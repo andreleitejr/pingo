@@ -1,0 +1,13 @@
+import 'package:flutter/material.dart';
+
+class DesignColor {
+  static const primary100 = Color(0xFFF49A05);
+  static const primary300 = Color(0xFFF49A05);
+  static const primary500 = Color(0xFFF49A05);
+  static const primary700 = Color(0xFFD08811);
+  static const text100 = Color(0xFFF8FAFD);
+  static const text200 = Color(0xFFE7ECF3);
+  static const text300 = Color(0xFFA7B0C0);
+  static const text400 = Color(0xFF5D6470);
+  static const text500 = Color(0xFF1D232E);
+}
