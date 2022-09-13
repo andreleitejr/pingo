@@ -5,4 +5,5 @@ class DesignSize {
   static const double appBarHeight = 80;
   static const double buttonHeight = 56;
   static const double verticalDivider = 16;
+  static const double borderRadius = 8;
 }

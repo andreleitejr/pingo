@@ -84,7 +84,6 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
                       DesignSize.padding,
                       DesignSize.padding,
                     ),
-                    // shrinkWrap: true,
                     crossAxisCount: 2,
                     mainAxisSpacing: DesignSize.mediumSpace,
                     crossAxisSpacing: DesignSize.mediumSpace,
@@ -96,12 +95,6 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
                           index % 2 == 0 ? mediumCardWidth : smallCardWidth;
 
                       return Obx(() {
-                        print(
-                            '################## PLCE VALID: ${controller.quantityValid(
-                          widget.list,
-                          widget.minimumQuantity,
-                        )}');
-
                         final isSelected =
                             controller.keywords.contains(widget.list[index].id);
 
@@ -130,11 +123,6 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       return Obx(() {
-                        print(
-                            '################## PLCE VALID: ${controller.quantityValid(
-                          widget.list,
-                          widget.minimumQuantity,
-                        )}');
                         final isSelected =
                             controller.keywords.contains(widget.list[index].id);
 

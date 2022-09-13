@@ -24,7 +24,14 @@ abstract class DataBaseRepository<T extends DataBase> {
 
   Stream<List<T>?> get stream => _streamController.stream;
 
-  Future<void> save(T model) async => await collection.add(model.toMap());
+  Future<void> save(T model) async {
+    try {
+      await collection.add(model.toMap());
+    } catch (e) {
+      // IMPLEMENTAR CRASHLYTICS
+      print(e);
+    }
+  }
 
   void update(String documentId, T model) =>
       collection.doc(documentId).update(model.toMap());

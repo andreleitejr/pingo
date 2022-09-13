@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/core/keyword.dart';
@@ -14,7 +15,8 @@ class SignUpController extends GetxController {
   final email = ''.obs;
   final password = ''.obs;
   final confirmPassword = ''.obs;
-  final birthday = ''.obs;
+
+  final birthday = DateTime.now().obs;
   final gender = ''.obs;
   final country = ''.obs;
   final city = ''.obs;
@@ -27,7 +29,7 @@ class SignUpController extends GetxController {
 
   void setConfirmPassword(String v) => confirmPassword(v);
 
-  void setBirthday(String v) => birthday(v);
+  void setBirthday(DateTime v) => birthday(v);
 
   void setGender(String v) => gender(v);
 
@@ -41,7 +43,7 @@ class SignUpController extends GetxController {
 
   User get user => User(
         name: name.value,
-        birthday: DateTime.now(),
+        birthday: birthday.value,
         email: email.value,
         gender: gender.value,
         country: country.value,
@@ -58,8 +60,7 @@ class SignUpController extends GetxController {
       confirmPassword.value.isNotEmpty &&
       confirmPassword.value == password.value;
 
-  // TODO: CHANGE TO DATETIME VALIDATION
-  bool get birthdayValid => birthday.value.length >= 8;
+  bool get birthdayValid => birthday.value.acceptedAge;
 
   bool get genderValid => gender.value.isNotEmpty;
 
@@ -82,39 +83,40 @@ class SignUpController extends GetxController {
       cityValid;
 
   Future<void> create() async {
-    await _auth.createUserWithEmailAndPassword(
-      email: email.value,
-      password: password.value,
-    );
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: email.value,
+        password: password.value,
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> save() async {
     await _repository.save(user);
   }
 
-
   final PageController pageController = PageController();
 
   final _scrollTimeDuration = const Duration(milliseconds: 250);
 
   Future<void> nextPage() => pageController.nextPage(
-    duration: _scrollTimeDuration,
-    curve: Curves.easeIn,
-  );
+        duration: _scrollTimeDuration,
+        curve: Curves.easeIn,
+      );
 
   Future<void> previousPage() => pageController.previousPage(
-    duration: _scrollTimeDuration,
-    curve: Curves.easeIn,
-  );
+        duration: _scrollTimeDuration,
+        curve: Curves.easeIn,
+      );
 
   var keywords = <int>[].obs;
 
   void toggleKeyword(int v) {
     if (!keywords.contains(v)) {
-      print('##### ADICIONOU $v');
       keywords.add(v);
     } else {
-      print('##### REMOVEU $v');
       keywords.remove(v);
     }
   }

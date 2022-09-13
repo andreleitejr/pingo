@@ -37,7 +37,9 @@ class _DesignTextInputState extends State<DesignTextInput> {
       onChanged: widget.onChanged,
       obscureText: widget.obscureText,
       decoration: InputDecoration(
-        border: const OutlineInputBorder(),
+        border:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(DesignSize.borderRadius),
+        ),
         hintText: widget.hint,
         suffixIcon: Row(
           mainAxisSize: MainAxisSize.min,

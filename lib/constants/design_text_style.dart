@@ -21,4 +21,8 @@ class DesignTextStyle {
   static const bodyMedium16 = TextStyle(
     fontSize: 16,
   );
+  static const bodyMedium16Bold = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
 }
