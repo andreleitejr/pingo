@@ -13,6 +13,7 @@ class DesignAppBar extends StatelessWidget {
     this.actionText,
     this.onLeadingPressed,
     this.onActionPressed,
+    this.actionValid = false,
   });
 
   final String? title;
@@ -20,6 +21,7 @@ class DesignAppBar extends StatelessWidget {
   final String? actionText;
   final Function()? onLeadingPressed;
   final Function()? onActionPressed;
+  final bool actionValid;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,9 @@ class DesignAppBar extends StatelessWidget {
                   actionText!,
                   textAlign: TextAlign.center,
                   style: DesignTextStyle.bodySmall14Bold.apply(
-                    color: DesignColor.primary700,
+                    color: actionValid
+                        ? DesignColor.primary700
+                        : DesignColor.text300,
                   ),
                 ),
               ),

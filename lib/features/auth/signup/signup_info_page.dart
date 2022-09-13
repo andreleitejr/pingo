@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/auth/signup/signup_controller.dart';
-import 'package:pingo/features/auth/signup/signup_page_view.dart';
+import 'package:pingo/features/profile/profile_keywords_selection.dart';
+import 'package:pingo/widgets/design_page_view.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_date_input.dart';
@@ -69,9 +70,8 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
               () => DesignButton(
                 onPressed: () async {
                   if (controller.isInfoFormValid) {
-                    await controller
-                        .save()
-                        .then((value) => Get.to(SignUpPageView()));
+                    await controller.save().then(
+                        (value) => Get.to(const ProfileKeywordsSelection()));
                   }
                 },
                 title: 'Sign In',

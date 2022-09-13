@@ -13,8 +13,7 @@ class DesignTitleWithSubtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(DesignSize.padding),
-      height: 72,
+      padding: const EdgeInsets.symmetric(horizontal: DesignSize.padding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

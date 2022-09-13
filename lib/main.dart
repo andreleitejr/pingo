@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pingo/features/profile/profile_keywords_selection.dart';
 import 'package:pingo/landing_page.dart';
 
 Future<void> main() async {
@@ -9,5 +11,5 @@ Future<void> main() async {
 
   // FirebaseAuth.instance.signOut();
 
-  runApp(LandingPage());
+  runApp(GetMaterialApp(home: ProfileKeywordsSelection(),));
 }

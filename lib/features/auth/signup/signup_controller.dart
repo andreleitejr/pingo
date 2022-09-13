@@ -1,25 +1,25 @@
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/core/keyword.dart';
+import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/repositories/user_repository.dart';
 
 class SignUpController extends GetxController {
-  final _repository = UserRepository();
-  final _auth = auth.FirebaseAuth.instance;
+  final _userRepository = UserRepository();
+  final _authRepository = AuthRepository();
 
-  var name = ''.obs;
+  final name = ''.obs;
   final email = ''.obs;
   final password = ''.obs;
   final confirmPassword = ''.obs;
-
   final birthday = DateTime.now().obs;
   final gender = ''.obs;
   final country = ''.obs;
   final city = ''.obs;
+  final acceptedTermsAndConditions = false.obs;
 
   void setName(String v) => name(v);
 
@@ -37,8 +37,6 @@ class SignUpController extends GetxController {
 
   void setCity(String v) => city(v);
 
-  var acceptedTermsAndConditions = false.obs;
-
   void toggleTermsAndConditions(bool? v) => acceptedTermsAndConditions(v!);
 
   User get user => User(
@@ -48,6 +46,7 @@ class SignUpController extends GetxController {
         gender: gender.value,
         country: country.value,
         city: city.value,
+        agreed: acceptedTermsAndConditions.value,
       );
 
   bool get nameValid => name.value.length >= 6;
@@ -83,50 +82,10 @@ class SignUpController extends GetxController {
       cityValid;
 
   Future<void> create() async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-        email: email.value,
-        password: password.value,
-      );
-    } catch (e) {
-      print(e);
-    }
+    await _authRepository.create(email.value, password.value);
   }
 
   Future<void> save() async {
-    await _repository.save(user);
-  }
-
-  final PageController pageController = PageController();
-
-  final _scrollTimeDuration = const Duration(milliseconds: 250);
-
-  Future<void> nextPage() => pageController.nextPage(
-        duration: _scrollTimeDuration,
-        curve: Curves.easeIn,
-      );
-
-  Future<void> previousPage() => pageController.previousPage(
-        duration: _scrollTimeDuration,
-        curve: Curves.easeIn,
-      );
-
-  var keywords = <int>[].obs;
-
-  void toggleKeyword(int v) {
-    if (!keywords.contains(v)) {
-      keywords.add(v);
-    } else {
-      keywords.remove(v);
-    }
-  }
-
-  bool quantityValid(List<Keyword> items, int expectedQuantity) {
-    final list = <int>[];
-    for (final item in items) {
-      list.add(item.id);
-    }
-    return list.toSet().intersection(keywords.toSet()).length >
-        expectedQuantity;
+    await _userRepository.save(user);
   }
 }

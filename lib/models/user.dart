@@ -10,6 +10,7 @@ class User extends DataBase {
   final String city;
   final String? image;
   final String? description;
+  final bool agreed;
 
   User({
     required this.name,
@@ -20,6 +21,7 @@ class User extends DataBase {
     required this.city,
     this.image,
     this.description,
+    this.agreed = true,
   }) : super();
 
   factory User.fromMap(DocumentSnapshot document) {
@@ -30,6 +32,7 @@ class User extends DataBase {
       gender: document['gender'],
       country: document['country'],
       city: document['city'],
+      agreed: document['agreed'],
     );
   }
 
@@ -43,5 +46,6 @@ class User extends DataBase {
         'city': city,
         'image': image,
         'description': description,
+        'agreed': agreed,
       };
 }
