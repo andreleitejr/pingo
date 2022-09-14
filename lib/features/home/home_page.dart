@@ -11,7 +11,7 @@ import 'package:pingo/widgets/design_vertical_space.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key? key, required this.keywords}) : super(key: key);
 
-  final List<KeywordData> keywords;
+  final List<int> keywords;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -22,7 +22,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    print('################### KEYWORDS: ${widget.keywords}');
     controller = Get.put(HomeController(widget.keywords));
     super.initState();
   }
@@ -38,10 +37,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             const DesignVerticalSpace(),
             Text('Keywords: '),
-            Obx(
-              () => Text(
-                controller.keywordsIds.toString(),
-              ),
+            Text(
+              controller.keywordsIds.toString(),
             ),
             const DesignVerticalSpace(),
             Text('Places: '),
@@ -59,6 +56,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Text(
                         'Match: ${controller.bestMatch[index].match}',
+                      ),
+                      Text(
+                        'Distance: ${controller.bestMatch[index].distance}',
                       ),
                       const DesignVerticalSpace(),
                     ],

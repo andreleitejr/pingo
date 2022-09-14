@@ -5,20 +5,17 @@ abstract class Base extends DataBase {
   final String name;
   final String? description;
   final String? image;
-  final String? createdBy;
 
   Base({
     required this.name,
     this.description,
     this.image,
-    this.createdBy,
   });
 
   Base.fromMap(DocumentSnapshot document)
       : name = document['name'] as String,
         description = document['description'] as String?,
-        image = document['image'] as String,
-        createdBy = document['createdBy'] as String,
+        image = document['image'] as String?,
         super.fromMap(document);
 
   @override
@@ -28,7 +25,6 @@ abstract class Base extends DataBase {
         'name': name,
         'description': description,
         'image': image,
-        'createdBy': createdBy,
       });
   }
 

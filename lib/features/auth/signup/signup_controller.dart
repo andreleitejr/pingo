@@ -1,15 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
-import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/models/user.dart';
-import 'package:pingo/repositories/user_repository.dart';
 
 class SignUpController extends GetxController {
-  final _userRepository = UserRepository();
-  final _authRepository = AuthRepository();
+  final repository = AuthRepository();
 
   final name = ''.obs;
   final email = ''.obs;
@@ -82,10 +77,8 @@ class SignUpController extends GetxController {
       cityValid;
 
   Future<void> create() async {
-    await _authRepository.create(email.value, password.value);
+    await repository.create(email.value, password.value);
   }
 
-  Future<void> save() async {
-    await _userRepository.save(user);
-  }
+  Future<void> save() async => repository.save(user);
 }

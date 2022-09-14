@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/address.dart';
 import 'package:pingo/models/base.dart';
@@ -29,21 +31,19 @@ class Place extends Base {
   }) : super(
           name: name,
           description: description,
-          createdBy: createdBy,
           image: image,
         );
 
+  final GeoPoint currentLocation = Get.find();
   @override
   double get distance {
-    // final User _user = getIt();
-    //
-    // return Geolocator.distanceBetween(
-    //   _user.location.latitude,
-    //   _user.location.longitude,
-    //   address.location.latitude,
-    //   address.location.longitude,
-    // );
-    return 902902920920920.902;
+
+    return Geolocator.distanceBetween(
+      currentLocation.latitude,
+      currentLocation.longitude,
+      address.location.latitude,
+      address.location.longitude,
+    );
   }
 
   // double? time;
@@ -68,5 +68,13 @@ class Place extends Base {
         'keywords': keywords,
         'open': open,
       });
+  }
+
+  int compareTo(Place other) {
+    if (match == other.match) {
+      return distance.compareTo(other.distance) * -1;
+    } else {
+      return match!.compareTo(other.match!);
+    }
   }
 }

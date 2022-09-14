@@ -106,7 +106,8 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
 
               if (isValid) {
                 if (controller.pageView.pageController.page == 3) {
-                  Get.to(HomePage(keywords: controller.keywords));
+                  controller.save().then(
+                      (_) => Get.to(HomePage(keywords: controller.keywordIds)));
                 } else {
                   controller.pageView.nextPage();
                 }

@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pingo/features/profile/profile_keywords_selection.dart';
-import 'package:pingo/landing_page.dart';
+import 'package:pingo/core/current_location.dart';
+import 'package:pingo/features/auth/landing/landing_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,5 +12,9 @@ Future<void> main() async {
 
   // FirebaseAuth.instance.signOut();
 
-  runApp(GetMaterialApp(home: ProfileKeywordsSelection(),));
+  final sharedPreferences = await SharedPreferences.getInstance();
+  Get.put(sharedPreferences);
+
+  await CurrentLocation.init();
+  runApp(LandingPage());
 }

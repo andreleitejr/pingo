@@ -24,9 +24,9 @@ abstract class DataBaseRepository<T extends DataBase> {
 
   Stream<List<T>?> get stream => _streamController.stream;
 
-  Future<void> save(T model) async {
+  Future<void> save(T model, {String? documentId}) async {
     try {
-      await collection.add(model.toMap());
+      await collection.doc(documentId).set(model.toMap());
     } catch (e) {
       // IMPLEMENTAR CRASHLYTICS
       print(e);
@@ -39,6 +39,9 @@ abstract class DataBaseRepository<T extends DataBase> {
   void delete(String documentId) => collection.doc(documentId).delete();
 
   Stream<List<T>> get read => collectionGroup.snapshots().map(
-        (query) => query.docs.map<T>((document) => fromMap(document)).toList(),
+        (query) => query.docs.map<T>((document){
+          print('###################### Document: ${document.id}');
+          return fromMap(document);
+        }).toList(),
       );
 }

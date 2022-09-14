@@ -1,7 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:pingo/models/user.dart';
+import 'package:pingo/repositories/user_repository.dart';
 
-class AuthRepository {
-  final _auth = FirebaseAuth.instance;
+class AuthRepository extends UserRepository {
+  final _auth = auth.FirebaseAuth.instance;
+
+  @override
+  Future<void> save(User model, {String? documentId}) async {
+    final user = await currentUser();
+
+    if (user != null) {
+      await super.save(model, documentId: user.uid);
+    }
+  }
 
   Future<void> create(String email, String password) async {
     try {
@@ -11,6 +22,15 @@ class AuthRepository {
       );
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<auth.User?> currentUser() async {
+    try {
+      return _auth.currentUser;
+    } catch (e) {
+      print(e);
+      return null;
     }
   }
 }

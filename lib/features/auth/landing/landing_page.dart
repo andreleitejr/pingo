@@ -1,0 +1,60 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pingo/features/auth/landing/landing_controller.dart';
+
+import 'package:pingo/features/auth/signup/signup_info_page.dart';
+import 'package:pingo/features/auth/signup/signup_page.dart';
+import 'package:pingo/features/home/home_page.dart';
+import 'package:pingo/features/profile/profile_keywords_selection.dart';
+import 'package:pingo/widgets/design_progress_indicator.dart';
+
+class LandingPage extends StatefulWidget {
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+  late LandingController controller;
+
+  @override
+  void initState() {
+    controller = LandingController();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      home: StreamBuilder<User?>(
+        stream: controller.userChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            final user = snapshot.data;
+            if (user == null) {
+              return const SignUpPage();
+            }
+
+            if (controller.users.value.isEmpty) {
+              return const DesignProgressIndicator();
+            }
+
+            if (controller.keywordsCreatedInCache) {
+              return HomePage(
+                keywords: controller.keywordIds,
+              );
+            }
+
+            if (controller.userCreatedInDatabase) {
+              return const ProfileKeywordsSelection();
+            }
+
+            return const SignUpInfoPage();
+          } else {
+            return const DesignProgressIndicator();
+          }
+        },
+      ),
+    );
+  }
+}

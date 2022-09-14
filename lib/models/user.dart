@@ -21,24 +21,24 @@ class User extends Base {
   }) : super(name: name, description: description);
 
   User.fromMap(DocumentSnapshot document)
-      : birthday = document['birthday'],
-        email = document['email'],
-        gender = document['gender'],
-        country = document['country'],
-        city = document['city'],
-        agreed = document['agreed'],
+      : birthday = (document['birthday'] as Timestamp).toDate(),
+        email = document['email'] as String,
+        gender = document['gender'] as String,
+        country = document['country'] as String,
+        city = document['city'] as String,
+        agreed = document['agreed'] as bool,
         super.fromMap(document);
 
   @override
-  Map<String, dynamic> toMap() => {
-        'name': name,
-        'birthday': birthday,
-        'email': email,
-        'gender': gender,
-        'country': country,
-        'city': city,
-        'image': image,
-        'description': description,
-        'agreed': agreed,
-      };
+  Map<String, dynamic> toMap() =>
+      super.toMap()
+        ..remove('createdBy')
+        ..addAll({
+          'birthday': birthday,
+          'email': email,
+          'gender': gender,
+          'country': country,
+          'city': city,
+          'agreed': agreed,
+        });
 }

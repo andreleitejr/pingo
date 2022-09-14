@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diacritic/diacritic.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 extension StringExtension on String {
@@ -26,4 +28,8 @@ extension DateTimeExtension on DateTime {
             differenceInDays >= 0 &&
             differenceInDays >= 0;
   }
+}
+
+extension PositionExtension on Position {
+  GeoPoint get toGeoPoint => GeoPoint(latitude, longitude);
 }

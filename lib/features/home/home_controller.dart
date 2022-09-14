@@ -4,18 +4,10 @@ import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
 
 class HomeController extends GetxController {
-  HomeController(this.keywords);
+  HomeController(this.keywordsIds);
 
-  final List<KeywordData> keywords;
+  final List<int> keywordsIds;
 
-  List<int> get keywordsIds {
-    final list = <int>[];
-
-    for (final keyword in keywords) {
-      list.add(keyword.id);
-    }
-    return list;
-  }
 
   final repository = PlaceRepository();
 
