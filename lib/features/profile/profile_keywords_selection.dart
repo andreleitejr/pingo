@@ -72,7 +72,7 @@ class DesignKeywordSelection extends StatefulWidget {
   final bool showSearch;
   final String? searchHint;
   final bool masonryStyle;
-  final List<Keyword> list;
+  final List<KeywordData> list;
   final List<int>? selectedList;
   final Function(int)? onItemTapped;
   final int minimumQuantity;
@@ -98,6 +98,8 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
           () => DesignAppBar(
             onLeadingPressed: () => controller.pageView.previousPage(),
             actionText: 'Next',
+            actionValid:
+                controller.quantityValid(widget.list, widget.minimumQuantity),
             onActionPressed: () {
               final isValid =
                   controller.quantityValid(widget.list, widget.minimumQuantity);
@@ -110,8 +112,6 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
                 }
               }
             },
-            actionValid:
-                controller.quantityValid(widget.list, widget.minimumQuantity),
           ),
         ),
       ),

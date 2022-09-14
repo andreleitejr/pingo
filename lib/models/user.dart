@@ -1,40 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pingo/models/database.dart';
+import 'package:pingo/models/base.dart';
 
-class User extends DataBase {
-  final String name;
+class User extends Base {
   final DateTime birthday;
   final String email;
   final String gender;
   final String country;
   final String city;
-  final String? image;
-  final String? description;
   final bool agreed;
 
   User({
-    required this.name,
+    required String name,
     required this.birthday,
     required this.email,
     required this.gender,
     required this.country,
     required this.city,
-    this.image,
-    this.description,
     this.agreed = true,
-  }) : super();
+    String? description,
+  }) : super(name: name, description: description);
 
-  factory User.fromMap(DocumentSnapshot document) {
-    return User(
-      name: document['name'],
-      birthday: document['birthday'],
-      email: document['email'],
-      gender: document['gender'],
-      country: document['country'],
-      city: document['city'],
-      agreed: document['agreed'],
-    );
-  }
+  User.fromMap(DocumentSnapshot document)
+      : birthday = document['birthday'],
+        email = document['email'],
+        gender = document['gender'],
+        country = document['country'],
+        city = document['city'],
+        agreed = document['agreed'],
+        super.fromMap(document);
 
   @override
   Map<String, dynamic> toMap() => {

@@ -1,21 +1,21 @@
-class Keyword {
+class KeywordData {
   final String title;
   final int id;
 
-  Keyword(this.title, this.id);
+  KeywordData(this.title, this.id);
 }
 
-class KeywordValue {
+class Keyword {
   /// TYPES OF PLACES
   static const restaurant = 1;
   static const pub = 2;
   static const party = 3;
-  static const concert =4;
+  static const concert = 4;
   static const park = 5;
   static const museum = 6;
   static const square = 7;
   static const cinema = 8;
-  static const historical =9;
+  static const historical = 9;
   static const theater = 10;
   static const bookstore = 11;
   static const exposition = 12;
@@ -57,9 +57,9 @@ class KeywordValue {
   static const classic = 44;
   static const mpb = 45;
   static const blues = 46;
-  static const jazz =47;
+  static const jazz = 47;
   static const trance = 48;
-  static const hardcore =49;
+  static const hardcore = 49;
   static const punk = 50;
 
   /// MISCELLANEOUS
@@ -85,87 +85,97 @@ class KeywordValue {
   static const boxing = 70;
   static const bjj = 71;
   static const thaiBoxing = 72;
+  static const gin = 73;
+  static const scotch = 74;
+  static const drinks = 75;
+  static const soda = 76;
+
+  /// SEXUAL ORIENTATION
+  static const lgbt = 99;
 }
 
-final places = <Keyword>[
-  Keyword('Restaurant', KeywordValue.restaurant),
-  Keyword('Pub', KeywordValue.pub),
-  Keyword('Party', KeywordValue.party),
-  Keyword('Concert', KeywordValue.concert),
-  Keyword('Park', KeywordValue.park),
-  Keyword('Museum', KeywordValue.museum),
-  Keyword('Square', KeywordValue.square),
-  Keyword('Historical', KeywordValue.historical),
-  Keyword('Theater', KeywordValue.theater),
-  Keyword('Bookstore', KeywordValue.bookstore),
-  Keyword('Exposition', KeywordValue.exposition),
+final places = <KeywordData>[
+  KeywordData('Restaurant', Keyword.restaurant),
+  KeywordData('Pub', Keyword.pub),
+  KeywordData('Party', Keyword.party),
+  KeywordData('Concert', Keyword.concert),
+  KeywordData('Park', Keyword.park),
+  KeywordData('Museum', Keyword.museum),
+  KeywordData('Square', Keyword.square),
+  KeywordData('Historical', Keyword.historical),
+  KeywordData('Theater', Keyword.theater),
+  KeywordData('Bookstore', Keyword.bookstore),
+  KeywordData('Exposition', Keyword.exposition),
 ];
 
-final foods = <Keyword>[
-  Keyword('Brazilian', KeywordValue.brazilian),
-  Keyword('Fast Food', KeywordValue.fastFood),
-  Keyword('Pizza', KeywordValue.pizza),
-  Keyword('Burger', KeywordValue.burger),
-  Keyword('Hot Dog', KeywordValue.hotDog),
-  Keyword('Candy', KeywordValue.candy),
-  Keyword('Donuts', KeywordValue.donuts),
-  Keyword('Japanese', KeywordValue.japanese),
-  Keyword('Mexican', KeywordValue.mexican),
-  Keyword('Chinese', KeywordValue.chinese),
-  Keyword('Italian', KeywordValue.italian),
-  Keyword('Thai', KeywordValue.thai),
-  Keyword('Greek', KeywordValue.greek),
-  Keyword('Arabian', KeywordValue.arabian),
-  Keyword('Coxinha', KeywordValue.coxinha),
-  Keyword('Marmita', KeywordValue.marmita),
-  Keyword('Pastel', KeywordValue.pastel),
-  Keyword('Esfiha', KeywordValue.esfiha),
+final foods = <KeywordData>[
+  KeywordData('Brazilian', Keyword.brazilian),
+  KeywordData('Fast Food', Keyword.fastFood),
+  KeywordData('Pizza', Keyword.pizza),
+  KeywordData('Burger', Keyword.burger),
+  KeywordData('Hot Dog', Keyword.hotDog),
+  KeywordData('Candy', Keyword.candy),
+  KeywordData('Donuts', Keyword.donuts),
+  KeywordData('Japanese', Keyword.japanese),
+  KeywordData('Mexican', Keyword.mexican),
+  KeywordData('Chinese', Keyword.chinese),
+  KeywordData('Italian', Keyword.italian),
+  KeywordData('Thai', Keyword.thai),
+  KeywordData('Greek', Keyword.greek),
+  KeywordData('Arabian', Keyword.arabian),
+  KeywordData('Coxinha', Keyword.coxinha),
+  KeywordData('Marmita', Keyword.marmita),
+  KeywordData('Pastel', Keyword.pastel),
+  KeywordData('Esfiha', Keyword.esfiha),
 ];
 
-final musics = <Keyword>[
-  Keyword('Rock', KeywordValue.rock),
-  Keyword('Pop', KeywordValue.pop),
-  Keyword('Country', KeywordValue.country),
-  Keyword('Eletronic', KeywordValue.electronic),
-  Keyword('Funk', KeywordValue.funk),
-  Keyword('House', KeywordValue.house),
-  Keyword('Trap', KeywordValue.trap),
-  Keyword('Techno', KeywordValue.techno),
-  Keyword('Rap', KeywordValue.rap),
-  Keyword('Samba', KeywordValue.samba),
-  Keyword('Metal', KeywordValue.metal),
-  Keyword('Pagode', KeywordValue.pagode),
-  Keyword('Gospel', KeywordValue.gospel),
-  Keyword('Classic', KeywordValue.classic),
-  Keyword('MPB', KeywordValue.mpb),
-  Keyword('Blues', KeywordValue.blues),
-  Keyword('Jazz', KeywordValue.jazz),
-  Keyword('Trance', KeywordValue.trance),
-  Keyword('Hardcore', KeywordValue.hardcore),
-  Keyword('Punk', KeywordValue.punk),
+final musics = <KeywordData>[
+  KeywordData('Rock', Keyword.rock),
+  KeywordData('Pop', Keyword.pop),
+  KeywordData('Country', Keyword.country),
+  KeywordData('Eletronic', Keyword.electronic),
+  KeywordData('Funk', Keyword.funk),
+  KeywordData('House', Keyword.house),
+  KeywordData('Trap', Keyword.trap),
+  KeywordData('Techno', Keyword.techno),
+  KeywordData('Rap', Keyword.rap),
+  KeywordData('Samba', Keyword.samba),
+  KeywordData('Metal', Keyword.metal),
+  KeywordData('Pagode', Keyword.pagode),
+  KeywordData('Gospel', Keyword.gospel),
+  KeywordData('Classic', Keyword.classic),
+  KeywordData('MPB', Keyword.mpb),
+  KeywordData('Blues', Keyword.blues),
+  KeywordData('Jazz', Keyword.jazz),
+  KeywordData('Trance', Keyword.trance),
+  KeywordData('Hardcore', Keyword.hardcore),
+  KeywordData('Punk', Keyword.punk),
 ];
 
-final miscellaneous = <Keyword>[
-  Keyword('Gym', KeywordValue.gym),
-  Keyword('Beer', KeywordValue.beer),
-  Keyword('Sports', KeywordValue.sports),
-  Keyword('Games', KeywordValue.games),
-  Keyword('Dance', KeywordValue.dance),
-  Keyword('Anime', KeywordValue.anime),
-  Keyword('Chocolate', KeywordValue.chocolate),
-  Keyword('Street Art', KeywordValue.streetArt),
-  Keyword('Bike', KeywordValue.bike),
-  Keyword('Skate', KeywordValue.skate),
-  Keyword('Rollerblades', KeywordValue.rollerblades),
-  Keyword('Art', KeywordValue.art),
-  Keyword('Tattoo', KeywordValue.tattoo),
-  Keyword('Meditation', KeywordValue.meditation),
-  Keyword('Soccer', KeywordValue.soccer),
-  Keyword('Basketball', KeywordValue.basketball),
-  Keyword('Volleyball', KeywordValue.volleyball),
-  Keyword('Tennis', KeywordValue.tennis),
-  Keyword('UFC', KeywordValue.ufc),
-  Keyword('Boxing', KeywordValue.boxing),
-  Keyword('Brazilian Jiu Jitsu', KeywordValue.bjj),
-  Keyword('Thai Boxing', KeywordValue.thaiBoxing),
+final miscellaneous = <KeywordData>[
+  KeywordData('LGBT', Keyword.lgbt),
+  KeywordData('Gym', Keyword.gym),
+  KeywordData('Beer', Keyword.beer),
+  KeywordData('Sports', Keyword.sports),
+  KeywordData('Games', Keyword.games),
+  KeywordData('Dance', Keyword.dance),
+  KeywordData('Anime', Keyword.anime),
+  KeywordData('Chocolate', Keyword.chocolate),
+  KeywordData('Street Art', Keyword.streetArt),
+  KeywordData('Bike', Keyword.bike),
+  KeywordData('Skate', Keyword.skate),
+  KeywordData('Rollerblades', Keyword.rollerblades),
+  KeywordData('Art', Keyword.art),
+  KeywordData('Tattoo', Keyword.tattoo),
+  KeywordData('Meditation', Keyword.meditation),
+  KeywordData('Soccer', Keyword.soccer),
+  KeywordData('Basketball', Keyword.basketball),
+  KeywordData('Volleyball', Keyword.volleyball),
+  KeywordData('Tennis', Keyword.tennis),
+  KeywordData('UFC', Keyword.ufc),
+  KeywordData('Boxing', Keyword.boxing),
+  KeywordData('Brazilian Jiu Jitsu', Keyword.bjj),
+  KeywordData('Thai Boxing', Keyword.thaiBoxing),
+  KeywordData('Gin', Keyword.gin),
+  KeywordData('Drinks', Keyword.drinks),
 ];
