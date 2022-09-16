@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pingo/core/extensions.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/place/models/place.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                         'Match: ${controller.bestMatch[index].match}',
                       ),
                       Text(
-                        'Distance: ${controller.bestMatch[index].distance}',
+                        'Distance: ${controller.bestMatch[index].distance.metricSystem}',
                       ),
                       const DesignVerticalSpace(),
                     ],

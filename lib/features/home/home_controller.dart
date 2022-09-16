@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
 
@@ -7,7 +6,6 @@ class HomeController extends GetxController {
   HomeController(this.keywordsIds);
 
   final List<int> keywordsIds;
-
 
   final repository = PlaceRepository();
 
@@ -18,13 +16,11 @@ class HomeController extends GetxController {
 
   List<Place> get bestMatch {
     for (final place in places) {
-      print(place.name);
-      print(place.keywords.toSet().intersection(keywordsIds.toSet()).length);
       final match =
           place.keywords.toSet().intersection(keywordsIds.toSet()).length;
       place.match = match;
     }
-    places.sort((a, b) => a.match!.compareTo(b.match!));
+    places.sort((a, b) => a.compareTo(b));
 
     return places;
   }

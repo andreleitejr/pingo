@@ -30,15 +30,15 @@ class User extends Base {
         super.fromMap(document);
 
   @override
-  Map<String, dynamic> toMap() =>
-      super.toMap()
-        ..remove('createdBy')
-        ..addAll({
-          'birthday': birthday,
-          'email': email,
-          'gender': gender,
-          'country': country,
-          'city': city,
-          'agreed': agreed,
-        });
+  Map<String, dynamic> toMap() => super.toMap()
+    ..remove('createdBy')
+    ..addAll({
+      'birthday': birthday,
+      'email': email,
+      'gender': gender,
+      'country': country,
+      'city': city,
+      'agreed': agreed,
+    });
+
 }

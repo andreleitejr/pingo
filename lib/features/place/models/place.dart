@@ -5,6 +5,7 @@ import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/address.dart';
 import 'package:pingo/models/base.dart';
 import 'package:pingo/models/rating.dart';
+import 'package:pingo/models/user.dart';
 
 class Place extends Base {
   final Address address;
@@ -35,12 +36,13 @@ class Place extends Base {
         );
 
   final GeoPoint currentLocation = Get.find();
+
   @override
   double get distance {
-
     return Geolocator.distanceBetween(
-      currentLocation.latitude,
-      currentLocation.longitude,
+      -23.548457045227913, -46.646617959134126,
+      // currentLocation.latitude,
+      // currentLocation.longitude,
       address.location.latitude,
       address.location.longitude,
     );
@@ -71,10 +73,12 @@ class Place extends Base {
   }
 
   int compareTo(Place other) {
-    if (match == other.match) {
-      return distance.compareTo(other.distance) * -1;
+    // TODO: SUBSTITUIR PELA MAX DISTANCE DO FILTRO
+    if (distance <= 1000) {
+      if (match == other.match) return distance.compareTo(other.distance);
+      return match!.compareTo(other.match!) * -1;
     } else {
-      return match!.compareTo(other.match!);
+      return distance.compareTo(other.distance);
     }
   }
 }

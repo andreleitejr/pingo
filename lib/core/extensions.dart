@@ -12,6 +12,39 @@ extension StringExtension on String {
       contains(RegExp(r'[0-9]')) && contains(RegExp(r'[a-z]'));
 }
 
+extension DoubleExtension on double {
+  double get km => this / 1000;
+
+  String get time {
+    if (this < 0) return 'Invalid Value';
+    final flooredValue = floor();
+    final decimalValue = this - flooredValue;
+    final hourValue = getHourString(flooredValue);
+    final minuteString = getMinuteString(decimalValue);
+
+    return '$hourValue:$minuteString';
+  }
+
+  num get doubleWithoutDecimalToInt {
+    return this % 1 == 0 ? toInt() : this;
+  }
+
+  String get metricSystem {
+    if (this < 1000) {
+      return '${doubleWithoutDecimalToInt.floor()}m';
+    } else {
+      return '${(this / 1000).doubleWithoutDecimalToInt.toStringAsFixed(1)}km';
+    }
+  }
+
+  String getMinuteString(double decimalValue) {
+    return '${(decimalValue * 60).toInt()}'.padLeft(2, '0');
+  }
+
+  String getHourString(int flooredValue) {
+    return '${flooredValue % 24}'.padLeft(2, '0');
+  }
+}
 extension DateTimeExtension on DateTime {
   String get format => DateFormat.yMMMMd('en_US').format(this);
 
