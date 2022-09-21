@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/widgets/design_space.dart';
@@ -18,7 +19,15 @@ class DesignProductItem extends StatelessWidget {
         children: [
           Container(
             height: (Get.width / 2) - 32,
-            color: Colors.grey,
+            decoration: BoxDecoration(
+              color: DesignColor.text200,
+              image: DecorationImage(
+                image: NetworkImage(
+                  product.image ?? 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
+                ),
+                fit: BoxFit.fill,
+              ),
+            ),
           ),
           Text(
             product.name,

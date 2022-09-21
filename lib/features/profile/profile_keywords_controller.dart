@@ -54,6 +54,7 @@ class ProfileKeywordsController extends GetxController {
   Future<void> save() async {
     user.keywords.addAll(keywordIds);
 
+    print('Document Uuid: ${user.uuid}');
     repository.update(user.uuid, user);
   }
 }

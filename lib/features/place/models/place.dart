@@ -33,8 +33,9 @@ class Place extends Base {
   @override
   double get distance {
     return Geolocator.distanceBetween(
-      currentLocation.latitude,
-      currentLocation.longitude,
+      // currentLocation.latitude,
+      // currentLocation.longitude,
+      -23.548471,-46.6466175,
       address.location.latitude,
       address.location.longitude,
     );

@@ -75,6 +75,9 @@ extension DateTimeExtension on DateTime {
             differenceInDays >= 0 &&
             differenceInDays >= 0;
   }
+
+  String startAndEnd(DateTime end) =>
+      '$hour${minute != 0 ? ':$minute' : ''}-${end.hour}${end.minute != 0 ? ':${end.minute}' : ''}';
 }
 
 extension PositionExtension on Position {

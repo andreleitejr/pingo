@@ -81,5 +81,7 @@ class SignUpController extends GetxController {
     await repository.create(email.value, password.value);
   }
 
-  Future<void> save() async => repository.save(user);
+  Future<void> save() async {
+    await repository.save(user).then((value) => Get.put(user));
+  }
 }

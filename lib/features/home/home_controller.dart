@@ -49,6 +49,8 @@ class HomeController extends GetxController {
       product.match = match;
     }
 
+    products.sort((a, b) => a.compareTo(b));
+
     return products;
   }
 
@@ -66,7 +68,7 @@ class HomeController extends GetxController {
           event.keywords.toSet().intersection(user.keywords.toSet()).length;
       event.match = match;
     }
-
+    events.sort((a, b) => a.compareTo(b));
     return events;
   }
 
