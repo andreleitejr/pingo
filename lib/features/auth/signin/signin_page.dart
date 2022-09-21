@@ -6,7 +6,7 @@ import 'package:pingo/features/auth/signup/signup_info_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_text_input.dart';
-import 'package:pingo/widgets/design_vertical_space.dart';
+import 'package:pingo/widgets/design_space.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -33,13 +33,13 @@ class _SignInPageState extends State<SignInPage> {
               hint: 'E-mail',
               onChanged: (String) {},
             ),
-            const DesignVerticalSpace(),
+            const DesignSpace(),
             DesignTextInput(
               hint: 'Password',
               obscureText: true,
               onChanged: (String) {},
             ),
-            const DesignVerticalSpace(),
+            const DesignSpace(),
             DesignButton(
               onPressed: () => Get.to(
                 const SignUpInfoPage(),

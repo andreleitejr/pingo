@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:pingo/core/keyword.dart';
 
 extension StringExtension on String {
   String get pathReference => split("/").last;
@@ -10,6 +13,14 @@ extension StringExtension on String {
 
   bool get containsLettersAndNumbers =>
       contains(RegExp(r'[0-9]')) && contains(RegExp(r'[a-z]'));
+}
+
+extension IntExtension on int {
+  String get keyword {
+    final keywords = places + foods + musics + miscellaneous;
+
+    return keywords.firstWhere((keyword) => keyword.id == this).title;
+  }
 }
 
 extension DoubleExtension on double {
@@ -37,6 +48,8 @@ extension DoubleExtension on double {
     }
   }
 
+  String get monetary => NumberFormat.simpleCurrency().format(this);
+
   String getMinuteString(double decimalValue) {
     return '${(decimalValue * 60).toInt()}'.padLeft(2, '0');
   }
@@ -45,6 +58,7 @@ extension DoubleExtension on double {
     return '${flooredValue % 24}'.padLeft(2, '0');
   }
 }
+
 extension DateTimeExtension on DateTime {
   String get format => DateFormat.yMMMMd('en_US').format(this);
 

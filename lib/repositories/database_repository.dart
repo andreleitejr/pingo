@@ -25,6 +25,7 @@ abstract class DataBaseRepository<T extends DataBase> {
   Stream<List<T>?> get stream => _streamController.stream;
 
   Future<void> save(T model, {String? documentId}) async {
+    print(collection);
     try {
       await collection.doc(documentId).set(model.toMap());
     } catch (e) {

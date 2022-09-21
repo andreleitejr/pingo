@@ -42,6 +42,7 @@ class SignUpController extends GetxController {
         country: country.value,
         city: city.value,
         agreed: acceptedTermsAndConditions.value,
+        keywords: [],
       );
 
   bool get nameValid => name.value.length >= 6;

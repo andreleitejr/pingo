@@ -7,7 +7,7 @@ import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_date_input.dart';
 import 'package:pingo/widgets/design_text_input.dart';
-import 'package:pingo/widgets/design_vertical_space.dart';
+import 'package:pingo/widgets/design_space.dart';
 
 class SignUpInfoPage extends StatefulWidget {
   const SignUpInfoPage({Key? key}) : super(key: key);
@@ -36,9 +36,10 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
                 hint: 'Birthday',
                 onPressed: controller.setBirthday,
                 value: controller.birthday.value,
+                isValid: controller.birthdayValid,
               ),
             ),
-            const DesignVerticalSpace(),
+            const DesignSpace(),
             Obx(
               () => DesignTextInput(
                 hint: 'Gender',
@@ -46,7 +47,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
                 isValid: controller.genderValid,
               ),
             ),
-            const DesignVerticalSpace(),
+            const DesignSpace(),
             Obx(
               () => DesignTextInput(
                 hint: 'Country',
@@ -54,7 +55,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
                 isValid: controller.countryValid,
               ),
             ),
-            const DesignVerticalSpace(),
+            const DesignSpace(),
             Obx(
               () => DesignTextInput(
                 hint: 'City',
@@ -62,7 +63,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
                 isValid: controller.cityValid,
               ),
             ),
-            const DesignVerticalSpace(),
+            const DesignSpace(),
             Obx(
               () => DesignButton(
                 onPressed: () async {

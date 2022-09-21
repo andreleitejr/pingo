@@ -11,7 +11,7 @@ import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_check_box.dart';
 import 'package:pingo/widgets/design_text_input.dart';
-import 'package:pingo/widgets/design_vertical_space.dart';
+import 'package:pingo/widgets/design_space.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -46,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   isValid: controller.nameValid,
                 ),
               ),
-              const DesignVerticalSpace(),
+              const DesignSpace(),
               Obx(
                 () => DesignTextInput(
                   hint: 'E-mail',
@@ -54,7 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   isValid: controller.emailValid,
                 ),
               ),
-              const DesignVerticalSpace(),
+              const DesignSpace(),
               Obx(
                 () => DesignTextInput(
                   hint: 'Password',
@@ -63,7 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   isValid: controller.passwordValid,
                 ),
               ),
-              const DesignVerticalSpace(),
+              const DesignSpace(),
               Obx(
                 () => DesignTextInput(
                   hint: 'Confirm Password',
@@ -72,9 +72,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   isValid: controller.confirmPasswordValid,
                 ),
               ),
-              const DesignVerticalSpace(),
+              const DesignSpace(),
               termsAndConditions(),
-              const DesignVerticalSpace(),
+              const DesignSpace(),
               Obx(
                 () => DesignButton(
                   onPressed: () async {
@@ -90,7 +90,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   isActive: controller.isAuthFormValid,
                 ),
               ),
-              const DesignVerticalSpace(),
+              const DesignSpace(),
               signIn(),
             ],
           ),

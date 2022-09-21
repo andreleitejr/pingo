@@ -4,15 +4,19 @@ import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
-import 'package:pingo/widgets/design_horizontal_medium_divider.dart';
 
 class DesignDateInput extends StatefulWidget {
-  const DesignDateInput(
-      {Key? key, required this.onPressed, required this.hint, this.value})
-      : super(key: key);
+  const DesignDateInput({
+    Key? key,
+    required this.onPressed,
+    required this.hint,
+    this.value,
+    this.isValid = false,
+  }) : super(key: key);
   final Function(DateTime) onPressed;
   final DateTime? value;
   final String hint;
+  final bool isValid;
 
   @override
   State<DesignDateInput> createState() => _DesignDateInputState();
@@ -36,9 +40,25 @@ class _DesignDateInputState extends State<DesignDateInput> {
           ),
           borderRadius: BorderRadius.circular(DesignSize.borderRadius),
         ),
-        child: Text(
-          widget.value?.format ?? widget.hint,
-          style: DesignTextStyle.bodyMedium16.apply(color: DesignColor.text400),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                widget.value?.format ?? widget.hint,
+                style: DesignTextStyle.bodyMedium16
+                    .apply(color: DesignColor.text400),
+              ),
+            ),
+            if (widget.isValid)
+              Container(
+                height: 16,
+                width: 16,
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(32),
+                ),
+              ),
+          ],
         ),
       ),
     );
@@ -51,9 +71,7 @@ class _DesignDateInputState extends State<DesignDateInput> {
         textStyleDayButton: DesignTextStyle.bodyMedium16,
         textStyleYearButton: DesignTextStyle.bodyLarge18Bold
             .apply(color: DesignColor.primary700),
-
         textStyleDayHeader: DesignTextStyle.bodyMedium16Bold,
-
         paddingDatePicker: EdgeInsets.zero,
         paddingMonthHeader: const EdgeInsets.all(16),
         sizeArrow: DesignSize.mediumSpace,
@@ -61,13 +79,12 @@ class _DesignDateInputState extends State<DesignDateInput> {
             DesignTextStyle.bodySmall14.apply(color: DesignColor.text400),
         textStyleButtonPositive:
             DesignTextStyle.bodySmall14.apply(color: DesignColor.primary500),
-        decorationDateSelected: const
-            BoxDecoration(color: DesignColor.primary500, shape: BoxShape.circle),
+        decorationDateSelected: const BoxDecoration(
+            color: DesignColor.primary500, shape: BoxShape.circle),
         backgroundPicker: Colors.white,
         backgroundHeader: Colors.white,
         backgroundActionBar: Colors.white,
         backgroundHeaderMonth: Colors.white,
-
       ),
       styleYearPicker: MaterialRoundedYearPickerStyle(
         textStyleYear:

@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
 import 'package:pingo/core/keyword.dart';
+import 'package:pingo/models/user.dart';
+import 'package:pingo/repositories/user_repository.dart';
 import 'package:pingo/widgets/design_page_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileKeywordsController extends GetxController {
+  final repository = UserRepository();
   final PageViewController pageView = Get.find();
 
   var keywords = <KeywordData>[].obs;
@@ -46,9 +49,11 @@ class ProfileKeywordsController extends GetxController {
     return ids;
   }
 
-  Future<void> save() async {
-    SharedPreferences sharedPreferences = Get.find();
+  final User user = Get.find();
 
-    await sharedPreferences.setStringList('keywords', keywordsStringList);
+  Future<void> save() async {
+    user.keywords.addAll(keywordIds);
+
+    repository.update(user.uuid, user);
   }
 }

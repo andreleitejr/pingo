@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_text_style.dart';
-import 'package:pingo/widgets/design_horizontal_medium_divider.dart';
 import 'package:pingo/widgets/design_icon.dart';
+import 'package:pingo/widgets/design_space.dart';
 
 class DesignAppBar extends StatelessWidget {
   const DesignAppBar({
@@ -62,7 +62,7 @@ class DesignAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-              const DesignHorizontalMediumDivider(),
+              const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
             ]
             // DesignIconButton()
           ],

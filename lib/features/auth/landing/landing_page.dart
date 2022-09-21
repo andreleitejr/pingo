@@ -26,6 +26,7 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       home: StreamBuilder<User?>(
         stream: controller.userChanges(),
         builder: (context, snapshot) {
@@ -35,17 +36,17 @@ class _LandingPageState extends State<LandingPage> {
               return const SignUpPage();
             }
 
-            if (controller.users.value.isEmpty) {
+            if (controller.user == null) {
               return const DesignProgressIndicator();
             }
 
-            if (controller.keywordsCreatedInCache) {
-              return HomePage(
-                keywords: controller.keywordIds,
-              );
+            if (controller.userValid) {
+              controller.registerUser();
+              return const HomePage();
             }
 
             if (controller.userCreatedInDatabase) {
+              controller.registerUser();
               return const ProfileKeywordsSelection();
             }
 

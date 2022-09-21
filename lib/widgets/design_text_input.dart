@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pingo/constants/design_size.dart';
-import 'package:pingo/widgets/design_horizontal_medium_divider.dart';
 
 class DesignTextInput extends StatefulWidget {
   DesignTextInput({

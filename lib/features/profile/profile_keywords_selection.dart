@@ -10,7 +10,7 @@ import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_page_view.dart';
 import 'package:pingo/widgets/design_title_with_subtitle.dart';
 import 'package:pingo/widgets/design_search_input.dart';
-import 'package:pingo/widgets/design_vertical_space.dart';
+import 'package:pingo/widgets/design_space.dart';
 
 class ProfileKeywordsSelection extends StatelessWidget {
   const ProfileKeywordsSelection({Key? key}) : super(key: key);
@@ -107,7 +107,7 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
               if (isValid) {
                 if (controller.pageView.pageController.page == 3) {
                   controller.save().then(
-                      (_) => Get.to(HomePage(keywords: controller.keywordIds)));
+                      (_) => Get.to(const HomePage()));
                 } else {
                   controller.pageView.nextPage();
                 }
@@ -125,7 +125,7 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
             ),
           ),
           const SliverToBoxAdapter(
-            child: DesignVerticalSpace(),
+            child: DesignSpace(),
           ),
           if (widget.showSearch) ...[
             SliverToBoxAdapter(
@@ -138,7 +138,7 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
               ),
             ),
             const SliverToBoxAdapter(
-              child: DesignVerticalSpace(),
+              child: DesignSpace(),
             ),
           ],
           widget.masonryStyle ? masonryGrid() : basicGrid(),

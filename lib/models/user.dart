@@ -10,15 +10,17 @@ class User extends Base {
   final bool agreed;
 
   User({
-    required String name,
+    required super.name,
     required this.birthday,
     required this.email,
     required this.gender,
     required this.country,
     required this.city,
     this.agreed = true,
-    String? description,
-  }) : super(name: name, description: description);
+    super.description,
+    super.image,
+    required super.keywords,
+  });
 
   User.fromMap(DocumentSnapshot document)
       : birthday = (document['birthday'] as Timestamp).toDate(),
@@ -40,5 +42,4 @@ class User extends Base {
       'city': city,
       'agreed': agreed,
     });
-
 }

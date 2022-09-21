@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DesignSearchInput extends StatefulWidget {
-  DesignSearchInput({
+  const DesignSearchInput({
     Key? key,
     this.hint,
   }) : super(key: key);
