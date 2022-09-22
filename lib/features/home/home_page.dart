@@ -262,6 +262,16 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         const SliverToBoxAdapter(child: DesignSpace()),
+        SliverToBoxAdapter(
+          child: DesignSectionTitle(
+            title: 'Near you',
+            onActionPressed: () {},
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSize.mediumSpace,
+            ),
+          ),
+        ),
+        const SliverToBoxAdapter(child: DesignSpace()),
         Obx(() {
           final places = controller.places;
 
