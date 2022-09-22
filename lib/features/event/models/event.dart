@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/models/buyable.dart';
-import 'package:pingo/models/rating.dart';
+import 'package:pingo/features/rating/models/rating.dart';
 
 class Event extends Buyable {
   final String placeId;

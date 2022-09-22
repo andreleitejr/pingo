@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:pingo/core/current_location.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/address.dart';
 import 'package:pingo/models/base.dart';
-import 'package:pingo/models/rating.dart';
+import 'package:pingo/features/rating/models/rating.dart';
 
 class Place extends Base {
   final Address address;
@@ -15,7 +16,6 @@ class Place extends Base {
 
   final products = <Product>[];
   final events = <Event>[];
-  final ratings = <Rating>[];
 
   Place({
     required this.address,
@@ -28,14 +28,13 @@ class Place extends Base {
     super.image,
   });
 
-  final GeoPoint currentLocation = Get.find();
+  final CurrentLocation currentLocation = Get.find();
 
   @override
   double get distance {
     return Geolocator.distanceBetween(
-      // currentLocation.latitude,
-      // currentLocation.longitude,
-      -23.548471,-46.6466175,
+      currentLocation.location.latitude,
+      currentLocation.location.longitude,
       address.location.latitude,
       address.location.longitude,
     );

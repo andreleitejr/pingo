@@ -1,24 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:pingo/models/database.dart';
 
-class Rating extends DataBase{
-  final String title;
-  final String? message;
-  final double? grade;
-  final String? ratedId;
+class Rating extends DataBase {
+  String? message;
+  int nps;
+  String? ratedId;
 
   Rating({
-    required this.title,
+    required this.nps,
     this.message,
-    this.grade,
     this.ratedId,
-    required String createdBy,
   });
 
   Rating.fromMap(DocumentSnapshot document)
-      : title = document['title'] as String,
+      : nps = document['nps'] as int,
         message = document['message'] as String,
-        grade = document['grade'] as double,
         ratedId = document['ratedId'] as String,
         super.fromMap(document);
 
@@ -26,9 +23,8 @@ class Rating extends DataBase{
   Map<String, dynamic> toMap() {
     return super.toMap()
       ..addAll({
-        'title': title,
         'message': message,
-        'grade': grade,
+        'nps': nps,
         'ratedId': ratedId,
       });
   }

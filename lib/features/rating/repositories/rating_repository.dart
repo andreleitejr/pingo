@@ -1,4 +1,4 @@
-import 'package:pingo/models/rating.dart';
+import 'package:pingo/features/rating/models/rating.dart';
 import 'package:pingo/repositories/database_repository.dart';
 
 class RatingRepository extends DataBaseRepository<Rating> {

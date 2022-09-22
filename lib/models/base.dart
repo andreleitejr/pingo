@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pingo/features/rating/models/rating.dart';
 import 'package:pingo/models/database.dart';
 
 abstract class Base extends DataBase {
@@ -48,5 +49,16 @@ abstract class Base extends DataBase {
 
       // if (match == other.match) return distance.compareTo(other.distance);
     }
+  }
+
+  final ratings = <Rating>[];
+
+  double get rating {
+    var i = 0;
+    for (final r in ratings) {
+      i += r.nps;
+    }
+
+    return (i / ratings.length) / 2;
   }
 }

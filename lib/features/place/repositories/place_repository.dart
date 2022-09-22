@@ -3,9 +3,9 @@ import 'package:pingo/features/event/repositories/event_repository.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/repositories/product_repository.dart';
-import 'package:pingo/models/rating.dart';
+import 'package:pingo/features/rating/models/rating.dart';
 import 'package:pingo/repositories/database_repository.dart';
-import 'package:pingo/repositories/rating_repository.dart';
+import 'package:pingo/features/rating/repositories/rating_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PlaceRepository extends DataBaseRepository<Place> {

@@ -3,9 +3,12 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/core/current_location.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/product/models/product.dart';
+import 'package:pingo/models/user.dart';
+import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_item.dart';
 import 'package:pingo/widgets/design_event_item.dart';
 import 'package:pingo/widgets/design_product_item.dart';
@@ -22,6 +25,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late HomeController controller;
+  final CurrentLocation location = Get.find();
+  final User user = Get.find();
 
   @override
   void initState() {
@@ -55,13 +60,13 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hello, John',
+                          'Hello, ${user.name}',
                           style: DesignTextStyle.labelMedium12.apply(
                             color: DesignColor.text400,
                           ),
                         ),
-                        const Text(
-                          'Franklin Roosevelt Square, 128',
+                        Text(
+                          location.streetName,
                           style: DesignTextStyle.bodySmall14,
                         ),
                       ],
@@ -131,59 +136,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (BuildContext context, int index) {
                     final bestMatch = bestMatches[index];
 
-                    return Container(
-                      alignment: Alignment.center,
-                      width: Get.width * 0.6,
-                      decoration: BoxDecoration(
-                        color: DesignColor.text200,
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            bestMatch.image!,
-                          ),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      margin: EdgeInsets.only(
-                          right: index != controller.bestMatch.length - 1
-                              ? DesignSize.mediumSpace
-                              : 0),
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            color: Colors.black.withOpacity(0.35),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.all(DesignSize.mediumSpace),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  bestMatch.name,
-                                  style: DesignTextStyle.bodyMedium16Bold
-                                      .apply(color: Colors.white),
-                                ),
-                                // Text(
-                                //   controller.bestMatch[index].keywords.toString(),
-                                // ),
-                                Text(
-                                  'Match: ${bestMatch.match}',
-                                  style: DesignTextStyle.bodyMedium16Bold
-                                      .apply(color: Colors.white),
-                                ),
-                                Text(
-                                  'Distance: ${bestMatch.distance.metricSystem}',
-                                  style: DesignTextStyle.bodyMedium16Bold
-                                      .apply(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
+                    return DesignBestMatchItem(bestMatch: bestMatch);
                   },
                 );
               },
