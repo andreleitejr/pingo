@@ -5,7 +5,6 @@ import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/event/pages/read/event_read_page.dart';
-import 'package:pingo/features/product/models/product.dart';
 
 class DesignEventItem extends StatelessWidget {
   const DesignEventItem({Key? key, required this.event}) : super(key: key);
@@ -14,7 +13,7 @@ class DesignEventItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=> Get.to(EventReadPage(event: event)),
+      onTap: () => Get.to(EventReadPage(event: event)),
       child: SizedBox(
         height: 240,
         width: (Get.width / 2) - 24,
@@ -26,7 +25,8 @@ class DesignEventItem extends StatelessWidget {
               decoration: BoxDecoration(
                 color: DesignColor.text200,
                 image: DecorationImage(
-                  image: NetworkImage(event.image ?? DesignImages.fallbackImage),
+                  image:
+                      NetworkImage(event.image ?? DesignImages.fallbackImage),
                   fit: BoxFit.fill,
                 ),
               ),
