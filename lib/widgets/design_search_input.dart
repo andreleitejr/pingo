@@ -5,9 +5,11 @@ class DesignSearchInput extends StatefulWidget {
   const DesignSearchInput({
     Key? key,
     this.hint,
+    this.onFilter,
   }) : super(key: key);
 
   final String? hint;
+  final Function()? onFilter;
 
   @override
   State<DesignSearchInput> createState() => _DesignSearchInputState();
@@ -26,7 +28,10 @@ class _DesignSearchInputState extends State<DesignSearchInput> {
           ),
           border: const OutlineInputBorder(),
           hintText: widget.hint,
-          suffixIcon: Icon(Icons.filter_list)
+          suffixIcon: GestureDetector(
+            onTap: widget.onFilter,
+            child: const Icon(Icons.filter_list),
+          ),
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {

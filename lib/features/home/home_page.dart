@@ -5,6 +5,7 @@ import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/current_location.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/home/filter/filter_modal.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/user.dart';
@@ -104,12 +105,28 @@ class _HomePageState extends State<HomePage> {
           ),
           floating: true,
         ),
-        const SliverAppBar(
+        SliverAppBar(
           primary: false,
           pinned: true,
           backgroundColor: Colors.white,
           title: DesignSearchInput(
             hint: 'Search the best around you',
+            onFilter: () {
+              showModalBottomSheet<void>(
+                isScrollControlled: true,
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                ),
+                backgroundColor: Colors.white,
+                builder: (BuildContext context) {
+                  return FilterModal();
+                },
+              );
+            },
           ),
         ),
         SliverToBoxAdapter(

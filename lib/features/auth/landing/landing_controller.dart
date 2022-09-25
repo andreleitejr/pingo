@@ -11,28 +11,7 @@ class LandingController extends GetxController {
   final repository = UserRepository();
 
   @override
-  void onReady() {
-    // SharedPreferences sharedPreferences = Get.find();
-
-    // keywordStringList = sharedPreferences.getStringList('keywords');
-
-    users.bindStream(repository.read);
-    // placeList.bindStream(placeRepo.read);
-
-    print('INIT HSDUDASHUDSHSDAUASD REGISTER USER $user');
-  }
-
-  // List<String>? keywordStringList;
-  //
-  // List<int> get keywordIds {
-  //   final ids = <int>[];
-  //   if (keywordStringList != null && keywordStringList!.isNotEmpty) {
-  //     for (final keywordString in keywordStringList!) {
-  //       ids.add(int.parse(keywordString));
-  //     }
-  //   }
-  //   return ids;
-  // }
+  void onReady() => users.bindStream(repository.read);
 
   final _auth = auth.FirebaseAuth.instance;
 
@@ -62,15 +41,7 @@ class LandingController extends GetxController {
 
   void registerUser() {
     if (user != null) {
-      print('HSDUDASHUDSHSDAUASD REGISTER USER ${user?.uuid}');
       Get.put(user!);
     }
   }
-
-// final placeRepo = PlaceRepository();
-//
-// Rx<List<Place>> placeList = Rx<List<Place>>([]);
-//
-// // ORDER BY DISTANCE
-// List<Place> get places => placeList.value;
 }

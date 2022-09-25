@@ -68,8 +68,9 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
               () => DesignButton(
                 onPressed: () async {
                   if (controller.isInfoFormValid) {
-                    await controller.save().then(
-                        (value) => Get.to(const ProfileKeywordsSelection()));
+                    await controller.save().then((value) {
+                      Get.to(const ProfileKeywordsSelection());
+                    });
                   }
                 },
                 title: 'Sign In',
