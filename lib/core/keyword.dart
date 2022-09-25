@@ -92,6 +92,12 @@ class Keyword {
 
   /// SEXUAL ORIENTATION
   static const lgbt = 99;
+
+  /// SEXUAL ORIENTATION
+  static const police = 190;
+  static const emergency = 191;
+  static const hospital = 192;
+  static const fireDepartment = 193;
 }
 
 final places = <KeywordData>[

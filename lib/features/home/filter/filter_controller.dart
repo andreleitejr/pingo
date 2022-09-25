@@ -11,7 +11,7 @@ class FilterController extends GetxController {
   var minPrice = 0.0.obs;
   var maxPrice = 20000.0.obs;
 
-  var rating = 5.obs;
+  var rating = 1.obs;
 
   int get divisions {
     final lessThanOneKm = distance < 1000;

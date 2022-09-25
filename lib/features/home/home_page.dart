@@ -5,13 +5,18 @@ import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/current_location.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/home/filter/filter_modal.dart';
 import 'package:pingo/features/home/home_controller.dart';
+import 'package:pingo/features/place/models/place.dart';
+import 'package:pingo/features/place/pages/list/place_list_page.dart';
+import 'package:pingo/features/place/pages/read/place_read_page.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_item.dart';
 import 'package:pingo/widgets/design_event_item.dart';
+import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_product_item.dart';
 import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_section_title.dart';
@@ -162,30 +167,28 @@ class _HomePageState extends State<HomePage> {
         ),
         const SliverToBoxAdapter(child: DesignSpace()),
         SliverToBoxAdapter(
-          child: SizedBox(
+          child: Container(
             height: 110,
-            child: ListView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: DesignSize.mediumSpace,
+            child: Obx(
+              () => ListView.builder(
+                padding: const EdgeInsets.only(
+                  left: DesignSize.mediumSpace,
+                ),
+                scrollDirection: Axis.horizontal,
+                itemCount: controller.categories.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final category = controller.categories[index];
+                  return DesignCategoryItem(
+                    onPressed: () => Get.to(
+                      PlaceListPage(
+                        title: category.title,
+                        places: category.list as List<Place>,
+                      ),
+                    ),
+                    title: category.title,
+                  );
+                },
               ),
-              scrollDirection: Axis.horizontal,
-              children: const [
-                DesignCategoryItem(title: 'Restaurants'),
-                DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-                DesignCategoryItem(title: 'Events'),
-                DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-                DesignCategoryItem(title: 'Products'),
-                DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-                DesignCategoryItem(title: 'Pubs'),
-                DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-                DesignCategoryItem(title: 'Museus'),
-                DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-                DesignCategoryItem(title: 'Historicals'),
-                DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-                DesignCategoryItem(title: 'Utils'),
-                DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-                DesignCategoryItem(title: 'More'),
-              ],
             ),
           ),
         ),
@@ -303,56 +306,12 @@ class _HomePageState extends State<HomePage> {
               (BuildContext context, int index) {
                 final place = places[index];
 
-                return Column(
-                  children: [
-                    SizedBox(
-                      height: 60,
-                      child: Row(
-                        children: [
-                          const DesignSpace(
-                              orientation: DesignSpaceOrientation.horizontal),
-                          Container(
-                            width: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              image: DecorationImage(
-                                image: NetworkImage(place.image!),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          const DesignSpace(
-                            orientation: DesignSpaceOrientation.horizontal,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(place.name),
-                                    ),
-                                    Text(place.distance.metricSystem),
-                                  ],
-                                ),
-                                Text(
-                                  '${place.description}',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: DesignTextStyle.labelMedium12,
-                                ),
-                                Text('Average price \$29.99'),
-                              ],
-                            ),
-                          ),
-                          const DesignSpace(
-                              orientation: DesignSpaceOrientation.horizontal),
-                        ],
-                      ),
-                    ),
-                    const DesignSpace(),
-                  ],
+                return DesignListTile(
+                  image: place.image,
+                  title: place.name,
+                  subtitle: place.description,
+                  trailing: place.distance.metricSystem,
+                  onPressed: () => Get.to(PlaceReadPage(place: place)),
                 );
               },
               childCount: places.length, // 1000 list items

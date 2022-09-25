@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/event/models/event.dart';
+import 'package:pingo/features/home/category/category.dart';
 import 'package:pingo/features/home/filter/filter_controller.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
@@ -92,4 +94,44 @@ class HomeController extends GetxController {
     bestMatchList.bindStream(repository.combined);
     placeList.bindStream(repository.combined);
   }
+
+  List<Place> _build(List<int> keywords) {
+    return places
+        .where((place) =>
+        place.keywords.any((keyword) => keywords.contains(keyword)))
+        .toList();
+  }
+
+  List<Place> get restaurants => _build([Keyword.restaurant]);
+
+  List<Place> get pubs => _build([Keyword.pub]);
+
+  List<Place> get fastFoods => _build([Keyword.fastFood]);
+
+  List<Place> get museums => _build([Keyword.museum]);
+
+  List<Place> get theaters => _build([Keyword.theater]);
+
+  List<Place> get parks => _build([Keyword.park]);
+
+  List<Place> get historical => _build([Keyword.historical]);
+
+  List<Place> get utils => _build([
+    Keyword.police,
+    Keyword.fireDepartment,
+    Keyword.hospital,
+    Keyword.emergency,
+  ]);
+
+  List<Category> get categories => [
+    Category('Restaurant', restaurants),
+    // Category('Events', events),
+    Category('Pubs', pubs),
+    Category('Fast Foods', fastFoods),
+    // Category('Products', restaurants),
+    Category('Theaters', theaters),
+    Category('Museums', museums),
+    Category('Historicals', historical),
+    Category('Utils', utils),
+  ];
 }
