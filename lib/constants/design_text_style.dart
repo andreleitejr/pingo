@@ -25,6 +25,13 @@ class DesignTextStyle {
     // fontFamily: 'Roboto',
     fontWeight: FontWeight.w500,
   );
+  static const labelSmall6 = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.bold,
+  );
+  static const labelSmall10 = TextStyle(
+    fontSize: 10,
+  );
   static const labelMedium12 = TextStyle(
     fontSize: 12,
   );

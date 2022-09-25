@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/current_location.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/core/keyword.dart';
+import 'package:pingo/features/event/pages/list/event_list_page.dart';
 import 'package:pingo/features/home/filter/filter_modal.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/list/place_list_page.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
 import 'package:pingo/features/product/models/product.dart';
+import 'package:pingo/features/product/pages/list/product_list_page.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_item.dart';
@@ -57,7 +60,9 @@ class _HomePageState extends State<HomePage> {
                     width: 32,
                     margin: const EdgeInsets.symmetric(horizontal: 16),
                     decoration: BoxDecoration(
-                      color: DesignColor.text300,
+                      image: DecorationImage(
+                        image: AssetImage(DesignImages.weather),
+                      ),
                       borderRadius: BorderRadius.circular(32),
                     ),
                   ),
@@ -65,11 +70,44 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Hello, ${user.name}',
-                          style: DesignTextStyle.labelMedium12.apply(
-                            color: DesignColor.text400,
-                          ),
+                        Row(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '21',
+                                  style: DesignTextStyle.labelMedium12.apply(
+                                    color: DesignColor.text400,
+                                  ),
+                                ),
+                                Text(
+                                  '°C',
+                                  style: DesignTextStyle.labelSmall6.apply(
+                                    color: DesignColor.text400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 4),
+                            Center(
+                              child: Container(
+                                width: 4,
+                                height: 4,
+                                decoration: BoxDecoration(
+                                  color: DesignColor.text300,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              location.city,
+                              style: DesignTextStyle.labelMedium12.apply(
+                                color: DesignColor.text400,
+                              ),
+                            ),
+                          ],
                         ),
                         Text(
                           location.streetName,
@@ -78,32 +116,32 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 32,
-                    width: 32,
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.topRight,
-                      children: [
-                        const Icon(
-                          Icons.notification_important_outlined,
-                          color: DesignColor.text500,
-                        ),
-                        Container(
-                          width: 10,
-                          height: 10,
-                          margin: const EdgeInsets.fromLTRB(0, 3, 1, 0),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white, width: 2),
-                              color: DesignColor.primary700,
-                              borderRadius: BorderRadius.circular(100)),
-                        )
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   height: 32,
+                  //   width: 32,
+                  //   margin: const EdgeInsets.symmetric(horizontal: 16),
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(32),
+                  //   ),
+                  //   child: Stack(
+                  //     alignment: Alignment.topRight,
+                  //     children: [
+                  //       const Icon(
+                  //         Icons.notification_important_outlined,
+                  //         color: DesignColor.text500,
+                  //       ),
+                  //       Container(
+                  //         width: 10,
+                  //         height: 10,
+                  //         margin: const EdgeInsets.fromLTRB(0, 3, 1, 0),
+                  //         decoration: BoxDecoration(
+                  //             border: Border.all(color: Colors.white, width: 2),
+                  //             color: DesignColor.primary700,
+                  //             borderRadius: BorderRadius.circular(100)),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ],
@@ -137,7 +175,10 @@ class _HomePageState extends State<HomePage> {
         SliverToBoxAdapter(
           child: DesignSectionTitle(
             title: 'Made for you',
-            onActionPressed: () {},
+            onActionPressed: () => Get.to(
+              PlaceListPage(
+                  title: 'Made for you', places: controller.bestMatch),
+            ),
             padding: const EdgeInsets.symmetric(
               horizontal: DesignSize.mediumSpace,
             ),
@@ -167,7 +208,7 @@ class _HomePageState extends State<HomePage> {
         ),
         const SliverToBoxAdapter(child: DesignSpace()),
         SliverToBoxAdapter(
-          child: Container(
+          child: SizedBox(
             height: 110,
             child: Obx(
               () => ListView.builder(
@@ -196,7 +237,11 @@ class _HomePageState extends State<HomePage> {
         SliverToBoxAdapter(
           child: DesignSectionTitle(
             title: 'Best Prices Only',
-            onActionPressed: () {},
+            onActionPressed: () => Get.to(
+              ProductListPage(
+                  title: 'Best Prices Only',
+                  products: controller.productBestMatch),
+            ),
             padding: const EdgeInsets.symmetric(
               horizontal: DesignSize.mediumSpace,
             ),
@@ -239,8 +284,11 @@ class _HomePageState extends State<HomePage> {
         const SliverToBoxAdapter(child: DesignSpace()),
         SliverToBoxAdapter(
           child: DesignSectionTitle(
-            title: 'Time to Party',
-            onActionPressed: () {},
+            title: 'Events',
+            onActionPressed: () => Get.to(
+              EventListPage(
+                  title: 'Events', events: controller.eventsBestMatch),
+            ),
             padding: const EdgeInsets.symmetric(
               horizontal: DesignSize.mediumSpace,
             ),
@@ -285,7 +333,9 @@ class _HomePageState extends State<HomePage> {
         SliverToBoxAdapter(
           child: DesignSectionTitle(
             title: 'Near you',
-            onActionPressed: () {},
+            onActionPressed: () => Get.to(
+              PlaceListPage(title: 'Near You', places: controller.places),
+            ),
             padding: const EdgeInsets.symmetric(
               horizontal: DesignSize.mediumSpace,
             ),

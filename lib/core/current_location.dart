@@ -7,6 +7,7 @@ import 'package:pingo/core/extensions.dart';
 class CurrentLocation {
   late GeoPoint location;
   String streetName = '';
+  String city = '';
 
   Future<void> init() async {
     final permission = await Geolocator.requestPermission();
@@ -15,9 +16,7 @@ class CurrentLocation {
         permission != LocationPermission.deniedForever) {
       // await _getCurrentLocation();
       location = const GeoPoint(-23.548471, -46.6466175);
-      print('Location: ${location.latitude}, ${location.longitude}');
       await _getStreetName();
-      print('Location: ${location.latitude}, ${location.longitude}');
     }
   }
 
@@ -33,8 +32,8 @@ class CurrentLocation {
   Future<void> _getStreetName() async {
     List<Placemark> placemarks =
         await placemarkFromCoordinates(location.latitude, location.longitude);
-print(placemarks.first.street);
+    print(placemarks.first.street);
     if (placemarks.first.street != null) streetName = placemarks.first.street!;
-    print('Street Nameddd: $streetName');
+    if (placemarks.first.administrativeArea != null) city = placemarks.first.administrativeArea!;
   }
 }
