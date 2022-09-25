@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/rating/models/rating.dart';
 import 'package:pingo/models/database.dart';
 
@@ -61,4 +62,8 @@ abstract class Base extends DataBase {
 
     return (i / ratings.length) / 2;
   }
+
+  List<KeywordData> get keywordData => allKeywords
+      .where((keywordData) => keywords.contains(keywordData.id))
+      .toList();
 }

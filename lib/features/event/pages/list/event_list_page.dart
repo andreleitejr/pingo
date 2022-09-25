@@ -23,7 +23,6 @@ class EventListPage extends StatelessWidget {
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
           title: title,
-          showLeading: false,
         ),
       ),
       resizeToAvoidBottomInset: false,

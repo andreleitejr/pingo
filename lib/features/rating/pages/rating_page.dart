@@ -35,7 +35,6 @@ class _RatingPageState extends State<RatingPage> {
         preferredSize: Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
           title: 'Rating',
-          showLeading: false,
         ),
       ),
       resizeToAvoidBottomInset: false,

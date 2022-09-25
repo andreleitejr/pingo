@@ -27,7 +27,6 @@ class _EventReadPageState extends State<EventReadPage> {
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
           title: widget.event.name,
-          showLeading: false,
         ),
       ),
       resizeToAvoidBottomInset: false,

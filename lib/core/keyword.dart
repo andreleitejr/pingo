@@ -100,6 +100,8 @@ class Keyword {
   static const fireDepartment = 193;
 }
 
+final allKeywords = places + foods + musics + miscellaneous;
+
 final places = <KeywordData>[
   KeywordData('Restaurant', Keyword.restaurant),
   KeywordData('Pub', Keyword.pub),

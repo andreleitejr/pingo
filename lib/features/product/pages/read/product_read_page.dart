@@ -26,7 +26,6 @@ class _ProductReadPageState extends State<ProductReadPage> {
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
           title: widget.product.name,
-          showLeading: false,
         ),
       ),
       resizeToAvoidBottomInset: false,

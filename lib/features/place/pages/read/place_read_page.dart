@@ -25,7 +25,6 @@ class _PlaceReadPageState extends State<PlaceReadPage> {
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
           title: widget.place.name,
-          showLeading: false,
         ),
       ),
       resizeToAvoidBottomInset: false,

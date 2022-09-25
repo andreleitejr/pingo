@@ -3,6 +3,7 @@ import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/home/category/category.dart';
 import 'package:pingo/features/home/filter/filter_controller.dart';
+import 'package:pingo/features/home/search/search_controller.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
 import 'package:pingo/features/product/models/product.dart';
@@ -17,6 +18,8 @@ class HomeController extends GetxController {
 
   final filter = Get.put(FilterController());
 
+  final search = Get.put(SearchController());
+
   Rx<List<Place>> bestMatchList = Rx<List<Place>>([]);
   Rx<List<Place>> placeList = Rx<List<Place>>([]);
 
@@ -27,6 +30,7 @@ class HomeController extends GetxController {
 
     list = filter.filterPlaceByDistance(list) as List<Place>;
     list = filter.filterPlaceByRating(list) as List<Place>;
+    list = search.filterBySearch(list) as List<Place>;
     return list;
   }
 

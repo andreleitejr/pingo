@@ -12,7 +12,6 @@ class FilterController extends GetxController {
   var maxPrice = 20000.0.obs;
 
   var rating = 1.obs;
-
   int get divisions {
     final lessThanOneKm = distance < 1000;
     final lessThanFiveKm = distance < 5000;
@@ -41,10 +40,10 @@ class FilterController extends GetxController {
   void setMaxPrice(String v) => maxPrice(double.parse(v));
 
   List<Base> filterPlaceByDistance(List<Base> list) =>
-      list.where((place) => place.distance <= distance.value).toList();
+      list.where((base) => base.distance <= distance.value).toList();
 
   List<Base> filterPlaceByRating(List<Base> list) =>
-      list.where((place) => place.rating >= rating.value).toList();
+      list.where((base) => base.rating >= rating.value).toList();
 
   List<Buyable> filterProductByPrice(List<Buyable> list) => list
       .where((buyable) =>
