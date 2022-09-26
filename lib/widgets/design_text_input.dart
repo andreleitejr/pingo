@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pingo/constants/design_size.dart';
 
+// ignore: must_be_immutable
 class DesignTextInput extends StatefulWidget {
   DesignTextInput({
     Key? key,
+    this.initialValue,
     required this.hint,
     required this.onChanged,
     this.obscureText = false,
@@ -11,6 +13,7 @@ class DesignTextInput extends StatefulWidget {
     this.isValid = false,
   }) : super(key: key);
 
+  final String? initialValue;
   final String hint;
   final Function(String) onChanged;
   final Widget? prefixIcon;
@@ -33,6 +36,7 @@ class _DesignTextInputState extends State<DesignTextInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: widget.initialValue,
       onChanged: widget.onChanged,
       obscureText: widget.obscureText,
       decoration: InputDecoration(

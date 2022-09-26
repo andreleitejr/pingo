@@ -3,7 +3,6 @@ import 'package:pingo/core/keyword.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/repositories/user_repository.dart';
 import 'package:pingo/widgets/design_page_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileKeywordsController extends GetxController {
   final repository = UserRepository();
@@ -53,8 +52,6 @@ class ProfileKeywordsController extends GetxController {
 
   Future<void> save() async {
     user.keywords.addAll(keywordIds);
-
-    print('Document Uuid: ${user.uuid}');
     repository.update(user.uuid, user);
   }
 }

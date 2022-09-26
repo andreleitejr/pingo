@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
 
 class CurrentLocation {
@@ -32,7 +31,6 @@ class CurrentLocation {
   Future<void> _getStreetName() async {
     List<Placemark> placemarks =
         await placemarkFromCoordinates(location.latitude, location.longitude);
-    print(placemarks.first.street);
     if (placemarks.first.street != null) streetName = placemarks.first.street!;
     if (placemarks.first.administrativeArea != null) city = placemarks.first.administrativeArea!;
   }

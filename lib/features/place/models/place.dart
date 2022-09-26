@@ -6,7 +6,6 @@ import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/address.dart';
 import 'package:pingo/models/base.dart';
-import 'package:pingo/features/rating/models/rating.dart';
 
 class Place extends Base {
   final Address address;

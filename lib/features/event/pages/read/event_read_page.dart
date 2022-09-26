@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/models/event.dart';
-import 'package:pingo/features/place/models/place.dart';
-import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/widgets/design_space.dart';
 

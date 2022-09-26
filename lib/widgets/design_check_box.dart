@@ -3,7 +3,7 @@ import 'package:pingo/constants/design_color.dart';
 
 // ignore: must_be_immutable
 class DesignCheckBox extends StatefulWidget {
-  DesignCheckBox({
+  const DesignCheckBox({
     Key? key,
     required this.isChecked,
     required this.onChanged,

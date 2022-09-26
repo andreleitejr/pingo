@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pingo/constants/design_size.dart';
 
 class DesignTextArea extends StatelessWidget {
-  DesignTextArea({
+  const DesignTextArea({
     Key? key,
     required this.hint,
     required this.onChanged,

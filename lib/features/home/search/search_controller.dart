@@ -5,10 +5,7 @@ import 'package:pingo/models/base.dart';
 class SearchController extends GetxController {
   var text = ''.obs;
 
-  void setSearch(String v) {
-    text(v);
-    print(text);
-  }
+  void setSearch(String v) => text(v);
 
   List<Base> filterBySearch(List<Base> list) => list.where(
         (base) {

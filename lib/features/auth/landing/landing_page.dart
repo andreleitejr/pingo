@@ -6,7 +6,7 @@ import 'package:pingo/features/auth/landing/landing_controller.dart';
 import 'package:pingo/features/auth/signup/signup_info_page.dart';
 import 'package:pingo/features/auth/signup/signup_page.dart';
 import 'package:pingo/features/home/home_page.dart';
-import 'package:pingo/features/profile/profile_keywords_selection.dart';
+import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
 import 'package:pingo/widgets/design_progress_indicator.dart';
 
 class LandingPage extends StatefulWidget {

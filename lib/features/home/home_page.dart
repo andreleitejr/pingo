@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/current_location.dart';
 import 'package:pingo/core/extensions.dart';
-import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/event/pages/list/event_list_page.dart';
+import 'package:pingo/features/home/category/category.dart';
 import 'package:pingo/features/home/filter/filter_modal.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/home/search/search_page.dart';
-import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/list/place_list_page.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/pages/list/product_list_page.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/widgets/design_best_match_item.dart';
+import 'package:pingo/widgets/design_category_bullet_list.dart';
 import 'package:pingo/widgets/design_category_item.dart';
 import 'package:pingo/widgets/design_event_item.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
@@ -55,6 +56,7 @@ class _HomePageState extends State<HomePage> {
           slivers: [
             SliverAppBar(
               backgroundColor: Colors.white,
+              elevation: 0,
               title: Column(
                 children: [
                   Row(
@@ -65,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                         width: 32,
                         margin: const EdgeInsets.symmetric(horizontal: 16),
                         decoration: BoxDecoration(
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage(DesignImages.weather),
                           ),
                           borderRadius: BorderRadius.circular(32),
@@ -108,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  location.city,
+                                  DateFormat.EEEE().format(DateTime.now()),
                                   style: DesignTextStyle.labelMedium12.apply(
                                     color: DesignColor.text400,
                                   ),
@@ -116,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                             Text(
-                              location.streetName,
+                              '${location.streetName}, ${location.city}',
                               style: DesignTextStyle.bodySmall14,
                             ),
                           ],
@@ -191,26 +193,46 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 110,
-                child: Obx(
-                  () => ListView.builder(
-                    padding: const EdgeInsets.only(
-                      left: DesignSize.mediumSpace,
-                    ),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.categories.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final category = controller.categories[index];
-                      return DesignCategoryItem(
-                        onPressed: () => Get.to(
-                          PlaceListPage(
-                            title: category.title,
-                            places: category.list as List<Place>,
-                          ),
-                        ),
-                        title: category.title,
-                      );
-                    },
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(
+                    left: DesignSize.mediumSpace,
                   ),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categories.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final category = categories[index];
+                    return DesignCategoryItem(
+                      onPressed: () {
+                        controller.category.setCategory(category);
+
+                        if (controller.category.category.value.id ==
+                            Category.products) {
+                          Get.to(
+                            ProductListPage(
+                              title: controller.category.category.value.title,
+                              products: controller.productBestMatch,
+                            ),
+                          );
+                        } else if (controller.category.category.value.id ==
+                            Category.events) {
+                          Get.to(
+                            EventListPage(
+                              title: controller.category.category.value.title,
+                              events: controller.eventsBestMatch,
+                            ),
+                          );
+                        } else {
+                          Get.to(
+                            PlaceListPage(
+                              title: controller.category.category.value.title,
+                              places: controller.places,
+                            ),
+                          );
+                        }
+                      },
+                      title: category.title,
+                    );
+                  },
                 ),
               ),
             ),
@@ -275,14 +297,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            const SliverToBoxAdapter(child: DesignSpace()),
             SliverToBoxAdapter(
               child: Obx(
                 () {
                   final events = controller.eventsBestMatch;
 
                   return SizedBox(
-                    height: 216,
+                    height: 164,
                     child: ListView.builder(
                       padding: const EdgeInsets.symmetric(
                         horizontal: DesignSize.mediumSpace,
@@ -322,33 +343,45 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            SliverToBoxAdapter(
+              child: DesignCategoryBulletList(
+                value: controller.category.category.value,
+                onItemPressed: controller.category.setCategory,
+              ),
+            ),
             const SliverToBoxAdapter(child: DesignSpace()),
-            Obx(() {
-              final places = controller.places;
+            Obx(
+              () {
+                final places = controller.places;
 
-              if (places.isEmpty) {
-                return SliverToBoxAdapter(
-                  child: Container(),
+                if (places.isEmpty) {
+                  return SliverToBoxAdapter(
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 300,
+                      child: const Text('Not Found'),
+                    ),
+                  );
+                }
+
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      final place = places[index];
+
+                      return DesignListTile(
+                        image: place.image,
+                        title: place.name,
+                        subtitle: place.description,
+                        trailing: place.distance.metricSystem,
+                        onPressed: () => Get.to(PlaceReadPage(place: place)),
+                      );
+                    },
+                    childCount: places.length, // 1000 list items
+                  ),
                 );
-              }
-
-              return SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    final place = places[index];
-
-                    return DesignListTile(
-                      image: place.image,
-                      title: place.name,
-                      subtitle: place.description,
-                      trailing: place.distance.metricSystem,
-                      onPressed: () => Get.to(PlaceReadPage(place: place)),
-                    );
-                  },
-                  childCount: places.length, // 1000 list items
-                ),
-              );
-            }),
+              },
+            ),
           ],
         );
       }),

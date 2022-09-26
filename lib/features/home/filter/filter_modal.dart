@@ -29,7 +29,7 @@ class FilterModal extends StatelessWidget {
           DesignSectionTitle(
             title: 'Distance',
             actionTitle: 'Clean',
-            onActionPressed: () {},
+            onActionPressed: () => controller.cleanDistance(),
           ),
           SizedBox(
             width: double.infinity,
@@ -46,7 +46,7 @@ class FilterModal extends StatelessWidget {
           DesignSectionTitle(
             title: 'Rating',
             actionTitle: 'Clean',
-            onActionPressed: () {},
+            onActionPressed: () => controller.cleanRating(),
           ),
           SizedBox(
             width: double.infinity,
@@ -82,22 +82,22 @@ class FilterModal extends StatelessWidget {
           DesignSectionTitle(
             title: 'Price',
             actionTitle: 'Clean',
-            onActionPressed: () {},
+            onActionPressed: () => controller.cleanPrice(),
           ),
           Row(
             children: [
-              Obx(
-                () => Expanded(
-                  child: DesignTextInput(
-                    hint: 'R\$${controller.minPrice.round()}',
-                    onChanged: controller.setMinPrice,
-                  ),
-                ),
+              Expanded(
+                child: Obx(() => DesignTextInput(
+                      initialValue: controller.minPrice.toString(),
+                      hint: 'R\$${controller.minPrice.round()}',
+                      onChanged: controller.setMinPrice,
+                    )),
               ),
               const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
               Obx(
                 () => Expanded(
                   child: DesignTextInput(
+                    initialValue: controller.maxPrice.toString(),
                     hint: 'R\$${controller.maxPrice.round()}',
                     onChanged: controller.setMaxPrice,
                   ),

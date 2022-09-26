@@ -15,13 +15,13 @@ class DesignEventItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.to(EventReadPage(event: event)),
       child: SizedBox(
-        height: 240,
-        width: (Get.width / 2) - 24,
+        height: 180,
+        width: (Get.width / 3) - 26,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: (Get.width / 2) - 32,
+              height: (Get.width / 3) - 26,
               decoration: BoxDecoration(
                 color: DesignColor.text200,
                 image: DecorationImage(
@@ -46,10 +46,11 @@ class DesignEventItem extends StatelessWidget {
               children: [
                 Text(event.price.monetary),
                 const SizedBox(width: 8),
+                Expanded(child:
                 Text(
                   event.start.startAndEnd(event.end),
                   overflow: TextOverflow.ellipsis,
-                ),
+                ),),
               ],
             ),
           ],

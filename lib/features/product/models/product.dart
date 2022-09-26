@@ -2,13 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/models/buyable.dart';
-import 'package:pingo/features/rating/models/rating.dart';
 
 class Product extends Buyable {
   final String placeId;
 
   Place? place;
-  final ratings = <Rating>[];
 
   Product({
     required this.placeId,

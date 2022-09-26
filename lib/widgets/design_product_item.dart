@@ -5,7 +5,6 @@ import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/pages/read/product_read_page.dart';
-import 'package:pingo/widgets/design_space.dart';
 
 class DesignProductItem extends StatelessWidget {
   const DesignProductItem({Key? key, required this.product}) : super(key: key);
@@ -17,7 +16,7 @@ class DesignProductItem extends StatelessWidget {
       onTap: () => Get.to(ProductReadPage(product: product)),
       child: SizedBox(
         height: 221,
-        width: (Get.width / 2) - 24,
+        width: (Get.width / 2) - 32,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
-import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
