@@ -1,11 +1,15 @@
 import 'package:get/get.dart';
 import 'package:pingo/core/keyword.dart';
-import 'package:pingo/models/user.dart';
-import 'package:pingo/repositories/user_repository.dart';
+import 'package:pingo/widgets/design_page_view.dart';
 
-class ProfileKeywordsController extends GetxController {
-  final repository = UserRepository();
-  // final PageViewController pageView = Get.find();
+class KeywordSelectionController extends GetxController {
+
+
+  KeywordSelectionController(this.list);
+
+  List<KeywordData> list;
+
+  final pageView = PageViewController();
 
   var keywords = <KeywordData>[].obs;
 
@@ -16,11 +20,6 @@ class ProfileKeywordsController extends GetxController {
       keywords.remove(v);
     }
   }
-
-  final int minPlacesSelected = 1;
-  final int minFoodsSelected = 1;
-  final int minMusicsSelected = 1;
-  final int minMiscellaneousSelected = 5;
 
   bool quantityValid(List<KeywordData> items, int expectedQuantity) {
     return items.toSet().intersection(keywords.toSet()).length >=
@@ -47,10 +46,7 @@ class ProfileKeywordsController extends GetxController {
     return ids;
   }
 
-  final User user = Get.find();
+  var search = ''.obs;
 
-  Future<void> save() async {
-    user.keywords.addAll(keywordIds);
-    repository.update(user.uuid, user);
-  }
+  void setSearch(String v) => search(v);
 }

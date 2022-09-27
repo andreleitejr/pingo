@@ -30,7 +30,7 @@ class HomeController extends GetxController {
     list.sort((a, b) => a.distance.compareTo(b.distance));
 
     list = filter.filterPlaceByDistance(list) as List<Place>;
-    list = filter.filterPlaceByRating(list) as List<Place>;
+    // list = filter.filterPlaceByRating(list) as List<Place>;
     list = search.filterBySearch(list) as List<Place>;
     list = category.filterByCategory(list);
     return list;
@@ -47,7 +47,7 @@ class HomeController extends GetxController {
     list.sort((a, b) => a.compareTo(b));
 
     list = filter.filterPlaceByDistance(list) as List<Place>;
-    list = filter.filterPlaceByRating(list) as List<Place>;
+    // list = filter.filterPlaceByRating(list) as List<Place>;
     return list;
   }
 

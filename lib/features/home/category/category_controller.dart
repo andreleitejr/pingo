@@ -23,6 +23,8 @@ class CategoryController extends GetxController {
         return _build(list, [Keyword.restaurant]);
       case Category.pubs:
         return _build(list, [Keyword.pub]);
+      case Category.shopping:
+        return _build(list, [Keyword.shopping]);
       case Category.fastFoods:
         return _build(list, [Keyword.fastFood]);
       case Category.theaters:
@@ -31,6 +33,8 @@ class CategoryController extends GetxController {
         return _build(list, [Keyword.museum]);
       case Category.historical:
         return _build(list, [Keyword.historical]);
+      case Category.utils:
+        return _build(list, [Keyword.util]);
     }
     return [];
   }

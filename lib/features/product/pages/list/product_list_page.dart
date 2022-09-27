@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/place/pages/edit/place_edit_page.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
@@ -8,11 +10,11 @@ import 'package:pingo/widgets/design_list_tile.dart';
 class ProductListPage extends StatelessWidget {
   const ProductListPage({
     Key? key,
-    required this.title,
+    this.title,
     required this.products,
   }) : super(key: key);
 
-  final String title;
+  final String? title;
   final List<Product> products;
 
   @override
@@ -21,7 +23,11 @@ class ProductListPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
-          title: title,
+          title: title ?? 'Products',
+          actionText: 'New',
+          onActionPressed: () {
+            Get.to(PlaceEditPage());
+          },
         ),
       ),
       resizeToAvoidBottomInset: false,

@@ -7,6 +7,7 @@ class KeywordData {
 
 class Keyword {
   /// TYPES OF PLACES
+  static const shopping = 0;
   static const restaurant = 1;
   static const pub = 2;
   static const party = 3;
@@ -94,10 +95,14 @@ class Keyword {
   static const lgbt = 99;
 
   /// SEXUAL ORIENTATION
+  static const util = 189;
   static const police = 190;
   static const emergency = 191;
   static const hospital = 192;
   static const fireDepartment = 193;
+
+  /// PRODUCTS
+  static const ticket = 200;
 }
 
 final allKeywords = places + foods + musics + miscellaneous;

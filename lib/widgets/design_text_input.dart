@@ -11,6 +11,7 @@ class DesignTextInput extends StatefulWidget {
     this.obscureText = false,
     this.prefixIcon,
     this.isValid = false,
+    this.textInputType = TextInputType.text,
   }) : super(key: key);
 
   final String? initialValue;
@@ -19,6 +20,7 @@ class DesignTextInput extends StatefulWidget {
   final Widget? prefixIcon;
   bool obscureText;
   final bool isValid;
+  final TextInputType textInputType;
 
   @override
   State<DesignTextInput> createState() => _DesignTextInputState();
@@ -39,8 +41,9 @@ class _DesignTextInputState extends State<DesignTextInput> {
       initialValue: widget.initialValue,
       onChanged: widget.onChanged,
       obscureText: widget.obscureText,
+      keyboardType: widget.textInputType,
       decoration: InputDecoration(
-        border:  OutlineInputBorder(
+        border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(DesignSize.borderRadius),
         ),
         hintText: widget.hint,
