@@ -7,6 +7,13 @@ import 'package:pingo/widgets/design_page_view.dart';
 class ProfileKeywordsController extends GetxController {
   final repository = UserRepository();
   final PageViewController pageView = Get.find();
+  @override
+  void onReady() {
+    print('KEYWORD CONTROLLER INITING... ${user.uuid}');
+    print('KEYWORD CONTROLLER INITING... ${user.keywords}');
+    print('KEYWORD CONTROLLER INITING... ${user.email}');
+    super.onReady();
+  }
 
   var keywords = <KeywordData>[].obs;
 
@@ -50,8 +57,9 @@ class ProfileKeywordsController extends GetxController {
 
   final User user = Get.find();
 
-  Future<void> save() async {
+  Future<void> updateUser() async {
     user.keywords.addAll(keywordIds);
+    print('USER USER USER ${user.uuid}');
     repository.update(user.uuid, user);
   }
 }

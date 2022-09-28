@@ -10,8 +10,8 @@ import 'package:pingo/models/base.dart';
 class Place extends Base {
   final Address address;
   final String? email;
-  final int? open;
-  final int? close;
+  final String? open;
+  final String? close;
 
   final products = <Product>[];
   final events = <Event>[];
@@ -45,9 +45,9 @@ class Place extends Base {
 
   Place.fromMap(DocumentSnapshot document)
       : address = Address.fromJson(document['address'] as Map<String, dynamic>),
-        close = document['close'] as int,
+        close = document['close'] as String?,
         email = document['email'] as String,
-        open = document['open'] as int,
+        open = document['open'] as String?,
         super.fromMap(document);
 
   @override

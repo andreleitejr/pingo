@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 abstract class DataBase {
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final String uuid;
+  String uuid;
 
   DataBase({
     this.createdAt,
