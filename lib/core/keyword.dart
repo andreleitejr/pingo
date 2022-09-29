@@ -103,6 +103,9 @@ class Keyword {
 
   /// PRODUCTS
   static const ticket = 200;
+
+  static const store = 300;
+  static const fashion = 320;
 }
 
 final allKeywords = places + foods + musics + miscellaneous;
@@ -114,6 +117,7 @@ final places = <KeywordData>[
   KeywordData('Concert', Keyword.concert),
   KeywordData('Park', Keyword.park),
   KeywordData('Museum', Keyword.museum),
+  KeywordData('Store', Keyword.store),
   KeywordData('Square', Keyword.square),
   KeywordData('Historical', Keyword.historical),
   KeywordData('Theater', Keyword.theater),
@@ -167,6 +171,7 @@ final musics = <KeywordData>[
 
 final miscellaneous = <KeywordData>[
   KeywordData('LGBT', Keyword.lgbt),
+  KeywordData('Fashion', Keyword.fashion),
   KeywordData('Gym', Keyword.gym),
   KeywordData('Beer', Keyword.beer),
   KeywordData('Sports', Keyword.sports),

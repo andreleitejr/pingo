@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/pages/edit/place_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
@@ -110,12 +112,65 @@ class PlaceEditPage extends StatelessWidget {
             //   ),
             // ),
             const DesignSpace(),
+            const Text(
+              'Address',
+              style: DesignTextStyle.bodyMedium16Bold,
+            ),
+            const DesignSpace(),
             SizedBox(
               height: 54,
               child: Row(
                 children: [
                   Expanded(
                     child: DesignTextInput(
+                      textInputType: TextInputType.text,
+                      hint: 'Line',
+                      onChanged: controller.setLine,
+                    ),
+                  ),
+                  const DesignSpace(
+                    orientation: DesignSpaceOrientation.horizontal,
+                  ),
+                  SizedBox(
+                    width: 100,
+                    child: DesignTextInput(
+                      textInputType: TextInputType.number,
+                      hint: 'Num',
+                      onChanged: controller.setNumber,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const DesignSpace(),
+            DesignTextInput(
+              textEditingController: controller.neighborhoodController,
+              textInputType: TextInputType.text,
+              hint: 'Neighborhood',
+              onChanged: controller.setNeighborhood,
+            ),
+            const DesignSpace(),
+            DesignTextInput(
+              textEditingController: controller.zipController,
+              textInputType: TextInputType.text,
+              hint: 'ZIP Code',
+              onChanged: controller.setZip,
+            ),
+            const DesignSpace(),
+            DesignTextInput(
+              textInputType: TextInputType.text,
+              hint: 'Complement',
+              onChanged: controller.setComplement,
+              // isValid: controller.emailValid,
+            ),
+            const DesignSpace(),
+            SizedBox(
+              height: 54,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: DesignTextInput(
+                      textEditingController: controller.latitudeController,
                       textInputType: TextInputType.number,
                       hint: 'Latitude',
                       onChanged: controller.setLatitude,
@@ -126,6 +181,7 @@ class PlaceEditPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: DesignTextInput(
+                      textEditingController: controller.longitudeController,
                       textInputType: TextInputType.number,
                       hint: 'Longitude',
                       onChanged: controller.setLongitude,
@@ -133,6 +189,132 @@ class PlaceEditPage extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+            const DesignSpace(),
+            const Text(
+              'Category',
+              style: DesignTextStyle.bodyMedium16Bold,
+            ),
+            const DesignSpace(),
+            Wrap(
+              children: [
+                for (final place in places) ...[
+                  GestureDetector(
+                    onTap: () => controller.addCategory(place.id),
+                    child: Obx(
+                      () {
+                        final isSelected =
+                            controller.categories.contains(place.id);
+                        return Container(
+                          padding: const EdgeInsets.all(8),
+                          margin: const EdgeInsets.all(4),
+                          color: isSelected
+                              ? DesignColor.primary500
+                              : DesignColor.text300,
+                          child: Text(place.title),
+                        );
+                      },
+                    ),
+                  ),
+                ]
+              ],
+            ),
+            const DesignSpace(),
+            Obx(() {
+              if (controller.categories.contains(Keyword.restaurant)) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Foods',
+                      style: DesignTextStyle.bodyMedium16Bold,
+                    ),
+                    const DesignSpace(),
+                    Wrap(
+                      children: [
+                        for (final other in foods) ...[
+                          GestureDetector(
+                            onTap: () => controller.addCategory(other.id),
+                            child: Obx(
+                              () {
+                                final isSelected =
+                                    controller.categories.contains(other.id);
+                                return Container(
+                                  padding: const EdgeInsets.all(8),
+                                  margin: const EdgeInsets.all(4),
+                                  color: isSelected
+                                      ? DesignColor.primary500
+                                      : DesignColor.text300,
+                                  child: Text(other.title),
+                                );
+                              },
+                            ),
+                          ),
+                        ]
+                      ],
+                    ),
+                    const DesignSpace(),
+                  ],
+                );
+              }
+              return Container();
+            }),
+            const Text(
+              'Musics',
+              style: DesignTextStyle.bodyMedium16Bold,
+            ),
+            const DesignSpace(),
+            Wrap(
+              children: [
+                for (final music in musics) ...[
+                  GestureDetector(
+                    onTap: () => controller.addCategory(music.id),
+                    child: Obx(
+                      () {
+                        final isSelected =
+                            controller.categories.contains(music.id);
+                        return Container(
+                          padding: const EdgeInsets.all(8),
+                          margin: const EdgeInsets.all(4),
+                          color: isSelected
+                              ? DesignColor.primary500
+                              : DesignColor.text300,
+                          child: Text(music.title),
+                        );
+                      },
+                    ),
+                  ),
+                ]
+              ],
+            ),
+            const DesignSpace(),
+            const Text(
+              'Miscellaneous',
+              style: DesignTextStyle.bodyMedium16Bold,
+            ),
+            const DesignSpace(),
+            Wrap(
+              children: [
+                for (final other in miscellaneous) ...[
+                  GestureDetector(
+                    onTap: () => controller.addCategory(other.id),
+                    child: Obx(
+                      () {
+                        final isSelected =
+                            controller.categories.contains(other.id);
+                        return Container(
+                          padding: const EdgeInsets.all(8),
+                          margin: const EdgeInsets.all(4),
+                          color: isSelected
+                              ? DesignColor.primary500
+                              : DesignColor.text300,
+                          child: Text(other.title),
+                        );
+                      },
+                    ),
+                  ),
+                ]
+              ],
             ),
             const DesignSpace(),
             Obx(
@@ -149,21 +331,6 @@ class PlaceEditPage extends StatelessWidget {
               ),
             ),
             const DesignSpace(),
-            DesignKeywordSelectionBox(
-              title: 'Select Category',
-              list: places,
-              keywords: controller.categories,
-              onKeywordSelected: controller.addCategory,
-              isValid: true,
-            ),
-            const DesignSpace(),
-            DesignKeywordSelectionBox(
-              title: 'Select Keywords',
-              list: foods + musics + miscellaneous,
-              keywords: controller.miscellaneous,
-              onKeywordSelected: controller.addMiscellaneous,
-              isValid: true,
-            ),
           ],
         ),
       ),

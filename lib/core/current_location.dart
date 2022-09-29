@@ -32,6 +32,18 @@ class CurrentLocation {
     List<Placemark> placemarks =
         await placemarkFromCoordinates(location.latitude, location.longitude);
     if (placemarks.first.street != null) streetName = placemarks.first.street!;
-    if (placemarks.first.administrativeArea != null) city = placemarks.first.administrativeArea!;
+    if (placemarks.first.administrativeArea != null)
+      city = placemarks.first.administrativeArea!;
+  }
+
+  static Future<GeoPoint> getCoordinates(String line) async {
+    List<Location> locations = await locationFromAddress(line);
+    return GeoPoint(locations.first.latitude, locations.first.longitude);
+  }
+
+  static Future<Placemark> getAddress(GeoPoint location) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(location.latitude, location.longitude);
+    return placemarks.first;
   }
 }

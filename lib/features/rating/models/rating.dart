@@ -4,12 +4,12 @@ import 'package:pingo/models/database.dart';
 class Rating extends DataBase {
   String? message;
   int nps;
-  String? ratedId;
+  String ratedId;
 
   Rating({
     required this.nps,
     this.message,
-    this.ratedId,
+    required this.ratedId,
   });
 
   Rating.fromMap(DocumentSnapshot document)

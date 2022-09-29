@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pingo/core/current_location.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
@@ -7,6 +9,11 @@ import 'package:pingo/models/address.dart';
 
 class PlaceEditController extends GetxController {
   final repository = PlaceRepository();
+
+  final latitudeController = TextEditingController();
+  final longitudeController = TextEditingController();
+  final neighborhoodController = TextEditingController();
+  final zipController = TextEditingController();
 
   var name = ''.obs;
   var description = ''.obs;
@@ -30,7 +37,6 @@ class PlaceEditController extends GetxController {
   var zip = ''.obs;
 
   var categories = <int>[].obs;
-  var miscellaneous = <int>[].obs;
 
   void setName(String v) => name(v);
 
@@ -60,7 +66,38 @@ class PlaceEditController extends GetxController {
 
   void setNeighborhood(String v) => neighborhood(v);
 
-  void setNumber(String v) => number(v);
+  Future<void> setNumber(String v) async {
+    number(v);
+
+    final address = '${line.value}, ${number.value}';
+    final location = await CurrentLocation.getCoordinates(address);
+    latitude(location.latitude);
+    latitudeController.text = latitude.toString();
+    longitude(location.longitude);
+    longitudeController.text = longitude.toString();
+
+    final placemark = await CurrentLocation.getAddress(location);
+
+    print('################# PLACE MARK NAME ${placemark.name}');
+    print('################# PLACE MARK COUNTRY ${placemark.country}');
+    print(
+        '################# PLACE MARK ADM AREA ${placemark.administrativeArea}');
+    print('################# PLACE MARK POSTAL CODE ${placemark.postalCode}');
+    print(
+        '################# PLACE MARK SUB ADM ${placemark.subAdministrativeArea}');
+    print('################# PLACE MARK SUB LOCAL ${placemark.subLocality}');
+
+    neighborhood(placemark.subLocality);
+    neighborhoodController.text = neighborhood.value;
+    zip(placemark.postalCode);
+    zipController.text = zip.value;
+    print('################# PLACE MARK THOUGHFIRE ${placemark.thoroughfare}');
+    print(
+        '################# PLACE MARK SUB THOUGHFIRE ${placemark.subThoroughfare}');
+
+    print('ADDRESS: ${latitude.value}, ${longitude.value}');
+    print('ADDRESS: ${latitude.value}, ${longitude.value}');
+  }
 
   void setState(String v) => state(v);
 
@@ -69,13 +106,10 @@ class PlaceEditController extends GetxController {
   void addCategory(int v) {
     if (!categories.contains(v)) {
       categories.add(v);
+    } else {
+      categories.remove(v);
     }
-  }
-
-  void addMiscellaneous(int v) {
-    if (!miscellaneous.contains(v)) {
-      miscellaneous.add(v);
-    }
+    print(categories);
   }
 
   String getStringFormattedHour(int hour, int minute) {
@@ -122,14 +156,14 @@ class PlaceEditController extends GetxController {
 
   Address get address => Address(
         city: 'São Paulo',
-        complement: '',
+        complement: complement.value,
         country: 'Brazil',
-        line: 'Praça Franklin Roosevelt',
-        location: GeoPoint(-23.548471, -46.6466175),
-        neighborhood: 'Centro Histórico de São Paulo',
-        number: '2',
+        line: line.value,
+        location: GeoPoint(latitude.value, longitude.value),
+        neighborhood: neighborhood.value,
+        number: number.value,
         state: 'São Paulo',
-        zip: '01120010',
+        zip: zip.value,
       );
 
   // Address(
@@ -150,11 +184,7 @@ class PlaceEditController extends GetxController {
         open: '08:30',
         close: '22:30',
         image: image.value,
-        keywords: [
-          Keyword.util,
-          Keyword.emergency,
-          Keyword.hospital,
-        ],
+        keywords: categories,
       );
 
   Future<void> save() async => await repository.save(place);

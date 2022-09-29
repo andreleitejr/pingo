@@ -12,6 +12,7 @@ class DesignTextInput extends StatefulWidget {
     this.prefixIcon,
     this.isValid = false,
     this.textInputType = TextInputType.text,
+    this.textEditingController,
   }) : super(key: key);
 
   final String? initialValue;
@@ -21,6 +22,7 @@ class DesignTextInput extends StatefulWidget {
   bool obscureText;
   final bool isValid;
   final TextInputType textInputType;
+  final TextEditingController? textEditingController;
 
   @override
   State<DesignTextInput> createState() => _DesignTextInputState();
@@ -38,6 +40,7 @@ class _DesignTextInputState extends State<DesignTextInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.textEditingController,
       initialValue: widget.initialValue,
       onChanged: widget.onChanged,
       obscureText: widget.obscureText,
