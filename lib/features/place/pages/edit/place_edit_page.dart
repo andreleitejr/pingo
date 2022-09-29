@@ -200,11 +200,11 @@ class PlaceEditPage extends StatelessWidget {
               children: [
                 for (final place in places) ...[
                   GestureDetector(
-                    onTap: () => controller.addCategory(place.id),
+                    onTap: () => controller.toggleKeyword(place.id),
                     child: Obx(
                       () {
                         final isSelected =
-                            controller.categories.contains(place.id);
+                            controller.keywords.contains(place.id);
                         return Container(
                           padding: const EdgeInsets.all(8),
                           margin: const EdgeInsets.all(4),
@@ -221,7 +221,7 @@ class PlaceEditPage extends StatelessWidget {
             ),
             const DesignSpace(),
             Obx(() {
-              if (controller.categories.contains(Keyword.restaurant)) {
+              if (controller.keywords.contains(Keyword.restaurant)) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -234,11 +234,11 @@ class PlaceEditPage extends StatelessWidget {
                       children: [
                         for (final other in foods) ...[
                           GestureDetector(
-                            onTap: () => controller.addCategory(other.id),
+                            onTap: () => controller.toggleKeyword(other.id),
                             child: Obx(
                               () {
                                 final isSelected =
-                                    controller.categories.contains(other.id);
+                                    controller.keywords.contains(other.id);
                                 return Container(
                                   padding: const EdgeInsets.all(8),
                                   margin: const EdgeInsets.all(4),
@@ -268,11 +268,11 @@ class PlaceEditPage extends StatelessWidget {
               children: [
                 for (final music in musics) ...[
                   GestureDetector(
-                    onTap: () => controller.addCategory(music.id),
+                    onTap: () => controller.toggleKeyword(music.id),
                     child: Obx(
                       () {
                         final isSelected =
-                            controller.categories.contains(music.id);
+                            controller.keywords.contains(music.id);
                         return Container(
                           padding: const EdgeInsets.all(8),
                           margin: const EdgeInsets.all(4),
@@ -297,11 +297,11 @@ class PlaceEditPage extends StatelessWidget {
               children: [
                 for (final other in miscellaneous) ...[
                   GestureDetector(
-                    onTap: () => controller.addCategory(other.id),
+                    onTap: () => controller.toggleKeyword(other.id),
                     child: Obx(
                       () {
                         final isSelected =
-                            controller.categories.contains(other.id);
+                            controller.keywords.contains(other.id);
                         return Container(
                           padding: const EdgeInsets.all(8),
                           margin: const EdgeInsets.all(4),

@@ -36,7 +36,7 @@ class PlaceEditController extends GetxController {
   var state = ''.obs;
   var zip = ''.obs;
 
-  var categories = <int>[].obs;
+  var keywords = <int>[].obs;
 
   void setName(String v) => name(v);
 
@@ -76,40 +76,25 @@ class PlaceEditController extends GetxController {
     longitude(location.longitude);
     longitudeController.text = longitude.toString();
 
-    final placemark = await CurrentLocation.getAddress(location);
+    final placemarks = await CurrentLocation.getAddress(location);
 
-    print('################# PLACE MARK NAME ${placemark.name}');
-    print('################# PLACE MARK COUNTRY ${placemark.country}');
-    print(
-        '################# PLACE MARK ADM AREA ${placemark.administrativeArea}');
-    print('################# PLACE MARK POSTAL CODE ${placemark.postalCode}');
-    print(
-        '################# PLACE MARK SUB ADM ${placemark.subAdministrativeArea}');
-    print('################# PLACE MARK SUB LOCAL ${placemark.subLocality}');
-
-    neighborhood(placemark.subLocality);
+    neighborhood(placemarks.subLocality);
     neighborhoodController.text = neighborhood.value;
-    zip(placemark.postalCode);
+    zip(placemarks.postalCode);
     zipController.text = zip.value;
-    print('################# PLACE MARK THOUGHFIRE ${placemark.thoroughfare}');
-    print(
-        '################# PLACE MARK SUB THOUGHFIRE ${placemark.subThoroughfare}');
-
-    print('ADDRESS: ${latitude.value}, ${longitude.value}');
-    print('ADDRESS: ${latitude.value}, ${longitude.value}');
   }
 
   void setState(String v) => state(v);
 
   void setZip(String v) => zip(v);
 
-  void addCategory(int v) {
-    if (!categories.contains(v)) {
-      categories.add(v);
+  void toggleKeyword(int v) {
+    if (!keywords.contains(v)) {
+      keywords.add(v);
     } else {
-      categories.remove(v);
+      keywords.remove(v);
     }
-    print(categories);
+    print(keywords);
   }
 
   String getStringFormattedHour(int hour, int minute) {
@@ -184,7 +169,7 @@ class PlaceEditController extends GetxController {
         open: '08:30',
         close: '22:30',
         image: image.value,
-        keywords: categories,
+        keywords: keywords,
       );
 
   Future<void> save() async => await repository.save(place);

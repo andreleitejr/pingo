@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/place/models/place.dart';
+import 'package:pingo/features/product/pages/edit/product_edit_page.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_read_image.dart';
+import 'package:pingo/widgets/design_space.dart';
 
 class PlaceReadPage extends StatefulWidget {
   const PlaceReadPage({Key? key, required this.place}) : super(key: key);
@@ -37,8 +39,13 @@ class _PlaceReadPageState extends State<PlaceReadPage> {
           if (widget.place.description != null) Text(widget.place.description!),
           DesignButton(
             onPressed: () => Get.to(RatingPage(ratedId: widget.place.uuid)),
-            title: 'Avaliar',
-          )
+            title: 'Rate',
+          ),
+          const DesignSpace(),
+          DesignButton(
+            onPressed: () => Get.to(ProductEditPage(place: widget.place)),
+            title: 'Create Product',
+          ),
         ],
       ),
     );

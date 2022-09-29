@@ -3,27 +3,54 @@ import 'package:get/get.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
+import 'package:pingo/features/product/models/product.dart';
+import 'package:pingo/features/product/models/product_category.dart';
+import 'package:pingo/features/product/repositories/product_repository.dart';
 import 'package:pingo/models/address.dart';
 
 class ProductEditController extends GetxController {
-  final repository = PlaceRepository();
+  ProductEditController(this.place);
+
+  final repository = ProductRepository();
+  final Place place;
 
   var name = ''.obs;
   var description = ''.obs;
-  var email = ''.obs;
   var image = ''.obs;
 
   var price = 0.0.obs;
   var promotionalPrice = 0.0.obs;
   var placeId = ''.obs;
 
+  var productCategories = <ProductCategory>[].obs;
+  var keywords = <int>[].obs;
+
   void setName(String v) => name(v);
 
   void setDescription(String v) => description(v);
 
-  void setEmail(String v) => email(v);
-
   void setImage(String v) => image(v);
+
+  void setPrice(String v) => price(double.parse(v));
+
+  void setPromotionalPrice(String v) => promotionalPrice(double.parse(v));
+
+  void toggleCategory(ProductCategory v) {
+    if (!productCategories.contains(v)) {
+      productCategories.add(v);
+    } else {
+      productCategories.remove(v);
+    }
+    print(productCategories);
+  }
+  void toggleKeyword(int v) {
+    if (!keywords.contains(v)) {
+      keywords.add(v);
+    } else {
+      keywords.remove(v);
+    }
+    print(keywords);
+  }
 
   String getStringFormattedHour(int hour, int minute) {
     if (hour >= 24) {
@@ -43,21 +70,6 @@ class ProductEditController extends GetxController {
 
   bool get descriptionValid => description.isNotEmpty;
 
-  bool get emailValid =>
-      email.isNotEmpty ? GetUtils.isEmail(email.value) : true;
-
-  // bool get cityValid => city.isNotEmpty;
-  //
-  // bool get countryValid => country.isNotEmpty;
-  //
-  // bool get lineValid => line.isNotEmpty;
-  //
-  // bool get numberValid => number.isNotEmpty;
-  //
-  // bool get stateValid => state.isNotEmpty;
-  //
-  // bool get zipValid => zip.isNotEmpty;
-
   bool get isValid => nameValid && descriptionValid;
 
   // cityValid &&
@@ -66,18 +78,6 @@ class ProductEditController extends GetxController {
   // numberValid &&
   // stateValid &&
   // zipValid
-
-  Address get address => Address(
-        city: 'São Paulo',
-        complement: '',
-        country: 'Brazil',
-        line: 'Praça Franklin Roosevelt',
-        location: GeoPoint(-23.548471, -46.6466175),
-        neighborhood: 'Centro Histórico de São Paulo',
-        number: '2',
-        state: 'São Paulo',
-        zip: '01120010',
-      );
 
   // Address(
   //   city: city.value,
@@ -90,20 +90,15 @@ class ProductEditController extends GetxController {
   //   location: GeoPoint(latitude.value, longitude.value),
   // );
 
-  Place get place => Place(
-        address: address,
+  Product get product => Product(
         description: description.value,
         name: name.value,
-        email: email.value,
-        open: '08:30',
-        close: '22:30',
         image: image.value,
-        keywords: [
-          Keyword.util,
-          Keyword.emergency,
-          Keyword.hospital,
-        ],
+        keywords: keywords,
+        price: price.value,
+        promotionalPrice: promotionalPrice.value,
+        placeId: place.uuid,
       );
 
-  Future<void> save() async => await repository.save(place);
+  Future<void> save() async => await repository.save(product);
 }
