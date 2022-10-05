@@ -45,11 +45,8 @@ class _LandingPageState extends State<LandingPage> {
               controller.registerUser();
               return const ProfileKeywordsSelection();
             }
-
-            print('sdasdasdasaddsasadsda');
             return const DesignProgressIndicator();
           } else {
-            print('sdasdasdasaddsasadsda');
             return const DesignProgressIndicator();
           }
         },
