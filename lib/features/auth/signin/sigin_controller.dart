@@ -23,6 +23,8 @@ class SignInController extends GetxController {
   Future<AuthResult> signIn() async {
     final result = await repository.signInWithEmailAndPassword(
         email.value, password.value);
+
+
     return result;
   }
 }

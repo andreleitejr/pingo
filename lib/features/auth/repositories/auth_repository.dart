@@ -54,10 +54,11 @@ class AuthRepository extends UserRepository {
   Future<AuthResult> signInWithEmailAndPassword(
       String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-      return AuthResult.success;
+      final result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      return _getUser(result);
     } on auth.FirebaseAuthException catch (e) {
-      print('CAIU AQUI! ${e.code}');
       switch (e.code) {
         case FirebaseError.userNotFound:
           return AuthResult.userNotFound;
@@ -68,6 +69,19 @@ class AuthRepository extends UserRepository {
         default:
           return AuthResult.failed;
       }
+    }
+  }
+
+  Future<AuthResult> _getUser(auth.UserCredential credential) async {
+    try {
+      final user = await super.get(credential.user!.uid);
+      if (user != null) {
+        Get.put(user);
+        return AuthResult.success;
+      }
+      return AuthResult.failed;
+    } catch (e) {
+      return AuthResult.failed;
     }
   }
 
