@@ -124,6 +124,7 @@ class _HomePageState extends State<HomePage> {
         return CustomScrollView(
           slivers: [
             SliverAppBar(
+              automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
               elevation: 0,
               title: Column(
@@ -207,6 +208,7 @@ class _HomePageState extends State<HomePage> {
             SliverAppBar(
               primary: false,
               pinned: true,
+              automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
               title: DesignSearchInput(
                 hint: 'Search the best around you ',
