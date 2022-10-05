@@ -77,11 +77,13 @@ class SignUpController extends GetxController {
       countryValid &&
       cityValid;
 
-  Future<void> create() async {
-    await repository.create(email.value, password.value);
+  Future<AuthResult> signUpWithEmailAndPassword() async {
+    final result = await repository.signUpWithEmailAndPassword(
+        name.value, email.value, password.value);
+    return result;
   }
 
   Future<void> save() async {
-    await repository.save(user).then((value) => Get.put(user));
+    await repository.save(user);
   }
 }

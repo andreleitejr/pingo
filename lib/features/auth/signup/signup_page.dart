@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/signin/signin_page.dart';
 import 'package:pingo/features/auth/signup/signup_controller.dart';
 import 'package:pingo/features/auth/signup/signup_info_page.dart';
@@ -79,11 +81,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 () => DesignButton(
                   onPressed: () async {
                     if (controller.isAuthFormValid) {
-                      await controller.create().then(
-                            (value) => Get.to(
-                              const SignUpInfoPage(),
-                            ),
-                          );
+                      final result =
+                          await controller.signUpWithEmailAndPassword();
+                      if (result == AuthResult.success) {
+                        Get.to(const SignUpInfoPage());
+                      } else {
+                        Get.snackbar(
+                          result.title,
+                          result.message,
+                          backgroundColor: DesignColor.primary500,
+                          colorText: Colors.white,
+                        );
+                      }
                     }
                   },
                   title: 'Sign In',

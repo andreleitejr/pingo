@@ -122,10 +122,13 @@ class PlaceEditPage extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: DesignTextInput(
-                      textInputType: TextInputType.text,
-                      hint: 'Line',
-                      onChanged: controller.setLine,
+                    child: Obx(
+                      () => DesignTextInput(
+                        textInputType: TextInputType.text,
+                        hint: 'Line',
+                        onChanged: controller.setLine,
+                        isValid: controller.lineValid,
+                      ),
                     ),
                   ),
                   const DesignSpace(
@@ -133,33 +136,42 @@ class PlaceEditPage extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 100,
-                    child: DesignTextInput(
-                      textInputType: TextInputType.number,
-                      hint: 'Num',
-                      onChanged: controller.setNumber,
+                    child: Obx(
+                      () => DesignTextInput(
+                        textInputType: TextInputType.number,
+                        hint: 'Num',
+                        onChanged: controller.setNumber,
+                        isValid: controller.numberValid,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             const DesignSpace(),
-            DesignTextInput(
-              textEditingController: controller.neighborhoodController,
-              textInputType: TextInputType.text,
-              hint: 'Neighborhood',
-              onChanged: controller.setNeighborhood,
+            Obx(
+              () => DesignTextInput(
+                textEditingController: controller.subLocalityController,
+                textInputType: TextInputType.text,
+                hint: 'Neighborhood',
+                onChanged: controller.setSubLocality,
+                isValid: controller.subLocalityValid,
+              ),
+            ),
+            const DesignSpace(),
+            Obx(
+              () => DesignTextInput(
+                textEditingController: controller.zipController,
+                textInputType: TextInputType.text,
+                hint: 'ZIP Code',
+                onChanged: controller.setZip,
+                isValid: controller.zipValid,
+              ),
             ),
             const DesignSpace(),
             DesignTextInput(
-              textEditingController: controller.zipController,
               textInputType: TextInputType.text,
-              hint: 'ZIP Code',
-              onChanged: controller.setZip,
-            ),
-            const DesignSpace(),
-            DesignTextInput(
-              textInputType: TextInputType.text,
-              hint: 'Complement',
+              hint: 'Complement (Optional)',
               onChanged: controller.setComplement,
               // isValid: controller.emailValid,
             ),

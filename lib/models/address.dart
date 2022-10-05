@@ -6,7 +6,7 @@ class Address {
   final String country;
   final String? line;
   final GeoPoint location;
-  final String? neighborhood;
+  final String? subLocality;
   final String number;
   final String? state;
   final String? zip;
@@ -18,7 +18,7 @@ class Address {
     required this.location,
     this.complement,
     this.line,
-    this.neighborhood,
+    this.subLocality,
     this.state,
     this.zip,
   });
@@ -29,7 +29,7 @@ class Address {
         country = json['country'],
         line = json['line'],
         location = json['location'],
-        neighborhood = json['neighborhood'],
+        subLocality = json['neighborhood'],
         number = json['number'],
         state = json['state'],
         zip = json['zip'];
@@ -40,7 +40,7 @@ class Address {
     'country': country,
     'line': line,
     'location': location,
-    'neighborhood': neighborhood,
+    'neighborhood': subLocality,
     'number': number,
     'state': state,
     'zip': zip,
@@ -54,7 +54,7 @@ List<Address> addresses = [
     country: 'Brazil',
     line: 'Praça Franklin Roosevelt',
     location: const GeoPoint(-23.5487885,-46.646209),
-    neighborhood: 'Centro Histórico de São Paulo',
+    subLocality: 'Centro Histórico de São Paulo',
     number: '2',
     state: 'São Paulo',
     zip: '01120010',

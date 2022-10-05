@@ -4,8 +4,8 @@ import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/keyword.dart';
+import 'package:pingo/features/event/pages/edit/event_edit_controller.dart';
 import 'package:pingo/features/place/models/place.dart';
-import 'package:pingo/features/place/pages/edit/place_edit_controller.dart';
 import 'package:pingo/features/product/models/product_category.dart';
 import 'package:pingo/features/product/pages/edit/product_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
@@ -14,21 +14,21 @@ import 'package:pingo/widgets/design_text_input.dart';
 
 import '../../../../widgets/design_space.dart';
 
-class ProductEditPage extends StatefulWidget {
-  ProductEditPage({Key? key, required this.place}) : super(key: key);
+class EventEditPage extends StatefulWidget {
+  const EventEditPage({Key? key, required this.place}) : super(key: key);
 
   final Place place;
 
   @override
-  State<ProductEditPage> createState() => _ProductEditPageState();
+  State<EventEditPage> createState() => _EventEditPageState();
 }
 
-class _ProductEditPageState extends State<ProductEditPage> {
-  late ProductEditController controller;
+class _EventEditPageState extends State<EventEditPage> {
+  late EventEditController controller;
 
   @override
   void initState() {
-    controller = ProductEditController(widget.place);
+    controller = EventEditController(widget.place);
     super.initState();
   }
 
@@ -38,7 +38,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
-          title: 'Create Product',
+          title: 'Create Event',
         ),
       ),
       resizeToAvoidBottomInset: false,
@@ -78,23 +78,27 @@ class _ProductEditPageState extends State<ProductEditPage> {
               hint: 'Promotional Price',
               onChanged: controller.setPromotionalPrice,
             ),
+            const Text(
+              'Category',
+              style: DesignTextStyle.bodyMedium16Bold,
+            ),
             const DesignSpace(),
             Wrap(
               children: [
-                for (final productType in productTypes) ...[
+                for (final place in places) ...[
                   GestureDetector(
-                    onTap: () => controller.toggleCategory(productType),
+                    onTap: () => controller.toggleKeyword(place.id),
                     child: Obx(
                       () {
                         final isSelected =
-                            controller.productCategories.contains(productType);
+                            controller.keywords.contains(place.id);
                         return Container(
                           padding: const EdgeInsets.all(8),
                           margin: const EdgeInsets.all(4),
                           color: isSelected
                               ? DesignColor.primary500
                               : DesignColor.text300,
-                          child: Text(productType.title),
+                          child: Text(place.title),
                         );
                       },
                     ),
@@ -147,6 +151,41 @@ class _ProductEditPageState extends State<ProductEditPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
+                  'Type of Music',
+                  style: DesignTextStyle.bodyMedium16Bold,
+                ),
+                const DesignSpace(),
+                Wrap(
+                  children: [
+                    for (final other in musics) ...[
+                      GestureDetector(
+                        onTap: () => controller.toggleKeyword(other.id),
+                        child: Obx(
+                          () {
+                            final isSelected =
+                                controller.keywords.contains(other.id);
+                            return Container(
+                              padding: const EdgeInsets.all(8),
+                              margin: const EdgeInsets.all(4),
+                              color: isSelected
+                                  ? DesignColor.primary500
+                                  : DesignColor.text300,
+                              child: Text(other.title),
+                            );
+                          },
+                        ),
+                      ),
+                    ]
+                  ],
+                ),
+                const DesignSpace(),
+              ],
+            ),
+            const DesignSpace(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
                   'Miscellaneous',
                   style: DesignTextStyle.bodyMedium16Bold,
                 ),
@@ -157,9 +196,9 @@ class _ProductEditPageState extends State<ProductEditPage> {
                       GestureDetector(
                         onTap: () => controller.toggleKeyword(other.id),
                         child: Obx(
-                              () {
+                          () {
                             final isSelected =
-                            controller.keywords.contains(other.id);
+                                controller.keywords.contains(other.id);
                             return Container(
                               padding: const EdgeInsets.all(8),
                               margin: const EdgeInsets.all(4),
@@ -181,7 +220,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
               () => DesignButton(
                 onPressed: () async {
                   if (controller.isValid) {
-                    await controller.updateProfile().then(
+                    await controller.save().then(
                           (value) => Get.back(),
                         );
                   }

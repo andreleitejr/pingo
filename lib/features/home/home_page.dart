@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final pages = <Widget>[
       homePage(),
+      PlaceListPage(places: controller.places),
       EventListPage(events: controller.eventsBestMatch),
       ProductListPage(products: controller.productBestMatch),
       ProfileReadPage(),
@@ -66,24 +67,36 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home,
-            color: DesignColor.text300,),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: DesignColor.text300,
+            ),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event,
-              color: DesignColor.text300,),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.place,
+              color: DesignColor.text300,
+            ),
+            label: 'Places',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.event,
+              color: DesignColor.text300,
+            ),
             label: 'Events',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shop,
-              color: DesignColor.text300,),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.shop,
+              color: DesignColor.text300,
+            ),
             label: 'Products',
           ),
           BottomNavigationBarItem(
             icon: Container(
-
               width: 24,
               height: 24,
               decoration: BoxDecoration(
@@ -143,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '21',
+                                      '14',
                                       style:
                                           DesignTextStyle.labelMedium12.apply(
                                         color: DesignColor.text400,
@@ -336,7 +349,7 @@ class _HomePageState extends State<HomePage> {
                               if (!isLast)
                                 const DesignSpace(
                                   orientation:
-                                  DesignSpaceOrientation.horizontal,
+                                      DesignSpaceOrientation.horizontal,
                                 ),
                             ],
                           );
@@ -355,7 +368,7 @@ class _HomePageState extends State<HomePage> {
 
                 return Column(
                   children: [
-                    DesignSpace(),
+                    const DesignSpace(),
                     DesignSectionTitle(
                       title: 'Events',
                       onActionPressed: () => Get.to(
@@ -387,7 +400,7 @@ class _HomePageState extends State<HomePage> {
                               if (!isLast)
                                 const DesignSpace(
                                   orientation:
-                                  DesignSpaceOrientation.horizontal,
+                                      DesignSpaceOrientation.horizontal,
                                 ),
                             ],
                           );

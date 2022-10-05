@@ -12,7 +12,7 @@ class PlaceEditController extends GetxController {
 
   final latitudeController = TextEditingController();
   final longitudeController = TextEditingController();
-  final neighborhoodController = TextEditingController();
+  final subLocalityController = TextEditingController();
   final zipController = TextEditingController();
 
   var name = ''.obs;
@@ -31,7 +31,7 @@ class PlaceEditController extends GetxController {
   var line = ''.obs;
   var latitude = 0.0.obs;
   var longitude = 0.0.obs;
-  var neighborhood = ''.obs;
+  var subLocality = ''.obs;
   var number = ''.obs;
   var state = ''.obs;
   var zip = ''.obs;
@@ -64,7 +64,7 @@ class PlaceEditController extends GetxController {
 
   void setLongitude(String v) => longitude(double.tryParse(v));
 
-  void setNeighborhood(String v) => neighborhood(v);
+  void setSubLocality(String v) => subLocality(v);
 
   Future<void> setNumber(String v) async {
     number(v);
@@ -78,8 +78,8 @@ class PlaceEditController extends GetxController {
 
     final placemarks = await CurrentLocation.getAddress(location);
 
-    neighborhood(placemarks.subLocality);
-    neighborhoodController.text = neighborhood.value;
+    subLocality(placemarks.subLocality);
+    subLocalityController.text = subLocality.value;
     zip(placemarks.postalCode);
     zipController.text = zip.value;
   }
@@ -118,26 +118,30 @@ class PlaceEditController extends GetxController {
   bool get emailValid =>
       email.isNotEmpty ? GetUtils.isEmail(email.value) : true;
 
-  // bool get cityValid => city.isNotEmpty;
-  //
+  bool get cityValid => city.isNotEmpty;
+
   // bool get countryValid => country.isNotEmpty;
-  //
-  // bool get lineValid => line.isNotEmpty;
-  //
-  // bool get numberValid => number.isNotEmpty;
-  //
+
+  bool get lineValid => line.isNotEmpty;
+
+  bool get numberValid => number.isNotEmpty;
+
   // bool get stateValid => state.isNotEmpty;
-  //
-  // bool get zipValid => zip.isNotEmpty;
 
-  bool get isValid => nameValid && descriptionValid;
+  bool get subLocalityValid => subLocality.isNotEmpty;
 
-  // cityValid &&
-  // countryValid &&
-  // lineValid &&
-  // numberValid &&
-  // stateValid &&
-  // zipValid
+  bool get zipValid => zip.isNotEmpty;
+
+  bool get isValid =>
+      nameValid &&
+      descriptionValid &&
+      // cityValid &&
+      // countryValid &&
+      lineValid &&
+      numberValid &&
+      // stateValid &&
+      subLocalityValid &&
+      zipValid;
 
   Address get address => Address(
         city: 'São Paulo',
@@ -145,22 +149,12 @@ class PlaceEditController extends GetxController {
         country: 'Brazil',
         line: line.value,
         location: GeoPoint(latitude.value, longitude.value),
-        neighborhood: neighborhood.value,
+        subLocality: subLocality.value,
         number: number.value,
         state: 'São Paulo',
         zip: zip.value,
       );
 
-  // Address(
-  //   city: city.value,
-  //   complement: complement.value,
-  //   country: country.value,
-  //   line: line.value,
-  //   state: state.value,
-  //   zip: zip.value,
-  //   number: number.value,
-  //   location: GeoPoint(latitude.value, longitude.value),
-  // );
   Place get place => Place(
         address: address,
         description: description.value,
@@ -168,7 +162,7 @@ class PlaceEditController extends GetxController {
         email: email.value,
         open: '08:30',
         close: '22:30',
-        image: image.value,
+        image: 'https://i.ibb.co/WPXwnYF/pingo.jpg',
         keywords: keywords,
       );
 

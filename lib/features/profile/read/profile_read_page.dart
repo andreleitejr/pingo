@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/widgets/design_appbar.dart';
+import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 
 class ProfileReadPage extends StatelessWidget {
   ProfileReadPage({Key? key}) : super(key: key);
 
   final User user = Get.find();
+  final AuthRepository repository = AuthRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,14 @@ class ProfileReadPage extends StatelessWidget {
           DesignReadImage(image: user.image),
           Text(user.name),
           if (user.description != null) Text(user.description!),
+
+          DesignButton(
+            onPressed: () async {
+              await repository.signOut();
+            },
+            title: 'Log out',
+            isActive: true,
+          ),
         ],
       ),
     );

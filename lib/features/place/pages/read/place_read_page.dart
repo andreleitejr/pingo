@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/event/pages/edit/event_edit_page.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/pages/edit/product_edit_page.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
@@ -45,6 +46,11 @@ class _PlaceReadPageState extends State<PlaceReadPage> {
           DesignButton(
             onPressed: () => Get.to(ProductEditPage(place: widget.place)),
             title: 'Create Product',
+          ),
+          const DesignSpace(),
+          DesignButton(
+            onPressed: () => Get.to(EventEditPage(place: widget.place)),
+            title: 'Create Event',
           ),
         ],
       ),

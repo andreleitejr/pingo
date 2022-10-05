@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/features/auth/signup/signup_controller.dart';
 import 'package:pingo/features/auth/signup/signup_info_page.dart';
+import 'package:pingo/features/home/home_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_text_input.dart';
@@ -42,7 +43,7 @@ class _SignInPageState extends State<SignInPage> {
             const DesignSpace(),
             DesignButton(
               onPressed: () => Get.to(
-                const SignUpInfoPage(),
+                const HomePage(),
               ),
               title: 'Sign Up',
             ),
