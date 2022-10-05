@@ -13,14 +13,11 @@ import 'package:pingo/features/home/category/category.dart';
 import 'package:pingo/features/home/filter/filter_modal.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/home/search/search_page.dart';
-import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/edit/place_edit_page.dart';
 import 'package:pingo/features/place/pages/list/place_list_page.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/pages/list/product_list_page.dart';
-import 'package:pingo/features/profile/read/profile_read_page.dart';
-import 'package:pingo/models/user.dart';
 import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
 import 'package:pingo/widgets/design_category_item.dart';
@@ -31,91 +28,14 @@ import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_section_title.dart';
 import 'package:pingo/widgets/design_space.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+  HomePage({Key? key}) : super(key: key);
 
-class _HomePageState extends State<HomePage> {
-  final controller = Get.put(HomeController());
-  final CurrentLocation location = Get.find();
-  final User user = Get.find();
-
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  final HomeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    final pages = <Widget>[
-      homePage(),
-      PlaceListPage(places: controller.places, showLeading: false),
-      EventListPage(events: controller.eventsBestMatch, showLeading: false),
-      ProductListPage(
-          products: controller.productBestMatch, showLeading: false),
-      ProfileReadPage(),
-    ];
-
-    return Scaffold(
-      body: Center(
-        child: pages.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: DesignColor.text300,
-            ),
-            label: 'Home',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.place,
-              color: DesignColor.text300,
-            ),
-            label: 'Places',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.event,
-              color: DesignColor.text300,
-            ),
-            label: 'Events',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shop,
-              color: DesignColor.text300,
-            ),
-            label: 'Products',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              width: 24,
-              height: 24,
-              decoration: BoxDecoration(
-                color: DesignColor.text300,
-                borderRadius: BorderRadius.circular(48),
-              ),
-            ),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
-    );
-  }
-
-  Widget homePage() {
     return Scaffold(
       body: Obx(() {
         if (controller.search.searchActive) {
@@ -160,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                       '14',
                                       style:
-                                          DesignTextStyle.labelMedium12.apply(
+                                      DesignTextStyle.labelMedium12.apply(
                                         color: DesignColor.text400,
                                       ),
                                     ),
@@ -193,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                             Text(
-                              '${location.streetName}, ${location.city}',
+                              '${controller.location.streetName}, ${controller.location.city}',
                               style: DesignTextStyle.bodySmall14,
                             ),
                           ],
@@ -247,7 +167,7 @@ class _HomePageState extends State<HomePage> {
               child: SizedBox(
                 height: 150,
                 child: Obx(
-                  () {
+                      () {
                     final bestMatches = controller.bestMatch;
                     return ListView.builder(
                       padding: const EdgeInsets.symmetric(
@@ -352,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                               if (!isLast)
                                 const DesignSpace(
                                   orientation:
-                                      DesignSpaceOrientation.horizontal,
+                                  DesignSpaceOrientation.horizontal,
                                 ),
                             ],
                           );
@@ -403,7 +323,7 @@ class _HomePageState extends State<HomePage> {
                               if (!isLast)
                                 const DesignSpace(
                                   orientation:
-                                      DesignSpaceOrientation.horizontal,
+                                  DesignSpaceOrientation.horizontal,
                                 ),
                             ],
                           );
@@ -434,7 +354,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SliverToBoxAdapter(child: DesignSpace()),
             Obx(
-              () {
+                  () {
                 final places = controller.places;
 
                 if (places.isEmpty) {
@@ -449,7 +369,7 @@ class _HomePageState extends State<HomePage> {
 
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
+                        (BuildContext context, int index) {
                       final place = places[index];
 
                       return DesignListTile(

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pingo/core/current_location.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/home/category/category_controller.dart';
 import 'package:pingo/features/home/filter/filter_controller.dart';
@@ -12,6 +13,8 @@ class HomeController extends GetxController {
   HomeController();
 
   final User user = Get.find();
+
+  final CurrentLocation location = Get.find();
 
   final repository = PlaceRepository();
 
