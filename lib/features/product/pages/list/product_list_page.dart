@@ -12,10 +12,12 @@ class ProductListPage extends StatelessWidget {
     Key? key,
     this.title,
     required this.products,
+    this.showLeading = true,
   }) : super(key: key);
 
   final String? title;
   final List<Product> products;
+  final bool showLeading;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,8 @@ class ProductListPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
+          showLeading: showLeading,
           title: title ?? 'Products',
-          actionText: 'New',
-          onActionPressed: () {
-            Get.to(PlaceEditPage());
-          },
         ),
       ),
       resizeToAvoidBottomInset: false,

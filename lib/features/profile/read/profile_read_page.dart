@@ -20,6 +20,7 @@ class ProfileReadPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
+          showLeading: false,
           title: user.name,
         ),
       ),

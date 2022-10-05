@@ -55,9 +55,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final pages = <Widget>[
       homePage(),
-      PlaceListPage(places: controller.places),
-      EventListPage(events: controller.eventsBestMatch),
-      ProductListPage(products: controller.productBestMatch),
+      PlaceListPage(places: controller.places, showLeading: false),
+      EventListPage(events: controller.eventsBestMatch, showLeading: false),
+      ProductListPage(
+          products: controller.productBestMatch, showLeading: false),
       ProfileReadPage(),
     ];
 

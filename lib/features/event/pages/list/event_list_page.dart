@@ -10,10 +10,12 @@ class EventListPage extends StatelessWidget {
     Key? key,
     this.title,
     required this.events,
+    this.showLeading = true,
   }) : super(key: key);
 
   final String? title;
   final List<Event> events;
+  final bool showLeading;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class EventListPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
+          showLeading: showLeading,
           title: title ?? 'Events',
         ),
       ),
