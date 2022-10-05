@@ -37,11 +37,12 @@ List<Product> products = [
     image:
         'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/129/410/products/stela-artois-3551-5a863fde4374b45cdd15869272304668-480-0.jpg',
     keywords: [
+      Keyword.drinks,
       Keyword.beer,
     ],
     price: 4.90,
     promotionalPrice: 2.90,
-    placeId: 'pMsGwBcUydZ9u8XyJEQa',
+    placeId: 'doCcYcFgUV3UXihqipl4',
     name: 'Stella Artois',
     description: 'Stella geladinha no precinho.',
   ),
@@ -49,14 +50,14 @@ List<Product> products = [
     image:
         'https://blog.biglar.com.br/wp-content/uploads/2021/12/iStock-1310029561.jpg',
     keywords: [
-      Keyword.gin,
-      Keyword.drinks,
+      Keyword.museum,
+      Keyword.ticket,
     ],
     price: 14.90,
     promotionalPrice: 9.90,
-    placeId: 'uXULvrwslJ3xRg5FWWCe',
-    name: 'Gin Tonica',
-    description: 'Gin Tonica delicioso e na promocao.',
+    placeId: 'We4tknKO5zC4y5OdnGEZ',
+    name: 'Ingresso Museu',
+    description: 'Museu muito legal.',
   ),
   Product(
     image:
@@ -66,7 +67,7 @@ List<Product> products = [
     ],
     price: 49.90,
     promotionalPrice: 34.90,
-    placeId: '9OPRh6Mhn7o39gu1rRzu',
+    placeId: 'fGZBeqxV1Vyzv2G9pxW1',
     name: 'Pizza',
     description: 'Delicious pizza.',
   ),
@@ -78,7 +79,7 @@ List<Product> products = [
     ],
     price: 39.90,
     promotionalPrice: 29.90,
-    placeId: '2UkiDk2woS1JZlXUAYSM',
+    placeId: 'SFOwXCXpVvUVf73oo2AW',
     name: 'Burger',
     description: 'Delicious burger.',
   ),
@@ -86,25 +87,25 @@ List<Product> products = [
     image:
         'https://www.sabornamesa.com.br/media/k2/items/cache/2db073658ef98ff1d00d15e09c24406a_L.jpg',
     keywords: [
-      Keyword.mexican,
+      Keyword.brazilian,
     ],
     price: 19.90,
     promotionalPrice: 14.90,
-    placeId: 'Qsm70lr8LoYR41Tl4xOW',
-    name: 'Burrito',
-    description: 'Delicious burrito.',
+    placeId: 'sLWAsprJ5FTr9HZXepxO',
+    name: 'Food Plate',
+    description: 'Delicious food plate.',
   ),
   Product(
     image:
         'https://www.sabornamesa.com.br/media/k2/items/cache/5031e263a4a258791d6306b2d3d9dbf6_XL.jpg',
     keywords: [
-      Keyword.japanese,
+      Keyword.italian,
     ],
     price: 59.90,
     promotionalPrice: 44.90,
-    placeId: '2UkiDk2woS1JZlXUAYSM',
-    name: 'Sushi',
-    description: 'Delicious sushi.',
+    placeId: 'sLWAsprJ5FTr9HZXepxO',
+    name: 'Food Plate II',
+    description: 'Delicious food plate.',
   ),
   Product(
     image:
@@ -114,7 +115,7 @@ List<Product> products = [
     ],
     price: 29.90,
     promotionalPrice: 20.90,
-    placeId: 'uXULvrwslJ3xRg5FWWCe',
+    placeId: 'SFOwXCXpVvUVf73oo2AW',
     name: 'Yakissoba',
     description: 'Delicious yakissoba.',
   ),
@@ -126,7 +127,7 @@ List<Product> products = [
     ],
     price: 79.90,
     promotionalPrice: 49.90,
-    placeId: 'Qsm70lr8LoYR41Tl4xOW',
+    placeId: '0aeFWqz3sWMFfIa19g5n',
     name: 'Rodinha de Skate',
     description: 'Rodinha de skate muito bonita.',
   ),

@@ -1,9 +1,10 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:pingo/constants/emails.dart';
 import 'package:pingo/core/keyword.dart';
+import 'package:pingo/features/auth/repositories/auth_repository.dart';
 
 extension StringExtension on String {
   String get pathReference => split("/").last;
@@ -81,4 +82,24 @@ extension DateTimeExtension on DateTime {
 
 extension PositionExtension on Position {
   GeoPoint get toGeoPoint => GeoPoint(latitude, longitude);
+}
+
+extension AuthResultExtension on AuthResult {
+  String get title {
+    if (this == AuthResult.emailAlreadyInUse) {
+      return 'E-mail already in use.';
+    } else if (this == AuthResult.weakPassword) {
+      return 'Password is too weak';
+    }
+    return 'Unexpected error';
+  }
+
+  String get message {
+    if (this == AuthResult.emailAlreadyInUse) {
+      return 'E-mail already in use. Please try another e-mail.';
+    } else if (this == AuthResult.weakPassword) {
+      return 'This password is too weak. Try a password with unless 6 letters and numbers';
+    }
+    return 'An unexpected error ocurred. Try again in minutes or try contact our support at ${Emails.support}';
+  }
 }

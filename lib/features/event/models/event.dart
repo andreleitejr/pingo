@@ -62,7 +62,7 @@ List<Event> events = [
       Keyword.art,
     ],
     price: 14.90,
-    placeId: 'uXULvrwslJ3xRg5FWWCe',
+    placeId: 'SpntYzlcjjPt6FONe7os',
     name: 'Peça de Teatro',
     description: 'Peca de Teatro muito legal na cidade.',
     start: DateTime.parse('2022-09-22 14:00:04Z'),
@@ -134,7 +134,7 @@ List<Event> events = [
     keywords: [
       Keyword.skate,
     ],
-    price:10,
+    price: 10,
     placeId: 'uXULvrwslJ3xRg5FWWCe',
     name: 'Campeonato de Skate',
     description: 'Super campeonato de skate.',

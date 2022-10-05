@@ -30,7 +30,7 @@ class HomeController extends GetxController {
     list.sort((a, b) => a.distance.compareTo(b.distance));
 
     list = filter.filterPlaceByDistance(list) as List<Place>;
-    list = filter.filterPlaceByRating(list) as List<Place>;
+    // list = filter.filterPlaceByRating(list) as List<Place>;
     list = search.filterBySearch(list) as List<Place>;
     list = category.filterByCategory(list);
     return list;
@@ -47,7 +47,7 @@ class HomeController extends GetxController {
     list.sort((a, b) => a.compareTo(b));
 
     list = filter.filterPlaceByDistance(list) as List<Place>;
-    list = filter.filterPlaceByRating(list) as List<Place>;
+    // list = filter.filterPlaceByRating(list) as List<Place>;
     return list;
   }
 
@@ -67,7 +67,7 @@ class HomeController extends GetxController {
     products.sort((a, b) => a.compareTo(b));
 
     products = filter.filterPlaceByDistance(products) as List<Product>;
-    products = filter.filterPlaceByRating(products) as List<Product>;
+    // products = filter.filterPlaceByRating(products) as List<Product>;
     products = filter.filterProductByPrice(products) as List<Product>;
 
     products = search.filterBySearch(products) as List<Product>;
@@ -90,7 +90,7 @@ class HomeController extends GetxController {
     events.sort((a, b) => a.compareTo(b));
 
     events = filter.filterPlaceByDistance(events) as List<Event>;
-    events = filter.filterPlaceByRating(events) as List<Event>;
+    // events = filter.filterPlaceByRating(events) as List<Event>;
     events = filter.filterProductByPrice(events) as List<Event>;
     events = search.filterBySearch(events) as List<Event>;
     return events;

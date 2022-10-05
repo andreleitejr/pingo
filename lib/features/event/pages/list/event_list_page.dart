@@ -8,11 +8,11 @@ import 'package:pingo/widgets/design_list_tile.dart';
 class EventListPage extends StatelessWidget {
   const EventListPage({
     Key? key,
-    required this.title,
+    this.title,
     required this.events,
   }) : super(key: key);
 
-  final String title;
+  final String? title;
   final List<Event> events;
 
   @override
@@ -21,7 +21,7 @@ class EventListPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
-          title: title,
+          title: title ?? 'Events',
         ),
       ),
       resizeToAvoidBottomInset: false,

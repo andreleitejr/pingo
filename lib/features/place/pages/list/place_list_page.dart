@@ -8,11 +8,11 @@ import 'package:pingo/widgets/design_list_tile.dart';
 class PlaceListPage extends StatelessWidget {
   const PlaceListPage({
     Key? key,
-    required this.title,
+    this.title,
     required this.places,
   }) : super(key: key);
 
-  final String title;
+  final String? title;
   final List<Place> places;
 
   @override
@@ -21,7 +21,7 @@ class PlaceListPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
-          title: title,
+          title: title ?? 'Places',
         ),
       ),
       resizeToAvoidBottomInset: false,
