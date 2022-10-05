@@ -4,7 +4,14 @@ import 'package:pingo/constants/firebase_error.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/repositories/user_repository.dart';
 
-enum AuthResult { emailAlreadyInUse, weakPassword, failed, success }
+enum AuthResult {
+  success,
+  failed,
+  emailAlreadyInUse,
+  weakPassword,
+  userNotFound,
+  userNotFoundInDatabase,
+}
 
 class AuthRepository extends UserRepository {
   final _auth = auth.FirebaseAuth.instance;
@@ -15,6 +22,7 @@ class AuthRepository extends UserRepository {
     } on auth.FirebaseAuthException catch (e) {
       print('Failed with error code: ${e.code}');
       print(e.message);
+      return null;
     }
   }
 
@@ -47,24 +55,35 @@ class AuthRepository extends UserRepository {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return AuthResult.success;
     } on auth.FirebaseAuthException catch (e) {
-      return AuthResult.failed;
+      switch (e.code) {
+        case FirebaseError.userNotFound:
+          return AuthResult.userNotFound;
+        default:
+          return AuthResult.failed;
+      }
     }
   }
 
   @override
-  Future<void> save(User model, {String? documentId}) async {
+  Future<AuthResult> save(User model, {String? documentId}) async {
     try {
       final user = await currentUser();
 
       if (user != null) {
         model.uuid = user.uid;
 
-        await super.save(model, documentId: user.uid);
-        Get.put(model);
+        await super
+            .save(model, documentId: user.uid)
+            .then((_) => Get.put(model));
+
+        return AuthResult.success;
       }
+
+      return AuthResult.failed;
     } catch (e) {
       print('Failed with error code: ${e}');
       print(e);
+      return AuthResult.failed;
     }
   }
 

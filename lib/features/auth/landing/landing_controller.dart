@@ -25,19 +25,13 @@ class LandingController extends GetxController {
     return users.value.firstWhereOrNull((user) => user.uuid == authId);
   }
 
-  bool get userRegisteredButNotCreatedInDatabase =>
-      _auth.currentUser != null && user == null;
+  bool get userCreatedInDatabase => user != null;
 
-  bool get userCreatedInDatabase {
-    return users.value.any((u) => u.uuid == _auth.currentUser?.uid);
+  bool get userHasKeywords {
+    return userCreatedInDatabase && user!.keywords.isNotEmpty;
   }
 
-  bool get keywordsSavedInDatabase {
-    return user != null && userCreatedInDatabase && user!.keywords.isNotEmpty;
-  }
-
-  bool get userValid =>
-      user != null && userCreatedInDatabase && keywordsSavedInDatabase;
+  bool get userValid => userCreatedInDatabase && userHasKeywords;
 
   void registerUser() {
     if (user != null) {

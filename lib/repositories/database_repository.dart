@@ -38,6 +38,8 @@ abstract class DataBaseRepository<T extends DataBase> {
 
   void delete(String documentId) => collection.doc(documentId).delete();
 
-  Stream<List<T>> get read => collectionGroup.snapshots().map(
-      (query) => query.docs.map<T>((document) => fromMap(document)).toList());
+  Stream<List<T>> get read =>
+      collectionGroup.snapshots().map(
+              (query) =>
+              query.docs.map<T>((document) => fromMap(document)).toList());
 }

@@ -81,21 +81,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 () => DesignButton(
                   onPressed: () async {
                     if (controller.isAuthFormValid) {
-                      final result =
-                          await controller.signUpWithEmailAndPassword();
-                      if (result == AuthResult.success) {
-                        Get.to(const SignUpInfoPage());
-                      } else {
-                        Get.snackbar(
-                          result.title,
-                          result.message,
-                          backgroundColor: DesignColor.primary500,
-                          colorText: Colors.white,
-                        );
-                      }
+
+                      Get.to(const SignUpInfoPage());
                     }
                   },
-                  title: 'Sign In',
+                  title: 'Sign Up',
                   isActive: controller.isAuthFormValid,
                 ),
               ),

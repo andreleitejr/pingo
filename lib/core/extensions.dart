@@ -11,8 +11,11 @@ extension StringExtension on String {
 
   String get clean => removeDiacritics(toLowerCase());
 
-  bool get containsLettersAndNumbers =>
-      contains(RegExp(r'[0-9]')) && contains(RegExp(r'[a-z]'));
+  bool get passwordValid =>
+      length >= 6 &&
+      contains(RegExp(r'[0-9]')) &&
+      contains(RegExp(r'[a-z]')) &&
+      contains(RegExp(r'[^a-z]'));
 }
 
 extension IntExtension on int {
@@ -87,9 +90,11 @@ extension PositionExtension on Position {
 extension AuthResultExtension on AuthResult {
   String get title {
     if (this == AuthResult.emailAlreadyInUse) {
-      return 'E-mail already in use.';
+      return 'E-mail already in use';
     } else if (this == AuthResult.weakPassword) {
       return 'Password is too weak';
+    } else if (this == AuthResult.userNotFound) {
+      return 'User not registered';
     }
     return 'Unexpected error';
   }
@@ -99,6 +104,10 @@ extension AuthResultExtension on AuthResult {
       return 'E-mail already in use. Please try another e-mail.';
     } else if (this == AuthResult.weakPassword) {
       return 'This password is too weak. Try a password with unless 6 letters and numbers';
+    } else if (this == AuthResult.userNotFoundInDatabase) {
+      return 'User not found in database. We are redirecting your...';
+    } else if (this == AuthResult.userNotFound) {
+      return 'You don\'t have an account yet. Please sign up.';
     }
     return 'An unexpected error ocurred. Try again in minutes or try contact our support at ${Emails.support}';
   }

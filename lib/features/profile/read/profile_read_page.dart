@@ -32,7 +32,9 @@ class ProfileReadPage extends StatelessWidget {
           if (user.description != null) Text(user.description!),
           DesignButton(
             onPressed: () async {
-              await repository.signOut().then((_) => const SignInPage());
+              await repository
+                  .signOut()
+                  .then((_) => Get.to(() => const SignInPage()));
             },
             title: 'Log out',
             isActive: true,

@@ -49,7 +49,7 @@ class SignUpController extends GetxController {
 
   bool get emailValid => GetUtils.isEmail(email.value);
 
-  bool get passwordValid => password.value.containsLettersAndNumbers;
+  bool get passwordValid => password.value.passwordValid;
 
   bool get confirmPasswordValid =>
       confirmPassword.value.isNotEmpty &&
@@ -71,19 +71,16 @@ class SignUpController extends GetxController {
       acceptedTermsAndConditions.value;
 
   bool get isInfoFormValid =>
-      isAuthFormValid &&
-      birthdayValid &&
-      genderValid &&
-      countryValid &&
-      cityValid;
+      // isAuthFormValid &&
+      birthdayValid && genderValid && countryValid && cityValid;
 
   Future<AuthResult> signUpWithEmailAndPassword() async {
-    final result = await repository.signUpWithEmailAndPassword(
+    var result = await repository.signUpWithEmailAndPassword(
         name.value, email.value, password.value);
-    return result;
-  }
+    if (result == AuthResult.success) {
+      await repository.save(user);
+    }
 
-  Future<void> save() async {
-    await repository.save(user);
+    return result;
   }
 }

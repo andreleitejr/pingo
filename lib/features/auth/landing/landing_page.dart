@@ -36,10 +36,6 @@ class _LandingPageState extends State<LandingPage> {
               return const SignUpPage();
             }
 
-            if (controller.user == null) {
-              return const DesignProgressIndicator();
-            }
-
             if (controller.userValid) {
               controller.registerUser();
               return const HomePage();
@@ -50,7 +46,7 @@ class _LandingPageState extends State<LandingPage> {
               return const ProfileKeywordsSelection();
             }
 
-            return const SignUpInfoPage();
+            return const DesignProgressIndicator();
           } else {
             return const DesignProgressIndicator();
           }

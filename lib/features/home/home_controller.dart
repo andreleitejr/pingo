@@ -102,31 +102,4 @@ class HomeController extends GetxController {
     placeList.bindStream(repository.combined);
   }
 
-// List<Place> _build(List<int> keywords) {
-//   return places
-//       .where((place) =>
-//           place.keywords.any((keyword) => keywords.contains(keyword)))
-//       .toList();
-// }
-//
-// List<Place> get restaurants => _build([Keyword.restaurant]);
-//
-// List<Place> get pubs => _build([Keyword.pub]);
-//
-// List<Place> get fastFoods => _build([Keyword.fastFood]);
-//
-// List<Place> get museums => _build([Keyword.museum]);
-//
-// List<Place> get theaters => _build([Keyword.theater]);
-//
-// List<Place> get parks => _build([Keyword.park]);
-//
-// List<Place> get historical => _build([Keyword.historical]);
-//
-// List<Place> get utils => _build([
-//       Keyword.police,
-//       Keyword.fireDepartment,
-//       Keyword.hospital,
-//       Keyword.emergency,
-//     ]);
 }
