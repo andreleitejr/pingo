@@ -34,22 +34,6 @@ class SearchPage extends StatelessWidget {
                     value: controller.search.text.value,
                     hint: 'Search the best around you ',
                     onChanged: controller.search.setSearch,
-                    onFilter: () {
-                      showModalBottomSheet<void>(
-                        isScrollControlled: true,
-                        context: context,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(24),
-                            topRight: Radius.circular(24),
-                          ),
-                        ),
-                        backgroundColor: Colors.white,
-                        builder: (BuildContext context) {
-                          return FilterModal();
-                        },
-                      );
-                    },
                   ),
                 ),
                 DesignIconButton(

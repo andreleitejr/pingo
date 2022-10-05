@@ -29,7 +29,6 @@ import 'package:pingo/widgets/design_section_title.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class HomePage extends StatelessWidget {
-
   HomePage({Key? key}) : super(key: key);
 
   final HomeController controller = Get.find();
@@ -80,7 +79,7 @@ class HomePage extends StatelessWidget {
                                     Text(
                                       '14',
                                       style:
-                                      DesignTextStyle.labelMedium12.apply(
+                                          DesignTextStyle.labelMedium12.apply(
                                         color: DesignColor.text400,
                                       ),
                                     ),
@@ -119,6 +118,29 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                       ),
+
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet<void>(
+                            isScrollControlled: true,
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(24),
+                                topRight: Radius.circular(24),
+                              ),
+                            ),
+                            backgroundColor: Colors.white,
+                            builder: (BuildContext context) {
+                              return FilterModal();
+                            },
+                          );
+                        },
+                        child: const Icon(
+                          Icons.filter_list,
+                          color: DesignColor.text400,
+                        ),
+                      )
                     ],
                   ),
                 ],
@@ -133,22 +155,6 @@ class HomePage extends StatelessWidget {
               title: DesignSearchInput(
                 hint: 'Search the best around you ',
                 onChanged: controller.search.setSearch,
-                onFilter: () {
-                  showModalBottomSheet<void>(
-                    isScrollControlled: true,
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24),
-                      ),
-                    ),
-                    backgroundColor: Colors.white,
-                    builder: (BuildContext context) {
-                      return FilterModal();
-                    },
-                  );
-                },
               ),
             ),
             SliverToBoxAdapter(
@@ -167,7 +173,7 @@ class HomePage extends StatelessWidget {
               child: SizedBox(
                 height: 150,
                 child: Obx(
-                      () {
+                  () {
                     final bestMatches = controller.bestMatch;
                     return ListView.builder(
                       padding: const EdgeInsets.symmetric(
@@ -272,7 +278,7 @@ class HomePage extends StatelessWidget {
                               if (!isLast)
                                 const DesignSpace(
                                   orientation:
-                                  DesignSpaceOrientation.horizontal,
+                                      DesignSpaceOrientation.horizontal,
                                 ),
                             ],
                           );
@@ -323,7 +329,7 @@ class HomePage extends StatelessWidget {
                               if (!isLast)
                                 const DesignSpace(
                                   orientation:
-                                  DesignSpaceOrientation.horizontal,
+                                      DesignSpaceOrientation.horizontal,
                                 ),
                             ],
                           );
@@ -354,7 +360,7 @@ class HomePage extends StatelessWidget {
             ),
             const SliverToBoxAdapter(child: DesignSpace()),
             Obx(
-                  () {
+              () {
                 final places = controller.places;
 
                 if (places.isEmpty) {
@@ -369,7 +375,7 @@ class HomePage extends StatelessWidget {
 
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
+                    (BuildContext context, int index) {
                       final place = places[index];
 
                       return DesignListTile(
