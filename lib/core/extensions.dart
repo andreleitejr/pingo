@@ -93,6 +93,8 @@ extension AuthResultExtension on AuthResult {
       return 'E-mail already in use';
     } else if (this == AuthResult.weakPassword) {
       return 'Password is too weak';
+    } else if (this == AuthResult.wrongPassword) {
+      return 'Wrong password';
     } else if (this == AuthResult.userNotFound) {
       return 'User not registered';
     }
@@ -104,10 +106,14 @@ extension AuthResultExtension on AuthResult {
       return 'E-mail already in use. Please try another e-mail.';
     } else if (this == AuthResult.weakPassword) {
       return 'This password is too weak. Try a password with unless 6 letters and numbers';
+    } else if (this == AuthResult.wrongPassword) {
+      return 'Looks like you entered a wrong password. Plase, try again.';
     } else if (this == AuthResult.userNotFoundInDatabase) {
       return 'User not found in database. We are redirecting your...';
     } else if (this == AuthResult.userNotFound) {
       return 'You don\'t have an account yet. Please sign up.';
+    } else if (this == AuthResult.tooManyRequests) {
+      return 'Too many requests detected. Please, try again in a few minutes.';
     }
     return 'An unexpected error ocurred. Try again in minutes or try contact our support at ${Emails.support}';
   }

@@ -9,8 +9,10 @@ enum AuthResult {
   failed,
   emailAlreadyInUse,
   weakPassword,
+  wrongPassword,
   userNotFound,
   userNotFoundInDatabase,
+  tooManyRequests,
 }
 
 class AuthRepository extends UserRepository {
@@ -41,8 +43,8 @@ class AuthRepository extends UserRepository {
       switch (e.code) {
         case FirebaseError.emailAlreadyInUse:
           return AuthResult.emailAlreadyInUse;
-        case FirebaseError.weakPassword:
-          return AuthResult.weakPassword;
+        case FirebaseError.wrongPassword:
+          return AuthResult.wrongPassword;
         default:
           return AuthResult.failed;
       }
@@ -55,9 +57,14 @@ class AuthRepository extends UserRepository {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return AuthResult.success;
     } on auth.FirebaseAuthException catch (e) {
+      print('CAIU AQUI! ${e.code}');
       switch (e.code) {
         case FirebaseError.userNotFound:
           return AuthResult.userNotFound;
+        case FirebaseError.wrongPassword:
+          return AuthResult.wrongPassword;
+        case FirebaseError.tooManyRequests:
+          return AuthResult.tooManyRequests;
         default:
           return AuthResult.failed;
       }
