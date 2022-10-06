@@ -11,6 +11,9 @@
         android:label="pingo"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyDpza1ysp6oBtHjDWH1GD1CkeNMjAeKKe0"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
@@ -11,8 +12,11 @@ import 'package:pingo/features/product/pages/edit/product_edit_page.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
+import 'package:pingo/widgets/design_map.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_space.dart';
+
+import 'package:flutter/services.dart' show rootBundle;
 
 class PlaceReadPage extends StatefulWidget {
   const PlaceReadPage({Key? key, required this.place}) : super(key: key);
@@ -25,32 +29,16 @@ class PlaceReadPage extends StatefulWidget {
 
 class _PlaceReadPageState extends State<PlaceReadPage>
     with SingleTickerProviderStateMixin {
-  final PlaceReadController controller = Get.put(PlaceReadController());
+  late PlaceReadController controller;
   late TabController tabController;
 
   @override
   void initState() {
+    controller = Get.put(PlaceReadController(widget.place));
     tabController = TabController(length: 3, vsync: this);
 
     super.initState();
   }
-
-  final _listHeight = 23;
-
-  final _crossAxisCount = 3;
-
-  final _mainAxisSpacing = 2;
-  final _crossAxisSpacing = 2;
-
-  final itemSpace = 2;
-
-  double get cardHeight => (Get.width / _crossAxisCount);
-
-  bool get isDivisible => _listHeight % 3 == 0;
-
-  double get rowLength => _listHeight / 3;
-
-  double get _height => rowLength * cardHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -202,10 +190,9 @@ class _PlaceReadPageState extends State<PlaceReadPage>
               ] else if (controller.currentTab.value ==
                   PlaceTabItemValue.map) ...[
                 SliverFillRemaining(
-                  child: Container(
-                    color: DesignColor.text200,
-                    alignment: Alignment.center,
-                    child: Text('Map'),
+                  child: DesignMap(
+                    position: controller.userPosition,
+                    completer: controller.mapController,
                   ),
                 ),
               ] else ...[
@@ -224,30 +211,36 @@ class _PlaceReadPageState extends State<PlaceReadPage>
     );
   }
 
-  final tabs = [
-    PlaceTabItem(
-      value: PlaceTabItemValue.photos,
-      iconData: Icons.grid_on_outlined,
-    ),
-    PlaceTabItem(
-      value: PlaceTabItemValue.map,
-      iconData: Icons.map,
-    ),
-    PlaceTabItem(
-      value: PlaceTabItemValue.ratings,
-      iconData: Icons.comment,
-    ),
-  ];
+  List<PlaceTabItem> get tabs => [
+        PlaceTabItem(
+          value: PlaceTabItemValue.photos,
+          iconData: Icons.grid_on_outlined,
+          controller: controller,
+        ),
+        PlaceTabItem(
+          value: PlaceTabItemValue.map,
+          iconData: Icons.map,
+          controller: controller,
+        ),
+        PlaceTabItem(
+          value: PlaceTabItemValue.ratings,
+          iconData: Icons.comment,
+          controller: controller,
+        ),
+      ];
 }
 
 class PlaceTabItem extends StatelessWidget {
-  PlaceTabItem({required this.value, required this.iconData, Key? key})
+  const PlaceTabItem(
+      {required this.value,
+      required this.iconData,
+      required this.controller,
+      Key? key})
       : super(key: key);
 
   final PlaceTabItemValue value;
   final IconData iconData;
-
-  final PlaceReadController controller = Get.find();
+  final PlaceReadController controller;
 
   @override
   Widget build(BuildContext context) {
