@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        if (controller.search.searchActive) {
+        if (controller.search.searchActive.value) {
           return SearchPage();
         }
         return CustomScrollView(
@@ -116,7 +116,6 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                       ),
-
                       GestureDetector(
                         onTap: () {
                           showModalBottomSheet<void>(

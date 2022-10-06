@@ -5,7 +5,10 @@ import 'package:pingo/models/base.dart';
 class SearchController extends GetxController {
   var text = ''.obs;
 
-  void setSearch(String v) => text(v);
+  void setSearch(String v) {
+    text(v);
+    searchActive(true);
+  }
 
   List<Base> filterBySearch(List<Base> list) => list.where(
         (base) {
@@ -23,5 +26,7 @@ class SearchController extends GetxController {
         },
       ).toList();
 
-  bool get searchActive => text.isNotEmpty;
+  var searchActive = false.obs;
+
+  void closeSearch() => searchActive(false);
 }
