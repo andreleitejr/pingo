@@ -24,7 +24,7 @@ class FilterModal extends StatelessWidget {
           DesignSectionTitle(
             title: 'Filter',
             actionTitle: 'Clean All',
-            onActionPressed: () {},
+            onActionPressed: () => controller.cleanAll(),
           ),
           DesignSectionTitle(
             title: 'Distance',
@@ -35,9 +35,9 @@ class FilterModal extends StatelessWidget {
             width: double.infinity,
             child: Obx(
               () => DesignSlider(
-                value: controller.distance.value,
-                minValue: controller.minValue.value,
-                maxValue: controller.maxValue.value,
+                maxValue: controller.distance.value,
+                min: controller.min.value,
+                max: controller.max.value,
                 divisions: controller.divisions,
                 onChanged: controller.setDistance,
               ),
@@ -84,27 +84,44 @@ class FilterModal extends StatelessWidget {
             actionTitle: 'Clean',
             onActionPressed: () => controller.cleanPrice(),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Obx(() => DesignTextInput(
-                      initialValue: controller.minPrice.toString(),
-                      hint: 'R\$${controller.minPrice.round()}',
-                      onChanged: controller.setMinPrice,
-                    )),
+          SizedBox(
+            width: double.infinity,
+            child: Obx(
+              () => DesignSlider(
+                isRange: true,
+                minValue: controller.minPrice.value,
+                maxValue: controller.maxPrice.value,
+                min: controller.min.value,
+                max: 20000,
+                divisions: controller.divisions,
+                onRangeChanged: (RangeValues values) {
+                  controller.setMinPrice(values.start);
+                  controller.setMaxPrice(values.end);
+                },
               ),
-              const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-              Obx(
-                () => Expanded(
-                  child: DesignTextInput(
-                    initialValue: controller.maxPrice.toString(),
-                    hint: 'R\$${controller.maxPrice.round()}',
-                    onChanged: controller.setMaxPrice,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       child: Obx(() => DesignTextInput(
+          //             initialValue: controller.minPrice.toString(),
+          //             hint: 'R\$${controller.minPrice.round()}',
+          //             onChanged: controller.setMinPrice,
+          //           )),
+          //     ),
+          //     const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
+          //     Obx(
+          //       () => Expanded(
+          //         child: DesignTextInput(
+          //           initialValue: controller.maxPrice.toString(),
+          //           hint: 'R\$${controller.maxPrice.round()}',
+          //           onChanged: controller.setMaxPrice,
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
           Expanded(child: Container()),
           DesignButton(
             onPressed: () => Get.back(),

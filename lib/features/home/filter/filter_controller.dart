@@ -3,8 +3,8 @@ import 'package:pingo/models/base.dart';
 import 'package:pingo/models/buyable.dart';
 
 class FilterController extends GetxController {
-  var minValue = 0.0.obs;
-  var maxValue = 10000.0.obs;
+  var min = 0.0.obs;
+  var max = 10000.0.obs;
 
   var distance = 2000.0.obs;
 
@@ -29,7 +29,7 @@ class FilterController extends GetxController {
       dividerValue = 10000;
     }
 
-    return (maxValue / dividerValue).floor();
+    return (max / dividerValue).floor();
   }
 
   void setDistance(double v) => distance(v);
@@ -40,9 +40,9 @@ class FilterController extends GetxController {
 
   void cleanRating() => rating(1);
 
-  void setMinPrice(String v) => minPrice(double.parse(v));
+  void setMinPrice(double v) => minPrice(v);
 
-  void setMaxPrice(String v) => maxPrice(double.parse(v));
+  void setMaxPrice(double v) => maxPrice(v);
 
   void cleanPrice() {
     minPrice(0);
