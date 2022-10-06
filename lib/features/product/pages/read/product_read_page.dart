@@ -31,7 +31,7 @@ class _ProductReadPageState extends State<ProductReadPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DesignReadImage(image: widget.product.image),
+          DesignAvatarImage(image: widget.product.image),
           Text(widget.product.name),
           Text(widget.product.distance.metricSystem),
           if (widget.product.description != null) Text(widget.product.description!),

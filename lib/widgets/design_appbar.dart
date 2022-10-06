@@ -14,11 +14,13 @@ class DesignAppBar extends StatelessWidget {
     this.onLeadingPressed,
     this.onActionPressed,
     this.actionValid = false,
+    this.actionIcon,
   });
 
   final String? title;
   final bool showLeading;
   final String? actionText;
+  final IconData? actionIcon;
   final Function()? onLeadingPressed;
   final Function()? onActionPressed;
   final bool actionValid;
@@ -49,7 +51,7 @@ class DesignAppBar extends StatelessWidget {
                   : Container(),
             ),
             if (showLeading && actionText == null) const SizedBox(width: 24),
-            if (actionText != null && onActionPressed != null) ...[
+            if (actionText != null && actionIcon == null) ...[
               TextButton(
                 onPressed: onActionPressed,
                 child: Text(
@@ -63,7 +65,11 @@ class DesignAppBar extends StatelessWidget {
                 ),
               ),
               const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-            ]
+            ] else ...[
+              Icon(actionIcon,
+              color: DesignColor.text400,),
+              const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
+            ],
             // DesignIconButton()
           ],
         ),

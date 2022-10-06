@@ -31,7 +31,7 @@ class _EventReadPageState extends State<EventReadPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DesignReadImage(image: widget.event.image),
+          DesignAvatarImage(image: widget.event.image),
           Text(widget.event.name),
           Text(widget.event.distance.metricSystem),
           if (widget.event.description != null) Text(widget.event.description!),
