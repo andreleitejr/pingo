@@ -47,6 +47,7 @@ class DesignListTile extends StatelessWidget {
                 ),
                 Expanded(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(

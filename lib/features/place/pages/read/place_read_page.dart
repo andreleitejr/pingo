@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
@@ -12,6 +13,7 @@ import 'package:pingo/features/product/pages/edit/product_edit_page.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
+import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_map.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_space.dart';
@@ -43,6 +45,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Obx(
           () => CustomScrollView(
@@ -142,7 +145,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                   ],
                 ),
               ),
-              SliverToBoxAdapter(child: const DesignSpace()),
+              const SliverToBoxAdapter(child: DesignSpace()),
               SliverAppBar(
                 pinned: true,
                 backgroundColor: Colors.white,
@@ -196,11 +199,20 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                   ),
                 ),
               ] else ...[
-                SliverFillRemaining(
-                  child: Container(
-                    color: DesignColor.text200,
-                    alignment: Alignment.center,
-                    child: Text('Ratings'),
+                const SliverToBoxAdapter(child: DesignSpace()),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      final rating = controller.place!.ratings[index];
+
+                      return DesignListTile(
+                        image: rating.image,
+                        title: rating.title!,
+                        subtitle: rating.message,
+                        trailing: DateFormat('yMd').format(rating.createdAt!),
+                      );
+                    },
+                    childCount: controller.place!.ratings.length,
                   ),
                 ),
               ],

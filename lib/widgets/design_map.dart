@@ -25,10 +25,10 @@ class _DesignMapState extends State<DesignMap> {
     super.initState();
 
     rootBundle.loadString('assets/map/style.txt').then((string) {
-      print(' HASDUHDASUHSDAUDSHAUDSAHUSDAHDSUAHU $string');
       _mapStyle = string;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     GoogleMapController controller;

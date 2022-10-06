@@ -8,6 +8,7 @@ import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_space.dart';
 import 'package:pingo/widgets/design_text_area.dart';
+import 'package:pingo/widgets/design_text_input.dart';
 import 'package:pingo/widgets/design_title_with_subtitle.dart';
 
 class RatingPage extends StatefulWidget {
@@ -46,7 +47,6 @@ class _RatingPageState extends State<RatingPage> {
             subtitle:
                 'From 0 to 10, what probability you indicate this place to a friend?',
           ),
-          const DesignSpace(),
           Container(
             padding: const EdgeInsets.all(DesignSize.mediumSpace),
             height: 68,
@@ -78,6 +78,12 @@ class _RatingPageState extends State<RatingPage> {
                 ],
               ],
             ),
+          ),
+          const DesignSpace(),
+          const DesignSpace(),
+          DesignTextInput(
+            hint: 'Title',
+            onChanged: controller.setTitle,
           ),
           const DesignSpace(),
           DesignTextArea(
