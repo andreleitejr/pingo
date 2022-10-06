@@ -28,5 +28,8 @@ class SearchController extends GetxController {
 
   var searchActive = false.obs;
 
-  void closeSearch() => searchActive(false);
+  void closeSearch() {
+    text('');
+    searchActive(false);
+  }
 }
