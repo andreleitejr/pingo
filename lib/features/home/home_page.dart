@@ -237,57 +237,6 @@ class HomePage extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Obx(() {
-                final products = controller.productBestMatch;
-
-                if (products.isEmpty) return Container();
-
-                return Column(
-                  children: [
-                    DesignSpace(),
-                    DesignSectionTitle(
-                      title: 'Best Prices Only',
-                      onActionPressed: () => Get.to(
-                        ProductListPage(
-                            title: 'Best Prices Only',
-                            products: controller.productBestMatch),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: DesignSize.mediumSpace,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 216,
-                      child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: DesignSize.mediumSpace,
-                        ),
-                        itemCount: products.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          final product = products[index];
-                          final isLast = index == products.length - 1;
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              DesignProductItem(
-                                product: product,
-                              ),
-                              if (!isLast)
-                                const DesignSpace(
-                                  orientation:
-                                      DesignSpaceOrientation.horizontal,
-                                ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                );
-              }),
-            ),
-            SliverToBoxAdapter(
-              child: Obx(() {
                 final events = controller.eventsBestMatch;
 
                 if (events.isEmpty) return Container();
@@ -307,7 +256,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 164,
+                      height: 216,
                       child: ListView.builder(
                         padding: const EdgeInsets.symmetric(
                           horizontal: DesignSize.mediumSpace,
@@ -322,6 +271,57 @@ class HomePage extends StatelessWidget {
                             children: [
                               DesignEventItem(
                                 event: event,
+                              ),
+                              if (!isLast)
+                                const DesignSpace(
+                                  orientation:
+                                      DesignSpaceOrientation.horizontal,
+                                ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              }),
+            ),
+            SliverToBoxAdapter(
+              child: Obx(() {
+                final products = controller.productBestMatch;
+
+                if (products.isEmpty) return Container();
+
+                return Column(
+                  children: [
+                    const DesignSpace(),
+                    DesignSectionTitle(
+                      title: 'Best Prices Only',
+                      onActionPressed: () => Get.to(
+                        ProductListPage(
+                            title: 'Best Prices Only',
+                            products: controller.productBestMatch),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: DesignSize.mediumSpace,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 164,
+                      child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: DesignSize.mediumSpace,
+                        ),
+                        itemCount: products.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          final product = products[index];
+                          final isLast = index == products.length - 1;
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              DesignProductItem(
+                                product: product,
                               ),
                               if (!isLast)
                                 const DesignSpace(

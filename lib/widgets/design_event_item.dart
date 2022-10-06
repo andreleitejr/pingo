@@ -7,21 +7,24 @@ import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/event/pages/read/event_read_page.dart';
 
 class DesignEventItem extends StatelessWidget {
-  const DesignEventItem({Key? key, required this.event}) : super(key: key);
+  DesignEventItem({Key? key, required this.event}) : super(key: key);
   final Event event;
+
+  final _height = 221.0;
+  final _width = (Get.width / 2) - 32;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Get.to(EventReadPage(event: event)),
       child: SizedBox(
-        height: 180,
-        width: (Get.width / 3) - 26,
+        height: _height,
+        width: _width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: (Get.width / 3) - 26,
+              height: _width,
               decoration: BoxDecoration(
                 color: DesignColor.text200,
                 image: DecorationImage(
@@ -46,11 +49,12 @@ class DesignEventItem extends StatelessWidget {
               children: [
                 Text(event.price.monetary),
                 const SizedBox(width: 8),
-                Expanded(child:
-                Text(
-                  event.start.startAndEnd(event.end),
-                  overflow: TextOverflow.ellipsis,
-                ),),
+                Expanded(
+                  child: Text(
+                    event.start.startAndEnd(event.end),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
           ],
