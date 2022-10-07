@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
-import 'package:pingo/features/event/pages/edit/event_edit_page.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_controller.dart';
-import 'package:pingo/features/product/pages/edit/product_edit_page.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
@@ -17,8 +14,6 @@ import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_map.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_space.dart';
-
-import 'package:flutter/services.dart' show rootBundle;
 
 class PlaceReadPage extends StatefulWidget {
   const PlaceReadPage({Key? key, required this.place}) : super(key: key);
@@ -44,12 +39,12 @@ class _PlaceReadPageState extends State<PlaceReadPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Obx(
-          () => CustomScrollView(
-            slivers: <Widget>[
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
               const SliverAppBar(
                 pinned: true,
                 backgroundColor: Colors.white,
@@ -145,139 +140,82 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                   ],
                 ),
               ),
-              const SliverToBoxAdapter(child: DesignSpace()),
-              SliverAppBar(
-                pinned: true,
-                backgroundColor: Colors.white,
-                automaticallyImplyLeading: false,
-                elevation: 1,
-                titleSpacing: 0,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    for (final tab in tabs) ...[tab],
-                  ],
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (_, int index) {
+                    return const SizedBox(
+                      height: 50,
+                      child: TabBar(
+                        labelColor: DesignColor.primary500,
+                        unselectedLabelColor: DesignColor.text300,
+                        indicatorColor: DesignColor.primary500,
+                        indicatorWeight: 2,
+                        indicatorPadding: EdgeInsets.zero,
+                        labelPadding: EdgeInsets.zero,
+                        padding: EdgeInsets.zero,
+                        tabs: [
+                          Icon(
+                            Icons.grid_on_outlined,
+                          ),
+                          Icon(
+                            Icons.map_outlined,
+                          ),
+                          Icon(
+                            Icons.chat_bubble_outline,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  childCount: 1,
                 ),
               ),
-              if (controller.currentTab.value == PlaceTabItemValue.photos) ...[
-                SliverGrid(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 2,
-                      crossAxisSpacing: 2,
-                      childAspectRatio: 1),
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      if (controller.currentTab.value ==
-                          PlaceTabItemValue.photos) {
-                        return Container(
-                          padding: const EdgeInsets.all(8),
-                          color: DesignColor.text200,
-                          child: Center(
-                            child: Text(
-                              index.toString(),
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: DesignColor.text300,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-                      return Container();
-                    },
-                    childCount: 100,
-                  ),
-                ),
-              ] else if (controller.currentTab.value ==
-                  PlaceTabItemValue.map) ...[
-                SliverFillRemaining(
-                  child: DesignMap(
-                    position: controller.userPosition,
-                    completer: controller.mapController,
-                  ),
-                ),
-              ] else ...[
-                const SliverToBoxAdapter(child: DesignSpace()),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      final rating = controller.place!.ratings[index];
+            ];
+          },
+          body: TabBarView(
+            children: <Widget>[
+              GridView.count(
+                padding: EdgeInsets.zero,
+                crossAxisCount: 3,
+                crossAxisSpacing: 2,
+                mainAxisSpacing: 2,
+                children: List.generate(100, (index) {
+                  return Container(
+                    color: DesignColor.text200,
+                    child: Center(
+                      child: Text(
+                        index.toString(),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: DesignColor.text300,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+              DesignMap(
+                position: controller.userPosition,
+                completer: controller.mapController,
+                markers: controller.markers,
+              ),
+              ListView.builder(
+                  itemCount: controller.place.ratings.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final rating = controller.place.ratings[index];
 
-                      return DesignListTile(
-                        image: rating.image,
-                        title: rating.title!,
-                        subtitle: rating.message,
-                        trailing: DateFormat('yMd').format(rating.createdAt!),
-                      );
-                    },
-                    childCount: controller.place!.ratings.length,
-                  ),
-                ),
-              ],
+                    return DesignListTile(
+                      image: rating.image,
+                      title: rating.title!,
+                      subtitle: rating.message,
+                      trailing: DateFormat('yMd').format(rating.createdAt!),
+                    );
+                  })
             ],
           ),
         ),
       ),
-    );
-  }
-
-  List<PlaceTabItem> get tabs => [
-        PlaceTabItem(
-          value: PlaceTabItemValue.photos,
-          iconData: Icons.grid_on_outlined,
-          controller: controller,
-        ),
-        PlaceTabItem(
-          value: PlaceTabItemValue.map,
-          iconData: Icons.map,
-          controller: controller,
-        ),
-        PlaceTabItem(
-          value: PlaceTabItemValue.ratings,
-          iconData: Icons.comment,
-          controller: controller,
-        ),
-      ];
-}
-
-class PlaceTabItem extends StatelessWidget {
-  const PlaceTabItem(
-      {required this.value,
-      required this.iconData,
-      required this.controller,
-      Key? key})
-      : super(key: key);
-
-  final PlaceTabItemValue value;
-  final IconData iconData;
-  final PlaceReadController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => controller.setTabItem(value),
-      child: Obx(() {
-        final isSelected = controller.currentTab.value == value;
-
-        return Container(
-          width: (Get.width / 3) - 2,
-          height: 56,
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: isSelected ? DesignColor.primary500 : Colors.transparent,
-                width: 2,
-              ),
-            ),
-          ),
-          child: Icon(
-            iconData,
-            color: isSelected ? DesignColor.primary500 : DesignColor.text400,
-          ),
-        );
-      }),
     );
   }
 }

@@ -11,8 +11,9 @@ enum PlaceTabItemValue { photos, map, ratings }
 class PlaceReadController extends GetxController {
   PlaceReadController(this.place);
 
-  Place? place;
+  Place place;
 
+  final User user = Get.find();
   final CurrentLocation currentLocation = Get.find();
 
   var currentTab = PlaceTabItemValue.photos.obs;
@@ -20,6 +21,27 @@ class PlaceReadController extends GetxController {
   void setTabItem(PlaceTabItemValue v) => currentTab(v);
 
   final mapController = Completer<GoogleMapController>();
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+
+  Marker get placeMarker => Marker(
+        markerId: MarkerId(place.name),
+        position: LatLng(
+            place.address.location.latitude, place.address.location.longitude),
+        infoWindow: InfoWindow(
+          title: place.name,
+          snippet: place.address.line,
+        ),
+      );
+
+  Marker get userMarker => Marker(
+        markerId: MarkerId(user.name),
+        position: LatLng(
+            currentLocation.location.latitude, currentLocation.location.longitude),
+        infoWindow: InfoWindow(
+          title: user.name,
+          snippet: 'You are here!',
+        ),
+      );
 
   CameraPosition get userPosition => CameraPosition(
         target: LatLng(
@@ -30,8 +52,15 @@ class PlaceReadController extends GetxController {
       );
 
   CameraPosition get placePosition => CameraPosition(
-        target: LatLng(place!.address.location.latitude,
-            place!.address.location.longitude),
+        target: LatLng(
+            place.address.location.latitude, place.address.location.longitude),
         zoom: 15,
       );
+
+  @override
+  void onReady() {
+    markers[MarkerId(place.name)] = placeMarker;
+    markers[MarkerId(user.name)] = userMarker;
+    super.onReady();
+  }
 }
