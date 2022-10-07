@@ -82,17 +82,16 @@ class DesignImageGridView extends StatelessWidget {
           bottom: DesignSize.mediumSpace,
           right: DesignSize.mediumSpace,
           child: SizedBox(
-            height: 50,
-            child: TextButton(
-              onPressed: onButtonPressed,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: DesignColor.primary500,
-                  textStyle: const TextStyle(fontSize: 20),
-                ),
-                onPressed: onButtonPressed,
-                child: const Icon(Icons.grid_on_outlined),
+            height: 54,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                textStyle: const TextStyle(fontSize: 20),
+                shape: const CircleBorder(),
               ),
+              onPressed: onButtonPressed,
+              child: const Icon(Icons.grid_on_outlined,
+                color: DesignColor.primary500,),
             ),
           ),
         ),
