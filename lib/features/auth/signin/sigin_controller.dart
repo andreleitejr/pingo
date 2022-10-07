@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
-import 'package:pingo/models/user.dart';
-import 'package:pingo/repositories/user_repository.dart';
 
 class SignInController extends GetxController {
   final repository = AuthRepository();

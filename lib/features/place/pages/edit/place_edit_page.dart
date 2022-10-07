@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
@@ -7,8 +9,6 @@ import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/pages/edit/place_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
-import 'package:pingo/features/keyword/pages/keyword_selection_page.dart';
-import 'package:pingo/widgets/design_keyword_selection_box.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 
 import '../../../../widgets/design_space.dart';
@@ -57,10 +57,6 @@ class PlaceEditPage extends StatelessWidget {
               ),
             ),
             const DesignSpace(),
-            DesignTextInput(
-              hint: 'Image',
-              onChanged: controller.setImage,
-            ),
             // const DesignSpace(),
             // SizedBox(
             //   height: 54,
@@ -331,6 +327,100 @@ class PlaceEditPage extends StatelessWidget {
             const DesignSpace(),
             Obx(
               () => DesignButton(
+                onPressed: () {
+                  _displayPickImageDialog(
+                    context,
+                    source: ImageSource.camera,
+                    isMultiImage: false,
+                  );
+                },
+                title: 'Profile Photo',
+                isActive: controller.isValid,
+              ),
+            ),
+            const DesignSpace(),
+            Center(
+              child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                  ? FutureBuilder<void>(
+                      future: controller.camera.retrieveLostData(),
+                      builder:
+                          (BuildContext context, AsyncSnapshot<void> snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                          case ConnectionState.waiting:
+                            return const Text(
+                              'You have not yet picked an image.',
+                              textAlign: TextAlign.center,
+                            );
+                          case ConnectionState.done:
+                            return _handlePreview();
+                          default:
+                            if (snapshot.hasError) {
+                              return Text(
+                                'Pick image/video error: ${snapshot.error}}',
+                                textAlign: TextAlign.center,
+                              );
+                            } else {
+                              return const Text(
+                                'You have not yet picked an image.',
+                                textAlign: TextAlign.center,
+                              );
+                            }
+                        }
+                      },
+                    )
+                  : _handlePreview(),
+            ),
+            const DesignSpace(),
+            Obx(
+              () => DesignButton(
+                onPressed: () {
+                  _displayPickImageDialog(
+                    context,
+                    source: ImageSource.camera,
+                    isMultiImage: false,
+                  );
+                },
+                title: 'Profile Photo',
+                isActive: controller.isValid,
+              ),
+            ),
+            const DesignSpace(),
+            Center(
+              child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                  ? FutureBuilder<void>(
+                      future: controller.camera.retrieveLostData(),
+                      builder:
+                          (BuildContext context, AsyncSnapshot<void> snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                          case ConnectionState.waiting:
+                            return const Text(
+                              'You have not yet picked an image.',
+                              textAlign: TextAlign.center,
+                            );
+                          case ConnectionState.done:
+                            return _handlePreview();
+                          default:
+                            if (snapshot.hasError) {
+                              return Text(
+                                'Pick image/video error: ${snapshot.error}}',
+                                textAlign: TextAlign.center,
+                              );
+                            } else {
+                              return const Text(
+                                'You have not yet picked an image.',
+                                textAlign: TextAlign.center,
+                              );
+                            }
+                        }
+                      },
+                    )
+                  : _handlePreview(),
+            ),
+            const DesignSpace(),
+            Obx(
+              () => DesignButton(
                 onPressed: () async {
                   if (controller.isValid) {
                     await controller.save().then(
@@ -347,5 +437,106 @@ class PlaceEditPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _previewImages() {
+    final Text? retrieveError = _getRetrieveErrorWidget();
+    if (retrieveError != null) {
+      return retrieveError;
+    }
+    if (controller.camera.imageFileList != null) {
+      return SizedBox(
+        height: 200,
+        child: GridView.count(
+          key: UniqueKey(),
+          padding: EdgeInsets.zero,
+          crossAxisCount: 3,
+          crossAxisSpacing: 2,
+          mainAxisSpacing: 2,
+          children:
+              List.generate(controller.camera.imageFileList!.length, (index) {
+            final image = controller.camera.imageFileList![index];
+            return Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(image.path),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          }),
+        ),
+      );
+    } else if (controller.camera.pickImageError != null) {
+      return Text(
+        'Pick image error: ${controller.camera.pickImageError}',
+        textAlign: TextAlign.center,
+      );
+    } else {
+      return const Text(
+        'You have not yet picked an image.',
+        textAlign: TextAlign.center,
+      );
+    }
+  }
+
+  Widget _handlePreview() {
+    return _previewImages();
+  }
+
+  Text? _getRetrieveErrorWidget() {
+    if (controller.camera.retrieveDataError != null) {
+      final Text result = Text(controller.camera.retrieveDataError!);
+      controller.camera.retrieveDataError = null;
+      return result;
+    }
+    return null;
+  }
+
+  Future<void> _displayPickImageDialog(BuildContext context,
+      {required ImageSource source, bool isMultiImage = false}) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Add optional parameters'),
+            content: Column(
+              children: <Widget>[
+                DesignTextInput(
+                  textEditingController: controller.camera.maxWidthController,
+                  textInputType: TextInputType.number,
+                  hint: 'Max Width',
+                  onChanged: controller.camera.setMaxWidth,
+                ),
+                DesignTextInput(
+                  textEditingController: controller.camera.maxHeightController,
+                  textInputType: TextInputType.number,
+                  hint: 'Max Height',
+                  onChanged: controller.camera.setMaxHeight,
+                ),
+                DesignTextInput(
+                  textEditingController: controller.camera.qualityController,
+                  textInputType: TextInputType.number,
+                  hint: 'Quality',
+                  onChanged: controller.camera.setQuality,
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('CANCEL'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                  child: const Text('PICKZDZSDADSASDASDA'),
+                  onPressed: () async {
+                    await controller.setImage(source);
+                    Get.back();
+                  }),
+            ],
+          );
+        });
   }
 }

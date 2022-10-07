@@ -9,6 +9,8 @@ import 'package:pingo/features/auth/repositories/auth_repository.dart';
 extension StringExtension on String {
   String get pathReference => split("/").last;
 
+  String get pathName => replaceAll(' ', '-').toLowerCase();
+
   String get clean => removeDiacritics(toLowerCase());
 
   bool get passwordValid =>

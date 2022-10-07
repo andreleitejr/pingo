@@ -25,7 +25,7 @@ class DesignBestMatchItem extends StatelessWidget {
           color: DesignColor.text200,
           image: DecorationImage(
             image: NetworkImage(
-              bestMatch.image!,
+              'file:///data/user/0/com.pingo.pingo/cache/scaled_5739f07d-d85e-4d7d-a916-6db15294bb326134045901780543950.jpg',
             ),
             fit: BoxFit.fill,
           ),

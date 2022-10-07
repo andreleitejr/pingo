@@ -1,14 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pingo/core/current_location.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
 import 'package:pingo/models/address.dart';
+import 'package:pingo/services/camera.dart';
 
 class PlaceEditController extends GetxController {
   final repository = PlaceRepository();
+
+  final camera = Get.put(CameraController());
 
   final latitudeController = TextEditingController();
   final longitudeController = TextEditingController();
@@ -44,7 +48,16 @@ class PlaceEditController extends GetxController {
 
   void setEmail(String v) => email(v);
 
-  void setImage(String v) => image(v);
+  Future<void> setImage(ImageSource source) async {
+    await camera.onImageButtonPressed(source);
+
+    if (camera.imageFileList != null) {
+      final file = camera.imageFileList?.first;
+      final uploadTask = await repository.upload(file, place.name);
+
+      // final link = await repository.downloadLink(uploadTask!.snapshot.ref);
+    }
+  }
 
   void setCloseHour(String v) => closeHour(int.tryParse(v));
 
