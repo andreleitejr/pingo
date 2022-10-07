@@ -53,14 +53,18 @@ class DesignProductItem extends StatelessWidget {
                   const SizedBox(width: 4),
                 ],
                 Expanded(
-                  child: Text(product.price.monetary,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: product.isPromotion ? DesignColor.text300 : Colors.black,
-                        decoration: product.isPromotion
-                            ? TextDecoration.lineThrough
-                            : null,
-                      )),
+                  child: Text(
+                    product.price.monetary,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: product.isPromotion
+                          ? DesignColor.text300
+                          : Colors.black,
+                      decoration: product.isPromotion
+                          ? TextDecoration.lineThrough
+                          : null,
+                    ),
+                  ),
                 ),
               ],
             ),

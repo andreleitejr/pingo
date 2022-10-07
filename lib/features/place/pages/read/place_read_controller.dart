@@ -17,5 +17,7 @@ class PlaceReadController extends GetxController {
 
   void setTabItem(PlaceTabItemValue v) => currentTab(v);
 
+  var isMasonry = false.obs;
 
+  void toggleMasonry() => isMasonry(!isMasonry.value);
 }

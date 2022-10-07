@@ -9,9 +9,11 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_controller.dart';
+import 'package:pingo/features/rating/pages/rating_list.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
+import 'package:pingo/widgets/design_grid_view.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_map.dart';
 import 'package:pingo/widgets/design_read_image.dart';
@@ -176,42 +178,18 @@ class _PlaceReadPageState extends State<PlaceReadPage>
           },
           body: TabBarView(
             children: <Widget>[
-              GridView.count(
-                padding: EdgeInsets.zero,
-                crossAxisCount: 3,
-                crossAxisSpacing: 2,
-                mainAxisSpacing: 2,
-                children: List.generate(100, (index) {
-                  return Container(
-                    color: DesignColor.text200,
-                    child: Center(
-                      child: Text(
-                        index.toString(),
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: DesignColor.text300,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  );
-                }),
+              Obx(
+                () => DesignImageGridView(
+                  isMasonry: controller.isMasonry.value,
+                  onButtonPressed: controller.toggleMasonry,
+                ),
               ),
               DesignMap(
                 place: controller.place,
               ),
-              ListView.builder(
-                  itemCount: controller.place.ratings.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final rating = controller.place.ratings[index];
-
-                    return DesignListTile(
-                      image: rating.image,
-                      title: rating.title!,
-                      subtitle: rating.message,
-                      trailing: DateFormat('yMd').format(rating.createdAt!),
-                    );
-                  })
+              RatingList(
+                ratings: controller.place.ratings,
+              ),
             ],
           ),
         ),
