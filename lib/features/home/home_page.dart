@@ -54,9 +54,9 @@ class HomePage extends StatelessWidget {
                           Get.to(PlaceEditPage());
                         },
                         child: Container(
-                          height: 32,
-                          width: 32,
-                          margin: const EdgeInsets.symmetric(horizontal: 16),
+                          height: 42,
+                          width: 42,
+                          margin: const EdgeInsets.only(right: 8),
                           decoration: BoxDecoration(
                             image: const DecorationImage(
                               image: AssetImage(DesignImages.weather),
