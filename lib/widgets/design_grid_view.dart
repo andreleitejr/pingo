@@ -90,8 +90,10 @@ class DesignImageGridView extends StatelessWidget {
                 shape: const CircleBorder(),
               ),
               onPressed: onButtonPressed,
-              child: const Icon(Icons.grid_on_outlined,
-                color: DesignColor.primary500,),
+              child: const Icon(
+                Icons.grid_on_outlined,
+                color: DesignColor.primary500,
+              ),
             ),
           ),
         ),

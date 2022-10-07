@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/models/event.dart';
+import 'package:pingo/features/event/pages/list/event_list_fragment.dart';
 import 'package:pingo/features/event/pages/read/event_read_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
@@ -30,22 +31,7 @@ class EventListPage extends StatelessWidget {
         ),
       ),
       resizeToAvoidBottomInset: false,
-      body: ListView.builder(
-        itemCount: events.length,
-        itemBuilder: (BuildContext context, int index) {
-          final place = events[index];
-
-          return GestureDetector(
-            onTap: () => Get.to(() => EventReadPage(event: place)),
-            child: DesignListTile(
-              image: place.image,
-              title: place.name,
-              subtitle: place.description,
-              trailing: place.distance.metricSystem,
-            ),
-          );
-        },
-      ),
+      body: EventListFragment(events: events),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/place/pages/edit/place_edit_page.dart';
 import 'package:pingo/features/product/models/product.dart';
+import 'package:pingo/features/product/pages/list/product_list_fragment.dart';
 import 'package:pingo/features/product/pages/read/product_read_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
@@ -31,22 +32,7 @@ class ProductListPage extends StatelessWidget {
         ),
       ),
       resizeToAvoidBottomInset: false,
-      body: ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (BuildContext context, int index) {
-          final product = products[index];
-
-          return GestureDetector(
-            onTap: ()=> Get.to(()=> ProductReadPage(product: product)),
-            child: DesignListTile(
-              image: product.image,
-              title: product.name,
-              subtitle: product.description,
-              trailing: product.distance.metricSystem,
-            ),
-          );
-        },
-      ),
+      body: ProductListFragment(products: products),
     );
   }
 }

@@ -7,8 +7,11 @@ import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/event/pages/list/event_list_fragment.dart';
+import 'package:pingo/features/event/pages/list/event_list_page.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_controller.dart';
+import 'package:pingo/features/product/pages/list/product_list_fragment.dart';
 import 'package:pingo/features/rating/pages/rating_list.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
@@ -36,7 +39,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
   @override
   void initState() {
     controller = Get.put(PlaceReadController(widget.place));
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 5, vsync: this);
 
     super.initState();
   }
@@ -44,7 +47,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 5,
       child: Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -162,7 +165,13 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                             Icons.grid_on_outlined,
                           ),
                           Icon(
-                            Icons.map_outlined,
+                            Icons.production_quantity_limits,
+                          ),
+                          Icon(
+                            Icons.event,
+                          ),
+                          Icon(
+                            Icons.map,
                           ),
                           Icon(
                             Icons.chat_bubble_outline,
@@ -184,6 +193,8 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                   onButtonPressed: controller.toggleMasonry,
                 ),
               ),
+              ProductListFragment(products: controller.place.products),
+              EventListFragment(events: controller.place.events),
               DesignMap(
                 place: controller.place,
               ),
