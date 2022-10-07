@@ -1,5 +1,7 @@
+import 'package:custom_map_markers/custom_map_markers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
@@ -195,10 +197,58 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                   );
                 }),
               ),
-              DesignMap(
-                position: controller.userPosition,
-                completer: controller.mapController,
-                markers: controller.markers,
+              CustomGoogleMapMarkerBuilder(
+                customMarkers: [
+                  MarkerData(
+                    marker: controller.placeMarker,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 54),
+                      height: 54,
+                      width: 54,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(controller.place.image!),
+                            fit: BoxFit.cover),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(54),
+                          topRight: Radius.circular(54),
+                          bottomRight: Radius.circular(54),
+                        ),
+                      ),
+                    ),
+                  ),
+                  MarkerData(
+                    marker: controller.userMarker,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 54),
+                      height: 36,
+                      width: 36,
+                      decoration: BoxDecoration(
+                        image: controller.user.image != null
+                            ? DecorationImage(
+                                image: NetworkImage(controller.user.image!),
+                                fit: BoxFit.cover)
+                            : null,
+                        color: DesignColor.primary500,
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 4,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+                builder: (BuildContext context, Set<Marker>? markers) {
+                  if (markers == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return DesignMap(
+                    position: controller.placePosition,
+                    completer: controller.mapController,
+                    markers: markers,
+                  );
+                },
               ),
               ListView.builder(
                   itemCount: controller.place.ratings.length,

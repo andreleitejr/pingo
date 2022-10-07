@@ -2,14 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/features/auth/landing/landing_controller.dart';
-
-import 'package:pingo/features/auth/signup/signup_info_page.dart';
 import 'package:pingo/features/auth/signup/signup_page.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
 import 'package:pingo/widgets/design_progress_indicator.dart';
 
 class LandingPage extends StatefulWidget {
+  const LandingPage({Key? key}) : super(key: key);
+
   @override
   State<LandingPage> createState() => _LandingPageState();
 }

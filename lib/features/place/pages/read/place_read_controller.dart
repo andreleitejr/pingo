@@ -35,8 +35,8 @@ class PlaceReadController extends GetxController {
 
   Marker get userMarker => Marker(
         markerId: MarkerId(user.name),
-        position: LatLng(
-            currentLocation.location.latitude, currentLocation.location.longitude),
+        position: LatLng(currentLocation.location.latitude,
+            currentLocation.location.longitude),
         infoWindow: InfoWindow(
           title: user.name,
           snippet: 'You are here!',
@@ -48,13 +48,13 @@ class PlaceReadController extends GetxController {
           currentLocation.location.latitude,
           currentLocation.location.longitude,
         ),
-        zoom: 15,
+        zoom: 16,
       );
 
   CameraPosition get placePosition => CameraPosition(
         target: LatLng(
             place.address.location.latitude, place.address.location.longitude),
-        zoom: 15,
+        zoom: 16,
       );
 
   @override

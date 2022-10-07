@@ -12,7 +12,7 @@ class DesignMap extends StatefulWidget {
 
   final CameraPosition position;
   final Completer<GoogleMapController> completer;
-  final Map<MarkerId, Marker> markers;
+  final Set<Marker> markers;
 
   @override
   State<DesignMap> createState() => _DesignMapState();
@@ -43,7 +43,7 @@ class _DesignMapState extends State<DesignMap> {
           // widget.completer.complete(mapController);
           controller.setMapStyle(_mapStyle);
         },
-        markers: widget.markers.values.toSet(),
+        markers: widget.markers,
       ),
     );
   }
