@@ -49,6 +49,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
     return DefaultTabController(
       length: 5,
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -147,6 +148,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                   ],
                 ),
               ),
+              const SliverToBoxAdapter(child:  DesignSpace()),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (_, int index) {
