@@ -7,8 +7,6 @@ import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/pages/edit/place_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
-import 'package:pingo/features/keyword/pages/keyword_selection_page.dart';
-import 'package:pingo/widgets/design_keyword_selection_box.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 
 import '../../../../widgets/design_space.dart';

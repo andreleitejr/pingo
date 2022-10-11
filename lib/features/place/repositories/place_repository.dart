@@ -42,6 +42,8 @@ class PlaceRepository extends DataBaseRepository<Place> {
                 (rating) => rating.ratedId == product.uuid,
               );
 
+              product.place = place;
+
               product.ratings.addAll(productRatings);
 
               product.setDistance(place.distance);
@@ -55,7 +57,7 @@ class PlaceRepository extends DataBaseRepository<Place> {
 
             for (var event in place.events) {
               final eventRatings = d.where(
-                    (rating) => rating.ratedId == event.uuid,
+                (rating) => rating.ratedId == event.uuid,
               );
 
               event.ratings.addAll(eventRatings);

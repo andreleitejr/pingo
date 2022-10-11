@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 
-class BlurHashImage {
+class DesignBlurHashImage {
   final String image;
   final String hash;
 
-  BlurHashImage({required this.image, required this.hash});
+  DesignBlurHashImage({required this.image, required this.hash});
 }
 
 class DesignImageGridView extends StatelessWidget {
@@ -22,60 +22,60 @@ class DesignImageGridView extends StatelessWidget {
   // TODO: Implementar imagens
   // final List<String> images;
 
-  final images = <BlurHashImage>[
-    BlurHashImage(
+  final images = <DesignBlurHashImage>[
+    DesignBlurHashImage(
       image:
           'https://img.freepik.com/fotos-gratis/grupo-de-jovens-felizes-brindando-com-cerveja-e-se-divertindo-em-um-pub_637285-4057.jpg',
       hash: 'LUGRCyxt9a-:~VS#Rj-o9uR*xus.',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image:
           'https://media-cdn.tripadvisor.com/media/photo-s/1a/5d/f2/f6/autentico-pub-ingles.jpg',
       hash: 'LEDHpW^iEzI;}?-o%1R+5+t6%1%1',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image:
           'https://static.designmynight.com/uploads/2019/11/Fun-time-party-bars-belushi-optimised.jpg',
       hash: 'L9C?1WzU4,\$+Knvys8wN0KI.%gNL',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image:
           'https://media-cdn.tripadvisor.com/media/photo-s/16/49/7d/c7/house-of-beer-craft-beer.jpg',
       hash: 'L6G*HD~A00~WD~EjESv}5Y\$*IpNF',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image:
           'https://img.freepik.com/free-photo/confident-smiling-african-american-player-playing-boardgames-with-friends-home_482257-43285.jpg',
       hash: 'LVFYDZI9s:-;~pIToLx]xuRiX8Rk',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image: 'https://www.meon.com.br/source/files/originals/burger-526342.jpg',
       hash: 'LEHc+L}s4p9GBU-V4:57B;\$*=ZRP',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image: 'https://cdn.oimenu.com.br/base/79a/e7a/5fe/decoracao-pub.jpg',
       hash: 'L4ATAt=#00TZ01%F}rRR004.^*^j',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image:
           'https://media-cdn.tripadvisor.com/media/photo-s/1a/81/03/80/calabriao-deadpool-de.jpg',
       hash: 'L7Hd,4L#0[Pn9~#mSc9x4TxI-.NH',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image:
           'https://claudia.abril.com.br/wp-content/uploads/2020/07/pizza-pepperoni.jpg',
       hash: 'U5EK.PTB19tc5R69VY#;0kR5}U\$P[pxbAGXT',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image: 'https://fotos.web.sapo.io/i/Gc3189a6d/22334706_be71A.jpeg',
       hash: 'L9EorbW[00Vr05yD4:M_0K,@_Nx]',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image:
           'https://cdn.oimenu.com.br/base/0da/582/375/como-montar-um-pub.jpg',
       hash: 'CRH,O?={xZNy}=-ToJWC',
     ),
-    BlurHashImage(
+    DesignBlurHashImage(
       image: 'https://www.rbsdirect.com.br/imagesrc/35448575.jpg',
       hash: 'U9BVeF~BtkS#%hx]%2s9D,XTW?s+v}IoNG-U',
     ),

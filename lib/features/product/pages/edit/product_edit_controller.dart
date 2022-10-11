@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/models/product_category.dart';
@@ -39,7 +37,6 @@ class ProductEditController extends GetxController {
     } else {
       productCategories.remove(v);
     }
-    print(productCategories);
   }
   void toggleKeyword(int v) {
     if (!keywords.contains(v)) {
@@ -47,7 +44,6 @@ class ProductEditController extends GetxController {
     } else {
       keywords.remove(v);
     }
-    print(keywords);
   }
 
   String getStringFormattedHour(int hour, int minute) {

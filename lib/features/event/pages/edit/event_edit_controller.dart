@@ -41,7 +41,6 @@ class EventEditController extends GetxController {
     } else {
       productCategories.remove(v);
     }
-    print(productCategories);
   }
 
   void toggleKeyword(int v) {
@@ -50,7 +49,6 @@ class EventEditController extends GetxController {
     } else {
       keywords.remove(v);
     }
-    print(keywords);
   }
 
   String getStringFormattedHour(int hour, int minute) {

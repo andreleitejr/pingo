@@ -42,13 +42,13 @@ class MapController extends GetxController {
           currentLocation.location.latitude,
           currentLocation.location.longitude,
         ),
-        zoom: 16,
+        zoom: 15,
       );
 
   CameraPosition get placePosition => CameraPosition(
         target: LatLng(
             place.address.location.latitude, place.address.location.longitude),
-        zoom: 16,
+        zoom: 15,
       );
 
   @override

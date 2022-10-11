@@ -94,7 +94,6 @@ class PlaceEditController extends GetxController {
     } else {
       keywords.remove(v);
     }
-    print(keywords);
   }
 
   String getStringFormattedHour(int hour, int minute) {

@@ -7,16 +7,18 @@ class DesignSpace extends StatelessWidget {
   const DesignSpace({
     Key? key,
     this.orientation = DesignSpaceOrientation.vertical,
+    this.size,
   }) : super(key: key);
 
   final DesignSpaceOrientation? orientation;
+  final double? size;
 
   double get height => orientation == DesignSpaceOrientation.vertical
-      ? DesignSize.mediumSpace
+      ? size ?? DesignSize.mediumSpace
       : 0;
 
   double get width => orientation == DesignSpaceOrientation.horizontal
-      ? DesignSize.mediumSpace
+      ? size ?? DesignSize.mediumSpace
       : 0;
 
   @override
