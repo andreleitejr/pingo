@@ -60,6 +60,8 @@ class PlaceRepository extends DataBaseRepository<Place> {
                 (rating) => rating.ratedId == event.uuid,
               );
 
+              event.place = place;
+
               event.ratings.addAll(eventRatings);
 
               event.setDistance(place.distance);

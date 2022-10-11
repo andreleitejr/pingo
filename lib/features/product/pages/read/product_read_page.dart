@@ -51,9 +51,7 @@ class _ProductReadPageState extends State<ProductReadPage> {
                 ),
               ),
             ),
-            const DesignSpace(
-              size: DesignSize.smallSpace,
-            ),
+            const DesignSpace(),
             Row(
               children: [
                 Text(
@@ -74,9 +72,7 @@ class _ProductReadPageState extends State<ProductReadPage> {
                 ),
               ],
             ),
-            const DesignSpace(
-              size: DesignSize.smallSpace,
-            ),
+            const DesignSpace(size: DesignSize.smallSpace),
             RichText(
               text: TextSpan(
                   text: '${widget.product.distance.metricSystem} distance in ',
@@ -90,18 +86,44 @@ class _ProductReadPageState extends State<ProductReadPage> {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => Get.to(
-                          PlaceReadPage(
-                            place: widget.product.place!,
-                          ),
-                        ),
+                              PlaceReadPage(
+                                place: widget.product.place!,
+                              ),
+                            ),
                     )
                   ]),
             ),
-            const DesignSpace(
-              size: DesignSize.smallSpace,
+            const DesignSpace(size: DesignSize.smallSpace),
+            Row(
+              children: [
+                if (widget.product.isPromotion) ...[
+                  Text(widget.product.promotionalPrice!.monetary),
+                  const SizedBox(width: 4),
+                ],
+                Expanded(
+                  child: Text(
+                    widget.product.price.monetary,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: widget.product.isPromotion
+                          ? DesignColor.text300
+                          : Colors.black,
+                      decoration: widget.product.isPromotion
+                          ? TextDecoration.lineThrough
+                          : null,
+                    ),
+                  ),
+                ),
+              ],
             ),
+            const DesignSpace(size: DesignSize.smallSpace),
             if (widget.product.description != null) ...[
-              Text(widget.product.description!),
+              Text(
+                widget.product.description!,
+                style: DesignTextStyle.bodySmall14.apply(
+                  color: DesignColor.text400,
+                ),
+              ),
             ],
             Expanded(child: Container()),
             DesignButton(
@@ -121,8 +143,7 @@ class _ProductReadPageState extends State<ProductReadPage> {
                   children: [
                     RichText(
                       text: TextSpan(
-                          text:
-                              'Do you already know this product? ',
+                          text: 'Do you already know this product? ',
                           style: DesignTextStyle.bodySmall14.apply(
                             color: DesignColor.text400,
                           ),

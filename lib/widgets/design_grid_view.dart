@@ -100,7 +100,7 @@ class DesignImageGridView extends StatelessWidget {
 
               final image = images[index];
 
-              return Container(
+              return SizedBox(
                 height: cardHeight,
                 child: BlurHash(
                   hash: image.hash,

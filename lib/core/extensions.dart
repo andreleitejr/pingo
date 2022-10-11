@@ -63,7 +63,8 @@ extension DoubleExtension on double {
 }
 
 extension DateTimeExtension on DateTime {
-  String get format => DateFormat.yMMMMd('en_US').format(this);
+  String get yMMMMd => DateFormat.yMMMMd('en_US').format(this);
+  String get jm => DateFormat.jm('en_US').format(this);
 
   bool get acceptedAge {
     const minAge = 18;
