@@ -21,11 +21,6 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('USER Uuid: ${controller.user.uuid}');
-    print('USER Name: ${controller.name}');
-    print('USER Email: ${controller.email}');
-    print('USER Password: ${controller.password}');
-
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(DesignSize.appBarHeight),

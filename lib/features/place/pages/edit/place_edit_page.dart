@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -327,59 +329,8 @@ class PlaceEditPage extends StatelessWidget {
             const DesignSpace(),
             Obx(
               () => DesignButton(
-                onPressed: () {
-                  _displayPickImageDialog(
-                    context,
-                    source: ImageSource.camera,
-                    isMultiImage: false,
-                  );
-                },
-                title: 'Profile Photo',
-                isActive: controller.isValid,
-              ),
-            ),
-            const DesignSpace(),
-            Center(
-              child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
-                  ? FutureBuilder<void>(
-                      future: controller.camera.retrieveLostData(),
-                      builder:
-                          (BuildContext context, AsyncSnapshot<void> snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                          case ConnectionState.waiting:
-                            return const Text(
-                              'You have not yet picked an image.',
-                              textAlign: TextAlign.center,
-                            );
-                          case ConnectionState.done:
-                            return _handlePreview();
-                          default:
-                            if (snapshot.hasError) {
-                              return Text(
-                                'Pick image/video error: ${snapshot.error}}',
-                                textAlign: TextAlign.center,
-                              );
-                            } else {
-                              return const Text(
-                                'You have not yet picked an image.',
-                                textAlign: TextAlign.center,
-                              );
-                            }
-                        }
-                      },
-                    )
-                  : _handlePreview(),
-            ),
-            const DesignSpace(),
-            Obx(
-              () => DesignButton(
-                onPressed: () {
-                  _displayPickImageDialog(
-                    context,
-                    source: ImageSource.camera,
-                    isMultiImage: false,
-                  );
+                onPressed: () async {
+                  await controller.setImage(ImageSource.gallery);
                 },
                 title: 'Profile Photo',
                 isActive: controller.isValid,
@@ -422,6 +373,17 @@ class PlaceEditPage extends StatelessWidget {
             Obx(
               () => DesignButton(
                 onPressed: () async {
+                  await controller.setImage(ImageSource.gallery,
+                      isMultiImage: true);
+                },
+                title: 'Other Photos',
+                isActive: controller.isValid,
+              ),
+            ),
+            const DesignSpace(),
+            Obx(
+              () => DesignButton(
+                onPressed: () async {
                   if (controller.isValid) {
                     await controller.save().then(
                           (value) => Get.back(),
@@ -444,40 +406,42 @@ class PlaceEditPage extends StatelessWidget {
     if (retrieveError != null) {
       return retrieveError;
     }
-    if (controller.camera.imageFileList != null) {
-      return SizedBox(
-        height: 200,
-        child: GridView.count(
-          key: UniqueKey(),
-          padding: EdgeInsets.zero,
-          crossAxisCount: 3,
-          crossAxisSpacing: 2,
-          mainAxisSpacing: 2,
-          children:
-              List.generate(controller.camera.imageFileList!.length, (index) {
-            final image = controller.camera.imageFileList![index];
-            return Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(image.path),
-                  fit: BoxFit.cover,
+    return Obx(() {
+      if (controller.camera.imageFileList.isNotEmpty) {
+        return SizedBox(
+          height: 200,
+          child: GridView.count(
+            key: UniqueKey(),
+            padding: EdgeInsets.zero,
+            crossAxisCount: 3,
+            crossAxisSpacing: 2,
+            mainAxisSpacing: 2,
+            children:
+                List.generate(controller.camera.imageFileList.length, (index) {
+              final image = File(controller.camera.imageFileList[index].path);
+              return Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: FileImage(image),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-            );
-          }),
-        ),
-      );
-    } else if (controller.camera.pickImageError != null) {
-      return Text(
-        'Pick image error: ${controller.camera.pickImageError}',
-        textAlign: TextAlign.center,
-      );
-    } else {
-      return const Text(
-        'You have not yet picked an image.',
-        textAlign: TextAlign.center,
-      );
-    }
+              );
+            }),
+          ),
+        );
+      } else if (controller.camera.pickImageError != null) {
+        return Text(
+          'Pick image error: ${controller.camera.pickImageError}',
+          textAlign: TextAlign.center,
+        );
+      } else {
+        return const Text(
+          'You have not yet picked an image.',
+          textAlign: TextAlign.center,
+        );
+      }
+    });
   }
 
   Widget _handlePreview() {
@@ -491,52 +455,5 @@ class PlaceEditPage extends StatelessWidget {
       return result;
     }
     return null;
-  }
-
-  Future<void> _displayPickImageDialog(BuildContext context,
-      {required ImageSource source, bool isMultiImage = false}) async {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Add optional parameters'),
-            content: Column(
-              children: <Widget>[
-                DesignTextInput(
-                  textEditingController: controller.camera.maxWidthController,
-                  textInputType: TextInputType.number,
-                  hint: 'Max Width',
-                  onChanged: controller.camera.setMaxWidth,
-                ),
-                DesignTextInput(
-                  textEditingController: controller.camera.maxHeightController,
-                  textInputType: TextInputType.number,
-                  hint: 'Max Height',
-                  onChanged: controller.camera.setMaxHeight,
-                ),
-                DesignTextInput(
-                  textEditingController: controller.camera.qualityController,
-                  textInputType: TextInputType.number,
-                  hint: 'Quality',
-                  onChanged: controller.camera.setQuality,
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('CANCEL'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                  child: const Text('PICKZDZSDADSASDASDA'),
-                  onPressed: () async {
-                    await controller.setImage(source);
-                    Get.back();
-                  }),
-            ],
-          );
-        });
   }
 }

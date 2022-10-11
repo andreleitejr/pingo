@@ -24,10 +24,10 @@ class CameraController extends GetxController {
   final TextEditingController maxHeightController = TextEditingController();
   final TextEditingController qualityController = TextEditingController();
 
-  List<XFile>? imageFileList;
+  var imageFileList = <XFile>[].obs;
 
   void _setImageFileListFromFile(XFile? value) {
-    imageFileList = value == null ? null : <XFile>[value];
+    if (value != null) imageFileList.add(value);
   }
 
   dynamic pickImageError;
@@ -51,7 +51,7 @@ class CameraController extends GetxController {
       if (response.files == null) {
         _setImageFileListFromFile(response.file);
       } else {
-        imageFileList = response.files;
+        imageFileList.value = response.files ?? [];
       }
     } else {
       retrieveDataError = response.exception!.code;
@@ -68,7 +68,7 @@ class CameraController extends GetxController {
           imageQuality: quality.value,
         );
 
-        imageFileList = pickedFileList;
+        imageFileList.value = pickedFileList;
       } catch (e) {
         pickImageError = e;
       }

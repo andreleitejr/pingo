@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '14',
+                                      '19',
                                       style:
                                           DesignTextStyle.labelMedium12.apply(
                                         color: DesignColor.text400,
@@ -150,13 +150,13 @@ class HomePage extends StatelessWidget {
               automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
               title: DesignSearchInput(
-                hint: 'Search the best around you ',
+                hint: 'Busque o melhor ao redor',
                 onChanged: controller.search.setSearch,
               ),
             ),
             SliverToBoxAdapter(
               child: DesignSectionTitle(
-                title: 'Made for you',
+                title: 'Lugares feitos para você',
                 onActionPressed: () => Get.to(
                   PlaceListPage(
                       title: 'Made for you', places: controller.bestMatch),
@@ -245,7 +245,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     const DesignSpace(),
                     DesignSectionTitle(
-                      title: 'Events',
+                      title: 'Eventos próximos',
                       onActionPressed: () => Get.to(
                         EventListPage(
                             title: 'Events',
@@ -296,7 +296,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     const DesignSpace(),
                     DesignSectionTitle(
-                      title: 'Best Prices Only',
+                      title: 'Melhores preços da região',
                       onActionPressed: () => Get.to(
                         ProductListPage(
                             title: 'Best Prices Only',
@@ -340,9 +340,12 @@ class HomePage extends StatelessWidget {
             const SliverToBoxAdapter(child: DesignSpace()),
             SliverToBoxAdapter(
               child: DesignSectionTitle(
-                title: 'Near you',
+                title: 'Tudo próximo',
                 onActionPressed: () => Get.to(
-                  PlaceListPage(title: 'Near You', places: controller.places),
+                  PlaceListPage(
+                      title: ''
+                          '',
+                      places: controller.places),
                 ),
                 padding: const EdgeInsets.symmetric(
                   horizontal: DesignSize.mediumSpace,

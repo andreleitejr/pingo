@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +24,7 @@ class PlaceEditController extends GetxController {
   var name = ''.obs;
   var description = ''.obs;
   var email = ''.obs;
-  var image = ''.obs;
+  File? image;
 
   var closeHour = 23.obs;
   var closeMinute = 0.obs;
@@ -48,12 +50,17 @@ class PlaceEditController extends GetxController {
 
   void setEmail(String v) => email(v);
 
-  Future<void> setImage(ImageSource source) async {
-    await camera.onImageButtonPressed(source);
+  Future<void> setImage(ImageSource source, {bool isMultiImage = false}) async {
+    await camera.onImageButtonPressed(source, isMultiImage: isMultiImage);
 
-    if (camera.imageFileList != null) {
-      final file = camera.imageFileList?.first;
-      final uploadTask = await repository.upload(file, place.name);
+    if (camera.imageFileList.isNotEmpty) {
+      final imagePath = camera.imageFileList.first.path;
+
+      File file = File(imagePath);
+      image = file;
+
+      // final uploadTask = await repository.upload(file, place.name);
+      print('##################### FILE ${image?.path}');
 
       // final link = await repository.downloadLink(uploadTask!.snapshot.ref);
     }
@@ -107,7 +114,6 @@ class PlaceEditController extends GetxController {
     } else {
       keywords.remove(v);
     }
-    print(keywords);
   }
 
   String getStringFormattedHour(int hour, int minute) {

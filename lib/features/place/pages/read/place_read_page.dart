@@ -1,14 +1,10 @@
-import 'package:custom_map_markers/custom_map_markers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/pages/list/event_list_fragment.dart';
-import 'package:pingo/features/event/pages/list/event_list_page.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_controller.dart';
 import 'package:pingo/features/product/pages/list/product_list_fragment.dart';
@@ -17,7 +13,6 @@ import 'package:pingo/features/rating/pages/rating_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_grid_view.dart';
-import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_map.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_space.dart';
@@ -148,7 +143,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                   ],
                 ),
               ),
-              const SliverToBoxAdapter(child:  DesignSpace()),
+              const SliverToBoxAdapter(child: DesignSpace()),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (_, int index) {
