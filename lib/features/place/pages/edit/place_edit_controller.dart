@@ -24,7 +24,8 @@ class PlaceEditController extends GetxController {
   var name = ''.obs;
   var description = ''.obs;
   var email = ''.obs;
-  File? image;
+  var image = File('').obs;
+  var photos = <File>[].obs;
 
   var closeHour = 23.obs;
   var closeMinute = 0.obs;
@@ -50,19 +51,31 @@ class PlaceEditController extends GetxController {
 
   void setEmail(String v) => email(v);
 
-  Future<void> setImage(ImageSource source, {bool isMultiImage = false}) async {
-    await camera.onImageButtonPressed(source, isMultiImage: isMultiImage);
+  Future<void> setImage(ImageSource source) async {
+    await camera.onImageButtonPressed(source);
 
     if (camera.imageFileList.isNotEmpty) {
       final imagePath = camera.imageFileList.first.path;
 
       File file = File(imagePath);
-      image = file;
+      image(file);
 
-      // final uploadTask = await repository.upload(file, place.name);
-      print('##################### FILE ${image?.path}');
+      camera.imageFileList.clear();
+    }
+  }
 
-      // final link = await repository.downloadLink(uploadTask!.snapshot.ref);
+  Future<void> selectPhotos(ImageSource source) async {
+    await camera.onImageButtonPressed(source, isMultiImage: true);
+
+    if (camera.imageFileList.isNotEmpty) {
+      for (final imageFile in camera.imageFileList) {
+        final imagePath = imageFile.path;
+
+        File file = File(imagePath);
+        photos.add(file);
+      }
+
+      camera.imageFileList.clear();
     }
   }
 

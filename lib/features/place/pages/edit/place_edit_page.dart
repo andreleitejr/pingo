@@ -329,9 +329,8 @@ class PlaceEditPage extends StatelessWidget {
             const DesignSpace(),
             Obx(
               () => DesignButton(
-                onPressed: () async {
-                  await controller.setImage(ImageSource.gallery);
-                },
+                onPressed: () async =>
+                    await controller.setImage(ImageSource.gallery),
                 title: 'Profile Photo',
                 isActive: controller.isValid,
               ),
@@ -351,7 +350,7 @@ class PlaceEditPage extends StatelessWidget {
                               textAlign: TextAlign.center,
                             );
                           case ConnectionState.done:
-                            return _handlePreview();
+                            return _previewImage();
                           default:
                             if (snapshot.hasError) {
                               return Text(
@@ -367,18 +366,49 @@ class PlaceEditPage extends StatelessWidget {
                         }
                       },
                     )
-                  : _handlePreview(),
+                  : _previewPhotos(),
             ),
             const DesignSpace(),
             Obx(
               () => DesignButton(
-                onPressed: () async {
-                  await controller.setImage(ImageSource.gallery,
-                      isMultiImage: true);
-                },
+                onPressed: () async =>
+                    await controller.selectPhotos(ImageSource.gallery),
                 title: 'Other Photos',
                 isActive: controller.isValid,
               ),
+            ),
+            const DesignSpace(),
+            Center(
+              child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                  ? FutureBuilder<void>(
+                      future: controller.camera.retrieveLostData(),
+                      builder:
+                          (BuildContext context, AsyncSnapshot<void> snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                          case ConnectionState.waiting:
+                            return const Text(
+                              'You have not yet picked an image.',
+                              textAlign: TextAlign.center,
+                            );
+                          case ConnectionState.done:
+                            return _previewPhotos();
+                          default:
+                            if (snapshot.hasError) {
+                              return Text(
+                                'Pick image/video error: ${snapshot.error}}',
+                                textAlign: TextAlign.center,
+                              );
+                            } else {
+                              return const Text(
+                                'You have not yet picked an image.',
+                                textAlign: TextAlign.center,
+                              );
+                            }
+                        }
+                      },
+                    )
+                  : _previewPhotos(),
             ),
             const DesignSpace(),
             Obx(
@@ -401,13 +431,13 @@ class PlaceEditPage extends StatelessWidget {
     );
   }
 
-  Widget _previewImages() {
+  Widget _previewPhotos() {
     final Text? retrieveError = _getRetrieveErrorWidget();
     if (retrieveError != null) {
       return retrieveError;
     }
     return Obx(() {
-      if (controller.camera.imageFileList.isNotEmpty) {
+      if (controller.photos.isNotEmpty) {
         return SizedBox(
           height: 200,
           child: GridView.count(
@@ -416,9 +446,8 @@ class PlaceEditPage extends StatelessWidget {
             crossAxisCount: 3,
             crossAxisSpacing: 2,
             mainAxisSpacing: 2,
-            children:
-                List.generate(controller.camera.imageFileList.length, (index) {
-              final image = File(controller.camera.imageFileList[index].path);
+            children: List.generate(controller.photos.length, (index) {
+              final image = File(controller.photos[index].path);
               return Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -444,8 +473,36 @@ class PlaceEditPage extends StatelessWidget {
     });
   }
 
-  Widget _handlePreview() {
-    return _previewImages();
+  Widget _previewImage() {
+    final Text? retrieveError = _getRetrieveErrorWidget();
+    if (retrieveError != null) {
+      return retrieveError;
+    }
+    return Obx(() {
+      if (controller.image.value.path.isNotEmpty) {
+        return SizedBox(
+          height: 250,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: FileImage(controller.image.value),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        );
+      } else if (controller.camera.pickImageError != null) {
+        return Text(
+          'Pick image error: ${controller.camera.pickImageError}',
+          textAlign: TextAlign.center,
+        );
+      } else {
+        return const Text(
+          'You have not yet picked an image.',
+          textAlign: TextAlign.center,
+        );
+      }
+    });
   }
 
   Text? _getRetrieveErrorWidget() {

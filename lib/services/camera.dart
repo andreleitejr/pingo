@@ -9,20 +9,23 @@ import 'package:flutter/material.dart';
 
 class CameraController extends GetxController {
   final ImagePicker _picker = ImagePicker();
+  final double maxWidth = 250;
+  final double maxHeight = 250;
+  final int quality = 20;
 
-  var maxWidth = 0.0.obs;
-  var maxHeight = 0.0.obs;
-  var quality = 0.obs;
-
-  void setMaxWidth(String v) => maxWidth(double.parse(v));
-
-  void setMaxHeight(String v) => maxHeight(double.parse(v));
-
-  void setQuality(String v) => quality(int.parse(v));
-
-  final TextEditingController maxWidthController = TextEditingController();
-  final TextEditingController maxHeightController = TextEditingController();
-  final TextEditingController qualityController = TextEditingController();
+  // var maxWidth = 250.0.obs;
+  // var maxHeight = 250.0.obs;
+  // var quality = 10.obs;
+  //
+  // void setMaxWidth(String v) => maxWidth(double.parse(v));
+  //
+  // void setMaxHeight(String v) => maxHeight(double.parse(v));
+  //
+  // void setQuality(String v) => quality(int.parse(v));
+  //
+  // final TextEditingController maxWidthController = TextEditingController();
+  // final TextEditingController maxHeightController = TextEditingController();
+  // final TextEditingController qualityController = TextEditingController();
 
   var imageFileList = <XFile>[].obs;
 
@@ -63,9 +66,9 @@ class CameraController extends GetxController {
     if (isMultiImage) {
       try {
         final List<XFile> pickedFileList = await _picker.pickMultiImage(
-          maxWidth: maxWidth.value,
-          maxHeight: maxHeight.value,
-          imageQuality: quality.value,
+          maxWidth: maxWidth,
+          maxHeight: maxHeight,
+          imageQuality: quality,
         );
 
         imageFileList.value = pickedFileList;
@@ -76,9 +79,9 @@ class CameraController extends GetxController {
       try {
         final XFile? pickedFile = await _picker.pickImage(
           source: source,
-          maxWidth: maxWidth.value > 128 ? maxWidth.value : 128,
-          maxHeight: maxHeight.value > 128 ? maxWidth.value : 128,
-          imageQuality: quality.value > 0 ? quality.value : 1,
+          maxWidth: maxWidth,
+          maxHeight: maxHeight,
+          imageQuality: quality,
         );
 
         _setImageFileListFromFile(pickedFile);
