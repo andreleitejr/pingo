@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 
 class CameraController extends GetxController {
   final ImagePicker _picker = ImagePicker();
-  final double maxWidth = 250;
-  final double maxHeight = 250;
-  final int quality = 20;
+  final double maxWidth = 256;
+  final double maxHeight = 256;
+  final int quality = 128;
 
   // var maxWidth = 250.0.obs;
   // var maxHeight = 250.0.obs;
