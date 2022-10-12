@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pingo/constants/design_color.dart';
@@ -339,7 +340,7 @@ class PlaceEditPage extends StatelessWidget {
             Center(
               child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
                   ? FutureBuilder<void>(
-                      future: controller.camera.retrieveLostData(),
+                      future: controller.cameraController.retrieveLostData(),
                       builder:
                           (BuildContext context, AsyncSnapshot<void> snapshot) {
                         switch (snapshot.connectionState) {
@@ -381,7 +382,7 @@ class PlaceEditPage extends StatelessWidget {
             Center(
               child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
                   ? FutureBuilder<void>(
-                      future: controller.camera.retrieveLostData(),
+                      future: controller.cameraController.retrieveLostData(),
                       builder:
                           (BuildContext context, AsyncSnapshot<void> snapshot) {
                         switch (snapshot.connectionState) {
@@ -459,9 +460,9 @@ class PlaceEditPage extends StatelessWidget {
             }),
           ),
         );
-      } else if (controller.camera.pickImageError != null) {
+      } else if (controller.cameraController.pickImageError != null) {
         return Text(
-          'Pick image error: ${controller.camera.pickImageError}',
+          'Pick image error: ${controller.cameraController.pickImageError}',
           textAlign: TextAlign.center,
         );
       } else {
@@ -482,18 +483,14 @@ class PlaceEditPage extends StatelessWidget {
       if (controller.image.value.path.isNotEmpty) {
         return SizedBox(
           height: 250,
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: FileImage(controller.image.value),
-                fit: BoxFit.cover,
-              ),
-            ),
+          child: BlurHash(
+            image: controller.image.value.path,
+            hash: controller.imageBlurHash.value,
           ),
         );
-      } else if (controller.camera.pickImageError != null) {
+      } else if (controller.cameraController.pickImageError != null) {
         return Text(
-          'Pick image error: ${controller.camera.pickImageError}',
+          'Pick image error: ${controller.cameraController.pickImageError}',
           textAlign: TextAlign.center,
         );
       } else {
@@ -506,9 +503,9 @@ class PlaceEditPage extends StatelessWidget {
   }
 
   Text? _getRetrieveErrorWidget() {
-    if (controller.camera.retrieveDataError != null) {
-      final Text result = Text(controller.camera.retrieveDataError!);
-      controller.camera.retrieveDataError = null;
+    if (controller.cameraController.retrieveDataError != null) {
+      final Text result = Text(controller.cameraController.retrieveDataError!);
+      controller.cameraController.retrieveDataError = null;
       return result;
     }
     return null;

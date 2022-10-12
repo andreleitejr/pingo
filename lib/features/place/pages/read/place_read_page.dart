@@ -66,7 +66,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                         const DesignSpace(
                           orientation: DesignSpaceOrientation.horizontal,
                         ),
-                        DesignAvatarImage(image: widget.place.image),
+                        DesignAvatarImage(image: widget.place.image?.image),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Column(

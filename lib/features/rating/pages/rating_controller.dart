@@ -24,7 +24,7 @@ class RatingController extends GetxController {
         ratedId: ratedId,
         message: message.value,
         title: title.value,
-        image: user.image,
+        image: user.image?.image,
         ratedBy: user.uuid,
       );
 

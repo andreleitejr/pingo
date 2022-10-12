@@ -101,6 +101,7 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
             actionValid:
                 controller.quantityValid(widget.list, widget.minimumQuantity),
             onActionPressed: () {
+              print(controller.pageView.pageController.page);
               final isValid =
                   controller.quantityValid(widget.list, widget.minimumQuantity);
 

@@ -38,7 +38,7 @@ class PlaceListPage extends StatelessWidget {
           return GestureDetector(
             onTap: ()=> Get.to(()=> PlaceReadPage(place: place)),
             child: DesignListTile(
-              image: place.image,
+              image: place.image?.image,
               title: place.name,
               subtitle: place.description,
               trailing: place.distance.metricSystem,

@@ -29,7 +29,7 @@ class DesignProductItem extends StatelessWidget {
                 color: DesignColor.text200,
                 image: DecorationImage(
                   image: NetworkImage(
-                    product.image ?? DesignImages.fallbackImage,
+                    product.image?.image ?? DesignImages.fallbackImage,
                   ),
                   fit: BoxFit.fill,
                 ),

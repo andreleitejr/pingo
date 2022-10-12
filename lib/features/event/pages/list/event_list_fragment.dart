@@ -20,7 +20,7 @@ class EventListFragment extends StatelessWidget {
         return GestureDetector(
           onTap: () => Get.to(() => EventReadPage(event: event)),
           child: DesignListTile(
-            image: event.image,
+            image: event.image?.image,
             title: event.name,
             subtitle: event.description,
             trailing: event.distance.metricSystem,

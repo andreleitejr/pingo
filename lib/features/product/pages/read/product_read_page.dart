@@ -46,7 +46,7 @@ class _ProductReadPageState extends State<ProductReadPage> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                      widget.product.image ?? DesignImages.fallbackImage),
+                      widget.product.image?.image ?? DesignImages.fallbackImage),
                   fit: BoxFit.cover,
                 ),
               ),

@@ -18,7 +18,7 @@ class DesignUserMarker extends StatelessWidget {
       decoration: BoxDecoration(
         image: user.image != null
             ? DecorationImage(
-            image: NetworkImage(user.image!),
+            image: NetworkImage(user.image!.image),
             fit: BoxFit.cover)
             : null,
         color: DesignColor.primary500,

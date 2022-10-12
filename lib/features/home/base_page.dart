@@ -83,7 +83,7 @@ class _BasePageState extends State<BasePage> {
                 borderRadius: BorderRadius.circular(48),
                 image: user.image != null
                     ? DecorationImage(
-                        image: NetworkImage(user.image!),
+                        image: NetworkImage(user.image!.image),
                         fit: BoxFit.cover,
                       )
                     : null,

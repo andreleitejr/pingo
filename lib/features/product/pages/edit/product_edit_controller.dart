@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/models/product_category.dart';
 import 'package:pingo/features/product/repositories/product_repository.dart';
+import 'package:pingo/services/blurhash_controller.dart';
 
 class ProductEditController extends GetxController {
   ProductEditController(this.place);
@@ -38,6 +40,7 @@ class ProductEditController extends GetxController {
       productCategories.remove(v);
     }
   }
+
   void toggleKeyword(int v) {
     if (!keywords.contains(v)) {
       keywords.add(v);
@@ -87,7 +90,10 @@ class ProductEditController extends GetxController {
   Product get product => Product(
         description: description.value,
         name: name.value,
-        image: 'https://i.ibb.co/WPXwnYF/pingo.jpg',
+        image: ImageBlurHash(
+          image: DesignImages.fallbackImage,
+          blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+        ),
         keywords: keywords,
         price: price.value,
         promotionalPrice: promotionalPrice.value,

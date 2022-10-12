@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/event/repositories/event_repository.dart';
@@ -7,6 +8,7 @@ import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/models/product_category.dart';
 import 'package:pingo/features/product/repositories/product_repository.dart';
+import 'package:pingo/services/blurhash_controller.dart';
 
 class EventEditController extends GetxController {
   EventEditController(this.place);
@@ -92,7 +94,10 @@ class EventEditController extends GetxController {
   Event get event => Event(
         description: description.value,
         name: name.value,
-        image: 'https://i.ibb.co/WPXwnYF/pingo.jpg',
+        image: ImageBlurHash(
+          image: DesignImages.fallbackImage,
+          blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+        ),
         keywords: keywords,
         price: price.value,
         promotionalPrice: promotionalPrice.value,

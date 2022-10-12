@@ -29,7 +29,7 @@ class DesignEventItem extends StatelessWidget {
                 color: DesignColor.text200,
                 image: DecorationImage(
                   image:
-                      NetworkImage(event.image ?? DesignImages.fallbackImage),
+                      NetworkImage(event.image?.image ?? DesignImages.fallbackImage),
                   fit: BoxFit.fill,
                 ),
               ),

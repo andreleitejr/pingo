@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/rating/models/rating.dart';
 import 'package:pingo/models/database.dart';
+import 'package:pingo/services/blurhash_controller.dart';
 
 abstract class Base extends DataBase {
   final String name;
   final String? description;
-  final String? image;
+  final ImageBlurHash? image;
   final List<int> keywords;
 
   Base({
@@ -20,7 +21,7 @@ abstract class Base extends DataBase {
       : name = document['name'] as String,
         keywords = List.from(document['keywords']),
         description = document['description'] as String?,
-        image = document['image'] as String?,
+        image = ImageBlurHash.fromJson(document['image'] as Map<String, dynamic>),
         super.fromMap(document);
 
   @override
@@ -30,7 +31,7 @@ abstract class Base extends DataBase {
         'name': name,
         'keywords': keywords,
         'description': description,
-        'image': image,
+        'image': image?.toJson(),
       });
   }
 

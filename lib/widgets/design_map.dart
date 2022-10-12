@@ -45,7 +45,7 @@ class _DesignMapState extends State<DesignMap> {
         MarkerData(
             marker: controller.placeMarker,
             child: DesignDestionationMarker(
-              image: controller.place.image!,
+              image: controller.place.image!.image,
             )),
         MarkerData(
           marker: controller.userMarker,

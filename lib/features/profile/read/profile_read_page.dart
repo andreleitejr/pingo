@@ -28,7 +28,7 @@ class ProfileReadPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DesignAvatarImage(image: user.image),
+          DesignAvatarImage(image: user.image?.image),
           Text(user.name),
           if (user.description != null) Text(user.description!),
           DesignButton(

@@ -4,17 +4,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/core/current_location.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
 import 'package:pingo/models/address.dart';
-import 'package:pingo/services/camera.dart';
+import 'package:pingo/repositories/storage_repository.dart';
+import 'package:pingo/services/camera_controller.dart';
+import 'package:pingo/services/blurhash_controller.dart';
 
 class PlaceEditController extends GetxController {
   final repository = PlaceRepository();
 
-  final camera = Get.put(CameraController());
+  final cameraController = Get.put(CameraController());
+
+  final blurHashController = Get.put(BlurHashController());
 
   final latitudeController = TextEditingController();
   final longitudeController = TextEditingController();
@@ -25,6 +31,8 @@ class PlaceEditController extends GetxController {
   var description = ''.obs;
   var email = ''.obs;
   var image = File('').obs;
+  var imageBlurHash = ''.obs;
+  var url = ''.obs;
   var photos = <File>[].obs;
 
   var closeHour = 23.obs;
@@ -52,30 +60,33 @@ class PlaceEditController extends GetxController {
   void setEmail(String v) => email(v);
 
   Future<void> setImage(ImageSource source) async {
-    await camera.onImageButtonPressed(source);
+    await cameraController.onImageButtonPressed(source);
 
-    if (camera.imageFileList.isNotEmpty) {
-      final imagePath = camera.imageFileList.first.path;
+    if (cameraController.imageFileList.isNotEmpty) {
+      final imagePath = cameraController.imageFileList.first.path;
 
       File file = File(imagePath);
       image(file);
 
-      camera.imageFileList.clear();
+      cameraController.imageFileList.clear();
+
+      final blurHash = await blurHashController.encode(file);
+      imageBlurHash(blurHash);
     }
   }
 
   Future<void> selectPhotos(ImageSource source) async {
-    await camera.onImageButtonPressed(source, isMultiImage: true);
+    await cameraController.onImageButtonPressed(source, isMultiImage: true);
 
-    if (camera.imageFileList.isNotEmpty) {
-      for (final imageFile in camera.imageFileList) {
+    if (cameraController.imageFileList.isNotEmpty) {
+      for (final imageFile in cameraController.imageFileList) {
         final imagePath = imageFile.path;
 
         File file = File(imagePath);
         photos.add(file);
       }
 
-      camera.imageFileList.clear();
+      cameraController.imageFileList.clear();
     }
   }
 
@@ -194,9 +205,25 @@ class PlaceEditController extends GetxController {
         email: email.value,
         open: '08:30',
         close: '22:30',
-        image: 'https://i.ibb.co/WPXwnYF/pingo.jpg',
+        image: ImageBlurHash(
+          image: url.value,
+          blurHash: imageBlurHash.value,
+        ),
         keywords: keywords,
       );
 
-  Future<void> save() async => await repository.save(place);
+  Future<void> save() async {
+    // print('########################### CONTROLLER PATH: ${image.value.path}');
+    await repository.upload(image.value);
+    final downloadUrl = await repository.download(basename(image.value.path));
+    url(downloadUrl);
+    await repository.save(place);
+  }
+
+// Rx<List<Place>> placeList = Rx<List<Place>>([]);
+//
+// List<Place> get places => placeList.value;
+//
+// @override
+// void onReady() => placeList.bindStream(repository.read);
 }

@@ -46,7 +46,7 @@ class _EventReadPageState extends State<EventReadPage> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                      widget.event.image ?? DesignImages.fallbackImage),
+                      widget.event.image?.image ?? DesignImages.fallbackImage),
                   fit: BoxFit.cover,
                 ),
               ),

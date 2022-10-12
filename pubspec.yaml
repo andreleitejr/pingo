@@ -53,6 +53,7 @@ dependencies:
   firebase_storage: ^10.3.11
   flutter_blurhash: ^0.7.0
   path: ^1.8.1
+  blurhash: ^1.0.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.10.0

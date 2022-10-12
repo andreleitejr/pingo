@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/models/buyable.dart';
+import 'package:pingo/services/blurhash_controller.dart';
 
 class Product extends Buyable {
   final String placeId;
@@ -34,8 +36,10 @@ class Product extends Buyable {
 
 List<Product> products = [
   Product(
-    image:
-        'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/129/410/products/stela-artois-3551-5a863fde4374b45cdd15869272304668-480-0.jpg',
+    image: ImageBlurHash(
+      image: DesignImages.fallbackImage,
+      blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+    ),
     keywords: [
       Keyword.drinks,
       Keyword.beer,
@@ -47,8 +51,10 @@ List<Product> products = [
     description: 'Stella geladinha no precinho.',
   ),
   Product(
-    image:
-        'https://blog.biglar.com.br/wp-content/uploads/2021/12/iStock-1310029561.jpg',
+    image: ImageBlurHash(
+      image: DesignImages.fallbackImage,
+      blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+    ),
     keywords: [
       Keyword.museum,
       Keyword.ticket,
@@ -60,8 +66,10 @@ List<Product> products = [
     description: 'Museu muito legal.',
   ),
   Product(
-    image:
-        'https://t2.rg.ltmcdn.com/pt/posts/9/8/3/pizza_calabresa_e_mussarela_4389_600.jpg',
+    image: ImageBlurHash(
+      image: DesignImages.fallbackImage,
+      blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+    ),
     keywords: [
       Keyword.pizza,
     ],
@@ -72,8 +80,10 @@ List<Product> products = [
     description: 'Delicious pizza.',
   ),
   Product(
-    image:
-        'https://www.minervafoods.com/wp-content/uploads/2021/01/burguer-de-picanha-380x484.jpg',
+    image: ImageBlurHash(
+      image: DesignImages.fallbackImage,
+      blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+    ),
     keywords: [
       Keyword.burger,
     ],
@@ -84,8 +94,10 @@ List<Product> products = [
     description: 'Delicious burger.',
   ),
   Product(
-    image:
-        'https://www.sabornamesa.com.br/media/k2/items/cache/2db073658ef98ff1d00d15e09c24406a_L.jpg',
+    image: ImageBlurHash(
+      image: DesignImages.fallbackImage,
+      blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+    ),
     keywords: [
       Keyword.brazilian,
     ],
@@ -96,8 +108,10 @@ List<Product> products = [
     description: 'Delicious food plate.',
   ),
   Product(
-    image:
-        'https://www.sabornamesa.com.br/media/k2/items/cache/5031e263a4a258791d6306b2d3d9dbf6_XL.jpg',
+    image: ImageBlurHash(
+      image: DesignImages.fallbackImage,
+      blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+    ),
     keywords: [
       Keyword.italian,
     ],
@@ -108,8 +122,10 @@ List<Product> products = [
     description: 'Delicious food plate.',
   ),
   Product(
-    image:
-        'https://www.ajinomotofoodservice.com.br/uploads/recitas/recitas/yakissoba-480x480-26-07-2019-ud1il.jpg',
+    image: ImageBlurHash(
+      image: DesignImages.fallbackImage,
+      blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+    ),
     keywords: [
       Keyword.chinese,
     ],
@@ -120,8 +136,10 @@ List<Product> products = [
     description: 'Delicious yakissoba.',
   ),
   Product(
-    image:
-        'https://cdn.awsli.com.br/600x450/591/591154/produto/24370730/ff74214a1f.jpg',
+    image: ImageBlurHash(
+      image: DesignImages.fallbackImage,
+      blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
+    ),
     keywords: [
       Keyword.skate,
     ],
