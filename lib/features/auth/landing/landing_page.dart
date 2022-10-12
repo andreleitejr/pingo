@@ -35,17 +35,17 @@ class _LandingPageState extends State<LandingPage> {
             if (user == null) {
               return const SignUpPage();
             }
-
-            if (controller.userValid) {
-              controller.registerUser();
-              return const BasePage();
-            }
-
-            if (controller.userCreatedInDatabase) {
-              controller.registerUser();
-              return const ProfileKeywordsSelection();
-            }
-            return const DesignProgressIndicator();
+            return Obx(() {
+              if (controller.userValid) {
+                controller.registerUser();
+                return const BasePage();
+              } else if (controller.userCreatedInDatabase) {
+                controller.registerUser();
+                return const ProfileKeywordsSelection();
+              } else {
+                return const DesignProgressIndicator();
+              }
+            });
           } else {
             return const DesignProgressIndicator();
           }
