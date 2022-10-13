@@ -185,10 +185,18 @@ class _PlaceReadPageState extends State<PlaceReadPage>
           body: TabBarView(
             children: <Widget>[
               Obx(
-                () => DesignImageGridView(
-                  isMasonry: controller.isMasonry.value,
-                  onButtonPressed: controller.toggleMasonry,
-                ),
+                () {
+                  if (controller.place.photos == null) {
+                    return const Center(
+                      child: Text('No photos found'),
+                    );
+                  }
+                  return DesignImageGridView(
+                    images: controller.place.photos!,
+                    isMasonry: controller.isMasonry.value,
+                    onButtonPressed: controller.toggleMasonry,
+                  );
+                },
               ),
               ProductListFragment(products: controller.place.products),
               EventListFragment(events: controller.place.events),
