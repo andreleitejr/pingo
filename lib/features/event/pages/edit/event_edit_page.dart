@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
@@ -7,9 +8,9 @@ import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/event/pages/edit/event_edit_controller.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/models/product_category.dart';
-import 'package:pingo/features/product/pages/edit/product_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
+import 'package:pingo/widgets/design_photo_selection.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 
 import '../../../../widgets/design_space.dart';
@@ -62,10 +63,6 @@ class _EventEditPageState extends State<EventEditPage> {
               ),
             ),
             const DesignSpace(),
-            DesignTextInput(
-              hint: 'Image',
-              onChanged: controller.setImage,
-            ),
             const DesignSpace(),
             DesignTextInput(
               textInputType: TextInputType.number,
@@ -215,6 +212,13 @@ class _EventEditPageState extends State<EventEditPage> {
                 ),
                 const DesignSpace(),
               ],
+            ),
+            Obx(
+                  () => DesignPhotoSelection(
+                displayImage: controller.displayImage.value,
+                onButtonPressed: () async =>
+                await controller.setImage(ImageSource.gallery),
+              ),
             ),
             Obx(
               () => DesignButton(

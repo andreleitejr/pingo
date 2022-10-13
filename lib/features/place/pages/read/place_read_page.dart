@@ -4,6 +4,7 @@ import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/event/pages/edit/event_edit_page.dart';
 import 'package:pingo/features/event/pages/list/event_list_fragment.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_controller.dart';
@@ -57,7 +58,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                 title: DesignAppBar(
                   actionIcon: Icons.share,
                   onActionPressed: () =>
-                      Get.to(() => ProductEditPage(place: controller.place)),
+                      Get.to(() => EventEditPage(place: controller.place)),
                 ),
               ),
               SliverToBoxAdapter(

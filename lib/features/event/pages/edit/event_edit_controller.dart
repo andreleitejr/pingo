@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/event/models/event.dart';
@@ -9,16 +12,25 @@ import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/models/product_category.dart';
 import 'package:pingo/features/product/repositories/product_repository.dart';
 import 'package:pingo/services/blurhash_controller.dart';
+import 'package:pingo/services/camera_controller.dart';
 
 class EventEditController extends GetxController {
   EventEditController(this.place);
 
   final repository = EventRepository();
+
   final Place place;
+
+  final cameraController = Get.put(CameraController());
+
+  final blurHashController = Get.put(BlurHashController());
 
   var name = ''.obs;
   var description = ''.obs;
-  var image = ''.obs;
+
+  var displayImage = File('').obs;
+
+  ImageBlurHash? image;
 
   var price = 0.0.obs;
   var promotionalPrice = 0.0.obs;
@@ -31,7 +43,18 @@ class EventEditController extends GetxController {
 
   void setDescription(String v) => description(v);
 
-  void setImage(String v) => image(v);
+  Future<void> setImage(ImageSource source) async {
+    await cameraController.onImageButtonPressed(source);
+
+    if (cameraController.imageFileList.isNotEmpty) {
+      final imagePath = cameraController.imageFileList.first.path;
+
+      File file = File(imagePath);
+      displayImage(file);
+
+      cameraController.imageFileList.clear();
+    }
+  }
 
   void setPrice(String v) => price(double.parse(v));
 
@@ -94,10 +117,7 @@ class EventEditController extends GetxController {
   Event get event => Event(
         description: description.value,
         name: name.value,
-        image: ImageBlurHash(
-          image: DesignImages.fallbackImage,
-          blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
-        ),
+        image: image,
         keywords: keywords,
         price: price.value,
         promotionalPrice: promotionalPrice.value,
@@ -106,5 +126,9 @@ class EventEditController extends GetxController {
         end: DateTime.now(),
       );
 
-  Future<void> save() async => await repository.save(event);
+  Future<void> save() async {
+    image = await blurHashController.buildImageBlurHash(
+        displayImage.value, repository.name);
+    await repository.save(event);
+  }
 }
