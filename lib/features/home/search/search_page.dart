@@ -66,7 +66,7 @@ class SearchPage extends StatelessWidget {
                     final place = controller.places[index];
 
                     return DesignListTile(
-                      image: place.image?.image,
+                      image: place.image,
                       title: place.name,
                       subtitle: place.description,
                       trailing: place.distance.metricSystem,

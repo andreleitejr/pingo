@@ -3,6 +3,9 @@ import 'dart:typed_data';
 import 'package:blurhash/blurhash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:path/path.dart';
+import 'package:pingo/repositories/database_repository.dart';
+import 'package:pingo/repositories/storage_repository.dart';
 
 class ImageBlurHash {
   final String image;
@@ -34,5 +37,23 @@ class BlurHashController {
       debugPrint(e.message);
       return null;
     }
+  }
+
+  Future<ImageBlurHash?> buildImageBlurHash(
+      File file, String repositoryName) async {
+    final blurHash = await encode(file);
+    final url = await uploadAndGetUrl(file, repositoryName);
+    if (blurHash.isNotEmpty && url != null && url.isNotEmpty) {
+      return ImageBlurHash(image: url, blurHash: blurHash);
+    }
+    return null;
+  }
+
+  Future<String?> uploadAndGetUrl(File file, String repositoryName) async {
+    final repository = StorageReporitory(name: repositoryName);
+
+    await repository.upload(file);
+    final downloadUrl = await repository.download(basename(file.path));
+    return downloadUrl;
   }
 }

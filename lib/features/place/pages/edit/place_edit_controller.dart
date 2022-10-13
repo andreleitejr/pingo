@@ -61,7 +61,6 @@ class PlaceEditController extends GetxController {
   void setEmail(String v) => email(v);
 
   Future<void> setImage(ImageSource source) async {
-    print('HUSADHUHDASAHUASDHASDU ASDHUDASHUAUHSADUHUASDH SET IMAGE $source');
     await cameraController.onImageButtonPressed(source);
 
     if (cameraController.imageFileList.isNotEmpty) {
@@ -210,27 +209,14 @@ class PlaceEditController extends GetxController {
       );
 
   Future<void> save() async {
-    image = await buildImageBlurHash(displayImage.value);
+    image = await blurHashController.buildImageBlurHash(
+        displayImage.value, repository.name);
     for (final displayPhoto in displayPhotos) {
-      final photo = await buildImageBlurHash(displayPhoto);
+      final photo = await blurHashController.buildImageBlurHash(
+          displayPhoto, repository.name);
       if (photo != null) photos.add(photo);
     }
     debugPrint('Successful converted photos: ${photos.length}');
     await repository.save(place);
-  }
-
-  Future<ImageBlurHash?> buildImageBlurHash(File file) async {
-    final blurHash = await blurHashController.encode(file);
-    final url = await uploadAndGetUrl(file);
-    if (blurHash.isNotEmpty && url != null && url.isNotEmpty) {
-      return ImageBlurHash(image: url, blurHash: blurHash);
-    }
-    return null;
-  }
-
-  Future<String?> uploadAndGetUrl(File file) async {
-    await repository.upload(file);
-    final downloadUrl = await repository.download(basename(file.path));
-    return downloadUrl;
   }
 }

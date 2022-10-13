@@ -379,7 +379,7 @@ class HomePage extends StatelessWidget {
                       final place = places[index];
 
                       return DesignListTile(
-                        image: place.image?.image,
+                        image: place.image,
                         title: place.name,
                         subtitle: place.description,
                         trailing: place.distance.metricSystem,

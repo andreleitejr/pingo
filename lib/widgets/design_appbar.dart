@@ -66,7 +66,9 @@ class DesignAppBar extends StatelessWidget {
               ),
               const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
             ] else ...[
-              Icon(actionIcon,
+              IconButton(
+                onPressed: onActionPressed,
+                icon: Icon(actionIcon),
               color: DesignColor.text400,),
               const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
             ],

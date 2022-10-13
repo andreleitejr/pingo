@@ -13,6 +13,7 @@ import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/pages/edit/place_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
+import 'package:pingo/widgets/design_photo_selection.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 
 import '../../../../widgets/design_space.dart';
@@ -328,90 +329,105 @@ class PlaceEditPage extends StatelessWidget {
                 ]
               ],
             ),
+            // const DesignSpace(),
+            // Obx(
+            //   () => DesignButton(
+            //     onPressed: () async =>
+            //         await controller.setImage(ImageSource.gallery),
+            //     title: 'Profile Photo',
+            //     isActive: controller.isValid,
+            //   ),
+            // ),
             const DesignSpace(),
             Obx(
-              () => DesignButton(
-                onPressed: () async =>
+              () => DesignPhotoSelection(
+                displayImage: controller.displayImage.value,
+                onButtonPressed: () async =>
                     await controller.setImage(ImageSource.gallery),
-                title: 'Profile Photo',
-                isActive: controller.isValid,
               ),
             ),
-            const DesignSpace(),
-            Center(
-              child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
-                  ? FutureBuilder<void>(
-                      future: controller.cameraController.retrieveLostData(),
-                      builder:
-                          (BuildContext context, AsyncSnapshot<void> snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                          case ConnectionState.waiting:
-                            return const Text(
-                              'You have not yet picked an image.',
-                              textAlign: TextAlign.center,
-                            );
-                          case ConnectionState.done:
-                            return _previewImage();
-                          default:
-                            if (snapshot.hasError) {
-                              return Text(
-                                'Pick image/video error: ${snapshot.error}}',
-                                textAlign: TextAlign.center,
-                              );
-                            } else {
-                              return const Text(
-                                'You have not yet picked an image.',
-                                textAlign: TextAlign.center,
-                              );
-                            }
-                        }
-                      },
-                    )
-                  : _previewPhotos(),
-            ),
+            // Center(
+            //   child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+            //       ? FutureBuilder<void>(
+            //           future: controller.cameraController.retrieveLostData(),
+            //           builder:
+            //               (BuildContext context, AsyncSnapshot<void> snapshot) {
+            //             switch (snapshot.connectionState) {
+            //               case ConnectionState.none:
+            //               case ConnectionState.waiting:
+            //                 return const Text(
+            //                   'You have not yet picked an image.',
+            //                   textAlign: TextAlign.center,
+            //                 );
+            //               case ConnectionState.done:
+            //                 return _previewImage();
+            //               default:
+            //                 if (snapshot.hasError) {
+            //                   return Text(
+            //                     'Pick image/video error: ${snapshot.error}}',
+            //                     textAlign: TextAlign.center,
+            //                   );
+            //                 } else {
+            //                   return const Text(
+            //                     'You have not yet picked an image.',
+            //                     textAlign: TextAlign.center,
+            //                   );
+            //                 }
+            //             }
+            //           },
+            //         )
+            //       : _previewPhotos(),
+            // ),
             const DesignSpace(),
             Obx(
-              () => DesignButton(
-                onPressed: () async =>
+              () => DesignPhotoSelection(
+                isMultiImage: true,
+                displayPhotos: controller.displayPhotos,
+                onButtonPressed: () async =>
                     await controller.selectPhotos(ImageSource.gallery),
-                title: 'Other Photos',
-                isActive: controller.isValid,
               ),
             ),
-            const DesignSpace(),
-            Center(
-              child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
-                  ? FutureBuilder<void>(
-                      future: controller.cameraController.retrieveLostData(),
-                      builder:
-                          (BuildContext context, AsyncSnapshot<void> snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                          case ConnectionState.waiting:
-                            return const Text(
-                              'You have not yet picked an image.',
-                              textAlign: TextAlign.center,
-                            );
-                          case ConnectionState.done:
-                            return _previewPhotos();
-                          default:
-                            if (snapshot.hasError) {
-                              return Text(
-                                'Pick image/video error: ${snapshot.error}}',
-                                textAlign: TextAlign.center,
-                              );
-                            } else {
-                              return const Text(
-                                'You have not yet picked an image.',
-                                textAlign: TextAlign.center,
-                              );
-                            }
-                        }
-                      },
-                    )
-                  : _previewPhotos(),
-            ),
+            // Obx(
+            //   () => DesignButton(
+            //     onPressed: () async =>
+            //         await controller.selectPhotos(ImageSource.gallery),
+            //     title: 'Other Photos',
+            //     isActive: controller.isValid,
+            //   ),
+            // ),
+            // const DesignSpace(),
+            // Center(
+            //   child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+            //       ? FutureBuilder<void>(
+            //           future: controller.cameraController.retrieveLostData(),
+            //           builder:
+            //               (BuildContext context, AsyncSnapshot<void> snapshot) {
+            //             switch (snapshot.connectionState) {
+            //               case ConnectionState.none:
+            //               case ConnectionState.waiting:
+            //                 return const Text(
+            //                   'You have not yet picked an image.',
+            //                   textAlign: TextAlign.center,
+            //                 );
+            //               case ConnectionState.done:
+            //                 return _previewPhotos();
+            //               default:
+            //                 if (snapshot.hasError) {
+            //                   return Text(
+            //                     'Pick image/video error: ${snapshot.error}}',
+            //                     textAlign: TextAlign.center,
+            //                   );
+            //                 } else {
+            //                   return const Text(
+            //                     'You have not yet picked an image.',
+            //                     textAlign: TextAlign.center,
+            //                   );
+            //                 }
+            //             }
+            //           },
+            //         )
+            //       : _previewPhotos(),
+            // ),
             const DesignSpace(),
             Obx(
               () => DesignButton(
@@ -431,88 +447,5 @@ class PlaceEditPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _previewPhotos() {
-    final Text? retrieveError = _getRetrieveErrorWidget();
-    if (retrieveError != null) {
-      return retrieveError;
-    }
-    return Obx(() {
-      if (controller.displayPhotos.isNotEmpty) {
-        return SizedBox(
-          height: 200,
-          child: GridView.count(
-            key: UniqueKey(),
-            padding: EdgeInsets.zero,
-            crossAxisCount: 3,
-            crossAxisSpacing: 2,
-            mainAxisSpacing: 2,
-            children: List.generate(controller.displayPhotos.length, (index) {
-              final image = File(controller.displayPhotos[index].path);
-              return Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: FileImage(image),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              );
-            }),
-          ),
-        );
-      } else if (controller.cameraController.pickImageError != null) {
-        return Text(
-          'Pick image error: ${controller.cameraController.pickImageError}',
-          textAlign: TextAlign.center,
-        );
-      } else {
-        return const Text(
-          'You have not yet picked an image.',
-          textAlign: TextAlign.center,
-        );
-      }
-    });
-  }
-
-  Widget _previewImage() {
-    final Text? retrieveError = _getRetrieveErrorWidget();
-    if (retrieveError != null) {
-      return retrieveError;
-    }
-    return Obx(() {
-      if (controller.displayImage.value.path.isNotEmpty) {
-        return SizedBox(
-          height: 250,
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: FileImage(controller.displayImage.value),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        );
-      } else if (controller.cameraController.pickImageError != null) {
-        return Text(
-          'Pick image error: ${controller.cameraController.pickImageError}',
-          textAlign: TextAlign.center,
-        );
-      } else {
-        return const Text(
-          'You have not yet picked an image.',
-          textAlign: TextAlign.center,
-        );
-      }
-    });
-  }
-
-  Text? _getRetrieveErrorWidget() {
-    if (controller.cameraController.retrieveDataError != null) {
-      final Text result = Text(controller.cameraController.retrieveDataError!);
-      controller.cameraController.retrieveDataError = null;
-      return result;
-    }
-    return null;
   }
 }

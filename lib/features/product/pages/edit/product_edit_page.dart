@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
-import 'package:pingo/features/place/pages/edit/place_edit_controller.dart';
 import 'package:pingo/features/product/models/product_category.dart';
 import 'package:pingo/features/product/pages/edit/product_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
+import 'package:pingo/widgets/design_photo_selection.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 
 import '../../../../widgets/design_space.dart';
@@ -60,11 +61,6 @@ class _ProductEditPageState extends State<ProductEditPage> {
                 onChanged: controller.setDescription,
                 isValid: controller.descriptionValid,
               ),
-            ),
-            const DesignSpace(),
-            DesignTextInput(
-              hint: 'Image',
-              onChanged: controller.setImage,
             ),
             const DesignSpace(),
             DesignTextInput(
@@ -157,9 +153,9 @@ class _ProductEditPageState extends State<ProductEditPage> {
                       GestureDetector(
                         onTap: () => controller.toggleKeyword(other.id),
                         child: Obx(
-                              () {
+                          () {
                             final isSelected =
-                            controller.keywords.contains(other.id);
+                                controller.keywords.contains(other.id);
                             return Container(
                               padding: const EdgeInsets.all(8),
                               margin: const EdgeInsets.all(4),
@@ -177,11 +173,19 @@ class _ProductEditPageState extends State<ProductEditPage> {
                 const DesignSpace(),
               ],
             ),
+            const DesignSpace(),
+            Obx(
+              () => DesignPhotoSelection(
+                displayImage: controller.displayImage.value,
+                onButtonPressed: () async =>
+                    await controller.setImage(ImageSource.gallery),
+              ),
+            ),
             Obx(
               () => DesignButton(
                 onPressed: () async {
                   if (controller.isValid) {
-                    await controller.updateProfile().then(
+                    await controller.save().then(
                           (value) => Get.back(),
                         );
                   }

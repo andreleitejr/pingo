@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/services/blurhash_controller.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class DesignListTile extends StatelessWidget {
@@ -12,7 +14,7 @@ class DesignListTile extends StatelessWidget {
     this.onPressed,
   }) : super(key: key);
 
-  final String? image;
+  final ImageBlurHash? image;
   final String title;
   final String? subtitle;
   final String? trailing;
@@ -31,14 +33,11 @@ class DesignListTile extends StatelessWidget {
                 const DesignSpace(
                     orientation: DesignSpaceOrientation.horizontal),
                 image != null
-                    ? Container(
+                    ? SizedBox(
                         width: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          image: DecorationImage(
-                            image: NetworkImage(image!),
-                            fit: BoxFit.cover,
-                          ),
+                        child: BlurHash(
+                          image: image!.image,
+                          hash: image!.blurHash,
                         ),
                       )
                     : Container(),

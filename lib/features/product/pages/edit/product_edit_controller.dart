@@ -1,33 +1,59 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
-import 'package:pingo/constants/design_images.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/models/product_category.dart';
 import 'package:pingo/features/product/repositories/product_repository.dart';
 import 'package:pingo/services/blurhash_controller.dart';
+import 'package:pingo/services/camera_controller.dart';
 
 class ProductEditController extends GetxController {
   ProductEditController(this.place);
 
   final repository = ProductRepository();
+
   final Place place;
 
+  final cameraController = Get.put(CameraController());
+
+  final blurHashController = Get.put(BlurHashController());
+
   var name = ''.obs;
+
   var description = ''.obs;
-  var image = ''.obs;
+
+  var displayImage = File('').obs;
 
   var price = 0.0.obs;
+
   var promotionalPrice = 0.0.obs;
+
   var placeId = ''.obs;
 
+  ImageBlurHash? image;
+
   var productCategories = <ProductCategory>[].obs;
+
   var keywords = <int>[].obs;
 
   void setName(String v) => name(v);
 
   void setDescription(String v) => description(v);
 
-  void setImage(String v) => image(v);
+  Future<void> setImage(ImageSource source) async {
+    await cameraController.onImageButtonPressed(source);
+
+    if (cameraController.imageFileList.isNotEmpty) {
+      final imagePath = cameraController.imageFileList.first.path;
+
+      File file = File(imagePath);
+      displayImage(file);
+
+      cameraController.imageFileList.clear();
+    }
+  }
 
   void setPrice(String v) => price(double.parse(v));
 
@@ -69,36 +95,19 @@ class ProductEditController extends GetxController {
 
   bool get isValid => nameValid && descriptionValid;
 
-  // cityValid &&
-  // countryValid &&
-  // lineValid &&
-  // numberValid &&
-  // stateValid &&
-  // zipValid
-
-  // Address(
-  //   city: city.value,
-  //   complement: complement.value,
-  //   country: country.value,
-  //   line: line.value,
-  //   state: state.value,
-  //   zip: zip.value,
-  //   number: number.value,
-  //   location: GeoPoint(latitude.value, longitude.value),
-  // );
-
   Product get product => Product(
         description: description.value,
         name: name.value,
-        image: ImageBlurHash(
-          image: DesignImages.fallbackImage,
-          blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
-        ),
+        image: image,
         keywords: keywords,
         price: price.value,
         promotionalPrice: promotionalPrice.value,
         placeId: place.uuid,
       );
 
-  Future<void> updateProfile() async => await repository.save(product);
+  Future<void> save() async {
+    image = await blurHashController.buildImageBlurHash(
+        displayImage.value, repository.name);
+    await repository.save(product);
+  }
 }

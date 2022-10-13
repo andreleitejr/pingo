@@ -21,7 +21,7 @@ class ProductListFragment extends StatelessWidget {
         return GestureDetector(
           onTap: () => Get.to(() => ProductReadPage(product: product)),
           child: DesignListTile(
-            image: product.image?.image,
+            image: product.image,
             title: product.name,
             subtitle: product.description,
             trailing: product.distance.metricSystem,

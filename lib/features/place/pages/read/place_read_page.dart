@@ -7,6 +7,7 @@ import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/pages/list/event_list_fragment.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_controller.dart';
+import 'package:pingo/features/product/pages/edit/product_edit_page.dart';
 import 'package:pingo/features/product/pages/list/product_list_fragment.dart';
 import 'package:pingo/features/rating/pages/rating_list.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
@@ -48,13 +49,15 @@ class _PlaceReadPageState extends State<PlaceReadPage>
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-              const SliverAppBar(
+              SliverAppBar(
                 pinned: true,
                 backgroundColor: Colors.white,
                 automaticallyImplyLeading: false,
                 elevation: 0,
                 title: DesignAppBar(
                   actionIcon: Icons.share,
+                  onActionPressed: () =>
+                      Get.to(() => ProductEditPage(place: controller.place)),
                 ),
               ),
               SliverToBoxAdapter(
