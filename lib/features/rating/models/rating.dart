@@ -24,7 +24,7 @@ class Rating extends DataBase {
       : nps = document['nps'] as int,
         message = document['message'] as String,
         title = document['title'] as String,
-        image = document['image'] as ImageBlurHash?,
+        image = ImageBlurHash.fromJson(document['image'] as Map<String, dynamic>),
         ratedId = document['ratedId'] as String,
         ratedBy = document['ratedBy'] as String,
         super.fromMap(document);
