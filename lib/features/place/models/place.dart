@@ -6,6 +6,7 @@ import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/address.dart';
 import 'package:pingo/models/base.dart';
+import 'package:pingo/services/blurhash_controller.dart';
 
 class Place extends Base {
   final Address address;
@@ -15,12 +16,14 @@ class Place extends Base {
 
   final products = <Product>[];
   final events = <Event>[];
+  final List<ImageBlurHash>? photos;
 
   Place({
     required this.address,
     this.close,
     this.email,
     this.open,
+    this.photos,
     required super.name,
     required super.keywords,
     required super.description,
@@ -48,6 +51,10 @@ class Place extends Base {
         close = document['close'] as String?,
         email = document['email'] as String,
         open = document['open'] as String?,
+        photos = (document['photos'] as List<dynamic>)
+            .map((e) => ImageBlurHash.fromJson(
+                Map<String, dynamic>.from(e as Map<String, dynamic>)))
+            .toList(),
         super.fromMap(document);
 
   @override
@@ -59,6 +66,7 @@ class Place extends Base {
         'email': email,
         'keywords': keywords,
         'open': open,
+        'photos': photos?.map((e) => e.toJson()).toList(),
       });
   }
 }

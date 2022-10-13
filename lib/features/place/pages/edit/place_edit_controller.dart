@@ -27,13 +27,14 @@ class PlaceEditController extends GetxController {
   final subLocalityController = TextEditingController();
   final zipController = TextEditingController();
 
+  var displayImage = File('').obs;
+  var displayPhotos = <File>[].obs;
+
   var name = ''.obs;
   var description = ''.obs;
   var email = ''.obs;
-  var image = File('').obs;
-  var imageBlurHash = ''.obs;
-  var url = ''.obs;
-  var photos = <File>[].obs;
+  ImageBlurHash? image;
+  final photos = <ImageBlurHash>[];
 
   var closeHour = 23.obs;
   var closeMinute = 0.obs;
@@ -60,18 +61,16 @@ class PlaceEditController extends GetxController {
   void setEmail(String v) => email(v);
 
   Future<void> setImage(ImageSource source) async {
+    print('HUSADHUHDASAHUASDHASDU ASDHUDASHUAUHSADUHUASDH SET IMAGE $source');
     await cameraController.onImageButtonPressed(source);
 
     if (cameraController.imageFileList.isNotEmpty) {
       final imagePath = cameraController.imageFileList.first.path;
 
       File file = File(imagePath);
-      image(file);
+      displayImage(file);
 
       cameraController.imageFileList.clear();
-
-      final blurHash = await blurHashController.encode(file);
-      imageBlurHash(blurHash);
     }
   }
 
@@ -83,7 +82,7 @@ class PlaceEditController extends GetxController {
         final imagePath = imageFile.path;
 
         File file = File(imagePath);
-        photos.add(file);
+        displayPhotos.add(file);
       }
 
       cameraController.imageFileList.clear();
@@ -205,25 +204,33 @@ class PlaceEditController extends GetxController {
         email: email.value,
         open: '08:30',
         close: '22:30',
-        image: ImageBlurHash(
-          image: url.value,
-          blurHash: imageBlurHash.value,
-        ),
+        image: image,
+        photos: photos,
         keywords: keywords,
       );
 
   Future<void> save() async {
-    // print('########################### CONTROLLER PATH: ${image.value.path}');
-    await repository.upload(image.value);
-    final downloadUrl = await repository.download(basename(image.value.path));
-    url(downloadUrl);
+    image = await buildImageBlurHash(displayImage.value);
+    for (final displayPhoto in displayPhotos) {
+      final photo = await buildImageBlurHash(displayPhoto);
+      if (photo != null) photos.add(photo);
+    }
+    debugPrint('Successful converted photos: ${photos.length}');
     await repository.save(place);
   }
 
-// Rx<List<Place>> placeList = Rx<List<Place>>([]);
-//
-// List<Place> get places => placeList.value;
-//
-// @override
-// void onReady() => placeList.bindStream(repository.read);
+  Future<ImageBlurHash?> buildImageBlurHash(File file) async {
+    final blurHash = await blurHashController.encode(file);
+    final url = await uploadAndGetUrl(file);
+    if (blurHash.isNotEmpty && url != null && url.isNotEmpty) {
+      return ImageBlurHash(image: url, blurHash: blurHash);
+    }
+    return null;
+  }
+
+  Future<String?> uploadAndGetUrl(File file) async {
+    await repository.upload(file);
+    final downloadUrl = await repository.download(basename(file.path));
+    return downloadUrl;
+  }
 }

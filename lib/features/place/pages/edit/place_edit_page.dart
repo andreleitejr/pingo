@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
@@ -438,7 +439,7 @@ class PlaceEditPage extends StatelessWidget {
       return retrieveError;
     }
     return Obx(() {
-      if (controller.photos.isNotEmpty) {
+      if (controller.displayPhotos.isNotEmpty) {
         return SizedBox(
           height: 200,
           child: GridView.count(
@@ -447,8 +448,8 @@ class PlaceEditPage extends StatelessWidget {
             crossAxisCount: 3,
             crossAxisSpacing: 2,
             mainAxisSpacing: 2,
-            children: List.generate(controller.photos.length, (index) {
-              final image = File(controller.photos[index].path);
+            children: List.generate(controller.displayPhotos.length, (index) {
+              final image = File(controller.displayPhotos[index].path);
               return Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -480,12 +481,16 @@ class PlaceEditPage extends StatelessWidget {
       return retrieveError;
     }
     return Obx(() {
-      if (controller.image.value.path.isNotEmpty) {
+      if (controller.displayImage.value.path.isNotEmpty) {
         return SizedBox(
           height: 250,
-          child: BlurHash(
-            image: controller.image.value.path,
-            hash: controller.imageBlurHash.value,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: FileImage(controller.displayImage.value),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         );
       } else if (controller.cameraController.pickImageError != null) {
