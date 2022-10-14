@@ -1,10 +1,13 @@
+import 'package:pingo/constants/design_emojis.dart';
+
 class Category {
   final int id;
   final String title;
+  final String image;
 
   // final int keyword;
 
-  Category(this.id, this.title);
+  Category(this.id, this.title, this.image);
 
   static const all = 0;
   static const restaurants = 1;
@@ -21,15 +24,15 @@ class Category {
 }
 
 final categories = [
-  Category(Category.all, 'All'),
-  Category(Category.restaurants, 'Restaurant'),
-  // Category(Category.events, 'Events'),
-  Category(Category.pubs, 'Pubs'),
-  Category(Category.shopping, 'Shopping'),
-  Category(Category.fastFoods, 'Fast Foods'),
-  // Category(Category.products, 'Products'),
-  Category(Category.theaters, 'Theaters'),
-  Category(Category.museums, 'Museums'),
-  Category(Category.historical, 'Historical Places'),
-  Category(Category.utils, 'Utils'),
+  Category(Category.all, 'All', DesignEmojis.all),
+  Category(Category.restaurants, 'Restaurant', DesignEmojis.restaurant),
+  Category(Category.events, 'Events', DesignEmojis.eventWoman),
+  Category(Category.pubs, 'Pubs', DesignEmojis.pub),
+  Category(Category.shopping, 'Shopping', DesignEmojis.shopping),
+  Category(Category.fastFoods, 'Fast Foods', DesignEmojis.fastFood),
+  Category(Category.products, 'Products', DesignEmojis.product),
+  Category(Category.theaters, 'Theaters', DesignEmojis.theater),
+  Category(Category.museums, 'Museums', DesignEmojis.museum),
+  Category(Category.historical, 'Historical Places', DesignEmojis.historical),
+  Category(Category.utils, 'Utils', DesignEmojis.utils),
 ];

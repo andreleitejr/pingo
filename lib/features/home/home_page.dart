@@ -79,8 +79,7 @@ class HomePage extends StatelessWidget {
                                   children: [
                                     Text(
                                       '19',
-                                      style:
-                                          DesignTextStyle.labelSmall10.apply(
+                                      style: DesignTextStyle.labelSmall10.apply(
                                         color: DesignColor.text400,
                                       ),
                                     ),
@@ -234,6 +233,7 @@ class HomePage extends StatelessWidget {
                         }
                       },
                       title: category.title,
+                      image: category.image,
                     );
                   },
                 ),
