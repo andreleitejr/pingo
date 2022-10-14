@@ -5,9 +5,12 @@ import 'package:get/get.dart';
 import 'package:pingo/core/current_location.dart';
 import 'package:pingo/features/auth/landing/landing_page.dart';
 
+bool isAdmin = false;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
 
   // FirebaseAuth.instance.signOut();
 
@@ -19,5 +22,5 @@ Future<void> main() async {
 
   Get.put(location);
 
-  runApp(LandingPage());
+  runApp(const LandingPage());
 }

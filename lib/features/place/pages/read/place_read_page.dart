@@ -12,6 +12,7 @@ import 'package:pingo/features/product/pages/edit/product_edit_page.dart';
 import 'package:pingo/features/product/pages/list/product_list_fragment.dart';
 import 'package:pingo/features/rating/pages/rating_list.dart';
 import 'package:pingo/features/rating/pages/rating_page.dart';
+import 'package:pingo/main.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_grid_view.dart';
@@ -50,15 +51,13 @@ class _PlaceReadPageState extends State<PlaceReadPage>
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-              SliverAppBar(
+              const SliverAppBar(
                 pinned: true,
                 backgroundColor: Colors.white,
                 automaticallyImplyLeading: false,
                 elevation: 0,
                 title: DesignAppBar(
                   actionIcon: Icons.share,
-                  onActionPressed: () =>
-                      Get.to(() => EventEditPage(place: controller.place)),
                 ),
               ),
               SliverToBoxAdapter(
@@ -144,6 +143,30 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                         isActive: true,
                       ),
                     ),
+                    if (isAdmin) ...[
+                      const DesignSpace(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: DesignSize.mediumSpace),
+                        child: DesignButton(
+                          onPressed: () => Get.to(
+                              () => ProductEditPage(place: widget.place)),
+                          title: 'Create Product',
+                          isActive: true,
+                        ),
+                      ),
+                      const DesignSpace(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: DesignSize.mediumSpace),
+                        child: DesignButton(
+                          onPressed: () =>
+                              Get.to(() => EventEditPage(place: widget.place)),
+                          title: 'Create Event',
+                          isActive: true,
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),

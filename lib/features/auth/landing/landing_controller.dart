@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:pingo/main.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/repositories/user_repository.dart';
 
@@ -21,21 +23,20 @@ class LandingController extends GetxController {
 
   String? get authId => _auth.currentUser?.uid;
 
-  User? get user {
-    return users.value.firstWhereOrNull((user) => user.uuid == authId);
-  }
+  User? get user => users.value.firstWhereOrNull((user) => user.uuid == authId);
 
   bool get userCreatedInDatabase => user != null;
 
-  bool get userHasKeywords {
-    return userCreatedInDatabase && user!.keywords.isNotEmpty;
-  }
+  bool get userHasKeywords =>
+      userCreatedInDatabase && user!.keywords.isNotEmpty;
 
   bool get userValid => userCreatedInDatabase && userHasKeywords;
 
   void registerUser() {
     if (user != null) {
       Get.put(user!);
+      isAdmin = user?.email == 'paulo@rock.com';
+      if (isAdmin) debugPrint('System Message | Admin successful configured.');
     }
   }
 }
