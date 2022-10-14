@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/features/home/category/category.dart';
 
 class DesignCategoryBulletList extends StatelessWidget {
@@ -34,12 +35,21 @@ class DesignCategoryBulletList extends StatelessWidget {
                   horizontal: DesignSize.mediumSpace),
               margin: const EdgeInsets.only(right: DesignSize.smallSpace),
               decoration: BoxDecoration(
-                color:  isSelected ? DesignColor.primary500 : Colors.transparent,
+                  borderRadius: BorderRadius.circular(18),
+                  color:
+                      isSelected ? DesignColor.primary100 : Colors.transparent,
                   border: Border.all(
-                color: DesignColor.primary500,
-                width: 2,
-              )),
-              child: Text(category.title),
+                    color:  isSelected ? DesignColor.primary100 : DesignColor.primary500,
+                    width: 2,
+                  )),
+              child: Text(
+                category.title,
+                style: DesignTextStyle.bodyMedium16Bold.apply(
+                  color: isSelected
+                      ? DesignColor.primary700
+                      : DesignColor.primary500,
+                ),
+              ),
             ),
           );
         },

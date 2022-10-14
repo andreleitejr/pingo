@@ -35,9 +35,13 @@ class DesignListTile extends StatelessWidget {
                 image != null
                     ? SizedBox(
                         width: 60,
-                        child: BlurHash(
-                          image: image!.image,
-                          hash: image!.blurHash,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: BlurHash(
+                            imageFit: BoxFit.cover,
+                            image: image!.image,
+                            hash: image!.blurHash,
+                          ),
                         ),
                       )
                     : Container(),

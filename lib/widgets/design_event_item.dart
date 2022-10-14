@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_images.dart';
@@ -10,7 +11,7 @@ class DesignEventItem extends StatelessWidget {
   DesignEventItem({Key? key, required this.event}) : super(key: key);
   final Event event;
 
-  final _height = 221.0;
+  final _height = 196.0;
   final _width = (Get.width / 2) - 32;
 
   @override
@@ -23,14 +24,14 @@ class DesignEventItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: _width,
-              decoration: BoxDecoration(
-                color: DesignColor.text200,
-                image: DecorationImage(
-                  image:
-                      NetworkImage(event.image?.image ?? DesignImages.fallbackImage),
-                  fit: BoxFit.fill,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: BlurHash(
+                  imageFit: BoxFit.cover,
+                  image: event.image!.image,
+                  hash: event.image!.blurHash,
                 ),
               ),
             ),

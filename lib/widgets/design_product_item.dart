@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_images.dart';
@@ -23,15 +24,15 @@ class DesignProductItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+
+            SizedBox(
               height: _width,
-              decoration: BoxDecoration(
-                color: DesignColor.text200,
-                image: DecorationImage(
-                  image: NetworkImage(
-                    product.image?.image ?? DesignImages.fallbackImage,
-                  ),
-                  fit: BoxFit.fill,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: BlurHash(
+                  imageFit: BoxFit.cover,
+                  image: product.image!.image,
+                  hash: product.image!.blurHash,
                 ),
               ),
             ),

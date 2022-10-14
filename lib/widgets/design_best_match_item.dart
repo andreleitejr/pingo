@@ -19,9 +19,14 @@ class DesignBestMatchItem extends StatelessWidget {
         alignment: Alignment.center,
         width: Get.width * 0.6,
         margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
-        child: BlurHash(
-          image: bestMatch.image!.image,
-          hash: bestMatch.image!.blurHash,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: BlurHash(
+            imageFit: BoxFit.cover,
+            image: bestMatch.image!.image,
+            hash: bestMatch.image!.blurHash,
+          ),
         ),
         // child: Stack(
         //   children: [

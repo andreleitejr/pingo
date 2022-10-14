@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DesignColor {
-  static const primary100 = Color(0xFFF49A05);
+  static const primary100 = Color(0xFFFFE089);
   static const primary300 = Color(0xFFF49A05);
   static const primary500 = Color(0xFFF49A05);
   static const primary700 = Color(0xFFD08811);

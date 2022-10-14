@@ -195,7 +195,7 @@ class HomePage extends StatelessWidget {
             const SliverToBoxAdapter(child: DesignSpace()),
             SliverToBoxAdapter(
               child: SizedBox(
-                height: 110,
+                height: 96,
                 child: ListView.builder(
                   padding: const EdgeInsets.only(
                     left: DesignSize.mediumSpace,
@@ -261,7 +261,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 216,
+                      height: 196,
                       child: ListView.builder(
                         padding: const EdgeInsets.symmetric(
                           horizontal: DesignSize.mediumSpace,
@@ -312,7 +312,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 164,
+                      height: 142,
                       child: ListView.builder(
                         padding: const EdgeInsets.symmetric(
                           horizontal: DesignSize.mediumSpace,
