@@ -133,7 +133,7 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
             SliverToBoxAdapter(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: DesignSize.padding),
+                    const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
                 child: DesignSearchInput(
                   hint: widget.searchHint,
                 ),
@@ -154,10 +154,10 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
       // hasScrollBody: false,
       child: MasonryGridView.count(
         padding: const EdgeInsets.fromLTRB(
-          DesignSize.padding,
+          DesignSize.mediumSpace,
           0,
-          DesignSize.padding,
-          DesignSize.padding,
+          DesignSize.mediumSpace,
+          DesignSize.mediumSpace,
         ),
         crossAxisCount: 2,
         mainAxisSpacing: DesignSize.mediumSpace,

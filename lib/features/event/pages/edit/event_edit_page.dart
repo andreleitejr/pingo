@@ -44,7 +44,7 @@ class _EventEditPageState extends State<EventEditPage> {
       ),
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.all(DesignSize.padding),
+        padding: const EdgeInsets.all(DesignSize.mediumSpace),
         child: ListView(
           children: [
             Obx(

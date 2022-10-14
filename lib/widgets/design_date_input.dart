@@ -30,7 +30,7 @@ class _DesignDateInputState extends State<DesignDateInput> {
     return GestureDetector(
       onTap: selectDate,
       child: Container(
-        padding: const EdgeInsets.only(left: DesignSize.padding),
+        padding: const EdgeInsets.only(left: DesignSize.mediumSpace),
         alignment: Alignment.centerLeft,
         height: DesignSize.buttonHeight,
         width: double.infinity,

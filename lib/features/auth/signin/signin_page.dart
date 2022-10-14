@@ -31,7 +31,7 @@ class _SignInPageState extends State<SignInPage> {
         child: DesignAppBar(title: 'Sign In'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(DesignSize.padding),
+        padding: const EdgeInsets.all(DesignSize.mediumSpace),
         child: Column(
           children: [
             Obx(

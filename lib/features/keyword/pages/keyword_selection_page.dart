@@ -96,7 +96,7 @@
 //             SliverToBoxAdapter(
 //               child: Padding(
 //                 padding:
-//                     const EdgeInsets.symmetric(horizontal: DesignSize.padding),
+//                     const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
 //                 child: DesignSearchInput(
 //                   onChanged: controller.setSearch,
 //                   hint: widget.searchHint,
@@ -118,10 +118,10 @@
 //       // hasScrollBody: false,
 //       child: MasonryGridView.count(
 //         padding: const EdgeInsets.fromLTRB(
-//           DesignSize.padding,
+//           DesignSize.mediumSpace,
 //           0,
-//           DesignSize.padding,
-//           DesignSize.padding,
+//           DesignSize.mediumSpace,
+//           DesignSize.mediumSpace,
 //         ),
 //         crossAxisCount: 2,
 //         mainAxisSpacing: DesignSize.mediumSpace,

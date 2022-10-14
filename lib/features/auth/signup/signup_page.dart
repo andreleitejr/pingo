@@ -36,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(DesignSize.padding),
+          padding: const EdgeInsets.all(DesignSize.mediumSpace),
           child: Column(
             children: [
               Obx(

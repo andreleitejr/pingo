@@ -28,7 +28,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
       ),
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.all(DesignSize.padding),
+        padding: const EdgeInsets.all(DesignSize.mediumSpace),
         child: ListView(
           children: [
             Obx(
