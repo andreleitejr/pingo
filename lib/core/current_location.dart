@@ -7,13 +7,14 @@ class CurrentLocation {
   late GeoPoint location;
   String currentLocationAddress = '';
 
+
   Future<void> init() async {
     final permission = await Geolocator.requestPermission();
 
     if (permission != LocationPermission.denied &&
         permission != LocationPermission.deniedForever) {
-      // await _getCurrentLocation();
-      location = const GeoPoint(-23.55041838770605, -46.64824828296933);
+      await _getCurrentLocation();
+      // location = const GeoPoint(-23.55041838770605, -46.64824828296933);
       await _getStreetName();
     }
   }
