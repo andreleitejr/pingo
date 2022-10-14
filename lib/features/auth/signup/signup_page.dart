@@ -108,7 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
         RichText(
           text: TextSpan(
             children: [
-              const TextSpan(
+              TextSpan(
                 text: 'I agree with',
                 style: DesignTextStyle.bodySmall14,
               ),
@@ -121,7 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     print('Terms');
                   },
               ),
-              const TextSpan(
+              TextSpan(
                 text: 'and',
                 style: DesignTextStyle.bodySmall14,
               ),
@@ -134,7 +134,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     print('Conditions');
                   },
               ),
-              const TextSpan(
+              TextSpan(
                 text: '.',
                 style: DesignTextStyle.bodySmall14,
               ),
@@ -153,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: RichText(
         text: TextSpan(
           children: [
-            const TextSpan(
+            TextSpan(
               text: 'Alread have an account?',
               style: DesignTextStyle.bodySmall14,
             ),

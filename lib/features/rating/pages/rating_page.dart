@@ -43,7 +43,7 @@ class _RatingPageState extends State<RatingPage> {
         padding: const EdgeInsets.all(DesignSize.mediumSpace),
         child: Column(
           children: [
-            const Text(
+            Text(
               'From 0 to 10, what probability you indicate this place to a friend?',
               style: DesignTextStyle.bodyMedium16,
             ),

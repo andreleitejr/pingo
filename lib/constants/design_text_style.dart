@@ -1,38 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DesignTextStyle {
-  static const bodyLarge18Bold = TextStyle(
-    fontSize: 18,
-    // fontFamily: 'Jakarta',
-    color: Colors.black,
-    fontWeight: FontWeight.w500,
+  static final bodyLarge18Bold = GoogleFonts.plusJakartaSans(
+    textStyle: const TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+    ),
   );
-  static const bodyMedium16 = TextStyle(
-    fontSize: 16,
+  static final bodyMedium16 = GoogleFonts.plusJakartaSans(
+    textStyle: const TextStyle(
+      fontSize: 16,
+    ),
   );
-  static const bodyMedium16Bold = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
+  static final bodyMedium16Bold = GoogleFonts.plusJakartaSans(
+    textStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+    ),
   );
-  static const bodySmall14 = TextStyle(
-    fontSize: 14,
-    color: Colors.black,
-    fontWeight: FontWeight.w400,
+  static final bodySmall12 = GoogleFonts.roboto(
+    textStyle: const TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+    ),
   );
-  static const bodySmall14Bold = TextStyle(
-    fontSize: 14,
-    color: Colors.black,
-    // fontFamily: 'Roboto',
-    fontWeight: FontWeight.w500,
+  static final bodySmall14 = GoogleFonts.plusJakartaSans(
+    textStyle: const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+    ),
   );
-  static const labelSmall6 = TextStyle(
-    fontSize: 10,
-    fontWeight: FontWeight.bold,
+  static final bodySmall14Bold = GoogleFonts.plusJakartaSans(
+    textStyle: const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+    ),
   );
-  static const labelSmall10 = TextStyle(
-    fontSize: 10,
+  static final labelSmall8 = GoogleFonts.roboto(
+    textStyle: const TextStyle(
+      fontSize: 8,
+    ),
   );
-  static const labelMedium12 = TextStyle(
-    fontSize: 12,
+  static final labelSmall10 = GoogleFonts.roboto(
+    textStyle: const TextStyle(
+      fontSize: 10,
+    ),
+  );
+
+  static final labelMedium12 = GoogleFonts.plusJakartaSans(
+    textStyle: const TextStyle(
+      fontSize: 12,
+    ),
   );
 }

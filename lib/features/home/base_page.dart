@@ -47,10 +47,12 @@ class _BasePageState extends State<BasePage> {
         child: pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: [
           const BottomNavigationBarItem(
+            backgroundColor: Colors.white,
             icon: DesignIcon(icon: DesignIcons.home),
             label: 'Home',
           ),
@@ -85,7 +87,7 @@ class _BasePageState extends State<BasePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        // selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
     );

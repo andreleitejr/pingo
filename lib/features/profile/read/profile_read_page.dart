@@ -54,13 +54,13 @@ class ProfileReadPage extends StatelessWidget {
                     const DesignSpace(size: 4),
                     Row(
                       children: [
-                        DesignIcon(
+                        const DesignIcon(
                           icon: DesignIcons.place,
                           width: 8,
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          currentLocation.streetName,
+                          currentLocation.currentLocationAddress,
                           style: DesignTextStyle.labelMedium12
                               .apply(color: DesignColor.text400),
                         ),

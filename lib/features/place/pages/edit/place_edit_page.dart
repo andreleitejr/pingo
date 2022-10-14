@@ -113,7 +113,7 @@ class PlaceEditPage extends StatelessWidget {
             //   ),
             // ),
             const DesignSpace(),
-            const Text(
+            Text(
               'Address',
               style: DesignTextStyle.bodyMedium16Bold,
             ),
@@ -204,7 +204,7 @@ class PlaceEditPage extends StatelessWidget {
               ),
             ),
             const DesignSpace(),
-            const Text(
+            Text(
               'Category',
               style: DesignTextStyle.bodyMedium16Bold,
             ),
@@ -238,7 +238,7 @@ class PlaceEditPage extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Foods',
                       style: DesignTextStyle.bodyMedium16Bold,
                     ),
@@ -272,7 +272,7 @@ class PlaceEditPage extends StatelessWidget {
               }
               return Container();
             }),
-            const Text(
+            Text(
               'Musics',
               style: DesignTextStyle.bodyMedium16Bold,
             ),
@@ -301,7 +301,7 @@ class PlaceEditPage extends StatelessWidget {
               ],
             ),
             const DesignSpace(),
-            const Text(
+            Text(
               'Miscellaneous',
               style: DesignTextStyle.bodyMedium16Bold,
             ),

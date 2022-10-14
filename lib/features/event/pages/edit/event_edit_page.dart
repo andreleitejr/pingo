@@ -75,7 +75,7 @@ class _EventEditPageState extends State<EventEditPage> {
               hint: 'Promotional Price',
               onChanged: controller.setPromotionalPrice,
             ),
-            const Text(
+            Text(
               'Category',
               style: DesignTextStyle.bodyMedium16Bold,
             ),
@@ -109,7 +109,7 @@ class _EventEditPageState extends State<EventEditPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Foods',
                       style: DesignTextStyle.bodyMedium16Bold,
                     ),
@@ -147,7 +147,7 @@ class _EventEditPageState extends State<EventEditPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Type of Music',
                   style: DesignTextStyle.bodyMedium16Bold,
                 ),
@@ -182,7 +182,7 @@ class _EventEditPageState extends State<EventEditPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Miscellaneous',
                   style: DesignTextStyle.bodyMedium16Bold,
                 ),

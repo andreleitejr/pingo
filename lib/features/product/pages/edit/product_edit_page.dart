@@ -104,7 +104,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Foods',
                       style: DesignTextStyle.bodyMedium16Bold,
                     ),
@@ -142,7 +142,7 @@ class _ProductEditPageState extends State<ProductEditPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Miscellaneous',
                   style: DesignTextStyle.bodyMedium16Bold,
                 ),

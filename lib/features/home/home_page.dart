@@ -36,6 +36,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Obx(() {
         if (controller.search.searchActive.value) {
           return SearchPage();
@@ -79,13 +80,13 @@ class HomePage extends StatelessWidget {
                                     Text(
                                       '19',
                                       style:
-                                          DesignTextStyle.labelMedium12.apply(
+                                          DesignTextStyle.labelSmall10.apply(
                                         color: DesignColor.text400,
                                       ),
                                     ),
                                     Text(
                                       '°C',
-                                      style: DesignTextStyle.labelSmall6.apply(
+                                      style: DesignTextStyle.labelSmall8.apply(
                                         color: DesignColor.text400,
                                       ),
                                     ),
@@ -94,8 +95,8 @@ class HomePage extends StatelessWidget {
                                 const SizedBox(width: 4),
                                 Center(
                                   child: Container(
-                                    width: 4,
-                                    height: 4,
+                                    width: 3,
+                                    height: 3,
                                     decoration: BoxDecoration(
                                       color: DesignColor.text300,
                                       borderRadius: BorderRadius.circular(16),
@@ -105,15 +106,17 @@ class HomePage extends StatelessWidget {
                                 const SizedBox(width: 4),
                                 Text(
                                   DateFormat.EEEE().format(DateTime.now()),
-                                  style: DesignTextStyle.labelMedium12.apply(
+                                  style: DesignTextStyle.labelSmall10.apply(
                                     color: DesignColor.text400,
                                   ),
                                 ),
                               ],
                             ),
                             Text(
-                              '${controller.location.streetName}, ${controller.location.city}',
-                              style: DesignTextStyle.bodySmall14,
+                              controller.location.currentLocationAddress,
+                              style: DesignTextStyle.bodySmall12.apply(
+                                color: DesignColor.text500,
+                              ),
                             ),
                           ],
                         ),
