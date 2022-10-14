@@ -136,29 +136,29 @@ class _ProductReadPageState extends State<ProductReadPage> {
               isActive: true,
             ),
             const DesignSpace(),
-            GestureDetector(
-                onTap: () => Get.to(RatingPage(ratedId: widget.product.uuid)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                          text: 'Do you already know this product? ',
-                          style: DesignTextStyle.bodySmall14.apply(
-                            color: DesignColor.text400,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: 'So rate it!',
-                              style: DesignTextStyle.bodySmall14Bold.apply(
-                                color: DesignColor.primary500,
-                              ),
-                            ),
-                          ]),
-                    ),
-                  ],
-                )),
-            const DesignSpace(),
+            // GestureDetector(
+            //     onTap: () => Get.to(RatingPage(ratedId: widget.product.uuid)),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         RichText(
+            //           text: TextSpan(
+            //               text: 'Do you already know this product? ',
+            //               style: DesignTextStyle.bodySmall14.apply(
+            //                 color: DesignColor.text400,
+            //               ),
+            //               children: [
+            //                 TextSpan(
+            //                   text: 'So rate it!',
+            //                   style: DesignTextStyle.bodySmall14Bold.apply(
+            //                     color: DesignColor.primary500,
+            //                   ),
+            //                 ),
+            //               ]),
+            //         ),
+            //       ],
+            //     )),
+            // const DesignSpace(),
             const DesignSpace(),
           ],
         ),

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/features/rating/pages/rating_controller.dart';
-import 'package:pingo/features/rating/services/nps_color.dart';
+import 'package:pingo/features/rating/models/nps_color.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_space.dart';
 import 'package:pingo/widgets/design_text_area.dart';
 import 'package:pingo/widgets/design_text_input.dart';
-import 'package:pingo/widgets/design_title_with_subtitle.dart';
 
 class RatingPage extends StatefulWidget {
   const RatingPage({Key? key, required this.ratedId}) : super(key: key);
@@ -39,19 +39,16 @@ class _RatingPageState extends State<RatingPage> {
         ),
       ),
       resizeToAvoidBottomInset: false,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const DesignTitleWithSubtitle(
-            title: 'Rating',
-            subtitle:
-                'From 0 to 10, what probability you indicate this place to a friend?',
-          ),
-          Container(
-            padding: const EdgeInsets.all(DesignSize.mediumSpace),
-            height: 68,
-            width: double.infinity,
-            child: Wrap(
+      body: Padding(
+        padding: const EdgeInsets.all(DesignSize.mediumSpace),
+        child: Column(
+          children: [
+            const Text(
+              'From 0 to 10, what probability you indicate this place to a friend?',
+              style: DesignTextStyle.bodyMedium16,
+            ),
+            const DesignSpace(),
+            Row(
               children: [
                 for (var i = 1; i <= 10; i++) ...[
                   Obx(() {
@@ -70,7 +67,11 @@ class _RatingPageState extends State<RatingPage> {
                                   : NpsColor.get(i),
                               borderRadius: BorderRadius.circular(50)),
                           alignment: Alignment.center,
-                          child: Text(i.toString()),
+                          child: Text(
+                            i.toString(),
+                            style: DesignTextStyle.bodyMedium16
+                                .apply(color: Colors.white),
+                          ),
                         ),
                       ),
                     );
@@ -78,30 +79,30 @@ class _RatingPageState extends State<RatingPage> {
                 ],
               ],
             ),
-          ),
-          const DesignSpace(),
-          const DesignSpace(),
-          DesignTextInput(
-            hint: 'Title',
-            onChanged: controller.setTitle,
-          ),
-          const DesignSpace(),
-          DesignTextArea(
-            hint: 'Diga o que pensa desse lugar...',
-            onChanged: controller.setMessage,
-          ),
-          Expanded(child: Container()),
-          SizedBox(
-            height: DesignSize.buttonHeight,
-            child: DesignButton(
-              onPressed: () async => await controller.save().then((_) => Get.back()),
-              title: 'Sign In',
-              isActive: true,
-              // isActive: controller.isAuthFormValid,
+            const DesignSpace(),
+            DesignTextInput(
+              hint: 'Title',
+              onChanged: controller.setTitle,
             ),
-          ),
-          const DesignSpace(),
-        ],
+            const DesignSpace(),
+            DesignTextArea(
+              hint: 'Diga o que pensa desse lugar...',
+              onChanged: controller.setMessage,
+            ),
+            Expanded(child: Container()),
+            SizedBox(
+              height: DesignSize.buttonHeight,
+              child: DesignButton(
+                onPressed: () async =>
+                    await controller.save().then((_) => Get.back()),
+                title: 'Enviar',
+                isActive: true,
+                // isActive: controller.isAuthFormValid,
+              ),
+            ),
+            const DesignSpace(),
+          ],
+        ),
       ),
     );
   }
