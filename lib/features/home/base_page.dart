@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/features/event/pages/list/event_list_page.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/home/home_page.dart';
@@ -8,6 +9,7 @@ import 'package:pingo/features/place/pages/list/place_list_page.dart';
 import 'package:pingo/features/product/pages/list/product_list_page.dart';
 import 'package:pingo/features/profile/read/profile_read_page.dart';
 import 'package:pingo/models/user.dart';
+import 'package:pingo/widgets/design_icon.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({Key? key}) : super(key: key);
@@ -45,33 +47,23 @@ class _BasePageState extends State<BasePage> {
         child: pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: [
           const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: DesignColor.text300,
-            ),
+            icon: DesignIcon(icon: DesignIcons.home),
             label: 'Home',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.place,
-              color: DesignColor.text300,
-            ),
+            icon: DesignIcon(icon: DesignIcons.place),
             label: 'Places',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.event,
-              color: DesignColor.text300,
-            ),
+            icon: DesignIcon(icon: DesignIcons.event),
             label: 'Events',
           ),
           const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shop,
-              color: DesignColor.text300,
-            ),
+            icon: DesignIcon(icon: DesignIcons.product),
             label: 'Products',
           ),
           BottomNavigationBarItem(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
@@ -20,6 +21,7 @@ import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
 import 'package:pingo/widgets/design_category_item.dart';
 import 'package:pingo/widgets/design_event_item.dart';
+import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_product_item.dart';
 import 'package:pingo/widgets/design_search_input.dart';
@@ -133,9 +135,8 @@ class HomePage extends StatelessWidget {
                             },
                           );
                         },
-                        child: const Icon(
-                          Icons.filter_list,
-                          color: DesignColor.text400,
+                        child: const DesignIcon(
+                          icon: DesignIcons.filter,
                         ),
                       )
                     ],

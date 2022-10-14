@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_text_style.dart';
-import 'package:pingo/widgets/design_icon.dart';
+import 'package:pingo/widgets/design_icon_button.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class DesignAppBar extends StatelessWidget {
@@ -20,7 +21,7 @@ class DesignAppBar extends StatelessWidget {
   final String? title;
   final bool showLeading;
   final String? actionText;
-  final IconData? actionIcon;
+  final String? actionIcon;
   final Function()? onLeadingPressed;
   final Function()? onActionPressed;
   final bool actionValid;
@@ -35,11 +36,7 @@ class DesignAppBar extends StatelessWidget {
             // const Spacer(),
             if (showLeading)
               DesignIconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 24,
-                ),
+                icon: DesignIcons.arrowLeft,
                 onPressed: onLeadingPressed ?? () => Get.back(),
               ),
             Expanded(
@@ -66,13 +63,11 @@ class DesignAppBar extends StatelessWidget {
               ),
               const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
             ] else ...[
-              DesignIconButton(
-                onPressed: onActionPressed ?? () {},
-                icon: Icon(
-                  actionIcon,
-                  color: Colors.black,
+              if (actionIcon != null)
+                DesignIconButton(
+                  onPressed: onActionPressed ?? () {},
+                  icon: actionIcon!,
                 ),
-              ),
             ],
             // DesignIconButton()
           ],

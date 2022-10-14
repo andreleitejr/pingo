@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
@@ -31,7 +32,7 @@ class _ProductReadPageState extends State<ProductReadPage> {
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
           title: widget.product.name,
-          actionIcon: Icons.share,
+          actionIcon: DesignIcons.share,
         ),
       ),
       resizeToAvoidBottomInset: false,
@@ -45,8 +46,8 @@ class _ProductReadPageState extends State<ProductReadPage> {
               height: Get.width * 0.65,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                      widget.product.image?.image ?? DesignImages.fallbackImage),
+                  image: NetworkImage(widget.product.image?.image ??
+                      DesignImages.fallbackImage),
                   fit: BoxFit.cover,
                 ),
               ),

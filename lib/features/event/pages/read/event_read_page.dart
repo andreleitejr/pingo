@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
@@ -31,7 +32,7 @@ class _EventReadPageState extends State<EventReadPage> {
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: DesignAppBar(
           title: widget.event.name,
-          actionIcon: Icons.share,
+          actionIcon: DesignIcons.share,
         ),
       ),
       resizeToAvoidBottomInset: false,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
@@ -16,6 +17,7 @@ import 'package:pingo/main.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_grid_view.dart';
+import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_map.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_space.dart';
@@ -57,7 +59,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                 automaticallyImplyLeading: false,
                 elevation: 0,
                 title: DesignAppBar(
-                  actionIcon: Icons.share,
+                  actionIcon: DesignIcons.share,
                 ),
               ),
               SliverToBoxAdapter(
@@ -92,10 +94,10 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                                     color: DesignColor.text300,
                                   ),
                                   const SizedBox(width: 4),
-                                  const Icon(
-                                    Icons.heart_broken,
-                                    size: 14,
-                                    color: DesignColor.primary500,
+                                  const DesignIcon(
+                                    icon: DesignIcons.star,
+                                    height: DesignSize.smallIcon,
+                                    width: DesignSize.smallIcon,
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
@@ -185,20 +187,20 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                         labelPadding: EdgeInsets.zero,
                         padding: EdgeInsets.zero,
                         tabs: [
-                          Icon(
-                            Icons.grid_on_outlined,
+                          DesignIcon(
+                            icon: DesignIcons.grid,
                           ),
-                          Icon(
-                            Icons.production_quantity_limits,
+                          DesignIcon(
+                            icon: DesignIcons.product,
                           ),
-                          Icon(
-                            Icons.event,
+                          DesignIcon(
+                            icon: DesignIcons.event,
                           ),
-                          Icon(
-                            Icons.map,
+                          DesignIcon(
+                            icon: DesignIcons.map,
                           ),
-                          Icon(
-                            Icons.chat_bubble_outline,
+                          DesignIcon(
+                            icon: DesignIcons.message,
                           ),
                         ],
                       ),

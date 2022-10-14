@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:pingo/constants/design_size.dart';
 
-class DesignIconButton extends StatelessWidget {
-  const DesignIconButton(
-      {Key? key, required this.icon, required this.onPressed})
+class DesignIcon extends StatelessWidget {
+  const DesignIcon({Key? key, required this.icon, this.height, this.width})
       : super(key: key);
 
-  final Widget icon;
-  final Function() onPressed;
+  final String icon;
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: icon,
-      color: Colors.white,
-      onPressed: onPressed,
+    return Opacity(
+      opacity: 0.5,
+      child: SizedBox(
+        height: height ?? DesignSize.icon,
+        width: width ?? DesignSize.icon,
+        child: Image.asset(icon),
+      ),
     );
   }
 }
