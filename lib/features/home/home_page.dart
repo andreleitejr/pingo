@@ -192,6 +192,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SliverToBoxAdapter(child: DesignSpace()),
+            const SliverToBoxAdapter(child: DesignSpace()),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 110,

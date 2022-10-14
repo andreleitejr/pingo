@@ -3,11 +3,13 @@ import 'package:pingo/widgets/design_icon.dart';
 
 class DesignIconButton extends StatelessWidget {
   const DesignIconButton(
-      {Key? key, required this.icon, required this.onPressed})
+      {Key? key, required this.icon, required this.onPressed, this.height, this.width})
       : super(key: key);
 
   final String icon;
   final Function() onPressed;
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +17,8 @@ class DesignIconButton extends StatelessWidget {
       onTap: onPressed,
       child: DesignIcon(
         icon: icon,
+        height: height,
+        width: width,
       ),
     );
   }

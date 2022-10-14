@@ -25,7 +25,7 @@ class DesignTextStyle {
       fontWeight: FontWeight.w400,
     ),
   );
-  static final bodySmall14 = GoogleFonts.plusJakartaSans(
+  static final bodySmall14 = GoogleFonts.roboto(
     textStyle: const TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,

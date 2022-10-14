@@ -39,9 +39,19 @@ class SearchPage extends StatelessWidget {
                     onChanged: controller.search.setSearch,
                   ),
                 ),
+                const DesignSpace(
+                  orientation: DesignSpaceOrientation.horizontal,
+                ),
                 DesignIconButton(
-                    icon: DesignIcons.close,
-                    onPressed: () => controller.search.closeSearch()),
+                  icon: DesignIcons.close,
+                  height: 14,
+                  width: 14,
+                  onPressed: () => controller.search.closeSearch(),
+                ),
+                const DesignSpace(
+                  orientation: DesignSpaceOrientation.horizontal,
+                  size: DesignSize.smallSpace,
+                ),
               ],
             ),
           ),
