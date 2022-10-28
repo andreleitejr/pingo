@@ -4,8 +4,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:pingo/core/extensions.dart';
 
 class CurrentLocation {
-  late GeoPoint location;
-  String currentLocationAddress = '';
+  late GeoPoint currentCoordinates;
+  String currentAddress = '';
 
 
   Future<void> init() async {
@@ -13,8 +13,8 @@ class CurrentLocation {
 
     if (permission != LocationPermission.denied &&
         permission != LocationPermission.deniedForever) {
-      await _getCurrentLocation();
-      // location = const GeoPoint(-23.55041838770605, -46.64824828296933);
+      // await _getCurrentLocation();
+      currentCoordinates = const GeoPoint(-23.55041838770605, -46.64824828296933);
       await _getStreetName();
     }
   }
@@ -22,7 +22,7 @@ class CurrentLocation {
   Future<void> _getCurrentLocation() async {
     try {
       final currentLocation = await Geolocator.getCurrentPosition();
-      location = currentLocation.toGeoPoint;
+      currentCoordinates = currentLocation.toGeoPoint;
     } catch (e) {
       print(e);
     }
@@ -30,13 +30,13 @@ class CurrentLocation {
 
   Future<void> _getStreetName() async {
     List<Placemark> placemarks =
-        await placemarkFromCoordinates(location.latitude, location.longitude);
+        await placemarkFromCoordinates(currentCoordinates.latitude, currentCoordinates.longitude);
 
     if (placemarks.first.street != null) {
-      currentLocationAddress += placemarks.first.street!;
+      currentAddress += placemarks.first.street!;
     }
     if (placemarks.first.administrativeArea != null) {
-      currentLocationAddress += ', ${placemarks.first.administrativeArea!}';
+      currentAddress += ', ${placemarks.first.administrativeArea!}';
     }
   }
 

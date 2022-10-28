@@ -4,7 +4,7 @@ import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
-import 'package:pingo/core/current_location.dart';
+import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/signin/signin_page.dart';
 import 'package:pingo/models/user.dart';
@@ -60,7 +60,7 @@ class ProfileReadPage extends StatelessWidget {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          currentLocation.currentLocationAddress,
+                          currentLocation.currentAddress,
                           style: DesignTextStyle.labelMedium12
                               .apply(color: DesignColor.text400),
                         ),

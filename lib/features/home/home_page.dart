@@ -77,10 +77,13 @@ class HomePage extends StatelessWidget {
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      '19',
-                                      style: DesignTextStyle.labelSmall10.apply(
-                                        color: DesignColor.text400,
+                                    Obx(
+                                      () => Text(
+                                        controller.temperature.toString(),
+                                        style:
+                                            DesignTextStyle.labelSmall10.apply(
+                                          color: DesignColor.text400,
+                                        ),
                                       ),
                                     ),
                                     Text(
@@ -111,10 +114,12 @@ class HomePage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Text(
-                              controller.location.currentLocationAddress,
-                              style: DesignTextStyle.bodySmall12.apply(
-                                color: DesignColor.text500,
+                            Obx(
+                              () => Text(
+                                controller.address.value,
+                                style: DesignTextStyle.bodySmall12.apply(
+                                  color: DesignColor.text500,
+                                ),
                               ),
                             ),
                           ],

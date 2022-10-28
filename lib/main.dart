@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pingo/core/current_location.dart';
+import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/auth/landing/landing_page.dart';
 
 bool isAdmin = false;
@@ -16,11 +16,6 @@ Future<void> main() async {
 
   // final sharedPreferences = await SharedPreferences.getInstance();
   // Get.put(sharedPreferences);
-
-  final location = CurrentLocation();
-  await location.init();
-
-  Get.put(location);
 
   runApp(const LandingPage());
 }
