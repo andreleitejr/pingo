@@ -13,10 +13,6 @@ class ProfileInfoController extends GetxController {
   final cameraController = Get.put(CameraController());
   final blurHashController = Get.put(BlurHashController());
 
-  final name = ''.obs;
-  final description = ''.obs;
-  final nickname = ''.obs;
-
   var displayImage = File('').obs;
 
   void setName(String v) => user.name = v;
