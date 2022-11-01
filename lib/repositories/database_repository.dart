@@ -27,6 +27,7 @@ abstract class DataBaseRepository<T extends DataBase> {
       FirebaseFirestore.instance.collectionGroup(name.pathReference);
 
   final _streamController = BehaviorSubject<List<T>?>();
+  
 
   List<T>? get result => _streamController.value;
 

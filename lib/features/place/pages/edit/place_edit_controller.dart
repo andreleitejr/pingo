@@ -4,14 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
-import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/services/current_location.dart';
-import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
 import 'package:pingo/models/address.dart';
-import 'package:pingo/repositories/storage_repository.dart';
 import 'package:pingo/services/camera_controller.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 
@@ -60,33 +56,11 @@ class PlaceEditController extends GetxController {
 
   void setEmail(String v) => email(v);
 
-  Future<void> setImage(ImageSource source) async {
-    await cameraController.onImageButtonPressed(source);
+  Future<void> setImage(ImageSource source) async =>
+      await cameraController.takePhoto(source, displayImage);
 
-    if (cameraController.imageFileList.isNotEmpty) {
-      final imagePath = cameraController.imageFileList.first.path;
-
-      File file = File(imagePath);
-      displayImage(file);
-
-      cameraController.imageFileList.clear();
-    }
-  }
-
-  Future<void> selectPhotos(ImageSource source) async {
-    await cameraController.onImageButtonPressed(source, isMultiImage: true);
-
-    if (cameraController.imageFileList.isNotEmpty) {
-      for (final imageFile in cameraController.imageFileList) {
-        final imagePath = imageFile.path;
-
-        File file = File(imagePath);
-        displayPhotos.add(file);
-      }
-
-      cameraController.imageFileList.clear();
-    }
-  }
+  Future<void> selectPhotos(ImageSource source) async =>
+      await cameraController.takeMultiplePhotos(source, displayPhotos);
 
   void setCloseHour(String v) => closeHour(int.tryParse(v));
 

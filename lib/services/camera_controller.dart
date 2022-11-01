@@ -27,8 +27,33 @@ class CameraController extends GetxController {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
   }
 
-  Future<void> takePhoto() async {
-    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+  Future<void> takePhoto(ImageSource source, Rx displayImage) async {
+    await onImageButtonPressed(source);
+
+    if (imageFileList.isNotEmpty) {
+      final imagePath = imageFileList.first.path;
+
+      File file = File(imagePath);
+      displayImage(file);
+
+      imageFileList.clear();
+    }
+  }
+
+  Future<void> takeMultiplePhotos(
+      ImageSource source, List<File> displayPhotos) async {
+    await onImageButtonPressed(source, isMultiImage: true);
+
+    if (imageFileList.isNotEmpty) {
+      for (final imageFile in imageFileList) {
+        final imagePath = imageFile.path;
+
+        File file = File(imagePath);
+        displayPhotos.add(file);
+      }
+
+      imageFileList.clear();
+    }
   }
 
   Future<void> retrieveLostData() async {

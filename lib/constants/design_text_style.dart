@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DesignTextStyle {
-  static final bodyLarge18Bold = GoogleFonts.plusJakartaSans(
+  static final bodyLarge18Bold = GoogleFonts.roboto(
     textStyle: const TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w500,
     ),
   );
-  static final bodyMedium16 = GoogleFonts.plusJakartaSans(
+  static final bodyMedium16 = GoogleFonts.roboto(
     textStyle: const TextStyle(
       fontSize: 16,
     ),
   );
-  static final bodyMedium16Bold = GoogleFonts.plusJakartaSans(
+  static final bodyMedium16Bold = GoogleFonts.roboto(
     textStyle: const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
@@ -31,7 +31,7 @@ class DesignTextStyle {
       fontWeight: FontWeight.w400,
     ),
   );
-  static final bodySmall14Bold = GoogleFonts.plusJakartaSans(
+  static final bodySmall14Bold = GoogleFonts.roboto(
     textStyle: const TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
@@ -48,7 +48,7 @@ class DesignTextStyle {
     ),
   );
 
-  static final labelMedium12 = GoogleFonts.plusJakartaSans(
+  static final labelMedium12 = GoogleFonts.roboto(
     textStyle: const TextStyle(
       fontSize: 12,
     ),

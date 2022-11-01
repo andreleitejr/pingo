@@ -5,9 +5,9 @@ import 'package:pingo/models/database.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 
 abstract class Base extends DataBase {
-  final String name;
-  final String? description;
-  final ImageBlurHash? image;
+  String name;
+  String? description;
+  ImageBlurHash? image;
   final List<int> keywords;
 
   Base({

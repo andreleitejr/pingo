@@ -4,6 +4,8 @@ import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/features/profile/edit/info/profile_info_controller.dart';
+import 'package:pingo/features/profile/edit/info/profile_info_page.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/signin/signin_page.dart';
@@ -77,9 +79,10 @@ class ProfileReadPage extends StatelessWidget {
             const DesignSpace(),
             DesignOutlinedButton(
               onPressed: () async {
-                await repository
-                    .signOut()
-                    .then((_) => Get.to(() => const SignInPage()));
+                Get.to(() => const ProfileInfoPage());
+                // await repository
+                //     .signOut()
+                //     .then((_) => Get.to(() => const SignInPage()));
               },
               title: 'Edit Profile',
               isActive: true,

@@ -343,7 +343,7 @@ class PlaceEditPage extends StatelessWidget {
               () => DesignPhotoSelection(
                 displayImage: controller.displayImage.value,
                 onButtonPressed: () async =>
-                    await controller.setImage(ImageSource.gallery),
+                    await controller.setImage(ImageSource.camera),
               ),
             ),
             // Center(
@@ -379,13 +379,11 @@ class PlaceEditPage extends StatelessWidget {
             //       : _previewPhotos(),
             // ),
             const DesignSpace(),
-            Obx(
-              () => DesignPhotoSelection(
-                isMultiImage: true,
-                displayPhotos: controller.displayPhotos,
-                onButtonPressed: () async =>
-                    await controller.selectPhotos(ImageSource.gallery),
-              ),
+            DesignPhotoSelection(
+              isMultiImage: true,
+              displayPhotos: controller.displayPhotos,
+              onButtonPressed: () async =>
+              await controller.selectPhotos(ImageSource.camera),
             ),
             // Obx(
             //   () => DesignButton(

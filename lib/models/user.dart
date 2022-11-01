@@ -8,6 +8,7 @@ class User extends Base {
   final String country;
   final String city;
   final bool agreed;
+  String? nickname;
 
   User({
     required super.name,
@@ -17,6 +18,7 @@ class User extends Base {
     required this.country,
     required this.city,
     this.agreed = true,
+    this.nickname,
     super.description,
     super.image,
     required super.keywords,
@@ -29,6 +31,7 @@ class User extends Base {
         country = document['country'] as String,
         city = document['city'] as String,
         agreed = document['agreed'] as bool,
+        nickname = document['nickname'] as String?,
         super.fromMap(document);
 
   @override
@@ -41,5 +44,6 @@ class User extends Base {
       'country': country,
       'city': city,
       'agreed': agreed,
+      'nickname': nickname,
     });
 }
