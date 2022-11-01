@@ -53,13 +53,14 @@ class _PlaceReadPageState extends State<PlaceReadPage>
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-              const SliverAppBar(
+              SliverAppBar(
                 pinned: true,
                 backgroundColor: Colors.white,
                 automaticallyImplyLeading: false,
                 elevation: 0,
                 title: DesignAppBar(
                   actionIcon: DesignIcons.share,
+                  onActionPressed: () => controller.share(),
                 ),
               ),
               SliverToBoxAdapter(
