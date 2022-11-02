@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/features/auth/signup/signup_controller.dart';
-import 'package:pingo/features/profile/edit/info/profile_info_controller.dart';
+import 'package:pingo/features/profile/edit/info/profile_info_edit_controller.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
@@ -20,7 +20,7 @@ class ProfileInfoEditPage extends StatefulWidget {
 }
 
 class _ProfileInfoEditPageState extends State<ProfileInfoEditPage> {
-  final controller = Get.put(ProfileInfoController());
+  final controller = Get.put(ProfileInfoEditController());
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'package:pingo/repositories/user_repository.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 import 'package:pingo/services/camera_controller.dart';
 
-class ProfileInfoController extends GetxController {
+class ProfileInfoEditController extends GetxController {
   final User user = Get.find();
   final repository = Get.put(UserRepository());
   final cameraController = Get.put(CameraController());

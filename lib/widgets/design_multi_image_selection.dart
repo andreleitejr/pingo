@@ -10,17 +10,14 @@ import 'package:pingo/widgets/design_space.dart';
 class DesignMultiImageSelection extends StatelessWidget {
   DesignMultiImageSelection({
     Key? key,
-    this.displayImage,
     this.displayPhotos,
-    this.isMultiImage = false,
     required this.onButtonPressed,
   }) : super(key: key);
 
-  final File? displayImage;
   final List<File>? displayPhotos;
-  final bool isMultiImage;
-  final CameraController cameraController = Get.find();
   final Function() onButtonPressed;
+
+  final CameraController cameraController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -28,45 +25,34 @@ class DesignMultiImageSelection extends StatelessWidget {
       children: [
         DesignButton(
           onPressed: onButtonPressed,
-          title: 'Profile Photo',
+          title: 'Select Photos',
           isActive: true,
         ),
         const DesignSpace(),
         Center(
           child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
               ? FutureBuilder<void>(
-            future: cameraController.retrieveLostData(),
-            builder:
-                (BuildContext context, AsyncSnapshot<void> snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                case ConnectionState.waiting:
-                  return const Text(
-                    'You have not yet picked an image.',
-                    textAlign: TextAlign.center,
-                  );
-                case ConnectionState.done:
-                  return isMultiImage
-                      ? _previewPhotos()
-                      : _previewImage();
-                default:
-                  if (snapshot.hasError) {
-                    return Text(
-                      'Pick image/video error: ${snapshot.error}}',
-                      textAlign: TextAlign.center,
-                    );
-                  } else {
-                    return const Text(
-                      'You have not yet picked an image.',
-                      textAlign: TextAlign.center,
-                    );
-                  }
-              }
-            },
-          )
-              : isMultiImage
-              ? _previewPhotos()
-              : _previewImage(),
+                  future: cameraController.retrieveLostData(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<void> snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.done:
+                        return _previewPhotos();
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                      default:
+                        if (snapshot.hasError) {
+                          return Text(
+                            'Pick image/video error: ${snapshot.error}}',
+                            textAlign: TextAlign.center,
+                          );
+                        } else {
+                          return Container();
+                        }
+                    }
+                  },
+                )
+              : _previewPhotos(),
         )
       ],
     );
@@ -98,37 +84,6 @@ class DesignMultiImageSelection extends StatelessWidget {
               ),
             );
           }),
-        ),
-      );
-    } else if (cameraController.pickImageError != null) {
-      return Text(
-        'Pick image error: ${cameraController.pickImageError}',
-        textAlign: TextAlign.center,
-      );
-    } else {
-      return const Text(
-        'You have not yet picked an image.',
-        textAlign: TextAlign.center,
-      );
-    }
-  }
-
-  Widget _previewImage() {
-    final Text? retrieveError = _getRetrieveErrorWidget();
-    if (retrieveError != null) {
-      return retrieveError;
-    }
-
-    if (displayImage != null && displayImage!.path.isNotEmpty) {
-      return SizedBox(
-        height: 250,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: FileImage(displayImage!),
-              fit: BoxFit.cover,
-            ),
-          ),
         ),
       );
     } else if (cameraController.pickImageError != null) {

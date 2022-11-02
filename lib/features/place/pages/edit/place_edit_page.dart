@@ -14,6 +14,7 @@ import 'package:pingo/features/place/pages/edit/place_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_avatar_image_selection.dart';
+import 'package:pingo/widgets/design_multi_image_selection.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 
 import '../../../../widgets/design_space.dart';
@@ -338,7 +339,8 @@ class PlaceEditPage extends StatelessWidget {
               ),
             ),
             const DesignSpace(),
-            DesignAvatarImageSelection(
+            DesignMultiImageSelection(
+              displayPhotos: controller.displayPhotos,
               onButtonPressed: () async =>
                   await controller.selectPhotos(ImageSource.camera),
             ),

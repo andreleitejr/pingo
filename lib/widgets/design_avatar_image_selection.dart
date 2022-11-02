@@ -35,7 +35,6 @@ class DesignAvatarImageSelection extends StatelessWidget {
                     switch (snapshot.connectionState) {
                       case ConnectionState.done:
                         return _previewImage();
-
                       case ConnectionState.none:
                       case ConnectionState.waiting:
                       default:
