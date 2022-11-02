@@ -37,7 +37,7 @@ class ProfileReadPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
-        child: ListView(
+        child: Column(
           children: [
             Row(
               children: [
@@ -93,12 +93,11 @@ class ProfileReadPage extends StatelessWidget {
             const DesignListButton(title: 'Security'),
             const DesignListButton(title: 'Help'),
             const DesignListButton(title: 'About Pingo'),
-            const DesignSpace(),
-            const DesignSpace(),
-            const DesignSpace(),
-            const DesignSpace(),
-            const DesignSpace(),
-            const DesignListButton(title: 'Sign Out'),
+            Expanded(child: Container()),
+            DesignListButton(
+              title: 'Sign Out',
+              onTap: () => repository.signOut(),
+            ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pingo/features/auth/landing/landing_controller.dart';
 import 'package:pingo/features/auth/signup/signup_page.dart';
@@ -26,6 +27,9 @@ class _LandingPageState extends State<LandingPage>
       'blink',
       autoplay: true,
     );
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     super.initState();
   }
 
