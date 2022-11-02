@@ -67,6 +67,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const DesignSpace(),
                     Row(
                       children: [
                         const DesignSpace(

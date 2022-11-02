@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pingo/constants/design_animations.dart';
-import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/features/auth/landing/landing_controller.dart';
 import 'package:pingo/features/auth/signup/signup_page.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
+import 'package:pingo/widgets/design_loading_page.dart';
 import 'package:rive/rive.dart';
 
 class LandingPage extends StatefulWidget {
@@ -32,21 +31,9 @@ class _LandingPageState extends State<LandingPage>
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: DesignColor.primary500,
-        body: Center(
-          child: SizedBox(
-            width: 85,
-            child: RiveAnimation.asset(
-              DesignAnimations.blink,
-              animations: const ['blink'],
-              controllers: [animationController],
-            ),
-          ),
-        ),
-      ),
+      home: DesignLoadingPage(),
     );
   }
 

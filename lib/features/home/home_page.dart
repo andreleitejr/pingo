@@ -78,7 +78,22 @@ class HomePage extends StatelessWidget {
                 height: 150,
                 child: Obx(
                   () {
+                    if (controller.bestMatch.isEmpty) {
+                      return ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: DesignSize.mediumSpace,
+                        ),
+                        itemCount: 3,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return const DesignBestMatchItem(
+                            bestMatch: null,
+                          );
+                        },
+                      );
+                    }
                     final bestMatches = controller.bestMatch;
+
                     return ListView.builder(
                       padding: const EdgeInsets.symmetric(
                         horizontal: DesignSize.mediumSpace,
@@ -87,8 +102,9 @@ class HomePage extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {
                         final bestMatch = bestMatches[index];
-
-                        return DesignBestMatchItem(bestMatch: bestMatch);
+                        return DesignBestMatchItem(
+                          bestMatch: bestMatch,
+                        );
                       },
                     );
                   },
@@ -269,9 +285,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             GestureDetector(
-              onTap: () {
-                Get.to(PlaceEditPage());
-              },
+              onTap: () => Get.to(PlaceEditPage()),
               child: Obx(
                 () => Container(
                   height: 63,

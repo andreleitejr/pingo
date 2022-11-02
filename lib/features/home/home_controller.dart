@@ -13,7 +13,12 @@ import 'package:pingo/services/current_weather.dart';
 import 'package:weather/weather.dart';
 
 class HomeController extends GetxController {
-  HomeController();
+  HomeController() {
+    print('INITING HOMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0');
+    loading(true);
+  }
+
+  var loading = false.obs;
 
   final User user = Get.find();
 
@@ -108,6 +113,8 @@ class HomeController extends GetxController {
   Future<void> onReady() async {
     bestMatchList.bindStream(repository.combined);
     placeList.bindStream(repository.combined);
+
+    loading(false);
   }
 
   // var coordinates = const GeoPoint(0, 0).obs;

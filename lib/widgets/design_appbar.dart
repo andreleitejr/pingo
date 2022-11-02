@@ -28,51 +28,58 @@ class DesignAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            // const Spacer(),
-            if (showLeading)
-              DesignIconButton(
-                icon: DesignIcons.arrowLeft,
-                onPressed: onLeadingPressed ?? () => Get.back(),
+    return Container(
+      height: 94,
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              if (showLeading)
+                DesignIconButton(
+                  icon: DesignIcons.arrowLeft,
+                  onPressed: onLeadingPressed ?? () => Get.back(),
+                  alignment: Alignment.centerLeft,
+                ),
+              Expanded(
+                child: title != null
+                    ? Text(
+                        title!,
+                        textAlign: TextAlign.center,
+                        style: DesignTextStyle.bodyMedium16Bold,
+                      )
+                    : Container(),
               ),
-            Expanded(
-              child: title != null
-                  ? Text(
-                      title!,
-                      textAlign: TextAlign.center,
-                    )
-                  : Container(),
-            ),
-            if (showLeading && actionText == null) const SizedBox(width: 24),
-            if (actionText != null && actionIcon == null) ...[
-              TextButton(
-                onPressed: onActionPressed,
-                child: Text(
-                  actionText!,
-                  textAlign: TextAlign.center,
-                  style: DesignTextStyle.bodySmall14Bold.apply(
-                    color: actionValid
-                        ? DesignColor.primary700
-                        : DesignColor.text300,
+              if (showLeading && actionText == null) const SizedBox(width: 24),
+              if (actionText != null && actionIcon == null) ...[
+                TextButton(
+                  onPressed: onActionPressed,
+                  child: Text(
+                    actionText!,
+                    textAlign: TextAlign.center,
+                    style: DesignTextStyle.bodySmall14Bold.apply(
+                      color: actionValid
+                          ? DesignColor.primary700
+                          : DesignColor.text300,
+                    ),
                   ),
                 ),
-              ),
-              const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
-            ] else ...[
-              if (actionIcon != null)
-                DesignIconButton(
-                  onPressed: onActionPressed ?? () {},
-                  icon: actionIcon!,
-                ),
+                const DesignSpace(
+                    orientation: DesignSpaceOrientation.horizontal),
+              ] else ...[
+                if (actionIcon != null)
+                  DesignIconButton(
+                    onPressed: onActionPressed ?? () {},
+                    icon: actionIcon!,
+                  ),
+              ],
+              // DesignIconButton()
             ],
-            // DesignIconButton()
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -7,13 +7,15 @@ class DesignIconButton extends StatelessWidget {
       required this.icon,
       required this.onPressed,
       this.height,
-      this.width})
+      this.width,
+      this.alignment = Alignment.centerRight})
       : super(key: key);
 
   final String icon;
   final Function() onPressed;
   final double? height;
   final double? width;
+  final Alignment alignment;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class DesignIconButton extends StatelessWidget {
       padding: const EdgeInsets.all(4),
       child: TextButton(
         onPressed: onPressed,
-        style: TextButton.styleFrom(alignment: Alignment.centerRight),
+        style: TextButton.styleFrom(alignment: alignment),
         child: DesignIcon(
           icon: icon,
           height: height,
