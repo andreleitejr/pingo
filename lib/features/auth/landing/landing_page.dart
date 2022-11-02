@@ -1,11 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_animations.dart';
+import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/features/auth/landing/landing_controller.dart';
 import 'package:pingo/features/auth/signup/signup_page.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
-import 'package:pingo/widgets/design_progress_indicator.dart';
+import 'package:rive/rive.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -14,12 +15,18 @@ class LandingPage extends StatefulWidget {
   State<LandingPage> createState() => _LandingPageState();
 }
 
-class _LandingPageState extends State<LandingPage> {
+class _LandingPageState extends State<LandingPage>
+    implements LandingPageNavigator {
   late LandingController controller;
+  late RiveAnimationController animationController;
 
   @override
   void initState() {
-    controller = LandingController();
+    controller = LandingController(this);
+    animationController = OneShotAnimation(
+      'blink',
+      autoplay: true,
+    );
     super.initState();
   }
 
@@ -27,30 +34,42 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: StreamBuilder<User?>(
-        stream: controller.userChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            final user = snapshot.data;
-            if (user == null) {
-              return const SignUpPage();
-            }
-            return Obx(() {
-              if (controller.userValid) {
-                controller.registerUser();
-                return const BasePage();
-              } else if (controller.userCreatedInDatabase) {
-                controller.registerUser();
-                return const ProfileKeywordsSelection();
-              } else {
-                return const DesignProgressIndicator();
-              }
-            });
-          } else {
-            return const DesignProgressIndicator();
-          }
-        },
+      home: Scaffold(
+        backgroundColor: DesignColor.primary500,
+        body: Center(
+          child: SizedBox(
+            width: 85,
+            child: RiveAnimation.asset(
+              DesignAnimations.blink,
+              animations: const ['blink'],
+              controllers: [animationController],
+            ),
+          ),
+        ),
       ),
     );
   }
+
+  @override
+  void logged() {
+    Get.to(() => const BasePage());
+  }
+
+  @override
+  void loggedOut() {
+    Get.to(() => const SignUpPage());
+  }
+
+  @override
+  void loggedWithoutInfo() {
+    Get.to(() => const ProfileKeywordsSelection());
+  }
+}
+
+abstract class LandingPageNavigator {
+  void logged();
+
+  void loggedOut();
+
+  void loggedWithoutInfo();
 }

@@ -1,25 +1,45 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:pingo/features/auth/landing/landing_page.dart';
 import 'package:pingo/main.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/repositories/user_repository.dart';
 
 class LandingController extends GetxController {
-  LandingController() {
+  LandingController(this.landingPageNavigator) {
     onReady();
+
+    print('HSADUHDASUADSHUDSAHDASUAHDSUHDASHDSAUHDSAUHDSUfdfdfdfdfd');
   }
 
   final repository = UserRepository();
 
+  final LandingPageNavigator landingPageNavigator;
+
   @override
-  void onReady() => users.bindStream(repository.read);
+  void onReady() {
+    users.bindStream(repository.read);
+    _init();
+  }
 
   final _auth = auth.FirebaseAuth.instance;
 
   Rx<List<User>> users = Rx<List<User>>([]);
 
-  Stream<auth.User?> userChanges() => _auth.userChanges();
+  Future<void> _init() async {
+    await Future.delayed(const Duration(seconds: 4));
+
+    _auth.authStateChanges().listen((auth.User? authUser) {
+      if (authUser == null) {
+        landingPageNavigator.loggedOut();
+      } else if (userCreatedInDatabase) {
+        landingPageNavigator.loggedWithoutInfo();
+      } else {
+        landingPageNavigator.logged();
+      }
+    });
+  }
 
   String? get authId => _auth.currentUser?.uid;
 
@@ -27,10 +47,7 @@ class LandingController extends GetxController {
 
   bool get userCreatedInDatabase => user != null;
 
-  bool get userHasKeywords =>
-      userCreatedInDatabase && user!.keywords.isNotEmpty;
-
-  bool get userValid => userCreatedInDatabase && userHasKeywords;
+  bool get userValid => userCreatedInDatabase && user!.keywords.isNotEmpty;
 
   void registerUser() {
     if (user != null) {
