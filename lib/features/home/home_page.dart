@@ -272,15 +272,19 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Get.to(PlaceEditPage());
               },
-              child: Container(
-                height: 42,
-                width: 42,
-                margin: const EdgeInsets.only(right: 8),
-                decoration: BoxDecoration(
-                  image: const DecorationImage(
-                    image: AssetImage(DesignImages.weather),
+              child: Obx(
+                () => Container(
+                  height: 63,
+                  width: 64,
+                  padding: EdgeInsets.zero,
+                  decoration: BoxDecoration(
+                    image: controller.icon.value.isNotEmpty
+                        ? DecorationImage(
+                            image: NetworkImage(controller.icon.value),
+                            fit: BoxFit.fitHeight,
+                          )
+                        : null,
                   ),
-                  borderRadius: BorderRadius.circular(32),
                 ),
               ),
             ),

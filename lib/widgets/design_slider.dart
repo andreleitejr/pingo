@@ -33,9 +33,9 @@ class DesignSlider extends StatelessWidget {
         inactiveTrackColor: DesignColor.primary100,
         activeTrackColor: DesignColor.primary500,
         thumbColor: DesignColor.primary500,
-        overlayColor: Color(0x29EB1555),
-        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12),
-        overlayShape: RoundSliderOverlayShape(overlayRadius: 20),
+        overlayColor: const Color(0x29EB1555),
+        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12),
+        overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
       ),
       child: isRange
           ? RangeSlider(

@@ -112,7 +112,8 @@ class HomeController extends GetxController {
 
   // var coordinates = const GeoPoint(0, 0).obs;
   var address = ''.obs;
-  var temperature = 0.obs;
+  var temperature = 25.obs;
+  var icon = ''.obs;
 
   @override
   Future<void> onInit() async {
@@ -122,6 +123,7 @@ class HomeController extends GetxController {
 
     await weather.init();
     temperature(weather.temperature?.celsius?.round());
+    icon(weather.icon);
 
     super.onInit();
   }

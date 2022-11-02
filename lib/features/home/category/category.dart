@@ -26,9 +26,9 @@ class Category {
 final categories = [
   Category(Category.all, 'All', DesignEmojis.all),
   Category(Category.restaurants, 'Restaurant', DesignEmojis.restaurant),
+  Category(Category.pubs, 'Pubs', DesignEmojis.pub),
   Category(Category.products, 'Products', DesignEmojis.product),
   Category(Category.events, 'Events', DesignEmojis.eventWoman),
-  Category(Category.pubs, 'Pubs', DesignEmojis.pub),
   Category(Category.fastFoods, 'Fast Foods', DesignEmojis.fastFood),
   Category(Category.shopping, 'Shopping', DesignEmojis.shopping),
   Category(Category.theaters, 'Theaters', DesignEmojis.theater),

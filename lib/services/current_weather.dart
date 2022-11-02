@@ -1,19 +1,19 @@
 import 'package:get/get.dart';
+import 'package:pingo/constants/apis.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:weather/weather.dart';
 
 class CurrentWeather {
   final CurrentLocation currentLocation = Get.find();
   final _weatherFactory = WeatherFactory(
-    "026022dfb52c6a39c6d50911c3872f26",
+    APIs.weather,
     language: Language.PORTUGUESE_BRAZIL,
   );
 
   Temperature? temperature;
+  String? icon;
 
-  Future<void> init() async {
-    await _getWeather();
-  }
+  Future<void> init() async => await _getWeather();
 
   Future<void> _getWeather() async {
     List<Weather> forecast = await _weatherFactory.fiveDayForecastByLocation(
@@ -21,5 +21,8 @@ class CurrentWeather {
         currentLocation.currentCoordinates.longitude);
 
     temperature = forecast.first.temperature;
+    icon =
+        "http://openweathermap.org/img/wn/${forecast.first.weatherIcon}@2x.png";
+    print('ASDHUASDHAUHADSUHASDUSHU WATHEHRUD V ${icon}');
   }
 }
