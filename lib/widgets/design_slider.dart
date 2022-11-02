@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pingo/constants/design_color.dart';
 
 class DesignSlider extends StatelessWidget {
   const DesignSlider({
@@ -26,25 +27,35 @@ class DesignSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isRange) {
-      return RangeSlider(
-        values: _currentRangeValues,
-        max: max,
-        divisions: 5,
-        labels: RangeLabels(
-          _currentRangeValues.start.round().toString(),
-          _currentRangeValues.end.round().toString(),
-        ),
-        onChanged: onRangeChanged,
-      );
-    }
-    return Slider(
-      value: maxValue,
-      min: min,
-      max: max,
-      divisions: divisions,
-      label: maxValue.round().toString(),
-      onChanged: onChanged,
+    return SliderTheme(
+      data: SliderTheme.of(context).copyWith(
+        valueIndicatorColor: DesignColor.primary500,
+        inactiveTrackColor: DesignColor.primary100,
+        activeTrackColor: DesignColor.primary500,
+        thumbColor: DesignColor.primary500,
+        overlayColor: Color(0x29EB1555),
+        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12),
+        overlayShape: RoundSliderOverlayShape(overlayRadius: 20),
+      ),
+      child: isRange
+          ? RangeSlider(
+              values: _currentRangeValues,
+              max: max,
+              divisions: 5,
+              labels: RangeLabels(
+                _currentRangeValues.start.round().toString(),
+                _currentRangeValues.end.round().toString(),
+              ),
+              onChanged: onRangeChanged,
+            )
+          : Slider(
+              value: maxValue,
+              min: min,
+              max: max,
+              divisions: divisions,
+              label: maxValue.round().toString(),
+              onChanged: onChanged,
+            ),
     );
   }
 }

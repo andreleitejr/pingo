@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
 
 class DesignButton extends StatelessWidget {
   const DesignButton({
@@ -22,7 +23,7 @@ class DesignButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: isActive ? DesignColor.primary500 : DesignColor.text300,
-          textStyle: const TextStyle(fontSize: 20),
+          textStyle: DesignTextStyle.bodySmall14Bold,
         ),
         onPressed: onPressed,
         child: Text(title),

@@ -61,7 +61,7 @@ class _BasePageState extends State<BasePage> {
             label: 'Home',
           ),
           const BottomNavigationBarItem(
-            icon: DesignIcon(icon: DesignIcons.place),
+            icon: DesignIcon(icon: DesignIcons.map),
             activeIcon: DesignIcon(icon: DesignIcons.place, isSelected: true),
             label: 'Places',
           ),

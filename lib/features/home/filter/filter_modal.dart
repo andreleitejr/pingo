@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/features/home/filter/filter_controller.dart';
+import 'package:pingo/widgets/design_bullet_item.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_section_title.dart';
 import 'package:pingo/widgets/design_slider.dart';
@@ -56,20 +57,23 @@ class FilterModal extends StatelessWidget {
                   Obx(
                     () {
                       final isSelected = i >= controller.rating.value;
-                      return GestureDetector(
-                        onTap: () => controller.setRating(i),
-                        child: Container(
-                          height: 40,
-                          width: ((Get.width - 64) * 0.2),
-                          color:
-                              isSelected ? DesignColor.primary500 : Colors.grey,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(i.toString()),
-                              const Icon(Icons.star),
-                            ],
+                      final unselectedColor =
+                          DesignColor.text300.withOpacity(0.75);
+                      return SizedBox(
+                        width: ((Get.width - 64) * 0.2),
+                        child: DesignBulletItem(
+                          onPressed: () => controller.setRating(i),
+                          title: i.toString(),
+                          icon: Icon(
+                            Icons.star,
+                            size: 16,
+                            color: isSelected
+                                ? DesignColor.primary700
+                                : unselectedColor,
                           ),
+                          isSelected: isSelected,
+                          padding: EdgeInsets.zero,
+                          unselectedColor: unselectedColor,
                         ),
                       );
                     },
