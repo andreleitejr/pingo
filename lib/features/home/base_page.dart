@@ -50,22 +50,29 @@ class _BasePageState extends State<BasePage> {
         backgroundColor: Colors.white,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        selectedFontSize: 0,
+        enableFeedback: false,
+        type: BottomNavigationBarType.fixed,
         items: [
           const BottomNavigationBarItem(
             backgroundColor: Colors.white,
             icon: DesignIcon(icon: DesignIcons.home),
+            activeIcon: DesignIcon(icon: DesignIcons.home, isSelected: true),
             label: 'Home',
           ),
           const BottomNavigationBarItem(
             icon: DesignIcon(icon: DesignIcons.place),
+            activeIcon: DesignIcon(icon: DesignIcons.place, isSelected: true),
             label: 'Places',
           ),
           const BottomNavigationBarItem(
             icon: DesignIcon(icon: DesignIcons.event),
+            activeIcon: DesignIcon(icon: DesignIcons.event, isSelected: true),
             label: 'Events',
           ),
           const BottomNavigationBarItem(
             icon: DesignIcon(icon: DesignIcons.product),
+            activeIcon: DesignIcon(icon: DesignIcons.product, isSelected: true),
             label: 'Products',
           ),
           BottomNavigationBarItem(

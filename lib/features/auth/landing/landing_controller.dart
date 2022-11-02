@@ -33,10 +33,12 @@ class LandingController extends GetxController {
     _auth.authStateChanges().listen((auth.User? authUser) {
       if (authUser == null) {
         landingPageNavigator.loggedOut();
-      } else if (userCreatedInDatabase) {
-        landingPageNavigator.loggedWithoutInfo();
-      } else {
+      } else if (userValid) {
+        registerUser();
         landingPageNavigator.logged();
+      } else {
+        registerUser();
+        landingPageNavigator.loggedWithoutInfo();
       }
     });
   }
@@ -45,9 +47,7 @@ class LandingController extends GetxController {
 
   User? get user => users.value.firstWhereOrNull((user) => user.uuid == authId);
 
-  bool get userCreatedInDatabase => user != null;
-
-  bool get userValid => userCreatedInDatabase && user!.keywords.isNotEmpty;
+  bool get userValid => user != null && user!.keywords.isNotEmpty;
 
   void registerUser() {
     if (user != null) {
