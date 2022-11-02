@@ -1,0 +1,30 @@
+Quais tipos de lugares você gosta ou gostaria de frequentar?
+
+Qual tipo de música você gosta?
+
+Qual tipo de atividade você curte fazer?
+
+Qual culinária tem mais a ver com você?
+
+
+
+
+Lugares: 
+Restaurantes (Cafes, Padarias),
+Bares, Baladas, Museus, Teatros, Parques, Pracas, Lugares Historicos, Cinemas, 
+Centro Cultural, Pratica de Esportes, Livrarias, Exposição Artística
+
+
+
+Musicas: 
+MPB, Nova MPB, Samba, Pop, Rap, Rock, Sertanejo, Pagode, Trap, Hip Hop, Piseiro, Country, House, Classica, Instrumental, Indie, Reggae, Brega, R&B, Eletronica, Funk, Blues, Gospel, Techno, Soul Music
+
+
+
+Miscellaneous: 
+Games, Filmes, Series, Esportes, Tecnologia, Familia, Pet, Cachorro, Gato, Jardinagem, Cultura, Futebol, Volei, Basquete, Praia, Beach Tennis, Skate, Correr, Patins, Bicicleta, Patinete, Surfe, Academia, Viagens, Show, Livros, Cerveja, Picnic, Dançar, Tattoo, Bateria, Guitarra, Violão, Baixo, Programação, Slack Line, Natação, Uísque, 
+
+
+
+
+

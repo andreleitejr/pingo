@@ -6,15 +6,17 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/widgets/design_icon.dart';
 
 class DesignListButton extends StatelessWidget {
-  const DesignListButton({Key? key, required this.title, this.icon})
+  const DesignListButton({Key? key, required this.title, this.icon, this.onTap})
       : super(key: key);
 
   final String title;
   final String? icon;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: Container(
         height: 56,
         decoration: const BoxDecoration(
@@ -28,8 +30,10 @@ class DesignListButton extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Text(title,
-              style: DesignTextStyle.bodySmall14Bold,),
+              child: Text(
+                title,
+                style: DesignTextStyle.bodySmall14Bold,
+              ),
             ),
             DesignIcon(
               icon: icon ?? DesignIcons.arrowRight,

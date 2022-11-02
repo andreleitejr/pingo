@@ -79,7 +79,7 @@ class ProfileReadPage extends StatelessWidget {
             const DesignSpace(),
             DesignOutlinedButton(
               onPressed: () async {
-                Get.to(() => const ProfileInfoPage());
+                Get.to(() => const ProfileInfoEditPage());
                 // await repository
                 //     .signOut()
                 //     .then((_) => Get.to(() => const SignInPage()));
@@ -88,11 +88,17 @@ class ProfileReadPage extends StatelessWidget {
               isActive: true,
             ),
             const DesignSpace(),
-            const DesignListButton(title: 'Preferences'),
+            const DesignListButton(title: 'Account'),
             const DesignListButton(title: 'Settings'),
             const DesignListButton(title: 'Security'),
             const DesignListButton(title: 'Help'),
             const DesignListButton(title: 'About Pingo'),
+            const DesignSpace(),
+            const DesignSpace(),
+            const DesignSpace(),
+            const DesignSpace(),
+            const DesignSpace(),
+            const DesignListButton(title: 'Sign Out'),
           ],
         ),
       ),

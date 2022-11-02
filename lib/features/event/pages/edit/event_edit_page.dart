@@ -10,7 +10,7 @@ import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/models/product_category.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
-import 'package:pingo/widgets/design_photo_selection.dart';
+import 'package:pingo/widgets/design_avatar_image_selection.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 
 import '../../../../widgets/design_space.dart';
@@ -214,7 +214,7 @@ class _EventEditPageState extends State<EventEditPage> {
               ],
             ),
             Obx(
-                  () => DesignPhotoSelection(
+                  () => DesignAvatarImageSelection(
                 displayImage: controller.displayImage.value,
                 onButtonPressed: () async =>
                 await controller.setImage(ImageSource.gallery),

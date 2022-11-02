@@ -7,8 +7,8 @@ import 'package:pingo/services/camera_controller.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_space.dart';
 
-class DesignPhotoSelection extends StatelessWidget {
-  DesignPhotoSelection({
+class DesignMultiImageSelection extends StatelessWidget {
+  DesignMultiImageSelection({
     Key? key,
     this.displayImage,
     this.displayPhotos,
@@ -35,38 +35,38 @@ class DesignPhotoSelection extends StatelessWidget {
         Center(
           child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
               ? FutureBuilder<void>(
-                  future: cameraController.retrieveLostData(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<void> snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                      case ConnectionState.waiting:
-                        return const Text(
-                          'You have not yet picked an image.',
-                          textAlign: TextAlign.center,
-                        );
-                      case ConnectionState.done:
-                        return isMultiImage
-                            ? _previewPhotos()
-                            : _previewImage();
-                      default:
-                        if (snapshot.hasError) {
-                          return Text(
-                            'Pick image/video error: ${snapshot.error}}',
-                            textAlign: TextAlign.center,
-                          );
-                        } else {
-                          return const Text(
-                            'You have not yet picked an image.',
-                            textAlign: TextAlign.center,
-                          );
-                        }
-                    }
-                  },
-                )
+            future: cameraController.retrieveLostData(),
+            builder:
+                (BuildContext context, AsyncSnapshot<void> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return const Text(
+                    'You have not yet picked an image.',
+                    textAlign: TextAlign.center,
+                  );
+                case ConnectionState.done:
+                  return isMultiImage
+                      ? _previewPhotos()
+                      : _previewImage();
+                default:
+                  if (snapshot.hasError) {
+                    return Text(
+                      'Pick image/video error: ${snapshot.error}}',
+                      textAlign: TextAlign.center,
+                    );
+                  } else {
+                    return const Text(
+                      'You have not yet picked an image.',
+                      textAlign: TextAlign.center,
+                    );
+                  }
+              }
+            },
+          )
               : isMultiImage
-                  ? _previewPhotos()
-                  : _previewImage(),
+              ? _previewPhotos()
+              : _previewImage(),
         )
       ],
     );
