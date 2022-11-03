@@ -11,79 +11,59 @@ import 'package:pingo/features/place/pages/edit/place_edit_page.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/services/current_weather.dart';
 import 'package:pingo/widgets/design_icon_button.dart';
+import 'package:pingo/widgets/design_shimmer_widget.dart';
 
 class DesignHomeAppBar extends StatelessWidget {
   DesignHomeAppBar({Key? key}) : super(key: key);
 
   final HomeController controller = Get.find();
 
-  final _textHeight = 16.toDouble();
-  final _imageSize = 64.toDouble();
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () => Get.to(PlaceEditPage()),
-              child: Obx(
-                () => _buildImage(),
+    return Obx(
+      () => Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildImage(),
+              Expanded(
+                child: _buildText(),
               ),
-            ),
-            Expanded(
-              child: Obx(() => _buildText()),
-            ),
-            DesignIconButton(
-              icon: DesignIcons.filter,
-              onPressed: () {
-                showModalBottomSheet<void>(
-                  isScrollControlled: true,
-                  context: context,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
-                    ),
-                  ),
-                  backgroundColor: Colors.white,
-                  builder: (BuildContext context) {
-                    return FilterModal();
-                  },
-                );
-              },
-            ),
-          ],
-        ),
-      ],
+              _buildIcon(context),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildImage() {
-    final height = 64.toDouble();
-
     if (controller.loading.value) {
-      return Container(
-        height: 32,
-        width: 32,
-        margin: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: DesignColor.text200,
-          borderRadius: BorderRadius.circular(64),
+      return DesignShimmerWidget(
+        child: Container(
+          height: 32,
+          width: 32,
+          margin: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: DesignColor.text200,
+            borderRadius: BorderRadius.circular(64),
+          ),
         ),
       );
     } else {
-      return SizedBox(
-        height: height,
-        width: height,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(64),
-          child: Image.network(
-            controller.icon.value,
-            fit: BoxFit.cover,
+      return GestureDetector(
+        onTap: () => Get.to(PlaceEditPage()),
+        child: SizedBox(
+          height: 64,
+          width: 64,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(64),
+            child: Image.network(
+              controller.icon.value,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       );
@@ -92,27 +72,29 @@ class DesignHomeAppBar extends StatelessWidget {
 
   Widget _buildText() {
     if (controller.loading.value) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 100,
-            height: 10,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(10),
+      return DesignShimmerWidget(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 100,
+              height: 12,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Container(
-            width: double.infinity,
-            height: 14,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(14),
+            const SizedBox(height: 4),
+            Container(
+              width: double.infinity,
+              height: 16,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(14),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     } else {
       return Column(
@@ -168,6 +150,42 @@ class DesignHomeAppBar extends StatelessWidget {
             ),
           ),
         ],
+      );
+    }
+  }
+
+  Widget _buildIcon(BuildContext context) {
+    if (controller.loading.value) {
+      return DesignShimmerWidget(
+        child: Container(
+          height: 32,
+          width: 32,
+          margin: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: DesignColor.text200,
+            borderRadius: BorderRadius.circular(64),
+          ),
+        ),
+      );
+    } else {
+      return DesignIconButton(
+        icon: DesignIcons.filter,
+        onPressed: () {
+          showModalBottomSheet<void>(
+            isScrollControlled: true,
+            context: context,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
+              ),
+            ),
+            backgroundColor: Colors.white,
+            builder: (BuildContext context) {
+              return FilterModal();
+            },
+          );
+        },
       );
     }
   }

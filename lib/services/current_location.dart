@@ -12,8 +12,8 @@ class CurrentLocation {
 
     if (permission != LocationPermission.denied &&
         permission != LocationPermission.deniedForever) {
-      await _getCurrentLocation();
-      // currentCoordinates = const GeoPoint(-23.55041838770605, -46.64824828296933);
+      // await _getCurrentLocation();
+      currentCoordinates = const GeoPoint(-23.55041838770605, -46.64824828296933);
       await _getStreetName();
     }
   }

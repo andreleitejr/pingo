@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/widgets/design_shimmer_widget.dart';
 
 class DesignSearchInput extends StatefulWidget {
   const DesignSearchInput({
@@ -10,12 +11,14 @@ class DesignSearchInput extends StatefulWidget {
     this.hint,
     this.onChanged,
     this.autoFocus = false,
+    this.isLoading = false,
   }) : super(key: key);
 
   final String? value;
   final String? hint;
   final Function(String)? onChanged;
   final bool autoFocus;
+  final bool isLoading;
 
   @override
   State<DesignSearchInput> createState() => _DesignSearchInputState();
@@ -24,6 +27,19 @@ class DesignSearchInput extends StatefulWidget {
 class _DesignSearchInputState extends State<DesignSearchInput> {
   @override
   Widget build(BuildContext context) {
+
+    if (widget.isLoading) {
+      return DesignShimmerWidget(
+        child: Container(
+          height: 40,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(40),
+          ),
+        ),
+      );
+    }
     return SizedBox(
       height: 40,
       child: TextFormField(

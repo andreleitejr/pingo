@@ -10,10 +10,12 @@ class DesignCategoryBulletList extends StatelessWidget {
     Key? key,
     required this.value,
     required this.onItemPressed,
+    this.isLoading = false,
   }) : super(key: key);
 
   final Category value;
   final Function(Category) onItemPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class DesignCategoryBulletList extends StatelessWidget {
             child: DesignBulletItem(
               title: category.title,
               isSelected: isSelected,
+              isLoading: isLoading,
             ),
           );
         },

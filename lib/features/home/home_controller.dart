@@ -78,7 +78,7 @@ class HomeController extends GetxController {
     products.sort((a, b) => a.compareTo(b));
 
     products = filter.filterPlaceByDistance(products) as List<Product>;
-    products = filter.filterPlaceByRating(products) as List<Product>;
+    // products = filter.filterPlaceByRating(products) as List<Product>;
     products = filter.filterProductByPrice(products) as List<Product>;
 
     products = search.filterBySearch(products) as List<Product>;
@@ -101,19 +101,14 @@ class HomeController extends GetxController {
     events.sort((a, b) => a.compareTo(b));
 
     events = filter.filterPlaceByDistance(events) as List<Event>;
-    events = filter.filterPlaceByRating(events) as List<Event>;
+    // events = filter.filterPlaceByRating(events) as List<Event>;
     events = filter.filterProductByPrice(events) as List<Event>;
     events = search.filterBySearch(events) as List<Event>;
     return events;
   }
 
   @override
-  Future<void> onReady() async {
-    bestMatchList.bindStream(repository.combined);
-    placeList.bindStream(repository.combined);
-
-    loading(false);
-  }
+  Future<void> onReady() async {}
 
   // var coordinates = const GeoPoint(0, 0).obs;
   var address = ''.obs;
@@ -122,6 +117,8 @@ class HomeController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    bestMatchList.bindStream(repository.combined);
+    placeList.bindStream(repository.combined);
     await location.init();
     // coordinates(location.currentCoordinates);
     address(location.currentAddress);
@@ -130,7 +127,7 @@ class HomeController extends GetxController {
     temperature(weather.weather?.temperature?.celsius?.round());
     icon(weather.icon);
 
-    print('HUDHDASUAHUADSHADSUHDSAUDSA ICON $icon');
+    loading(false);
 
     super.onInit();
   }

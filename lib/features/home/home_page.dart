@@ -19,6 +19,7 @@ import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_product_item.dart';
 import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_section_title.dart';
+import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class HomePage extends StatelessWidget {
@@ -51,6 +52,12 @@ class HomePage extends StatelessWidget {
               title: DesignSearchInput(
                 hint: 'Busque o melhor ao redor',
                 onChanged: controller.search.setSearch,
+                isLoading: controller.loading.value,
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: DesignSpace(
+                size: DesignSize.smallSpace,
               ),
             ),
             SliverToBoxAdapter(
@@ -63,152 +70,28 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   horizontal: DesignSize.mediumSpace,
                 ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 150,
-                child: Obx(
-                  () {
-                    if (controller.bestMatch.isEmpty) {
-                      return ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: DesignSize.mediumSpace,
-                        ),
-                        itemCount: 3,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return const DesignBestMatchItem(
-                            bestMatch: null,
-                          );
-                        },
-                      );
-                    }
-                    final bestMatches = controller.bestMatch;
-
-                    return ListView.builder(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: DesignSize.mediumSpace,
-                      ),
-                      itemCount: bestMatches.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        final bestMatch = bestMatches[index];
-                        return DesignBestMatchItem(
-                          bestMatch: bestMatch,
-                        );
-                      },
-                    );
-                  },
-                ),
+                isLoading: controller.loading.value,
               ),
             ),
             const SliverToBoxAdapter(child: DesignSpace()),
+            SliverToBoxAdapter(
+              child: _bestMatchList(),
+            ),
             const SliverToBoxAdapter(child: DesignSpace()),
             SliverToBoxAdapter(
               child: _categoryList(),
             ),
-            SliverToBoxAdapter(
-              child: Obx(() {
-                final events = controller.eventsBestMatch;
-
-                if (events.isEmpty) return Container();
-
-                return Column(
-                  children: [
-                    const DesignSpace(),
-                    DesignSectionTitle(
-                      title: 'Eventos próximos',
-                      onActionPressed: () => Get.to(
-                        EventListPage(
-                            title: 'Events',
-                            events: controller.eventsBestMatch),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: DesignSize.mediumSpace,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 196,
-                      child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: DesignSize.mediumSpace,
-                        ),
-                        itemCount: events.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          final event = events[index];
-                          final isLast = index == products.length - 1;
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              DesignEventItem(
-                                event: event,
-                              ),
-                              if (!isLast)
-                                const DesignSpace(
-                                  orientation:
-                                      DesignSpaceOrientation.horizontal,
-                                ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                );
-              }),
+            const SliverToBoxAdapter(child: DesignSpace()),
+            const SliverToBoxAdapter(
+              child: DesignSpace(
+                size: DesignSize.smallSpace,
+              ),
             ),
             SliverToBoxAdapter(
-              child: Obx(() {
-                final products = controller.productBestMatch;
-
-                if (products.isEmpty) return Container();
-
-                return Column(
-                  children: [
-                    const DesignSpace(),
-                    DesignSectionTitle(
-                      title: 'Melhores preços da região',
-                      onActionPressed: () => Get.to(
-                        ProductListPage(
-                            title: 'Best Prices Only',
-                            products: controller.productBestMatch),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: DesignSize.mediumSpace,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 142,
-                      child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: DesignSize.mediumSpace,
-                        ),
-                        itemCount: products.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          final product = products[index];
-                          final isLast = index == products.length - 1;
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              DesignProductItem(
-                                product: product,
-                              ),
-                              if (!isLast)
-                                const DesignSpace(
-                                  orientation:
-                                      DesignSpaceOrientation.horizontal,
-                                ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                );
-              }),
+              child: _buildEvents(),
+            ),
+            SliverToBoxAdapter(
+              child: _buildProducts(),
             ),
             const SliverToBoxAdapter(child: DesignSpace()),
             SliverToBoxAdapter(
@@ -223,50 +106,48 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   horizontal: DesignSize.mediumSpace,
                 ),
+                isLoading: controller.loading.value,
               ),
             ),
+            const SliverToBoxAdapter(child: DesignSpace()),
             SliverToBoxAdapter(
               child: DesignCategoryBulletList(
                 value: controller.category.category.value,
                 onItemPressed: controller.category.setCategory,
+                isLoading: controller.loading.value,
               ),
             ),
             const SliverToBoxAdapter(child: DesignSpace()),
-            Obx(
-              () {
-                final places = controller.places;
-
-                if (places.isEmpty) {
-                  return SliverToBoxAdapter(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 300,
-                      child: const Text('Not Found'),
-                    ),
-                  );
-                }
-
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      final place = places[index];
-
-                      return DesignListTile(
-                        image: place.image,
-                        title: place.name,
-                        subtitle: place.description,
-                        trailing: place.distance.metricSystem,
-                        onPressed: () => Get.to(PlaceReadPage(place: place)),
-                      );
-                    },
-                    childCount: places.length, // 1000 list items
-                  ),
-                );
-              },
-            ),
+            _buildPlaces(),
           ],
         );
       }),
+    );
+  }
+
+  Widget _bestMatchList() {
+    return SizedBox(
+      height: 150,
+      child: Obx(
+        () {
+          final bestMatches = controller.bestMatch;
+
+          return ListView.builder(
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSize.mediumSpace,
+            ),
+            itemCount: bestMatches.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              final bestMatch = bestMatches[index];
+              return DesignBestMatchItem(
+                bestMatch: bestMatch,
+                isLoading: controller.loading.value,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -311,9 +192,144 @@ class HomePage extends StatelessWidget {
             },
             title: category.title,
             image: category.image,
+            isLoading: controller.loading.value,
           );
         },
       ),
+    );
+  }
+
+  Widget _buildEvents() {
+    return Obx(
+      () {
+        final events = controller.eventsBestMatch;
+
+        if (events.isEmpty) return Container();
+
+        return Column(
+          children: [
+            DesignSectionTitle(
+              title: 'Eventos próximos',
+              onActionPressed: () => Get.to(
+                EventListPage(
+                    title: 'Events', events: controller.eventsBestMatch),
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: DesignSize.mediumSpace,
+              ),
+              isLoading: controller.loading.value,
+            ),
+            const DesignSpace(),
+            SizedBox(
+              height: 230,
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: DesignSize.mediumSpace,
+                ),
+                itemCount: events.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  final event = events[index];
+                  final isLast = index == products.length - 1;
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      DesignEventItem(
+                        event: event,
+                        isLoading: controller.loading.value,
+                      ),
+                      if (!isLast)
+                        const DesignSpace(
+                          orientation: DesignSpaceOrientation.horizontal,
+                        ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildProducts() {
+    return Obx(() {
+      final products = controller.productBestMatch;
+
+      if (products.isEmpty) return Container();
+
+      return Column(
+        children: [
+          const DesignSpace(),
+          DesignSectionTitle(
+            title: 'Melhores preços da região',
+            onActionPressed: () => Get.to(
+              ProductListPage(
+                  title: 'Best Prices Only',
+                  products: controller.productBestMatch),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: DesignSize.mediumSpace,
+            ),
+            isLoading: controller.loading.value,
+          ),
+          const DesignSpace(),
+          SizedBox(
+            height: 175,
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(
+                horizontal: DesignSize.mediumSpace,
+              ),
+              itemCount: products.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                final product = products[index];
+                final isLast = index == products.length - 1;
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DesignProductItem(
+                      product: product,
+                      isLoading: controller.loading.value,
+                    ),
+                    if (!isLast)
+                      const DesignSpace(
+                        orientation: DesignSpaceOrientation.horizontal,
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      );
+    });
+  }
+
+  Widget _buildPlaces() {
+    return Obx(
+      () {
+        final places = controller.places;
+
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              final place = places[index];
+
+              return DesignListTile(
+                image: place.image,
+                title: place.name,
+                subtitle: place.description,
+                trailing: place.distance.metricSystem,
+                onPressed: () => Get.to(() => PlaceReadPage(place: place)),
+                isLoading: controller.loading.value,
+              );
+            },
+            childCount: places.length, // 1000 list items
+          ),
+        );
+      },
     );
   }
 }

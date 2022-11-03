@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/widgets/design_shimmer_widget.dart';
 
 class DesignBulletItem extends StatelessWidget {
   const DesignBulletItem({
@@ -12,6 +13,7 @@ class DesignBulletItem extends StatelessWidget {
     this.unselectedColor,
     this.onPressed,
     this.padding,
+    this.isLoading = false,
   }) : super(key: key);
 
   final String title;
@@ -20,9 +22,38 @@ class DesignBulletItem extends StatelessWidget {
   final Color? unselectedColor;
   final Function()? onPressed;
   final EdgeInsetsGeometry? padding;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return DesignShimmerWidget(
+        child: Container(
+          alignment: Alignment.center,
+          height: 38,
+          padding: padding ??
+              const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
+          margin: const EdgeInsets.only(right: DesignSize.smallSpace),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            color: Colors.black,
+            border: Border.all(
+              width: 2,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (icon != null) icon!,
+              Text(
+                title,
+                style: DesignTextStyle.bodyMedium16Bold,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
     return GestureDetector(
       onTap: onPressed,
       child: Container(

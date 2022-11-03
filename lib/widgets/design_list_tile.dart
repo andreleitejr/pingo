@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:get/get.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/services/blurhash_controller.dart';
+import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class DesignListTile extends StatelessWidget {
@@ -12,6 +14,7 @@ class DesignListTile extends StatelessWidget {
     this.subtitle,
     this.trailing,
     this.onPressed,
+    this.isLoading = false,
   }) : super(key: key);
 
   final ImageBlurHash? image;
@@ -19,9 +22,87 @@ class DesignListTile extends StatelessWidget {
   final String? subtitle;
   final String? trailing;
   final Function()? onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return DesignShimmerWidget(
+          child: Column(
+        children: [
+          SizedBox(
+            height: 60,
+            child: Row(
+              children: [
+                const DesignSpace(
+                    orientation: DesignSpaceOrientation.horizontal),
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
+                const DesignSpace(
+                  orientation: DesignSpaceOrientation.horizontal,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            height: 16,
+                            width: Get.width * 0.5,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          Container(
+                            height: 16,
+                            width: 75,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 16,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                      ),
+                      Container(
+                        height: 16,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const DesignSpace(
+                    orientation: DesignSpaceOrientation.horizontal),
+              ],
+            ),
+          ),
+          const DesignSpace(),
+        ],
+      ));
+    }
     return GestureDetector(
       onTap: onPressed,
       child: Column(

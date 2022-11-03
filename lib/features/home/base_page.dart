@@ -10,6 +10,7 @@ import 'package:pingo/features/product/pages/list/product_list_page.dart';
 import 'package:pingo/features/profile/read/profile_read_page.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/widgets/design_icon.dart';
+import 'package:pingo/widgets/design_read_image.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({Key? key}) : super(key: key);
@@ -46,56 +47,76 @@ class _BasePageState extends State<BasePage> {
       body: Center(
         child: pages.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedFontSize: 0,
-        enableFeedback: false,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          const BottomNavigationBarItem(
-            backgroundColor: Colors.white,
-            icon: DesignIcon(icon: DesignIcons.home),
-            activeIcon: DesignIcon(icon: DesignIcons.home, isSelected: true),
-            label: 'Home',
-          ),
-          const BottomNavigationBarItem(
-            icon: DesignIcon(icon: DesignIcons.map),
-            activeIcon: DesignIcon(icon: DesignIcons.map, isSelected: true),
-            label: 'Places',
-          ),
-          const BottomNavigationBarItem(
-            icon: DesignIcon(icon: DesignIcons.event),
-            activeIcon: DesignIcon(icon: DesignIcons.event, isSelected: true),
-            label: 'Events',
-          ),
-          const BottomNavigationBarItem(
-            icon: DesignIcon(icon: DesignIcons.product),
-            activeIcon: DesignIcon(icon: DesignIcons.product, isSelected: true),
-            label: 'Products',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              width: 24,
-              height: 24,
-              decoration: BoxDecoration(
-                color: DesignColor.primary500,
-                borderRadius: BorderRadius.circular(48),
-                image: user.image != null
-                    ? DecorationImage(
-                        image: NetworkImage(user.image!.image),
-                        fit: BoxFit.cover,
-                      )
-                    : null,
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          backgroundColor: Colors.white,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedFontSize: 0,
+          enableFeedback: false,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+              backgroundColor: Colors.white,
+              icon: DesignIcon(
+                icon: DesignIcons.home,
+                isLoading: controller.loading.value,
               ),
+              activeIcon: DesignIcon(
+                icon: DesignIcons.home,
+                isSelected: true,
+                isLoading: controller.loading.value,
+              ),
+              label: 'Home',
             ),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        // selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+            BottomNavigationBarItem(
+              icon: DesignIcon(
+                icon: DesignIcons.map,
+                isLoading: controller.loading.value,
+              ),
+              activeIcon: DesignIcon(
+                icon: DesignIcons.map,
+                isSelected: true,
+                isLoading: controller.loading.value,
+              ),
+              label: 'Places',
+            ),
+            BottomNavigationBarItem(
+              icon: DesignIcon(
+                icon: DesignIcons.event,
+                isLoading: controller.loading.value,
+              ),
+              activeIcon: DesignIcon(
+                icon: DesignIcons.event,
+                isSelected: true,
+                isLoading: controller.loading.value,
+              ),
+              label: 'Events',
+            ),
+            BottomNavigationBarItem(
+              icon: DesignIcon(
+                icon: DesignIcons.product,
+                isLoading: controller.loading.value,
+              ),
+              activeIcon: DesignIcon(
+                icon: DesignIcons.product,
+                isSelected: true,
+                isLoading: controller.loading.value,
+              ),
+              label: 'Products',
+            ),
+            BottomNavigationBarItem(
+              icon: DesignAvatarImage(
+                image: controller.user.image?.image,
+                isLoading: controller.loading.value,
+              ),
+              label: 'Profile',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          // selectedItemColor: Colors.amber[800],
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
