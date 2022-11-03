@@ -30,7 +30,9 @@ class _ProfileInfoEditPageState extends State<ProfileInfoEditPage> {
         child: DesignAppBar(
           title: 'Personal Info',
           actionText: 'Concluir',
-          onActionPressed: () async => controller.save(),
+          onActionPressed: () async =>
+              controller.save().then((value) => Get.back()),
+          actionValid: true,
         ),
       ),
       resizeToAvoidBottomInset: false,

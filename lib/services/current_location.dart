@@ -5,16 +5,15 @@ import 'package:pingo/core/extensions.dart';
 
 class CurrentLocation {
   late GeoPoint currentCoordinates;
-  String currentAddress = '';
-
+  Placemark? placemark;
 
   Future<void> init() async {
     final permission = await Geolocator.requestPermission();
 
     if (permission != LocationPermission.denied &&
         permission != LocationPermission.deniedForever) {
-      // await _getCurrentLocation();
-      currentCoordinates = const GeoPoint(-23.55041838770605, -46.64824828296933);
+      await _getCurrentLocation();
+      // currentCoordinates = const GeoPoint(-23.55041838770605, -46.64824828296933);
       await _getStreetName();
     }
   }
@@ -29,15 +28,10 @@ class CurrentLocation {
   }
 
   Future<void> _getStreetName() async {
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(currentCoordinates.latitude, currentCoordinates.longitude);
+    List<Placemark> placemarks = await placemarkFromCoordinates(
+        currentCoordinates.latitude, currentCoordinates.longitude);
 
-    if (placemarks.first.street != null) {
-      currentAddress += placemarks.first.street!;
-    }
-    if (placemarks.first.administrativeArea != null) {
-      currentAddress += ', ${placemarks.first.administrativeArea!}';
-    }
+    placemark = placemarks.first;
   }
 
   static Future<GeoPoint> getCoordinates(String line) async {
@@ -50,4 +44,6 @@ class CurrentLocation {
         await placemarkFromCoordinates(location.latitude, location.longitude);
     return placemarks.first;
   }
+
+  String get currentAddress => '${placemark?.street}, ${placemark?.subLocality}';
 }

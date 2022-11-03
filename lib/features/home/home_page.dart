@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:pingo/constants/design_color.dart';
-import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
-import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/pages/list/event_list_page.dart';
 import 'package:pingo/features/home/category/category.dart';
-import 'package:pingo/features/home/filter/filter_modal.dart';
 import 'package:pingo/features/home/home_controller.dart';
-import 'package:pingo/features/home/search/search_page.dart';
-import 'package:pingo/features/place/pages/edit/place_edit_page.dart';
+import 'package:pingo/features/home/components/search/search_page.dart';
+import 'package:pingo/features/home/widgets/design_home_app_bar.dart';
 import 'package:pingo/features/place/pages/list/place_list_page.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
 import 'package:pingo/features/product/models/product.dart';
@@ -20,7 +15,6 @@ import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
 import 'package:pingo/widgets/design_category_item.dart';
 import 'package:pingo/widgets/design_event_item.dart';
-import 'package:pingo/widgets/design_icon_button.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_product_item.dart';
 import 'package:pingo/widgets/design_search_input.dart';
@@ -46,7 +40,7 @@ class HomePage extends StatelessWidget {
               automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
               elevation: 0,
-              title: _appBar(context),
+              title: DesignHomeAppBar(),
               floating: true,
             ),
             SliverAppBar(
@@ -273,111 +267,6 @@ class HomePage extends StatelessWidget {
           ],
         );
       }),
-    );
-  }
-
-  Widget _appBar(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () => Get.to(PlaceEditPage()),
-              child: Obx(
-                () => Container(
-                  height: 63,
-                  width: 64,
-                  padding: EdgeInsets.zero,
-                  decoration: BoxDecoration(
-                    image: controller.icon.value.isNotEmpty
-                        ? DecorationImage(
-                            image: NetworkImage(controller.icon.value),
-                            fit: BoxFit.fitHeight,
-                          )
-                        : null,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Obx(
-                            () => Text(
-                              controller.temperature.toString(),
-                              style: DesignTextStyle.labelSmall10.apply(
-                                color: DesignColor.text400,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            '°C',
-                            style: DesignTextStyle.labelSmall8.apply(
-                              color: DesignColor.text400,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 4),
-                      Center(
-                        child: Container(
-                          width: 3,
-                          height: 3,
-                          decoration: BoxDecoration(
-                            color: DesignColor.text300,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        DateFormat.EEEE().format(DateTime.now()),
-                        style: DesignTextStyle.labelSmall10.apply(
-                          color: DesignColor.text400,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Obx(
-                    () => Text(
-                      controller.address.value,
-                      style: DesignTextStyle.bodySmall12.apply(
-                        color: DesignColor.text500,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            DesignIconButton(
-              icon: DesignIcons.filter,
-              onPressed: () {
-                showModalBottomSheet<void>(
-                  isScrollControlled: true,
-                  context: context,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
-                    ),
-                  ),
-                  backgroundColor: Colors.white,
-                  builder: (BuildContext context) {
-                    return FilterModal();
-                  },
-                );
-              },
-            ),
-          ],
-        ),
-      ],
     );
   }
 

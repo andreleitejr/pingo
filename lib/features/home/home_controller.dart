@@ -3,18 +3,16 @@ import 'package:get/get.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/home/category/category_controller.dart';
-import 'package:pingo/features/home/filter/filter_controller.dart';
-import 'package:pingo/features/home/search/search_controller.dart';
+import 'package:pingo/features/home/components/filter/filter_controller.dart';
+import 'package:pingo/features/home/components/search/search_controller.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/repositories/place_repository.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/services/current_weather.dart';
-import 'package:weather/weather.dart';
 
 class HomeController extends GetxController {
   HomeController() {
-    print('INITING HOMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0');
     loading(true);
   }
 
@@ -60,7 +58,7 @@ class HomeController extends GetxController {
     list.sort((a, b) => a.compareTo(b));
 
     list = filter.filterPlaceByDistance(list) as List<Place>;
-    list = filter.filterPlaceByRating(list) as List<Place>;
+    // list = filter.filterPlaceByRating(list) as List<Place>;
     return list;
   }
 
@@ -129,8 +127,10 @@ class HomeController extends GetxController {
     address(location.currentAddress);
 
     await weather.init();
-    temperature(weather.temperature?.celsius?.round());
+    temperature(weather.weather?.temperature?.celsius?.round());
     icon(weather.icon);
+
+    print('HUDHDASUAHUADSHADSUHDSAUDSA ICON $icon');
 
     super.onInit();
   }

@@ -39,6 +39,14 @@ class PlaceEditPage extends StatelessWidget {
         child: ListView(
           children: [
             Obx(
+              () => DesignAvatarImageSelection(
+                displayImage: controller.displayImage.value,
+                onButtonPressed: () async =>
+                    await controller.setImage(ImageSource.gallery),
+              ),
+            ),
+            const DesignSpace(),
+            Obx(
               () => DesignTextInput(
                 hint: 'Name',
                 onChanged: controller.setName,
@@ -63,56 +71,6 @@ class PlaceEditPage extends StatelessWidget {
               ),
             ),
             const DesignSpace(),
-            // const DesignSpace(),
-            // SizedBox(
-            //   height: 54,
-            //   child: Row(
-            //     children: [
-            //       Expanded(
-            //         child: DesignTextInput(
-            //           textInputType: TextInputType.number,
-            //           hint: 'Open Hour',
-            //           onChanged: controller.setOpenHour,
-            //         ),
-            //       ),
-            //       const DesignSpace(
-            //         orientation: DesignSpaceOrientation.horizontal,
-            //       ),
-            //       Expanded(
-            //         child: DesignTextInput(
-            //           textInputType: TextInputType.number,
-            //           hint: 'Open Minute',
-            //           onChanged: controller.setOpenHour,
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            // const DesignSpace(),
-            // SizedBox(
-            //   height: 54,
-            //   child: Row(
-            //     children: [
-            //       Expanded(
-            //         child: DesignTextInput(
-            //           textInputType: TextInputType.number,
-            //           hint: 'Close Hour',
-            //           onChanged: controller.setCloseHour,
-            //         ),
-            //       ),
-            //       const DesignSpace(
-            //         orientation: DesignSpaceOrientation.horizontal,
-            //       ),
-            //       Expanded(
-            //         child: DesignTextInput(
-            //           textInputType: TextInputType.number,
-            //           hint: 'Close Minute',
-            //           onChanged: controller.setCloseMinute,
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
             const DesignSpace(),
             Text(
               'Address',
@@ -331,18 +289,10 @@ class PlaceEditPage extends StatelessWidget {
               ],
             ),
             const DesignSpace(),
-            Obx(
-              () => DesignAvatarImageSelection(
-                displayImage: controller.displayImage.value,
-                onButtonPressed: () async =>
-                    await controller.setImage(ImageSource.camera),
-              ),
-            ),
-            const DesignSpace(),
             DesignMultiImageSelection(
               displayPhotos: controller.displayPhotos,
               onButtonPressed: () async =>
-                  await controller.selectPhotos(ImageSource.camera),
+                  await controller.selectPhotos(ImageSource.gallery),
             ),
             const DesignSpace(),
             Obx(

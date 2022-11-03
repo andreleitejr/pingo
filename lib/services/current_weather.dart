@@ -10,8 +10,7 @@ class CurrentWeather {
     language: Language.PORTUGUESE_BRAZIL,
   );
 
-  Temperature? temperature;
-  String? icon;
+  Weather? weather;
 
   Future<void> init() async => await _getWeather();
 
@@ -20,9 +19,9 @@ class CurrentWeather {
         currentLocation.currentCoordinates.latitude,
         currentLocation.currentCoordinates.longitude);
 
-    temperature = forecast.first.temperature;
-    icon =
-        "http://openweathermap.org/img/wn/${forecast.first.weatherIcon}@2x.png";
-    print('ASDHUASDHAUHADSUHASDUSHU WATHEHRUD V ${icon}');
+    weather = forecast.first;
   }
+
+  String get icon =>
+      'http://openweathermap.org/img/wn/${weather?.weatherIcon}@2x.png';
 }
