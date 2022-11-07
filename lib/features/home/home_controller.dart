@@ -108,7 +108,10 @@ class HomeController extends GetxController {
   }
 
   @override
-  Future<void> onReady() async {}
+  Future<void> onReady() async {
+    bestMatchList.bindStream(repository.combined);
+    placeList.bindStream(repository.combined);
+  }
 
   // var coordinates = const GeoPoint(0, 0).obs;
   var address = ''.obs;
@@ -117,8 +120,6 @@ class HomeController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    bestMatchList.bindStream(repository.combined);
-    placeList.bindStream(repository.combined);
     await location.init();
     // coordinates(location.currentCoordinates);
     address(location.currentAddress);

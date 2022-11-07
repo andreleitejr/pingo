@@ -1,6 +1,8 @@
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/event/repositories/event_repository.dart';
 import 'package:pingo/features/place/models/place.dart';
+import 'package:pingo/features/post/models/post.dart';
+import 'package:pingo/features/post/repositories/post_repository.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/repositories/product_repository.dart';
 import 'package:pingo/features/rating/models/rating.dart';
@@ -18,17 +20,20 @@ class PlaceRepository extends DataBaseRepository<Place> {
   final productRepository = ProductRepository();
   final eventRepository = EventRepository();
   final ratingRepository = RatingRepository();
+  final postRepository = PostRepository();
 
-  Stream<List<Place>> get combined => Rx.combineLatest4(
+  Stream<List<Place>> get combined => Rx.combineLatest5(
         read,
         productRepository.read,
         eventRepository.read,
         ratingRepository.read,
+        postRepository.read,
         (
           List<Place> a,
           List<Product> b,
           List<Event> c,
           List<Rating> d,
+          List<Post> e,
         ) {
           for (final place in a) {
             final products = b.where(
@@ -71,6 +76,11 @@ class PlaceRepository extends DataBaseRepository<Place> {
               (rating) => rating.ratedId == place.uuid,
             );
             place.ratings.addAll(ratings);
+
+            final posts = e.where(
+              (post) => post.placeId == place.uuid,
+            );
+            place.posts.addAll(posts);
           }
           return a;
         },

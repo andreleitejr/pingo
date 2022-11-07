@@ -214,10 +214,10 @@ class _EventEditPageState extends State<EventEditPage> {
               ],
             ),
             Obx(
-                  () => DesignAvatarImageSelection(
+              () => DesignAvatarImageSelection(
                 displayImage: controller.displayImage.value,
                 onButtonPressed: () async =>
-                await controller.setImage(ImageSource.gallery),
+                    await controller.setImage(ImageSource.gallery),
               ),
             ),
             Obx(

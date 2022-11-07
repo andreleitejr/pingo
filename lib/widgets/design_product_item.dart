@@ -7,6 +7,7 @@ import 'package:pingo/features/product/models/product.dart';
 
 import 'package:pingo/features/product/pages/read/product_read_page.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
+import 'package:pingo/widgets/shimmers/shimmer_product_item.dart';
 
 class DesignProductItem extends StatelessWidget {
   DesignProductItem({
@@ -23,50 +24,7 @@ class DesignProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return DesignShimmerWidget(
-        child: SizedBox(
-          height: _height,
-          width: _width + 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: _width,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(24),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Container(
-                width: double.infinity,
-                height: 14,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              Container(
-                width: 90,
-                height: 14,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: 14,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+      return ShimmerProductItem();
     }
     return GestureDetector(
       onTap: () => Get.to(() => ProductReadPage(product: product)),

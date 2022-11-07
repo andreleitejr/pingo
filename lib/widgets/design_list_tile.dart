@@ -5,6 +5,7 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
+import 'package:pingo/widgets/shimmers/shimmer_list_tile.dart';
 
 class DesignListTile extends StatelessWidget {
   const DesignListTile({
@@ -27,81 +28,7 @@ class DesignListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return DesignShimmerWidget(
-          child: Column(
-        children: [
-          SizedBox(
-            height: 60,
-            child: Row(
-              children: [
-                const DesignSpace(
-                    orientation: DesignSpaceOrientation.horizontal),
-                Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                ),
-                const DesignSpace(
-                  orientation: DesignSpaceOrientation.horizontal,
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            height: 16,
-                            width: Get.width * 0.5,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(),
-                          ),
-                          Container(
-                            height: 16,
-                            width: 75,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 16,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                      ),
-                      Container(
-                        height: 16,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const DesignSpace(
-                    orientation: DesignSpaceOrientation.horizontal),
-              ],
-            ),
-          ),
-          const DesignSpace(),
-        ],
-      ));
+      return const ShimmerListTile();
     }
     return GestureDetector(
       onTap: onPressed,

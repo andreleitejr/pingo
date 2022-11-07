@@ -5,18 +5,22 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/features/post/models/post.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 import 'package:pingo/widgets/design_icon.dart';
 
 class DesignImageGridView extends StatelessWidget {
-  const DesignImageGridView({Key? key, required this.isMasonry, this.onButtonPressed, required this.images})
-      : super(key: key);
+  const DesignImageGridView({
+    Key? key,
+    required this.isMasonry,
+    this.onButtonPressed,
+    required this.posts,
+  }) : super(key: key);
 
   final bool isMasonry;
   final Function()? onButtonPressed;
 
-
-  final List<ImageBlurHash> images;
+  final List<Post> posts;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class DesignImageGridView extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 2,
             crossAxisSpacing: 2,
-            itemCount: images.length,
+            itemCount: posts.length,
             padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
               final mediumCardWidth = Get.width * 0.75;
@@ -35,7 +39,7 @@ class DesignImageGridView extends StatelessWidget {
               final cardHeight =
                   index % 2 == 0 ? mediumCardWidth : smallCardWidth;
 
-              final image = images[index];
+              final image = posts[index].image!;
 
               return SizedBox(
                 height: cardHeight,
@@ -53,8 +57,8 @@ class DesignImageGridView extends StatelessWidget {
             crossAxisCount: 3,
             crossAxisSpacing: 2,
             mainAxisSpacing: 2,
-            children: List.generate(images.length, (index) {
-              final image = images[index];
+            children: List.generate(posts.length, (index) {
+              final image = posts[index].image!;
               return BlurHash(
                 hash: image.blurHash,
                 image: image.image,

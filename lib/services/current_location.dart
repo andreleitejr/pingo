@@ -13,7 +13,8 @@ class CurrentLocation {
     if (permission != LocationPermission.denied &&
         permission != LocationPermission.deniedForever) {
       // await _getCurrentLocation();
-      currentCoordinates = const GeoPoint(-23.55041838770605, -46.64824828296933);
+      currentCoordinates =
+          const GeoPoint(-23.548842918924585, -46.64632573035709);
       await _getStreetName();
     }
   }
@@ -45,5 +46,6 @@ class CurrentLocation {
     return placemarks.first;
   }
 
-  String get currentAddress => '${placemark?.street}, ${placemark?.subLocality}';
+  String get currentAddress =>
+      '${placemark?.street}, ${placemark?.subLocality}';
 }

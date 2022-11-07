@@ -9,6 +9,7 @@ import 'package:pingo/features/event/pages/edit/event_edit_page.dart';
 import 'package:pingo/features/event/pages/list/event_list_fragment.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_controller.dart';
+import 'package:pingo/features/post/pages/edit/post_edit_page.dart';
 import 'package:pingo/features/product/pages/edit/product_edit_page.dart';
 import 'package:pingo/features/product/pages/list/product_list_fragment.dart';
 import 'package:pingo/features/rating/pages/rating_list.dart';
@@ -170,6 +171,17 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                           isActive: true,
                         ),
                       ),
+                      const DesignSpace(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: DesignSize.mediumSpace),
+                        child: DesignButton(
+                          onPressed: () =>
+                              Get.to(() => PostEditPage(place: widget.place)),
+                          title: 'Create Post',
+                          isActive: true,
+                        ),
+                      ),
                     ],
                   ],
                 ),
@@ -223,7 +235,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                     );
                   }
                   return DesignImageGridView(
-                    images: controller.place.photos!,
+                    posts: controller.place.posts,
                     isMasonry: controller.isMasonry.value,
                     onButtonPressed: controller.toggleMasonry,
                   );

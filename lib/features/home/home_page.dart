@@ -21,6 +21,9 @@ import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_section_title.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
+import 'package:pingo/widgets/shimmers/shimmer_event_item.dart';
+import 'package:pingo/widgets/shimmers/shimmer_list_tile.dart';
+import 'package:pingo/widgets/shimmers/shimmer_product_item.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -130,6 +133,21 @@ class HomePage extends StatelessWidget {
       height: 150,
       child: Obx(
         () {
+          if (controller.loading.value) {
+            return ListView.builder(
+              padding: const EdgeInsets.symmetric(
+                horizontal: DesignSize.mediumSpace,
+              ),
+              itemCount: 5,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return const DesignBestMatchItem(
+                  bestMatch: null,
+                  isLoading: true,
+                );
+              },
+            );
+          }
           final bestMatches = controller.bestMatch;
 
           return ListView.builder(
@@ -142,7 +160,6 @@ class HomePage extends StatelessWidget {
               final bestMatch = bestMatches[index];
               return DesignBestMatchItem(
                 bestMatch: bestMatch,
-                isLoading: controller.loading.value,
               );
             },
           );
@@ -202,6 +219,42 @@ class HomePage extends StatelessWidget {
   Widget _buildEvents() {
     return Obx(
       () {
+        if (controller.loading.value) {
+          return Column(
+            children: [
+              DesignSectionTitle(
+                title: 'Eventos próximos',
+                onActionPressed: () => Get.to(
+                  EventListPage(
+                      title: 'Events', events: controller.eventsBestMatch),
+                ),
+                isLoading: controller.loading.value,
+              ),
+              const DesignSpace(),
+              SizedBox(
+                height: 230,
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: DesignSize.mediumSpace,
+                  ),
+                  itemCount: 6,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ShimmerEventItem(),
+                        const DesignSpace(
+                          orientation: DesignSpaceOrientation.horizontal,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        }
         final events = controller.eventsBestMatch;
 
         if (events.isEmpty) return Container();
@@ -255,6 +308,47 @@ class HomePage extends StatelessWidget {
 
   Widget _buildProducts() {
     return Obx(() {
+      if (controller.loading.value) {
+        return Column(
+          children: [
+            const DesignSpace(),
+            DesignSectionTitle(
+              title: 'Melhores preços da região',
+              onActionPressed: () => Get.to(
+                ProductListPage(
+                    title: 'Best Prices Only',
+                    products: controller.productBestMatch),
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: DesignSize.mediumSpace,
+              ),
+              isLoading: controller.loading.value,
+            ),
+            const DesignSpace(),
+            SizedBox(
+              height: 175,
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: DesignSize.mediumSpace,
+                ),
+                itemCount: 6,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ShimmerProductItem(),
+                      const DesignSpace(
+                        orientation: DesignSpaceOrientation.horizontal,
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      }
       final products = controller.productBestMatch;
 
       if (products.isEmpty) return Container();
@@ -310,8 +404,17 @@ class HomePage extends StatelessWidget {
   Widget _buildPlaces() {
     return Obx(
       () {
+        if (controller.loading.value) {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return const ShimmerListTile();
+              },
+              childCount: 80, // 1000 list items
+            ),
+          );
+        }
         final places = controller.places;
-
         return SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {

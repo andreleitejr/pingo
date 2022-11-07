@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
-import 'package:pingo/widgets/design_shimmer_widget.dart';
+import 'package:pingo/widgets/shimmers/shimmer_section_title.dart';
 
 class DesignSectionTitle extends StatelessWidget {
   const DesignSectionTitle({
@@ -23,35 +24,12 @@ class DesignSectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return Padding(
-        padding: padding ?? EdgeInsets.zero,
-        child: DesignShimmerWidget(
-          child: Row(
-            children: [
-              Container(
-                height: 18,
-                width: Get.width * 0.5,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(40),
-                ),
-              ),
-              Expanded(child: Container()),
-              Container(
-                height: 18,
-                width: 60,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(40),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+      return const ShimmerSectionTitle();
     }
     return Padding(
-      padding: padding ?? EdgeInsets.zero,
+      padding: const EdgeInsets.symmetric(
+        horizontal: DesignSize.mediumSpace,
+      ),
       child: Row(
         children: [
           Expanded(
