@@ -229,13 +229,13 @@ class _PlaceReadPageState extends State<PlaceReadPage>
             children: <Widget>[
               Obx(
                 () {
-                  if (controller.place.photos == null) {
+                  if (controller.place.posts.isEmpty) {
                     return const Center(
                       child: Text('No photos found'),
                     );
                   }
-                  return DesignImageGridView(
-                    posts: controller.place.posts,
+                  return DesignPostGridView(
+                    place: controller.place,
                     isMasonry: controller.isMasonry.value,
                     onButtonPressed: controller.toggleMasonry,
                   );

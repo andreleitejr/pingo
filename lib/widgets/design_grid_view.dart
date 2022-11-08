@@ -5,22 +5,24 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/post/models/post.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 import 'package:pingo/widgets/design_icon.dart';
+import 'package:pingo/widgets/design_post_reader.dart';
 
-class DesignImageGridView extends StatelessWidget {
-  const DesignImageGridView({
+class DesignPostGridView extends StatelessWidget {
+  const DesignPostGridView({
     Key? key,
     required this.isMasonry,
     this.onButtonPressed,
-    required this.posts,
+    required this.place,
   }) : super(key: key);
 
   final bool isMasonry;
   final Function()? onButtonPressed;
 
-  final List<Post> posts;
+  final Place place;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class DesignImageGridView extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 2,
             crossAxisSpacing: 2,
-            itemCount: posts.length,
+            itemCount: place.posts.length,
             padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
               final mediumCardWidth = Get.width * 0.75;
@@ -39,14 +41,23 @@ class DesignImageGridView extends StatelessWidget {
               final cardHeight =
                   index % 2 == 0 ? mediumCardWidth : smallCardWidth;
 
-              final image = posts[index].image!;
+              final post = place.posts[index];
+              final image = post.image!;
 
-              return SizedBox(
-                height: cardHeight,
-                child: BlurHash(
-                  hash: image.blurHash,
-                  image: image.image,
-                  imageFit: BoxFit.cover,
+              return GestureDetector(
+                onTap: () => Get.to(
+                  () => DesignPostReader(
+                    post: post,
+                    place: place,
+                  ),
+                ),
+                child: SizedBox(
+                  height: cardHeight,
+                  child: BlurHash(
+                    hash: image.blurHash,
+                    image: image.image,
+                    imageFit: BoxFit.cover,
+                  ),
                 ),
               );
             },
@@ -57,12 +68,22 @@ class DesignImageGridView extends StatelessWidget {
             crossAxisCount: 3,
             crossAxisSpacing: 2,
             mainAxisSpacing: 2,
-            children: List.generate(posts.length, (index) {
-              final image = posts[index].image!;
-              return BlurHash(
-                hash: image.blurHash,
-                image: image.image,
-                imageFit: BoxFit.cover,
+            children: List.generate(place.posts.length, (index) {
+              final post = place.posts[index];
+              final image = post.image!;
+
+              return GestureDetector(
+                onTap: () => Get.to(
+                  () => DesignPostReader(
+                    post: post,
+                    place: place,
+                  ),
+                ),
+                child: BlurHash(
+                  hash: image.blurHash,
+                  image: image.image,
+                  imageFit: BoxFit.cover,
+                ),
               );
             }),
           ),
