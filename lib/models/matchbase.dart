@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_emojis.dart';
 import 'package:pingo/models/base.dart';
 import 'package:pingo/models/user.dart';
 
@@ -30,6 +31,20 @@ class MatchBase extends Base {
       return 'Você pode gostar';
     } else {
       return 'Outro perfil';
+    }
+  }
+
+  String get matchEmoji {
+    if (matchPercentage > 90) {
+      return DesignEmojis.smilingWithHeartEyes;
+    } else if (matchPercentage > 80) {
+      return DesignEmojis.smilingWithHearts;
+    } else if (matchPercentage > 70) {
+      return DesignEmojis.smilingWithOpenHands;
+    } else if (matchPercentage > 40) {
+      return DesignEmojis.winkingTongue;
+    } else {
+      return DesignEmojis.thinkingFace;
     }
   }
 

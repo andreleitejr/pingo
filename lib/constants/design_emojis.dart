@@ -1,3 +1,4 @@
+// TODO: TROCAR OS NOMES DAS CONSTANTES
 class DesignEmojis {
   static const all = '🎯';
   static const eventMan = '😋';
@@ -13,4 +14,10 @@ class DesignEmojis {
   static const shopping = '🛍️';
   static const theater = '🎭';
   static const utils = '🆘';
+
+  static const smilingWithHeartEyes = '😍';
+  static const smilingWithHearts = '🥰';
+  static const smilingWithOpenHands = '🤗';
+  static const winkingTongue = '😜';
+  static const thinkingFace = '🤔';
 }
