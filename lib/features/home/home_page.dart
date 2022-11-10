@@ -171,7 +171,7 @@ class HomePage extends StatelessWidget {
 
   Widget _categoryList() {
     return SizedBox(
-      height: 88,
+      height: 80,
       child: ListView.builder(
         padding: const EdgeInsets.only(
           left: DesignSize.mediumSpace,

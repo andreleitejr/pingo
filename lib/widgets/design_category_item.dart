@@ -27,7 +27,7 @@ class DesignCategoryItem extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                width: 60,
+                width: 48,
                 margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
                 decoration: BoxDecoration(
                   color: Colors.black,

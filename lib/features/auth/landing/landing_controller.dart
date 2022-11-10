@@ -9,8 +9,6 @@ import 'package:pingo/repositories/user_repository.dart';
 class LandingController extends GetxController {
   LandingController(this.landingPageNavigator) {
     onReady();
-
-    print('HSADUHDASUADSHUDSAHDASUAHDSUHDASHDSAUHDSAUHDSUfdfdfdfdfd');
   }
 
   final repository = UserRepository();
@@ -28,7 +26,7 @@ class LandingController extends GetxController {
   Rx<List<User>> users = Rx<List<User>>([]);
 
   Future<void> _init() async {
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(milliseconds: 1600));
 
     _auth.authStateChanges().listen((auth.User? authUser) {
       if (authUser == null) {
