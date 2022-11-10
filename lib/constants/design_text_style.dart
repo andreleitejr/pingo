@@ -55,6 +55,13 @@ class DesignTextStyle {
     ),
   );
 
+  static final labelSmall10Bold = GoogleFonts.roboto(
+    textStyle: const TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+
   static final labelMedium12 = GoogleFonts.roboto(
     textStyle: const TextStyle(
       fontSize: 12,

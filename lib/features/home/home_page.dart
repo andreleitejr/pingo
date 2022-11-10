@@ -35,6 +35,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Obx(() {
+        // controller.loading(true);
         if (controller.search.searchActive.value) {
           return SearchPage();
         }
@@ -84,7 +85,6 @@ class HomePage extends StatelessWidget {
             SliverToBoxAdapter(
               child: _categoryList(),
             ),
-            const SliverToBoxAdapter(child: DesignSpace()),
             const SliverToBoxAdapter(
               child: DesignSpace(
                 size: DesignSize.smallSpace,
@@ -170,7 +170,7 @@ class HomePage extends StatelessWidget {
 
   Widget _categoryList() {
     return SizedBox(
-      height: 96,
+      height: 88,
       child: ListView.builder(
         padding: const EdgeInsets.only(
           left: DesignSize.mediumSpace,
@@ -219,45 +219,7 @@ class HomePage extends StatelessWidget {
   Widget _buildEvents() {
     return Obx(
       () {
-        if (controller.loading.value) {
-          return Column(
-            children: [
-              DesignSectionTitle(
-                title: 'Eventos próximos',
-                onActionPressed: () => Get.to(
-                  EventListPage(
-                      title: 'Events', events: controller.eventsBestMatch),
-                ),
-                isLoading: controller.loading.value,
-              ),
-              const DesignSpace(),
-              SizedBox(
-                height: 230,
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: DesignSize.mediumSpace,
-                  ),
-                  itemCount: 6,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShimmerEventItem(),
-                        const DesignSpace(
-                          orientation: DesignSpaceOrientation.horizontal,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ],
-          );
-        }
         final events = controller.eventsBestMatch;
-
-        if (events.isEmpty) return Container();
 
         return Column(
           children: [
@@ -276,25 +238,26 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 230,
               child: ListView.builder(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: DesignSize.mediumSpace,
+                padding: const EdgeInsets.only(
+                  left: DesignSize.mediumSpace,
                 ),
-                itemCount: events.length,
+                itemCount: controller.loading.value ? 6 : events.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
-                  final event = events[index];
-                  final isLast = index == products.length - 1;
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      DesignEventItem(
-                        event: event,
-                        isLoading: controller.loading.value,
-                      ),
-                      if (!isLast)
-                        const DesignSpace(
-                          orientation: DesignSpaceOrientation.horizontal,
+                      if (controller.loading.value) ...[
+                        ShimmerEventItem()
+                      ] else ...[
+                        DesignEventItem(
+                          event: events[index],
+                          isLoading: controller.loading.value,
                         ),
+                      ],
+                      const DesignSpace(
+                        orientation: DesignSpaceOrientation.horizontal,
+                      ),
                     ],
                   );
                 },
