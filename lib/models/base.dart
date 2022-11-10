@@ -40,20 +40,6 @@ abstract class Base extends DataBase {
 
   void setDistance(double v) => distance = v;
 
-  int? match;
-
-  int compareTo(Base other) {
-    // TODO: SUBSTITUIR PELA MAX DISTANCE DO FILTRO
-    if (distance <= 1000 && other.distance <= 1000) {
-      if (match == other.match) return distance.compareTo(other.distance);
-      return match!.compareTo(other.match!) * -1;
-    } else {
-      return distance.compareTo(other.distance);
-
-      // if (match == other.match) return distance.compareTo(other.distance);
-    }
-  }
-
   final ratings = <Rating>[];
 
   double get rating {

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:pingo/features/post/models/post.dart';
+import 'package:pingo/models/matchbase.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/product/models/product.dart';
@@ -9,7 +10,7 @@ import 'package:pingo/models/address.dart';
 import 'package:pingo/models/base.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 
-class Place extends Base {
+class Place extends MatchBase {
   final Address address;
   final String? email;
   final String? open;

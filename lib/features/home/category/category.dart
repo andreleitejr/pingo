@@ -5,8 +5,6 @@ class Category {
   final String title;
   final String image;
 
-  // final int keyword;
-
   Category(this.id, this.title, this.image);
 
   static const all = 0;

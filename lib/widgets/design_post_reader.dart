@@ -52,8 +52,9 @@ class DesignPostReader extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text: place.name,
-                style:
-                    DesignTextStyle.bodySmall14Bold.apply(color: Colors.black),
+                style: DesignTextStyle.bodySmall14Bold.apply(
+                  color: Colors.black,
+                ),
                 children: <TextSpan>[
                   TextSpan(
                     text: post.description,

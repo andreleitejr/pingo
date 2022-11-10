@@ -39,14 +39,14 @@ class _DesignMapState extends State<DesignMap> {
 
   @override
   Widget build(BuildContext context) {
-    GoogleMapController mapController;
     return CustomGoogleMapMarkerBuilder(
       customMarkers: [
         MarkerData(
-            marker: controller.placeMarker,
-            child: DesignDestionationMarker(
-              image: controller.place.image!.image,
-            )),
+          marker: controller.placeMarker,
+          child: DesignDestionationMarker(
+            image: controller.place.image!.image,
+          ),
+        ),
         MarkerData(
           marker: controller.userMarker,
           child: DesignUserMarker(),
@@ -63,7 +63,6 @@ class _DesignMapState extends State<DesignMap> {
             initialCameraPosition: controller.placePosition,
             onMapCreated: (GoogleMapController mapController) {
               mapController = mapController;
-              // widget.completer.complete(mapController);
               mapController.setMapStyle(_mapStyle);
             },
             markers: markers,

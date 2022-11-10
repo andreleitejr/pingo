@@ -110,7 +110,7 @@ extension AuthResultExtension on AuthResult {
     } else if (this == AuthResult.weakPassword) {
       return 'This password is too weak. Try a password with unless 6 letters and numbers';
     } else if (this == AuthResult.wrongPassword) {
-      return 'Looks like you entered a wrong password. Plase, try again.';
+      return 'Looks like you entered a wrong password. Please, try again.';
     } else if (this == AuthResult.userNotFoundInDatabase) {
       return 'User not found in database. We are redirecting your...';
     } else if (this == AuthResult.userNotFound) {
@@ -118,6 +118,6 @@ extension AuthResultExtension on AuthResult {
     } else if (this == AuthResult.tooManyRequests) {
       return 'Too many requests detected. Please, try again in a few minutes.';
     }
-    return 'An unexpected error ocurred. Try again in minutes or try contact our support at ${Emails.support}';
+    return 'An unexpected error occurred. Try again in minutes or try contact our support at ${Emails.support}';
   }
 }

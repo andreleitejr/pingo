@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pingo/models/base.dart';
+import 'package:pingo/models/matchbase.dart';
 
-class Buyable extends Base {
+class Buyable extends MatchBase {
   final double price;
   final double? promotionalPrice;
 

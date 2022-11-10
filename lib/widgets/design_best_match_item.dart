@@ -3,6 +3,7 @@ import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
@@ -39,10 +40,29 @@ class DesignBestMatchItem extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
           child: bestMatch != null
-              ? BlurHash(
-                  imageFit: BoxFit.cover,
-                  image: bestMatch!.image!.image,
-                  hash: bestMatch!.image!.blurHash,
+              ? Stack(
+                  children: [
+                    BlurHash(
+                      imageFit: BoxFit.cover,
+                      image: bestMatch!.image!.image,
+                      hash: bestMatch!.image!.blurHash,
+                    ),
+                    Positioned(
+                        left: 0,
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: Container(
+                          color: Colors.black.withOpacity(0.5),
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            bestMatch!.matchMessage,
+                            style: DesignTextStyle.bodySmall14Bold.apply(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ))
+                  ],
                 )
               : Container(
                   color: DesignColor.text200,
