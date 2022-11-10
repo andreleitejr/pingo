@@ -59,11 +59,6 @@ class HomePage extends StatelessWidget {
                 isLoading: controller.loading.value,
               ),
             ),
-            const SliverToBoxAdapter(
-              child: DesignSpace(
-                size: DesignSize.smallSpace,
-              ),
-            ),
             SliverToBoxAdapter(
               child: DesignSectionTitle(
                 title: 'Lugares feitos para você',
@@ -77,7 +72,11 @@ class HomePage extends StatelessWidget {
                 isLoading: controller.loading.value,
               ),
             ),
-            const SliverToBoxAdapter(child: DesignSpace()),
+            const SliverToBoxAdapter(
+              child: DesignSpace(
+                size: DesignSize.smallSpace,
+              ),
+            ),
             SliverToBoxAdapter(
               child: _bestMatchList(),
             ),
@@ -112,7 +111,9 @@ class HomePage extends StatelessWidget {
                 isLoading: controller.loading.value,
               ),
             ),
-            const SliverToBoxAdapter(child: DesignSpace()),
+            const SliverToBoxAdapter(
+              child: DesignSpace(size: DesignSize.smallSpace),
+            ),
             SliverToBoxAdapter(
               child: DesignCategoryBulletList(
                 value: controller.category.category.value,
@@ -234,7 +235,7 @@ class HomePage extends StatelessWidget {
               ),
               isLoading: controller.loading.value,
             ),
-            const DesignSpace(),
+            const DesignSpace(size: DesignSize.smallSpace),
             SizedBox(
               height: 230,
               child: ListView.builder(
@@ -271,50 +272,7 @@ class HomePage extends StatelessWidget {
 
   Widget _buildProducts() {
     return Obx(() {
-      if (controller.loading.value) {
-        return Column(
-          children: [
-            const DesignSpace(),
-            DesignSectionTitle(
-              title: 'Melhores preços da região',
-              onActionPressed: () => Get.to(
-                ProductListPage(
-                    title: 'Best Prices Only',
-                    products: controller.productBestMatch),
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: DesignSize.mediumSpace,
-              ),
-              isLoading: controller.loading.value,
-            ),
-            const DesignSpace(),
-            SizedBox(
-              height: 175,
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: DesignSize.mediumSpace,
-                ),
-                itemCount: 6,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ShimmerProductItem(),
-                      const DesignSpace(
-                        orientation: DesignSpaceOrientation.horizontal,
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ),
-          ],
-        );
-      }
       final products = controller.productBestMatch;
-
-      if (products.isEmpty) return Container();
 
       return Column(
         children: [
@@ -326,34 +284,32 @@ class HomePage extends StatelessWidget {
                   title: 'Best Prices Only',
                   products: controller.productBestMatch),
             ),
-            padding: const EdgeInsets.symmetric(
-              horizontal: DesignSize.mediumSpace,
-            ),
+            padding:
+                const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
             isLoading: controller.loading.value,
           ),
-          const DesignSpace(),
+          const DesignSpace(size: DesignSize.smallSpace),
           SizedBox(
             height: 175,
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(
-                horizontal: DesignSize.mediumSpace,
-              ),
-              itemCount: products.length,
+              padding: const EdgeInsets.only(left: DesignSize.mediumSpace),
+              itemCount: controller.loading.value ? 10 : products.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                final product = products[index];
-                final isLast = index == products.length - 1;
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    DesignProductItem(
-                      product: product,
-                      isLoading: controller.loading.value,
-                    ),
-                    if (!isLast)
-                      const DesignSpace(
-                        orientation: DesignSpaceOrientation.horizontal,
+                    if (controller.loading.value) ...[
+                      ShimmerProductItem(),
+                    ] else ...[
+                      DesignProductItem(
+                        product: products[index],
+                        isLoading: controller.loading.value,
                       ),
+                    ],
+                    const DesignSpace(
+                      orientation: DesignSpaceOrientation.horizontal,
+                    ),
                   ],
                 );
               },

@@ -9,8 +9,7 @@ class ShimmerSectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      color: Colors.green,
+      height: 36,
       padding: const EdgeInsets.symmetric(
         horizontal: DesignSize.mediumSpace,
       ),

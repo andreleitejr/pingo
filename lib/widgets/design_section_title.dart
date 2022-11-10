@@ -27,7 +27,7 @@ class DesignSectionTitle extends StatelessWidget {
       return const ShimmerSectionTitle();
     }
     return Container(
-      height: 50,
+      height: 36,
       padding: const EdgeInsets.symmetric(
         horizontal: DesignSize.mediumSpace,
       ),
