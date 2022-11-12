@@ -34,6 +34,12 @@ class _LandingPageState extends State<LandingPage>
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -53,6 +59,7 @@ class _LandingPageState extends State<LandingPage>
 
   @override
   void loggedWithoutInfo() {
+    print('##### LANDING CONTROLLER SHDUSDHAAUSDHASDUHASDUASD | Sign Up Controller');
     Get.to(() => const ProfileKeywordsSelection());
   }
 }

@@ -16,7 +16,7 @@ class DesignEventItem extends StatelessWidget {
   final Event event;
   final bool isLoading;
 
-  final _width = (Get.width / 2) - 32;
+  final _width = (Get.width / 3);
 
   @override
   Widget build(BuildContext context) {

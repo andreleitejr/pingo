@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/signup/signup_controller.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
 import 'package:pingo/widgets/design_appbar.dart';
@@ -67,10 +70,23 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
             Obx(
               () => DesignButton(
                 onPressed: () async {
+                  print('################################# Sign Up Info Page | Init');
                   if (controller.isInfoFormValid) {
-                    await controller.signUpWithEmailAndPassword().then((value) {
+                    final result =
+                        await controller.signUpWithEmailAndPassword();
+
+                    print('################################# Sign Up Info Page | sign up $result');
+                    if (result == AuthResult.success) {
+                      print('##### Sign Up Info Page | Resultasasassaassaassaassasasasa  $result');
                       Get.to(() => const ProfileKeywordsSelection());
-                    });
+                    } else {
+                      Get.snackbar(
+                        result.title,
+                        result.message,
+                        backgroundColor: DesignColor.primary500,
+                        colorText: Colors.white,
+                      );
+                    }
                   }
                 },
                 title: 'Sign In',

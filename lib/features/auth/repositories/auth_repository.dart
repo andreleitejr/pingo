@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/firebase_error.dart';
 import 'package:pingo/models/user.dart';
@@ -93,17 +94,16 @@ class AuthRepository extends UserRepository {
       if (user != null) {
         model.uuid = user.uid;
 
-        await super
-            .save(model, documentId: user.uid)
-            .then((_) => Get.put(model));
+        await super.save(model, documentId: user.uid).then((_) {
+          Get.put(model);
+        });
 
         return AuthResult.success;
       }
 
       return AuthResult.failed;
     } catch (e) {
-      print('Failed with error code: ${e}');
-      print(e);
+      debugPrint('Failed with error code: $e');
       return AuthResult.failed;
     }
   }

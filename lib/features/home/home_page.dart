@@ -237,7 +237,7 @@ class HomePage extends StatelessWidget {
             ),
             const DesignSpace(size: DesignSize.smallSpace),
             SizedBox(
-              height: 230,
+              height: 184,
               child: ListView.builder(
                 padding: const EdgeInsets.only(
                   left: DesignSize.mediumSpace,

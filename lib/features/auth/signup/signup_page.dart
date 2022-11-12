@@ -79,7 +79,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 () => DesignButton(
                   onPressed: () async {
                     if (controller.isAuthFormValid) {
-
                       Get.to(const SignUpInfoPage());
                     }
                   },
@@ -110,7 +109,8 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               TextSpan(
                 text: 'I agree with',
-                style: DesignTextStyle.bodySmall14,
+                style: DesignTextStyle.bodySmall14
+                    .apply(color: DesignColor.text500),
               ),
               TextSpan(
                 text: ' Terms ',
@@ -123,7 +123,8 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               TextSpan(
                 text: 'and',
-                style: DesignTextStyle.bodySmall14,
+                style: DesignTextStyle.bodySmall14
+                    .apply(color: DesignColor.text500),
               ),
               TextSpan(
                 text: ' Conditions',
@@ -136,7 +137,8 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               TextSpan(
                 text: '.',
-                style: DesignTextStyle.bodySmall14,
+                style: DesignTextStyle.bodySmall14
+                    .apply(color: DesignColor.text500),
               ),
             ],
           ),
@@ -155,7 +157,8 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             TextSpan(
               text: 'Alread have an account?',
-              style: DesignTextStyle.bodySmall14,
+              style:
+                  DesignTextStyle.bodySmall14.apply(color: DesignColor.text500),
             ),
             TextSpan(
               text: ' Sign In!',

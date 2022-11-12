@@ -21,8 +21,9 @@ abstract class Base extends DataBase {
       : name = document['name'] as String,
         keywords = List.from(document['keywords']),
         description = document['description'] as String?,
-        image =
-            ImageBlurHash.fromJson(document['image'] as Map<String, dynamic>),
+        image = document['image'] != null
+            ? ImageBlurHash.fromJson(document['image'])
+            : null,
         super.fromMap(document);
 
   @override

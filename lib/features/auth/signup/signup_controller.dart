@@ -77,8 +77,9 @@ class SignUpController extends GetxController {
   Future<AuthResult> signUpWithEmailAndPassword() async {
     var result = await repository.signUpWithEmailAndPassword(
         name.value, email.value, password.value);
+
     if (result == AuthResult.success) {
-      await repository.save(user);
+      result = await repository.save(user);
     }
 
     return result;

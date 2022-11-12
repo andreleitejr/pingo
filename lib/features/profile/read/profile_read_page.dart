@@ -96,7 +96,10 @@ class ProfileReadPage extends StatelessWidget {
             Expanded(child: Container()),
             DesignListButton(
               title: 'Sign Out',
-              onTap: () => repository.signOut(),
+              onTap: () async {
+                await repository.signOut();
+                Get.to(() => const SignInPage());
+              },
             ),
           ],
         ),

@@ -26,19 +26,18 @@ class LandingController extends GetxController {
   Rx<List<User>> users = Rx<List<User>>([]);
 
   Future<void> _init() async {
-    await Future.delayed(const Duration(milliseconds: 1600));
+    await Future.delayed(const Duration(milliseconds: 1500));
 
-    _auth.authStateChanges().listen((auth.User? authUser) {
-      if (authUser == null) {
-        landingPageNavigator.loggedOut();
-      } else if (userValid) {
-        registerUser();
-        landingPageNavigator.logged();
-      } else {
-        registerUser();
-        landingPageNavigator.loggedWithoutInfo();
-      }
-    });
+    final authUser = _auth.currentUser;
+    if (authUser == null) {
+      landingPageNavigator.loggedOut();
+    } else if (userValid) {
+      registerUser();
+      landingPageNavigator.logged();
+    } else {
+      registerUser();
+      landingPageNavigator.loggedWithoutInfo();
+    }
   }
 
   String? get authId => _auth.currentUser?.uid;
