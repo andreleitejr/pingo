@@ -34,97 +34,99 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Obx(() {
-        if (controller.search.searchActive.value) {
-          return SearchPage();
-        }
-        return CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              backgroundColor: Colors.white,
-              elevation: 0,
-              title: DesignHomeAppBar(),
-              floating: true,
-            ),
-            SliverAppBar(
-              primary: false,
-              pinned: true,
-              automaticallyImplyLeading: false,
-              backgroundColor: Colors.white,
-              title: DesignSearchInput(
-                hint: 'Busque o melhor ao redor',
-                onChanged: controller.search.setSearch,
-                isLoading: controller.loading.value,
+      body: SafeArea(
+        child: Obx(() {
+          if (controller.search.searchActive.value) {
+            return SearchPage();
+          }
+          return CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                backgroundColor: Colors.white,
+                elevation: 0,
+                title: DesignHomeAppBar(),
+                floating: true,
               ),
-            ),
-            SliverToBoxAdapter(
-              child: DesignSectionTitle(
-                title: 'Lugares feitos para você',
-                onActionPressed: () => Get.to(
-                  PlaceListPage(
-                      title: 'Made for you', places: controller.bestMatch),
+              SliverAppBar(
+                primary: false,
+                pinned: true,
+                automaticallyImplyLeading: false,
+                backgroundColor: Colors.white,
+                title: DesignSearchInput(
+                  hint: 'Busque o melhor ao redor',
+                  onChanged: controller.search.setSearch,
+                  isLoading: controller.loading.value,
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: DesignSize.mediumSpace,
+              ),
+              SliverToBoxAdapter(
+                child: DesignSectionTitle(
+                  title: 'Lugares feitos para você',
+                  onActionPressed: () => Get.to(
+                    PlaceListPage(
+                        title: 'Made for you', places: controller.bestMatch),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: DesignSize.mediumSpace,
+                  ),
+                  isLoading: controller.loading.value,
                 ),
-                isLoading: controller.loading.value,
               ),
-            ),
-            const SliverToBoxAdapter(
-              child: DesignSpace(
-                size: DesignSize.smallSpace,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: _bestMatchList(),
-            ),
-            const SliverToBoxAdapter(child: DesignSpace()),
-            SliverToBoxAdapter(
-              child: _categoryList(),
-            ),
-            const SliverToBoxAdapter(
-              child: DesignSpace(
-                size: DesignSize.smallSpace,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: _buildEvents(),
-            ),
-            SliverToBoxAdapter(
-              child: _buildProducts(),
-            ),
-            const SliverToBoxAdapter(child: DesignSpace()),
-            SliverToBoxAdapter(
-              child: DesignSectionTitle(
-                title: 'Tudo próximo',
-                onActionPressed: () => Get.to(
-                  PlaceListPage(
-                      title: ''
-                          '',
-                      places: controller.places),
+              const SliverToBoxAdapter(
+                child: DesignSpace(
+                  size: DesignSize.smallSpace,
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: DesignSize.mediumSpace,
+              ),
+              SliverToBoxAdapter(
+                child: _bestMatchList(),
+              ),
+              const SliverToBoxAdapter(child: DesignSpace()),
+              SliverToBoxAdapter(
+                child: _categoryList(),
+              ),
+              const SliverToBoxAdapter(
+                child: DesignSpace(
+                  size: DesignSize.smallSpace,
                 ),
-                isLoading: controller.loading.value,
               ),
-            ),
-            const SliverToBoxAdapter(
-              child: DesignSpace(size: DesignSize.smallSpace),
-            ),
-            SliverToBoxAdapter(
-              child: DesignCategoryBulletList(
-                value: controller.category.category.value,
-                onItemPressed: controller.category.setCategory,
-                isLoading: controller.loading.value,
+              SliverToBoxAdapter(
+                child: _buildEvents(),
               ),
-            ),
-            const SliverToBoxAdapter(child: DesignSpace()),
-            _buildPlaces(),
-          ],
-        );
-      }),
+              SliverToBoxAdapter(
+                child: _buildProducts(),
+              ),
+              const SliverToBoxAdapter(child: DesignSpace()),
+              SliverToBoxAdapter(
+                child: DesignSectionTitle(
+                  title: 'Tudo próximo',
+                  onActionPressed: () => Get.to(
+                    PlaceListPage(
+                        title: ''
+                            '',
+                        places: controller.places),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: DesignSize.mediumSpace,
+                  ),
+                  isLoading: controller.loading.value,
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: DesignSpace(size: DesignSize.smallSpace),
+              ),
+              SliverToBoxAdapter(
+                child: DesignCategoryBulletList(
+                  value: controller.category.category.value,
+                  onItemPressed: controller.category.setCategory,
+                  isLoading: controller.loading.value,
+                ),
+              ),
+              const SliverToBoxAdapter(child: DesignSpace()),
+              _buildPlaces(),
+            ],
+          );
+        }),
+      ),
     );
   }
 
