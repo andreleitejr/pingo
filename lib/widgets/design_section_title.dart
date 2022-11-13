@@ -9,14 +9,14 @@ class DesignSectionTitle extends StatelessWidget {
   const DesignSectionTitle({
     Key? key,
     required this.title,
-    required this.onActionPressed,
+    this.onActionPressed,
     this.actionTitle,
     this.padding,
     this.isLoading = false,
   }) : super(key: key);
 
   final String title;
-  final Function() onActionPressed;
+  final Function()? onActionPressed;
   final String? actionTitle;
   final EdgeInsets? padding;
   final bool isLoading;

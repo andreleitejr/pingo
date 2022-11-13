@@ -7,6 +7,8 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
+import 'package:pingo/models/base.dart';
+import 'package:pingo/models/matchbase.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
 
@@ -15,17 +17,19 @@ class DesignBestMatchItem extends StatelessWidget {
     Key? key,
     required this.bestMatch,
     this.isLoading = false,
+    this.width,
   }) : super(key: key);
 
-  final Place? bestMatch;
+  final MatchBase? bestMatch;
   final bool isLoading;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
       return DesignShimmerWidget(
         child: Container(
-          width: Get.width * 0.6,
+          width: width ?? Get.width * 0.6,
           margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
           decoration: BoxDecoration(
             color: Colors.black,
@@ -35,9 +39,13 @@ class DesignBestMatchItem extends StatelessWidget {
       );
     }
     return GestureDetector(
-      onTap: () => Get.to(() => PlaceReadPage(place: bestMatch!)),
+      onTap: () {
+        if (bestMatch is Place) {
+          Get.to(() => PlaceReadPage(place: bestMatch! as Place));
+        }
+      },
       child: Container(
-        width: Get.width * 0.6,
+        width: width ?? Get.width * 0.6,
         margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),

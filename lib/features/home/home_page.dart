@@ -35,7 +35,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Obx(() {
-        // controller.loading(true);
         if (controller.search.searchActive.value) {
           return SearchPage();
         }
@@ -194,10 +193,7 @@ class HomePage extends StatelessWidget {
               } else if (controller.category.category.value.id ==
                   Category.events) {
                 Get.to(
-                  EventListPage(
-                    title: controller.category.category.value.title,
-                    events: controller.eventsBestMatch,
-                  ),
+                  () => EventListPage(events: controller.eventsBestMatch),
                 );
               } else {
                 Get.to(
@@ -226,10 +222,9 @@ class HomePage extends StatelessWidget {
           children: [
             DesignSectionTitle(
               title: 'Eventos próximos',
-              onActionPressed: () => Get.to(
-                EventListPage(
-                    title: 'Events', events: controller.eventsBestMatch),
-              ),
+              onActionPressed: () => Get.to(() => EventListPage(
+                    events: controller.eventsBestMatch,
+                  )),
               padding: const EdgeInsets.symmetric(
                 horizontal: DesignSize.mediumSpace,
               ),

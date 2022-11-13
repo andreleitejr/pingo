@@ -27,7 +27,6 @@ abstract class DataBaseRepository<T extends DataBase> {
       FirebaseFirestore.instance.collectionGroup(name.pathReference);
 
   final _streamController = BehaviorSubject<List<T>?>();
-  
 
   List<T>? get result => _streamController.value;
 
@@ -47,8 +46,10 @@ abstract class DataBaseRepository<T extends DataBase> {
 
   void delete(String documentId) => collection.doc(documentId).delete();
 
-  Stream<List<T>> get read => collectionGroup.snapshots().map(
-      (query) => query.docs.map<T>((document) => fromMap(document)).toList());
+  Stream<List<T>> get read => collectionGroup.snapshots().map((query) {
+        print('${query.docs.first}');
+        return query.docs.map<T>((document) => fromMap(document)).toList();
+      });
 
   Future<T?> get(String documentId) async =>
       await collection.doc(documentId).get().then((doc) => fromMap(doc));
