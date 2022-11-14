@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/services/category_controller.dart';
@@ -13,12 +14,25 @@ class EventListController extends GetxController {
   final category = Get.put(CategoryController());
 
   List<Event> get bestMatch {
-    final list = events;
+    var list = events;
     for (final event in list) {
       final match =
           event.keywords.toSet().intersection(user.keywords.toSet()).length;
       event.match = match;
     }
+
+    if (search.isNotEmpty) {
+      list = list.where((event) {
+        if (event.name.clean.contains(search.value.clean)) {
+          return true;
+        } else if (event.description != null &&
+            event.description!.clean.contains(search.value.clean)) {
+          return true;
+        }
+        return false;
+      }).toList();
+    }
+
     list.sort((a, b) => a.compareTo(b));
     return list;
   }

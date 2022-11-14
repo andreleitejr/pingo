@@ -67,7 +67,8 @@ class _EventListPageState extends State<EventListPage> {
               child: Obx(
                 () {
                   if (!(controller.category.category.value.id ==
-                      Category.all)) {
+                          Category.all) ||
+                      controller.search.value.isNotEmpty) {
                     return Container();
                   }
                   return const DesignSectionTitle(
@@ -86,7 +87,8 @@ class _EventListPageState extends State<EventListPage> {
               child: Obx(
                 () {
                   if (!(controller.category.category.value.id ==
-                      Category.all)) {
+                          Category.all) ||
+                      controller.search.value.isNotEmpty) {
                     return Container();
                   }
                   return SizedBox(
@@ -112,7 +114,8 @@ class _EventListPageState extends State<EventListPage> {
               child: Obx(
                 () {
                   if (!(controller.category.category.value.id ==
-                      Category.all)) {
+                          Category.all) ||
+                      controller.search.value.isNotEmpty) {
                     return Container();
                   }
                   return const DesignSpace();
@@ -134,7 +137,8 @@ class _EventListPageState extends State<EventListPage> {
               child: Obx(
                 () {
                   if (!(controller.category.category.value.id ==
-                      Category.all)) {
+                          Category.all) ||
+                      controller.search.value.isNotEmpty) {
                     return Container();
                   }
                   return DesignSectionTitle(
@@ -155,7 +159,8 @@ class _EventListPageState extends State<EventListPage> {
               child: Obx(
                 () {
                   if (!(controller.category.category.value.id ==
-                      Category.all)) {
+                          Category.all) ||
+                      controller.search.value.isNotEmpty) {
                     return Container();
                   }
                   return SizedBox(
@@ -188,7 +193,8 @@ class _EventListPageState extends State<EventListPage> {
               child: Obx(
                 () {
                   if (!(controller.category.category.value.id ==
-                      Category.all)) {
+                          Category.all) ||
+                      controller.search.value.isNotEmpty) {
                     return Container();
                   }
                   return const DesignSpace();
@@ -204,21 +210,25 @@ class _EventListPageState extends State<EventListPage> {
                 actionTitle: '',
               ),
             ),
-            const SliverToBoxAdapter(child: DesignSpace()),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  final event = controller.bestMatch[index];
+            const SliverToBoxAdapter(
+                child: DesignSpace(size: DesignSize.smallSpace)),
+            Obx(
+              () => SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    final event = controller.bestMatch[index];
 
-                  return DesignListTile(
-                    image: event.image,
-                    title: event.name,
-                    subtitle: event.description,
-                    trailing: event.distance.metricSystem,
-                    onPressed: () => Get.to(() => EventReadPage(event: event)),
-                  );
-                },
-                childCount: controller.bestMatch.length, // 1000 list items
+                    return DesignListTile(
+                      image: event.image,
+                      title: event.name,
+                      subtitle: event.description,
+                      trailing: event.distance.metricSystem,
+                      onPressed: () =>
+                          Get.to(() => EventReadPage(event: event)),
+                    );
+                  },
+                  childCount: controller.bestMatch.length, // 1000 list items
+                ),
               ),
             ),
           ],
