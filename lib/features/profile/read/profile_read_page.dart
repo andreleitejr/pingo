@@ -26,82 +26,85 @@ class ProfileReadPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(DesignSize.appBarHeight),
-        child: DesignAppBar(
-          showLeading: false,
-          title: 'Profile',
+    return SafeArea(
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
+          child: DesignAppBar(
+            showLeading: false,
+            title: '@${user.nickname}',
+          ),
         ),
-      ),
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                DesignAvatarImage(image: user.image?.image),
-                const DesignSpace(
-                  orientation: DesignSpaceOrientation.horizontal,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      user.name,
-                      style: DesignTextStyle.bodyMedium16Bold
-                          .apply(color: DesignColor.text500),
-                    ),
-                    const DesignSpace(size: 4),
-                    Row(
-                      children: [
-                        const DesignIcon(
-                          icon: DesignIcons.place,
-                          width: 8,
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          currentLocation.currentAddress,
-                          style: DesignTextStyle.labelMedium12
-                              .apply(color: DesignColor.text400),
-                        ),
-                      ],
-                    )
-                  ],
-                )
-              ],
-            ),
-            const DesignSpace(),
-            Text(
-              user.description ?? 'My name is ${user.name} and I am awesome!',
-            ),
-            const DesignSpace(),
-            DesignOutlinedButton(
-              onPressed: () async {
-                Get.to(() => const ProfileInfoEditPage());
-                // await repository
-                //     .signOut()
-                //     .then((_) => Get.to(() => const SignInPage()));
-              },
-              title: 'Edit Profile',
-              isActive: true,
-            ),
-            const DesignSpace(),
-            const DesignListButton(title: 'Account'),
-            const DesignListButton(title: 'Settings'),
-            const DesignListButton(title: 'Security'),
-            const DesignListButton(title: 'Help'),
-            const DesignListButton(title: 'About Pingo'),
-            Expanded(child: Container()),
-            DesignListButton(
-              title: 'Sign Out',
-              onTap: () async {
-                await repository.signOut();
-                Get.to(() => const SignInPage());
-              },
-            ),
-          ],
+        resizeToAvoidBottomInset: false,
+        body: Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  DesignAvatarImage(image: user.image?.image),
+                  const DesignSpace(
+                    orientation: DesignSpaceOrientation.horizontal,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        user.name,
+                        style: DesignTextStyle.bodyMedium16Bold
+                            .apply(color: DesignColor.text500),
+                      ),
+                      const DesignSpace(size: 4),
+                      Row(
+                        children: [
+                          const DesignIcon(
+                            icon: DesignIcons.place,
+                            width: 8,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            currentLocation.currentAddress,
+                            style: DesignTextStyle.labelMedium12
+                                .apply(color: DesignColor.text400),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+              const DesignSpace(),
+              Text(
+                user.description ?? 'My name is ${user.name} and I am awesome!',
+              ),
+              const DesignSpace(),
+              DesignOutlinedButton(
+                onPressed: () async {
+                  Get.to(() => const ProfileInfoEditPage());
+                  // await repository
+                  //     .signOut()
+                  //     .then((_) => Get.to(() => const SignInPage()));
+                },
+                title: 'Edit Profile',
+                isActive: true,
+              ),
+              const DesignSpace(),
+              const DesignListButton(title: 'Account'),
+              const DesignListButton(title: 'Settings'),
+              const DesignListButton(title: 'Security'),
+              const DesignListButton(title: 'Help'),
+              const DesignListButton(title: 'About Pingo'),
+              Expanded(child: Container()),
+              DesignListButton(
+                title: 'Sign Out',
+                onTap: () async {
+                  await repository.signOut();
+                  Get.to(() => const SignInPage());
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
