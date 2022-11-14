@@ -1,7 +1,8 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
+import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/features/event/pages/list/event_list_page.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/home/home_page.dart';
@@ -9,6 +10,7 @@ import 'package:pingo/features/place/pages/list/place_list_page.dart';
 import 'package:pingo/features/product/pages/list/product_list_page.dart';
 import 'package:pingo/features/profile/read/profile_read_page.dart';
 import 'package:pingo/models/user.dart';
+import 'package:pingo/widgets/design_error_page.dart';
 import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 
@@ -19,8 +21,8 @@ class BasePage extends StatefulWidget {
   State<BasePage> createState() => _BasePageState();
 }
 
-class _BasePageState extends State<BasePage> {
-  final controller = Get.put(HomeController());
+class _BasePageState extends State<BasePage> implements BasePageNav {
+  late HomeController controller;
   final User user = Get.find();
 
   int _selectedIndex = 0;
@@ -29,6 +31,12 @@ class _BasePageState extends State<BasePage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    controller = Get.put(HomeController(this));
+    super.initState();
   }
 
   @override
@@ -120,4 +128,36 @@ class _BasePageState extends State<BasePage> {
       ),
     );
   }
+
+  @override
+  void locationDenied() {
+    Get.to(
+      () => DesignErrorPage(
+        title: 'Localização negada',
+        description:
+            'Acesso à localização negado. Dessa forma, não conseguimos encontrar os melhores lugares próximos. Por favor, vá até suas configurações e permita que o Pingo saiba sua localização atual.',
+        image: DesignImages.fallbackImage,
+        onPressed: () => AppSettings.openLocationSettings(),
+      ),
+    );
+  }
+
+  @override
+  void noInternetConnection() {
+    Get.to(
+      () => DesignErrorPage(
+        title: 'Sem conexão com a internet',
+        description:
+            'Parece que você está desconectado. Dessa forma, não conseguimos encontrar os melhores lugares próximos. Por favor, verifique suas configurações e o status de conexão.',
+        image: DesignImages.fallbackImage,
+        onPressed: () => AppSettings.openDataRoamingSettings(),
+      ),
+    );
+  }
+}
+
+abstract class BasePageNav {
+  void locationDenied();
+
+  void noInternetConnection();
 }

@@ -1,5 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/services/category_controller.dart';
@@ -12,10 +14,11 @@ import 'package:pingo/models/user.dart';
 import 'package:pingo/services/current_weather.dart';
 
 class HomeController extends GetxController {
-  HomeController() {
+  HomeController(this.pageNav) {
     loading(true);
   }
 
+  final BasePageNav pageNav;
   var loading = false.obs;
 
   final User user = Get.find();
@@ -23,6 +26,8 @@ class HomeController extends GetxController {
   final location = Get.put(CurrentLocation());
 
   final weather = Get.put(CurrentWeather());
+
+  final internet = (Get.put(InternetConnectionChecker()));
 
   final repository = PlaceRepository();
 
@@ -107,6 +112,25 @@ class HomeController extends GetxController {
     return events;
   }
 
+  Future<void> _verifyConnection() async {
+    final hasConnection = await internet.hasConnection;
+
+    if (!hasConnection) {
+      await Future.delayed(const Duration(milliseconds: 500));
+      pageNav.noInternetConnection();
+    }
+  }
+
+  Future<void> _getLocation() async {
+    final permission = await location.requestPermission();
+
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      await Future.delayed(const Duration(milliseconds: 750));
+      pageNav.locationDenied();
+    }
+  }
+
   @override
   Future<void> onReady() async {
     bestMatchList.bindStream(repository.combined);
@@ -120,6 +144,9 @@ class HomeController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    await _verifyConnection();
+    await _getLocation();
+
     await location.init();
     // coordinates(location.currentCoordinates);
     address(location.currentAddress);

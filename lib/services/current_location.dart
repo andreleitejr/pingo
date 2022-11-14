@@ -9,15 +9,15 @@ class CurrentLocation {
   Placemark? placemark;
 
   Future<void> init() async {
-    final permission = await Geolocator.requestPermission();
+    await _getCurrentLocation();
+    // currentCoordinates =
+    //     const GeoPoint(-23.548842918924585, -46.64632573035709);
+    await _getStreetName();
+  }
 
-    if (permission != LocationPermission.denied &&
-        permission != LocationPermission.deniedForever) {
-      await _getCurrentLocation();
-      // currentCoordinates =
-      //     const GeoPoint(-23.548842918924585, -46.64632573035709);
-      await _getStreetName();
-    }
+  Future<LocationPermission> requestPermission() async {
+    final permission = await Geolocator.requestPermission();
+    return permission;
   }
 
   Future<void> _getCurrentLocation() async {
