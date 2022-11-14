@@ -75,7 +75,8 @@ class _ProductListPageState extends State<ProductListPage> {
               ),
             ),
             SliverToBoxAdapter(child: Obx(() {
-              if (!(controller.category.category.value.id == Category.all)) {
+              if (!(controller.category.category.value.id == Category.all) ||
+                  controller.search.value.isNotEmpty) {
                 return Container();
               }
               return const DesignSpace(
@@ -86,7 +87,8 @@ class _ProductListPageState extends State<ProductListPage> {
               child: Obx(
                 () {
                   if (!(controller.category.category.value.id ==
-                      Category.all)) {
+                          Category.all) ||
+                      controller.search.value.isNotEmpty) {
                     return Container();
                   }
                   return const DesignSectionTitle(
@@ -103,14 +105,16 @@ class _ProductListPageState extends State<ProductListPage> {
                 child: DesignSpace(size: DesignSize.smallSpace)),
             SliverToBoxAdapter(
               child: Obx(() {
-                if (!(controller.category.category.value.id == Category.all)) {
+                if (!(controller.category.category.value.id == Category.all) ||
+                    controller.search.value.isNotEmpty) {
                   return Container();
                 }
                 return _products();
               }),
             ),
             SliverToBoxAdapter(child: Obx(() {
-              if (!(controller.category.category.value.id == Category.all)) {
+              if (!(controller.category.category.value.id == Category.all) ||
+                  controller.search.value.isNotEmpty) {
                 return Container();
               }
               return const DesignSpace(
@@ -126,22 +130,25 @@ class _ProductListPageState extends State<ProductListPage> {
                 actionTitle: '',
               ),
             ),
-            const SliverToBoxAdapter(child: DesignSpace()),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  final product = controller.bestProducts[index];
+            const SliverToBoxAdapter(
+                child: DesignSpace(size: DesignSize.smallSpace)),
+            Obx(
+              () => SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    final product = controller.bestProducts[index];
 
-                  return DesignListTile(
-                    image: product.image,
-                    title: product.name,
-                    subtitle: product.description,
-                    trailing: product.distance.metricSystem,
-                    onPressed: () =>
-                        Get.to(() => ProductReadPage(product: product)),
-                  );
-                },
-                childCount: controller.bestProducts.length, // 1000 list items
+                    return DesignListTile(
+                      image: product.image,
+                      title: product.name,
+                      subtitle: product.description,
+                      trailing: product.distance.metricSystem,
+                      onPressed: () =>
+                          Get.to(() => ProductReadPage(product: product)),
+                    );
+                  },
+                  childCount: controller.bestProducts.length, // 1000 list items
+                ),
               ),
             ),
           ],

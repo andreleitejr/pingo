@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/services/category_controller.dart';
@@ -13,13 +14,27 @@ class ProductListController extends GetxController {
   final category = Get.put(CategoryController());
 
   List<Product> get bestProducts {
-    final list = products;
+    var list = products;
     for (final product in list) {
       final match =
           product.keywords.toSet().intersection(user.keywords.toSet()).length;
       product.match = match;
     }
+
+    if (search.isNotEmpty) {
+      list = list.where((product) {
+        if (product.name.clean.contains(search.value.clean)) {
+          return true;
+        } else if (product.description != null &&
+            product.description!.clean.contains(search.value.clean)) {
+          return true;
+        }
+        return false;
+      }).toList();
+    }
+
     list.sort((a, b) => a.compareTo(b));
+
     return list;
   }
 
