@@ -23,12 +23,14 @@ class SearchPage extends StatelessWidget {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
-          child: Container(
+          child: SizedBox(
             height: 100,
             width: double.infinity,
-            padding: const EdgeInsets.all(DesignSize.mediumSpace),
             child: Row(
               children: [
+                const DesignSpace(
+                  orientation: DesignSpaceOrientation.horizontal,
+                ),
                 Expanded(
                   child: DesignSearchInput(
                     autoFocus: true,
@@ -37,18 +39,12 @@ class SearchPage extends StatelessWidget {
                     onChanged: controller.search.setSearch,
                   ),
                 ),
-                const DesignSpace(
-                  orientation: DesignSpaceOrientation.horizontal,
-                ),
                 DesignIconButton(
                   icon: DesignIcons.close,
                   height: 14,
                   width: 14,
+                  alignment: Alignment.center,
                   onPressed: () => controller.search.closeSearch(),
-                ),
-                const DesignSpace(
-                  orientation: DesignSpaceOrientation.horizontal,
-                  size: DesignSize.smallSpace,
                 ),
               ],
             ),

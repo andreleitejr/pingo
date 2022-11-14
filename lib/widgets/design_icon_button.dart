@@ -19,8 +19,10 @@ class DesignIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      width: 54,
       padding: const EdgeInsets.all(4),
+      alignment: Alignment.center,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(alignment: alignment),
