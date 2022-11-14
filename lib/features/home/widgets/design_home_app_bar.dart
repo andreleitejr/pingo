@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:pingo/constants/design_animations.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
+import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/features/home/components/filter/filter_modal.dart';
 import 'package:pingo/features/home/home_controller.dart';
@@ -12,11 +14,28 @@ import 'package:pingo/services/current_location.dart';
 import 'package:pingo/services/current_weather.dart';
 import 'package:pingo/widgets/design_icon_button.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
+import 'package:rive/rive.dart';
 
-class DesignHomeAppBar extends StatelessWidget {
+class DesignHomeAppBar extends StatefulWidget {
   DesignHomeAppBar({Key? key}) : super(key: key);
 
+  @override
+  State<DesignHomeAppBar> createState() => _DesignHomeAppBarState();
+}
+
+class _DesignHomeAppBarState extends State<DesignHomeAppBar> {
   final HomeController controller = Get.find();
+
+  late RiveAnimationController animationController;
+
+  @override
+  void initState() {
+    animationController = OneShotAnimation(
+      controller.weather.animation,
+      autoplay: true,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +47,7 @@ class DesignHomeAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _buildImage(),
+              const SizedBox(width: DesignSize.smallSpace),
               Expanded(
                 child: _buildText(),
               ),
@@ -56,13 +76,14 @@ class DesignHomeAppBar extends StatelessWidget {
       return GestureDetector(
         onTap: () => Get.to(PlaceEditPage()),
         child: SizedBox(
-          height: 64,
-          width: 64,
+          height: 40,
+          width: 40,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(64),
-            child: Image.network(
-              controller.icon.value,
-              fit: BoxFit.cover,
+            child: RiveAnimation.asset(
+              controller.weather.asset,
+              animations: [controller.weather.animation],
+              controllers: [animationController],
             ),
           ),
         ),

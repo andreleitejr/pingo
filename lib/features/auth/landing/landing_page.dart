@@ -40,28 +40,19 @@ class _LandingPageState extends State<LandingPage>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DesignLoadingPage(),
-    );
-  }
+  Widget build(BuildContext context) => const GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: DesignLoadingPage(),
+      );
 
   @override
-  void logged() {
-    Get.to(() => const BasePage());
-  }
+  void logged() => Get.to(() => const BasePage());
 
   @override
-  void loggedOut() {
-    Get.to(() => const SignUpPage());
-  }
+  void loggedOut() => Get.to(() => const SignUpPage());
 
   @override
-  void loggedWithoutInfo() {
-    print('##### LANDING CONTROLLER SHDUSDHAAUSDHASDUHASDUASD | Sign Up Controller');
-    Get.to(() => const ProfileKeywordsSelection());
-  }
+  void loggedWithoutInfo() => Get.to(() => const ProfileKeywordsSelection());
 }
 
 abstract class LandingPageNavigator {
