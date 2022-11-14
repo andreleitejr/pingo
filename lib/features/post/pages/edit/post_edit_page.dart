@@ -33,9 +33,7 @@ class _PostEditPageState extends State<PostEditPage> {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(DesignSize.appBarHeight),
-        child: DesignAppBar(
-          title: 'Post',
-        ),
+        child: DesignAppBar(title: 'Post'),
       ),
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -46,7 +44,7 @@ class _PostEditPageState extends State<PostEditPage> {
               () => DesignImageSelection(
                 displayImage: controller.displayImage.value,
                 onButtonPressed: () async =>
-                    await controller.setImage(ImageSource.camera),
+                    await controller.setImage(ImageSource.gallery),
               ),
             ),
             const DesignSpace(),

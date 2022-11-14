@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pingo/core/keyword.dart';
-import 'package:pingo/features/home/category/category.dart';
+import 'package:pingo/models/category.dart';
 import 'package:pingo/features/place/models/place.dart';
 
 class CategoryController extends GetxController {

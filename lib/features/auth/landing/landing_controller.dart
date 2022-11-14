@@ -49,7 +49,7 @@ class LandingController extends GetxController {
   void registerUser() {
     if (user != null) {
       Get.put(user!);
-      isAdmin = user?.email == 'paulo@rock.com';
+      isAdmin = user?.email == 'paulo@rockdssd.com';
       if (isAdmin) debugPrint('System Message | Admin successful configured.');
     }
   }

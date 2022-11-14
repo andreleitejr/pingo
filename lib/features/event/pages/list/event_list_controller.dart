@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/models/user.dart';
+import 'package:pingo/services/category_controller.dart';
 
 class EventListController extends GetxController {
   EventListController(this.events);
@@ -8,6 +9,8 @@ class EventListController extends GetxController {
   final User user = Get.find();
 
   List<Event> events;
+
+  final category = Get.put(CategoryController());
 
   List<Event> get bestMatch {
     final list = events;

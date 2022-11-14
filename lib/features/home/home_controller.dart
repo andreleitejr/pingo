@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/event/models/event.dart';
-import 'package:pingo/features/home/category/category_controller.dart';
+import 'package:pingo/services/category_controller.dart';
 import 'package:pingo/features/home/components/filter/filter_controller.dart';
 import 'package:pingo/features/home/components/search/search_controller.dart';
 import 'package:pingo/features/place/models/place.dart';

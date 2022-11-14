@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:pingo/core/extensions.dart';
@@ -12,9 +13,9 @@ class CurrentLocation {
 
     if (permission != LocationPermission.denied &&
         permission != LocationPermission.deniedForever) {
-      // await _getCurrentLocation();
-      currentCoordinates =
-          const GeoPoint(-23.548842918924585, -46.64632573035709);
+      await _getCurrentLocation();
+      // currentCoordinates =
+      //     const GeoPoint(-23.548842918924585, -46.64632573035709);
       await _getStreetName();
     }
   }
@@ -22,7 +23,16 @@ class CurrentLocation {
   Future<void> _getCurrentLocation() async {
     try {
       final currentLocation = await Geolocator.getCurrentPosition();
+
       currentCoordinates = currentLocation.toGeoPoint;
+
+      Geolocator.getPositionStream().listen((Position? currentLocation) {
+        if (currentLocation != null) {
+          currentCoordinates = currentLocation.toGeoPoint;
+          debugPrint(
+              'CURRENT LOCATION CHANGED | ${currentCoordinates.latitude}, ${currentCoordinates.longitude}');
+        }
+      });
     } catch (e) {
       print(e);
     }

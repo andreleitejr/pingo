@@ -171,18 +171,18 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                           isActive: true,
                         ),
                       ),
-                      const DesignSpace(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: DesignSize.mediumSpace),
-                        child: DesignButton(
-                          onPressed: () =>
-                              Get.to(() => PostEditPage(place: widget.place)),
-                          title: 'Create Post',
-                          isActive: true,
-                        ),
-                      ),
                     ],
+                    const DesignSpace(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: DesignSize.mediumSpace),
+                      child: DesignButton(
+                        onPressed: () =>
+                            Get.to(() => PostEditPage(place: widget.place)),
+                        title: 'Create Post',
+                        isActive: true,
+                      ),
+                    ),
                   ],
                 ),
               ),

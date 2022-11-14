@@ -5,14 +5,17 @@ import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/event/pages/list/event_list_controller.dart';
 import 'package:pingo/features/event/pages/read/event_read_page.dart';
+import 'package:pingo/models/category.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_best_match_item.dart';
+import 'package:pingo/widgets/design_category_bullet_list.dart';
 import 'package:pingo/widgets/design_event_item.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_section_title.dart';
 import 'package:pingo/widgets/design_space.dart';
 
+// ignore: must_be_immutable
 class EventListPage extends StatefulWidget {
   EventListPage({
     Key? key,
@@ -60,51 +63,102 @@ class _EventListPageState extends State<EventListPage> {
                 onChanged: controller.setSearch,
               ),
             ),
-            const SliverToBoxAdapter(
-              child: DesignSectionTitle(
-                title: 'Eventos com seu perfil',
-                padding: EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
-                actionTitle: '',
+            SliverToBoxAdapter(
+              child: Obx(
+                () {
+                  if (!(controller.category.category.value.id ==
+                      Category.all)) {
+                    return Container();
+                  }
+                  return const DesignSectionTitle(
+                    title: 'Eventos com seu perfil',
+                    padding: EdgeInsets.symmetric(
+                        horizontal: DesignSize.mediumSpace),
+                    actionTitle: '',
+                  );
+                },
               ),
             ),
             const SliverToBoxAdapter(
-              child: DesignSpace(
-                size: DesignSize.smallSpace,
+              child: DesignSpace(size: DesignSize.smallSpace),
+            ),
+            SliverToBoxAdapter(
+              child: Obx(
+                () {
+                  if (!(controller.category.category.value.id ==
+                      Category.all)) {
+                    return Container();
+                  }
+                  return SizedBox(
+                    height: 175,
+                    child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: DesignSize.mediumSpace),
+                      itemCount: controller.bestMatch.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        final bestMatch = controller.bestMatch[index];
+                        return DesignBestMatchItem(
+                          bestMatch: bestMatch,
+                          width: Get.width * 0.8,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ),
             SliverToBoxAdapter(
-              child: SizedBox(
-                height: 225,
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: DesignSize.mediumSpace),
-                  itemCount: controller.bestMatch.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    final bestMatch = controller.bestMatch[index];
-                    return DesignBestMatchItem(
-                      bestMatch: bestMatch,
-                      width: Get.width * 0.8,
-                    );
-                  },
+              child: Obx(
+                () {
+                  if (!(controller.category.category.value.id ==
+                      Category.all)) {
+                    return Container();
+                  }
+                  return const DesignSpace();
+                },
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Obx(
+                () => DesignCategoryBulletList(
+                  value: controller.category.category.value,
+                  onItemPressed: controller.category.setCategory,
                 ),
               ),
             ),
-            const SliverToBoxAdapter(child: DesignSpace()),
+            const SliverToBoxAdapter(
+              child: DesignSpace(size: DesignSize.smallSpace),
+            ),
             SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  DesignSectionTitle(
-                    title: 'Principais eventos',
-                    onActionPressed: () => Get.to(() => EventListPage(
-                      events: controller.events,
-                    )),
+              child: Obx(
+                () {
+                  if (!(controller.category.category.value.id ==
+                      Category.all)) {
+                    return Container();
+                  }
+                  return DesignSectionTitle(
+                    title: 'Principais eventos na cidade',
+                    onActionPressed: () => Get.to(
+                      () => EventListPage(
+                        events: controller.events,
+                      ),
+                    ),
                     padding: const EdgeInsets.symmetric(
                         horizontal: DesignSize.mediumSpace),
                     actionTitle: '',
-                  ),
-                  const DesignSpace(size: DesignSize.smallSpace),
-                  SizedBox(
+                  );
+                },
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Obx(
+                () {
+                  if (!(controller.category.category.value.id ==
+                      Category.all)) {
+                    return Container();
+                  }
+                  return SizedBox(
                     height: 184,
                     child: ListView.builder(
                       padding: const EdgeInsets.only(
@@ -126,11 +180,21 @@ class _EventListPageState extends State<EventListPage> {
                         );
                       },
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
-            const SliverToBoxAdapter(child: DesignSpace()),
+            SliverToBoxAdapter(
+              child: Obx(
+                () {
+                  if (!(controller.category.category.value.id ==
+                      Category.all)) {
+                    return Container();
+                  }
+                  return const DesignSpace();
+                },
+              ),
+            ),
             const SliverToBoxAdapter(
               child: DesignSectionTitle(
                 title: 'Eventos próximos',
@@ -143,7 +207,7 @@ class _EventListPageState extends State<EventListPage> {
             const SliverToBoxAdapter(child: DesignSpace()),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
+                (BuildContext context, int index) {
                   final event = controller.bestMatch[index];
 
                   return DesignListTile(
