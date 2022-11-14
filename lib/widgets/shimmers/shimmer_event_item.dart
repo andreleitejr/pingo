@@ -5,7 +5,7 @@ import 'package:pingo/widgets/design_shimmer_widget.dart';
 class ShimmerEventItem extends StatelessWidget {
   ShimmerEventItem({Key? key}) : super(key: key);
 
-  final _width = (Get.width / 2) - 32;
+  final _width = (Get.width / 3);
 
   @override
   Widget build(BuildContext context) {
