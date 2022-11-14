@@ -80,17 +80,24 @@ class _PlaceListPageState extends State<PlaceListPage> {
                 ),
               ),
             ),
-            SliverToBoxAdapter(child: Obx(() {
-              if (!(controller.category.category.value.id == Category.all)) {
-                return Container();
-              }
-              return const DesignSpace(
-                size: DesignSize.smallSpace,
-              );
-            })),
+            SliverToBoxAdapter(
+              child: Obx(
+                () {
+                  if (!(controller.category.category.value.id ==
+                          Category.all) ||
+                      controller.search.text.isNotEmpty) {
+                    return Container();
+                  }
+                  return const DesignSpace(
+                    size: DesignSize.smallSpace,
+                  );
+                },
+              ),
+            ),
             SliverToBoxAdapter(
               child: Obx(() {
-                if (!(controller.category.category.value.id == Category.all)) {
+                if (!(controller.category.category.value.id == Category.all) ||
+                    controller.search.text.isNotEmpty) {
                   return Container();
                 }
                 return const DesignSectionTitle(
@@ -106,14 +113,16 @@ class _PlaceListPageState extends State<PlaceListPage> {
                 child: DesignSpace(size: DesignSize.smallSpace)),
             SliverToBoxAdapter(
               child: Obx(() {
-                if (!(controller.category.category.value.id == Category.all)) {
+                if (!(controller.category.category.value.id == Category.all) ||
+                    controller.search.text.isNotEmpty) {
                   return Container();
                 }
                 return _bestMatchList();
               }),
             ),
             SliverToBoxAdapter(child: Obx(() {
-              if (!(controller.category.category.value.id == Category.all)) {
+              if (!(controller.category.category.value.id == Category.all) ||
+                  controller.search.text.isNotEmpty) {
                 return Container();
               }
               return const DesignSpace(
