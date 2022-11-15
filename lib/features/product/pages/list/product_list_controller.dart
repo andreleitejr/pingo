@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/product/models/product.dart';
+import 'package:pingo/models/category.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/services/category_controller.dart';
 
@@ -12,6 +13,8 @@ class ProductListController extends GetxController {
   List<Product> products;
 
   final category = Get.put(CategoryController());
+
+  var categories = <Category>[].obs;
 
   List<Product> get bestProducts {
     var list = products;
@@ -33,6 +36,8 @@ class ProductListController extends GetxController {
       }).toList();
     }
 
+    list = category.filterByCategory(list) as List<Product>;
+
     list.sort((a, b) => a.compareTo(b));
 
     return list;
@@ -41,4 +46,11 @@ class ProductListController extends GetxController {
   var search = ''.obs;
 
   void setSearch(String v) => search(v);
+
+  @override
+  void onInit() {
+    final c = category.get(CategoryType.products);
+    categories(c);
+    super.onInit();
+  }
 }

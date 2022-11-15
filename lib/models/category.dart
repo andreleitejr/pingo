@@ -7,7 +7,7 @@ class Category {
 
   Category(this.id, this.title, this.image);
 
-  static const all = 0;
+  // static const all = 0;
   static const restaurants = 1;
   static const pubs = 2;
   static const shopping = 3;
@@ -21,16 +21,3 @@ class Category {
   static const products = 21;
 }
 
-final categories = [
-  Category(Category.all, 'All', DesignEmojis.all),
-  Category(Category.restaurants, 'Restaurant', DesignEmojis.restaurant),
-  Category(Category.pubs, 'Pubs', DesignEmojis.pub),
-  Category(Category.products, 'Products', DesignEmojis.product),
-  Category(Category.events, 'Events', DesignEmojis.eventWoman),
-  Category(Category.fastFoods, 'Fast Foods', DesignEmojis.fastFood),
-  Category(Category.shopping, 'Shopping', DesignEmojis.shopping),
-  Category(Category.theaters, 'Theaters', DesignEmojis.theater),
-  Category(Category.museums, 'Museums', DesignEmojis.museum),
-  Category(Category.historical, 'Historical Places', DesignEmojis.historical),
-  Category(Category.utils, 'Utils', DesignEmojis.utils),
-];

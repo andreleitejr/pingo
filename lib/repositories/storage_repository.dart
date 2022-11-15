@@ -25,12 +25,8 @@ class StorageReporitory {
   }
 
   Future<String?> download(String fileName) async {
-    print('##################### FILE NAME $fileName');
     try {
       final path = "$name/$fileName";
-
-      print('#################### PATH $path');
-
 
       final imageUrl = await reference.child(path).getDownloadURL();
       return imageUrl;

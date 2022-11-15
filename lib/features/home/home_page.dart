@@ -115,10 +115,13 @@ class HomePage extends StatelessWidget {
                 child: DesignSpace(size: DesignSize.smallSpace),
               ),
               SliverToBoxAdapter(
-                child: DesignCategoryBulletList(
-                  value: controller.category.category.value,
-                  onItemPressed: controller.category.setCategory,
-                  isLoading: controller.loading.value,
+                child: Obx(
+                  () => DesignCategoryBulletList(
+                    categories: controller.generalCategories,
+                    value: controller.category.category.value,
+                    onItemPressed: controller.category.setCategory,
+                    isLoading: controller.loading.value,
+                  ),
                 ),
               ),
               const SliverToBoxAdapter(child: DesignSpace()),
@@ -171,6 +174,48 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _categoryList() {
+    if (controller.loading.value) {
+      return SizedBox(
+        height: 80,
+        child: ListView.builder(
+          padding: const EdgeInsets.only(
+            left: DesignSize.mediumSpace,
+          ),
+          scrollDirection: Axis.horizontal,
+          itemCount: 6,
+          itemBuilder: (BuildContext context, int index) {
+            return DesignShimmerWidget(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: 48,
+                      margin:
+                          const EdgeInsets.only(right: DesignSize.mediumSpace),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(60),
+                      ),
+                    ),
+                  ),
+                  const DesignSpace(),
+                  Container(
+                    height: 16,
+                    width: 60,
+                    margin:
+                        const EdgeInsets.only(right: DesignSize.mediumSpace),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    }
     return SizedBox(
       height: 80,
       child: ListView.builder(
@@ -178,9 +223,9 @@ class HomePage extends StatelessWidget {
           left: DesignSize.mediumSpace,
         ),
         scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
+        itemCount: controller.generalCategories.length,
         itemBuilder: (BuildContext context, int index) {
-          final category = categories[index];
+          final category = controller.generalCategories[index];
           return DesignCategoryItem(
             onPressed: () {
               controller.category.setCategory(category);

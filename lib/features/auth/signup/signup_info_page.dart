@@ -70,14 +70,11 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
             Obx(
               () => DesignButton(
                 onPressed: () async {
-                  print('################################# Sign Up Info Page | Init');
                   if (controller.isInfoFormValid) {
                     final result =
                         await controller.signUpWithEmailAndPassword();
 
-                    print('################################# Sign Up Info Page | sign up $result');
                     if (result == AuthResult.success) {
-                      print('##### Sign Up Info Page | Resultasasassaassaassaassasasasa  $result');
                       Get.to(() => const ProfileKeywordsSelection());
                     } else {
                       Get.snackbar(

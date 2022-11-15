@@ -11,11 +11,13 @@ class DesignCategoryBulletList extends StatelessWidget {
     required this.value,
     required this.onItemPressed,
     this.isLoading = false,
+    required this.categories,
   }) : super(key: key);
 
   final Category value;
   final Function(Category) onItemPressed;
   final bool isLoading;
+  final List<Category> categories;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,11 @@ class DesignCategoryBulletList extends StatelessWidget {
           final category = categories[index];
           final isSelected = value == category;
           return GestureDetector(
-            onTap: () => onItemPressed(category),
+            onTap: () {
+              print(
+                  'CATEGORY SDHUSADHSUDHSDAUUSAHDUSH ${value.title} $isSelected}');
+              onItemPressed(category);
+            },
             child: DesignBulletItem(
               title: category.title,
               isSelected: isSelected,

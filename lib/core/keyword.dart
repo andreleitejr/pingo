@@ -6,11 +6,17 @@ class KeywordData {
 }
 
 class Keyword {
+  static const all = 90000030;
+  static const event = 90000;
+  static const product = 90001;
+
   /// TYPES OF PLACES
   static const shopping = 0;
   static const restaurant = 1;
   static const pub = 2;
   static const party = 3;
+  static const children = 909309309;
+  static const pet = 90930977;
   static const concert = 4;
   static const park = 5;
   static const museum = 6;
@@ -20,6 +26,7 @@ class Keyword {
   static const theater = 10;
   static const bookstore = 11;
   static const exposition = 12;
+  static const festival = 188888882;
 
   /// TYPES OF FOOD
   static const brazilian = 13;
@@ -106,15 +113,20 @@ class Keyword {
 
   static const store = 300;
   static const fashion = 320;
+  static const free = 3256450;
+  static const open = 32564580;
+  static const promo = 325645222;
 }
 
-final allKeywords = places + foods + musics + miscellaneous;
+final allKeywords = placesKeywords + foods + musics + miscellaneous + other;
 
-final places = <KeywordData>[
+final placesKeywords = <KeywordData>[
   KeywordData('Restaurant', Keyword.restaurant),
   KeywordData('Pub', Keyword.pub),
   KeywordData('Party', Keyword.party),
   KeywordData('Concert', Keyword.concert),
+  KeywordData('Children', Keyword.children),
+  KeywordData('Pets', Keyword.pet),
   KeywordData('Park', Keyword.park),
   KeywordData('Museum', Keyword.museum),
   KeywordData('Store', Keyword.store),
@@ -196,4 +208,13 @@ final miscellaneous = <KeywordData>[
   KeywordData('Thai Boxing', Keyword.thaiBoxing),
   KeywordData('Gin', Keyword.gin),
   KeywordData('Drinks', Keyword.drinks),
+];
+
+final other = [
+  KeywordData('Event', Keyword.event),
+  KeywordData('Product', Keyword.product),
+  KeywordData('Util', Keyword.util),
+  KeywordData('Free', Keyword.free),
+  KeywordData('Open', Keyword.open),
+  KeywordData('Promo', Keyword.promo),
 ];

@@ -66,8 +66,7 @@ class _EventListPageState extends State<EventListPage> {
             SliverToBoxAdapter(
               child: Obx(
                 () {
-                  if (!(controller.category.category.value.id ==
-                          Category.all) ||
+                  if (!controller.category.showAll ||
                       controller.search.value.isNotEmpty) {
                     return Container();
                   }
@@ -86,8 +85,7 @@ class _EventListPageState extends State<EventListPage> {
             SliverToBoxAdapter(
               child: Obx(
                 () {
-                  if (!(controller.category.category.value.id ==
-                          Category.all) ||
+                  if (!controller.category.showAll ||
                       controller.search.value.isNotEmpty) {
                     return Container();
                   }
@@ -113,8 +111,7 @@ class _EventListPageState extends State<EventListPage> {
             SliverToBoxAdapter(
               child: Obx(
                 () {
-                  if (!(controller.category.category.value.id ==
-                          Category.all) ||
+                  if (!controller.category.showAll ||
                       controller.search.value.isNotEmpty) {
                     return Container();
                   }
@@ -125,6 +122,7 @@ class _EventListPageState extends State<EventListPage> {
             SliverToBoxAdapter(
               child: Obx(
                 () => DesignCategoryBulletList(
+                  categories: controller.categories,
                   value: controller.category.category.value,
                   onItemPressed: controller.category.setCategory,
                 ),
@@ -136,8 +134,7 @@ class _EventListPageState extends State<EventListPage> {
             SliverToBoxAdapter(
               child: Obx(
                 () {
-                  if (!(controller.category.category.value.id ==
-                          Category.all) ||
+                  if (!controller.category.showAll ||
                       controller.search.value.isNotEmpty) {
                     return Container();
                   }
@@ -158,8 +155,7 @@ class _EventListPageState extends State<EventListPage> {
             SliverToBoxAdapter(
               child: Obx(
                 () {
-                  if (!(controller.category.category.value.id ==
-                          Category.all) ||
+                  if (!controller.category.showAll ||
                       controller.search.value.isNotEmpty) {
                     return Container();
                   }
@@ -192,8 +188,7 @@ class _EventListPageState extends State<EventListPage> {
             SliverToBoxAdapter(
               child: Obx(
                 () {
-                  if (!(controller.category.category.value.id ==
-                          Category.all) ||
+                  if (!controller.category.showAll ||
                       controller.search.value.isNotEmpty) {
                     return Container();
                   }

@@ -22,7 +22,7 @@ class ProfileKeywordsSelection extends StatelessWidget {
         DesignKeywordSelection(
           title: 'Hello, John... Welcome to Pingo.',
           subtitle: 'What kind of place do you like?',
-          list: places,
+          list: placesKeywords,
           masonryStyle: true,
           minimumQuantity: 1,
         ),

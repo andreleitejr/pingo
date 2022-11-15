@@ -76,6 +76,7 @@ class _PlaceListPageState extends State<PlaceListPage> {
               child: Obx(
                 () => DesignCategoryBulletList(
                   value: controller.category.category.value,
+                  categories: controller.generalCategories,
                   onItemPressed: controller.category.setCategory,
                 ),
               ),
@@ -83,8 +84,7 @@ class _PlaceListPageState extends State<PlaceListPage> {
             SliverToBoxAdapter(
               child: Obx(
                 () {
-                  if (!(controller.category.category.value.id ==
-                          Category.all) ||
+                  if (!controller.category.showAll ||
                       controller.search.text.isNotEmpty) {
                     return Container();
                   }
@@ -96,7 +96,7 @@ class _PlaceListPageState extends State<PlaceListPage> {
             ),
             SliverToBoxAdapter(
               child: Obx(() {
-                if (!(controller.category.category.value.id == Category.all) ||
+                if (!controller.category.showAll ||
                     controller.search.text.isNotEmpty) {
                   return Container();
                 }
@@ -113,7 +113,7 @@ class _PlaceListPageState extends State<PlaceListPage> {
                 child: DesignSpace(size: DesignSize.smallSpace)),
             SliverToBoxAdapter(
               child: Obx(() {
-                if (!(controller.category.category.value.id == Category.all) ||
+                if (!controller.category.showAll ||
                     controller.search.text.isNotEmpty) {
                   return Container();
                 }
@@ -121,7 +121,7 @@ class _PlaceListPageState extends State<PlaceListPage> {
               }),
             ),
             SliverToBoxAdapter(child: Obx(() {
-              if (!(controller.category.category.value.id == Category.all) ||
+              if (!controller.category.showAll ||
                   controller.search.text.isNotEmpty) {
                 return Container();
               }

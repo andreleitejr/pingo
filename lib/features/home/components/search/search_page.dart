@@ -55,6 +55,7 @@ class SearchPage extends StatelessWidget {
           children: [
             Obx(
               () => DesignCategoryBulletList(
+                categories: controller.generalCategories,
                 value: controller.category.category.value,
                 onItemPressed: controller.category.setCategory,
               ),

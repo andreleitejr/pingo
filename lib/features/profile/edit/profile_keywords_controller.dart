@@ -9,9 +9,6 @@ class ProfileKeywordsController extends GetxController {
   final PageViewController pageView = Get.find();
   @override
   void onReady() {
-    print('KEYWORD CONTROLLER INITING... ${user.uuid}');
-    print('KEYWORD CONTROLLER INITING... ${user.keywords}');
-    print('KEYWORD CONTROLLER INITING... ${user.email}');
     super.onReady();
   }
 

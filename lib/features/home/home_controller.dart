@@ -1,7 +1,9 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/home/base_page.dart';
+import 'package:pingo/models/category.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/services/category_controller.dart';
@@ -48,7 +50,7 @@ class HomeController extends GetxController {
     list = filter.filterPlaceByDistance(list) as List<Place>;
     list = filter.filterPlaceByRating(list) as List<Place>;
     list = search.filterBySearch(list) as List<Place>;
-    list = category.filterByCategory(list);
+    list = category.filterByCategory(list) as List<Place>;
     return list;
   }
 
@@ -141,6 +143,8 @@ class HomeController extends GetxController {
   var address = ''.obs;
   var temperature = 25.obs;
   var icon = ''.obs;
+  var generalCategories = <Category>[].obs;
+  var placeCategories = <Category>[].obs;
 
   @override
   Future<void> onInit() async {
@@ -154,6 +158,12 @@ class HomeController extends GetxController {
     await weather.init();
     temperature(weather.weather?.temperature?.celsius?.round());
     icon(weather.icon);
+
+    final general = category.get(CategoryType.general);
+    generalCategories(general);
+
+    // final places = category.get(CategoryType.places);
+    // placeCategories(places);
 
     loading(false);
 

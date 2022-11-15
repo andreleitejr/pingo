@@ -22,7 +22,7 @@ extension StringExtension on String {
 
 extension IntExtension on int {
   String get keyword {
-    final keywords = places + foods + musics + miscellaneous;
+    final keywords = placesKeywords + foods + musics + miscellaneous;
 
     return keywords.firstWhere((keyword) => keyword.id == this).title;
   }

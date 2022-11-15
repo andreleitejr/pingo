@@ -1,6 +1,7 @@
 // TODO: TROCAR OS NOMES DAS CONSTANTES
 class DesignEmojis {
   static const all = '🎯';
+  static const children = '🧒';
   static const eventMan = '😋';
   static const eventWoman = '💃🏽';
   static const fastFood = '🍔';
@@ -8,6 +9,7 @@ class DesignEmojis {
   static const historical = '🏰';
   static const museum = '🎨';
   static const other = '🚀';
+  static const pet = '🐾';
   static const pub = '🍻';
   static const product = '🛒';
   static const restaurant = '😋';

@@ -82,7 +82,7 @@ class _EventEditPageState extends State<EventEditPage> {
             const DesignSpace(),
             Wrap(
               children: [
-                for (final place in places) ...[
+                for (final place in placesKeywords) ...[
                   GestureDetector(
                     onTap: () => controller.toggleKeyword(place.id),
                     child: Obx(

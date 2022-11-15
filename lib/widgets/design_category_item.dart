@@ -21,34 +21,6 @@ class DesignCategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return DesignShimmerWidget(
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                width: 48,
-                margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(60),
-                ),
-              ),
-            ),
-            const DesignSpace(),
-            Container(
-              height: 16,
-              width: 60,
-              margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(40),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
     return GestureDetector(
       onTap: onPressed,
       child: Container(
