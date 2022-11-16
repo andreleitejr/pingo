@@ -38,9 +38,7 @@ class _BasePageState extends State<BasePage> implements BasePageNav {
   @override
   Widget build(BuildContext context) {
     final pages = <Widget>[
-      Obx(
-        () => HomePage(),
-      ),
+      HomePage(),
       Obx(
         () => PlaceListPage(places: controller.places, showLeading: false),
       ),
@@ -52,9 +50,7 @@ class _BasePageState extends State<BasePage> implements BasePageNav {
         () => ProductListPage(
             products: controller.productBestMatch, showLeading: false),
       ),
-      Obx(
-        () => ProfileReadPage(),
-      ),
+      ProfileReadPage(),
     ];
 
     return Scaffold(
