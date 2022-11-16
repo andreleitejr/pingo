@@ -133,7 +133,9 @@ class DesignListTile extends StatelessWidget {
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              itemCount: 2,
+                              itemCount: item.keywords.length > 2
+                                  ? 2
+                                  : item.keywords.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return keywordBullet(
                                     item.keywords[index].keyword);
