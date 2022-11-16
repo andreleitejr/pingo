@@ -93,7 +93,6 @@ class HomePage extends StatelessWidget {
               SliverToBoxAdapter(
                 child: _buildProducts(),
               ),
-              const SliverToBoxAdapter(child: DesignSpace()),
               SliverToBoxAdapter(
                 child: DesignSectionTitle(
                   title: 'Tudo próximo',
@@ -122,7 +121,9 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SliverToBoxAdapter(child: DesignSpace()),
+              const SliverToBoxAdapter(
+                child: DesignSpace(size: DesignSize.largeSpace),
+              ),
               _buildPlaces(),
             ],
           );
@@ -270,6 +271,7 @@ class HomePage extends StatelessWidget {
 
         return Column(
           children: [
+            const DesignSpace(size: DesignSize.smallSpace),
             DesignSectionTitle(
               title: 'Eventos próximos',
               onActionPressed: () => Get.to(() => EventListPage(
@@ -320,7 +322,6 @@ class HomePage extends StatelessWidget {
 
       return Column(
         children: [
-          const DesignSpace(),
           DesignSectionTitle(
             title: 'Melhores preços da região',
             onActionPressed: () => Get.to(
@@ -384,10 +385,7 @@ class HomePage extends StatelessWidget {
               final place = places[index];
 
               return DesignListTile(
-                image: place.image,
-                title: place.name,
-                subtitle: place.description,
-                trailing: place.distance.metricSystem,
+                item: place,
                 onPressed: () => Get.to(() => PlaceReadPage(place: place)),
                 isLoading: controller.loading.value,
               );

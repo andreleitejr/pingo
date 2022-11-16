@@ -117,7 +117,7 @@ class DesignEventBestMatchItem extends StatelessWidget {
                                     child: Opacity(
                                       opacity: 0.9,
                                       child: DesignIcon(
-                                        icon: DesignIcons.star,
+                                        icon: DesignIcons.pin,
                                         width: 9,
                                         height: 9,
                                         color: DesignColor.primary100,
@@ -126,7 +126,7 @@ class DesignEventBestMatchItem extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 2),
                                   Text(
-                                    bestMatch.rating.toString(),
+                                    bestMatch.distance.metricSystem,
                                     style: DesignTextStyle.labelSmall10.apply(
                                       color: Colors.white,
                                     ),
@@ -142,7 +142,7 @@ class DesignEventBestMatchItem extends StatelessWidget {
                                     child: Opacity(
                                       opacity: 0.9,
                                       child: DesignIcon(
-                                        icon: DesignIcons.pin,
+                                        icon: DesignIcons.star,
                                         width: 9,
                                         height: 9,
                                         color: DesignColor.primary100,
@@ -151,7 +151,7 @@ class DesignEventBestMatchItem extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 2),
                                   Text(
-                                    bestMatch.distance.metricSystem,
+                                    bestMatch.rating.toString(),
                                     style: DesignTextStyle.labelSmall10.apply(
                                       color: Colors.white,
                                     ),

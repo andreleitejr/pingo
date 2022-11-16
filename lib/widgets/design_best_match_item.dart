@@ -134,31 +134,6 @@ class DesignBestMatchItem extends StatelessWidget {
                                     child: Opacity(
                                       opacity: 0.9,
                                       child: DesignIcon(
-                                        icon: DesignIcons.star,
-                                        width: 9,
-                                        height: 9,
-                                        color: DesignColor.primary100,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 2),
-                                  Text(
-                                    bestMatch.rating.toString(),
-                                    style: DesignTextStyle.labelSmall10.apply(
-                                      color: Colors.white,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  const DesignSpace(
-                                    orientation:
-                                        DesignSpaceOrientation.horizontal,
-                                    size: 8,
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(bottom: 2),
-                                    child: Opacity(
-                                      opacity: 0.9,
-                                      child: DesignIcon(
                                         icon: DesignIcons.pin,
                                         width: 9,
                                         height: 9,
@@ -169,6 +144,31 @@ class DesignBestMatchItem extends StatelessWidget {
                                   const SizedBox(width: 2),
                                   Text(
                                     bestMatch.distance.metricSystem,
+                                    style: DesignTextStyle.labelSmall10.apply(
+                                      color: Colors.white,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const DesignSpace(
+                                    orientation:
+                                    DesignSpaceOrientation.horizontal,
+                                    size: 8,
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(bottom: 2),
+                                    child: Opacity(
+                                      opacity: 0.9,
+                                      child: DesignIcon(
+                                        icon: DesignIcons.star,
+                                        width: 9,
+                                        height: 9,
+                                        color: DesignColor.primary100,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 2),
+                                  Text(
+                                    bestMatch.rating.toString(),
                                     style: DesignTextStyle.labelSmall10.apply(
                                       color: Colors.white,
                                     ),

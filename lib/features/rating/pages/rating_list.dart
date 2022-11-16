@@ -15,12 +15,7 @@ class RatingList extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final rating = ratings[index];
 
-        return DesignListTile(
-          image: rating.image,
-          title: rating.title!,
-          subtitle: rating.message,
-          trailing: DateFormat('yMd').format(rating.createdAt!),
-        );
+        return Container();
       },
     );
   }

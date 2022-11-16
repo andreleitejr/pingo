@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
-import 'package:get/get.dart';
+import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
+import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
-import 'package:pingo/services/blurhash_controller.dart';
-import 'package:pingo/widgets/design_shimmer_widget.dart';
+import 'package:pingo/core/extensions.dart';
+import 'package:pingo/models/matchbase.dart';
+import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_space.dart';
 import 'package:pingo/widgets/shimmers/shimmer_list_tile.dart';
 
 class DesignListTile extends StatelessWidget {
   const DesignListTile({
     Key? key,
-    this.image,
-    required this.title,
-    this.subtitle,
-    this.trailing,
+    required this.item,
     this.onPressed,
     this.isLoading = false,
   }) : super(key: key);
 
-  final ImageBlurHash? image;
-  final String title;
-  final String? subtitle;
-  final String? trailing;
+  final MatchBase item;
   final Function()? onPressed;
   final bool isLoading;
 
@@ -34,21 +31,30 @@ class DesignListTile extends StatelessWidget {
       onTap: onPressed,
       child: Column(
         children: [
-          SizedBox(
-            height: 60,
+          Container(
+            padding: const EdgeInsets.only(bottom: DesignSize.mediumSpace),
+            height: 54,
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  width: 0.5,
+                  color: DesignColor.text100,
+                ),
+              ),
+            ),
             child: Row(
               children: [
                 const DesignSpace(
                     orientation: DesignSpaceOrientation.horizontal),
-                image != null
+                item.image != null
                     ? SizedBox(
-                        width: 60,
+                        width: 42,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(6),
                           child: BlurHash(
                             imageFit: BoxFit.cover,
-                            image: image!.image,
-                            hash: image!.blurHash,
+                            image: item.image!.image,
+                            hash: item.image!.blurHash,
                           ),
                         ),
                       )
@@ -64,20 +70,78 @@ class DesignListTile extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: Text(title),
+                            child: Text(
+                              item.name,
+                              style: DesignTextStyle.bodySmall12Bold,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                          trailing != null ? Text(trailing!) : Container(),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 2),
+                            child: Opacity(
+                              opacity: 0.7,
+                              child: DesignIcon(
+                                icon: DesignIcons.pin,
+                                width: 8,
+                                height: 8,
+                                color: DesignColor.primary300,
+                              ),
+                            ),
+                          ),
+                          const DesignSpace(
+                            orientation: DesignSpaceOrientation.horizontal,
+                            size: DesignSize.minimumSpace,
+                          ),
+                          Text(
+                            item.distance.metricSystem,
+                            style: DesignTextStyle.labelSmall10,
+                          ),
                         ],
                       ),
-                      subtitle != null
-                          ? Text(
-                              subtitle!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: DesignTextStyle.labelMedium12,
-                            )
-                          : Container(),
-                      const Text('Average price \$29.99'),
+                      Text(
+                        '${item.description}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: DesignTextStyle.labelSmall10,
+                      ),
+                      Row(
+                        children: [
+                          const SizedBox(width: 4),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 2),
+                            child: Opacity(
+                              opacity: 0.7,
+                              child: DesignIcon(
+                                icon: DesignIcons.star,
+                                width: 7,
+                                height: 7,
+                                color: DesignColor.primary300,
+                              ),
+                            ),
+                          ),
+                          const DesignSpace(
+                              orientation: DesignSpaceOrientation.horizontal,
+                              size: DesignSize.minimumSpace),
+                          Text(
+                            item.rating.toString(),
+                            style: DesignTextStyle.labelSmall8.apply(
+                              color: DesignColor.text400,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) {
+                                return keywordBullet(
+                                    item.keywords[index].keyword);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -88,6 +152,29 @@ class DesignListTile extends StatelessWidget {
           ),
           const DesignSpace(),
         ],
+      ),
+    );
+  }
+
+  Widget keywordBullet(String title) {
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+      margin: const EdgeInsets.only(left: 4),
+      height: 12,
+      decoration: BoxDecoration(
+        color: DesignColor.primary100.withOpacity(0.25),
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(
+          color: DesignColor.primary300.withOpacity(0.25),
+          width: 0.5,
+        ),
+      ),
+      child: Text(
+        title,
+        style: DesignTextStyle.labelSmall8.apply(
+          color: DesignColor.primary500,
+        ),
       ),
     );
   }

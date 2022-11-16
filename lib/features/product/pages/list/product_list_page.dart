@@ -143,10 +143,7 @@ class _ProductListPageState extends State<ProductListPage> {
                     final product = controller.bestProducts[index];
 
                     return DesignListTile(
-                      image: product.image,
-                      title: product.name,
-                      subtitle: product.description,
-                      trailing: product.distance.metricSystem,
+                      item: product,
                       onPressed: () =>
                           Get.to(() => ProductReadPage(product: product)),
                     );

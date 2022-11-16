@@ -12,17 +12,17 @@ class ShimmerListTile extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 60,
+            height: 54,
             child: Row(
               children: [
                 const DesignSpace(
                     orientation: DesignSpaceOrientation.horizontal),
                 Container(
-                  height: 60,
-                  width: 60,
+                  height: 42,
+                  width: 42,
                   decoration: BoxDecoration(
                     color: Colors.black,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                 ),
                 const DesignSpace(

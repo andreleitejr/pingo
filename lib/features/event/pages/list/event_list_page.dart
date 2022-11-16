@@ -215,10 +215,7 @@ class _EventListPageState extends State<EventListPage> {
                     final event = controller.bestMatch[index];
 
                     return DesignListTile(
-                      image: event.image,
-                      title: event.name,
-                      subtitle: event.description,
-                      trailing: event.distance.metricSystem,
+                      item: event,
                       onPressed: () =>
                           Get.to(() => EventReadPage(event: event)),
                     );

@@ -163,7 +163,8 @@ class _PlaceListPageState extends State<PlaceListPage> {
                 return DesignShimmerWidget(
                   child: Container(
                     width: Get.width * 0.6,
-                    margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
+                    margin:
+                        const EdgeInsets.only(right: DesignSize.mediumSpace),
                     decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(8),
@@ -213,10 +214,7 @@ class _PlaceListPageState extends State<PlaceListPage> {
               final place = places[index];
 
               return DesignListTile(
-                image: place.image,
-                title: place.name,
-                subtitle: place.description,
-                trailing: place.distance.metricSystem,
+                item: place,
                 onPressed: () => Get.to(() => PlaceReadPage(place: place)),
                 isLoading: controller.loading.value,
               );
