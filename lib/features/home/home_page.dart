@@ -334,7 +334,7 @@ class HomePage extends StatelessWidget {
           ),
           const DesignSpace(size: DesignSize.smallSpace),
           SizedBox(
-            height: 175,
+            height: 156,
             child: ListView.builder(
               padding: const EdgeInsets.only(left: DesignSize.mediumSpace),
               itemCount: controller.loading.value ? 10 : products.length,

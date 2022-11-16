@@ -44,7 +44,7 @@ class DesignIcon extends StatelessWidget {
         width: width ?? _size,
         child: ColorFiltered(
           colorFilter:
-              ColorFilter.mode(color ?? DesignColor.text400, BlendMode.srcATop),
+              ColorFilter.mode(color ?? Colors.transparent, BlendMode.srcATop),
           child: Image.asset(icon),
         ),
       ),

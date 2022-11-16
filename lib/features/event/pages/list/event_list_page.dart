@@ -9,6 +9,7 @@ import 'package:pingo/models/category.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
+import 'package:pingo/widgets/design_event_best_match_item.dart';
 import 'package:pingo/widgets/design_event_item.dart';
 import 'package:pingo/widgets/design_list_tile.dart';
 import 'package:pingo/widgets/design_search_input.dart';
@@ -98,7 +99,7 @@ class _EventListPageState extends State<EventListPage> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {
                         final bestMatch = controller.bestMatch[index];
-                        return DesignBestMatchItem(
+                        return DesignEventBestMatchItem(
                           bestMatch: bestMatch,
                           width: Get.width * 0.8,
                         );

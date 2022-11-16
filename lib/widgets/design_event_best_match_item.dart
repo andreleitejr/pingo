@@ -6,6 +6,7 @@ import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
 import 'package:pingo/models/base.dart';
@@ -15,15 +16,15 @@ import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
 
-class DesignBestMatchItem extends StatelessWidget {
-  const DesignBestMatchItem({
+class DesignEventBestMatchItem extends StatelessWidget {
+  const DesignEventBestMatchItem({
     Key? key,
     required this.bestMatch,
     this.isLoading = false,
     this.width,
   }) : super(key: key);
 
-  final Place bestMatch;
+  final Event bestMatch;
   final bool isLoading;
   final double? width;
 
@@ -102,29 +103,11 @@ class DesignBestMatchItem extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    bestMatch.name,
-                                    style:
-                                        DesignTextStyle.labelSmall11Bold.apply(
-                                      color: DesignColor.primary100,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 2),
-                                  if (bestMatch.verified)
-                                    const Padding(
-                                      padding: EdgeInsets.only(bottom: 2),
-                                      child: Opacity(
-                                        opacity: 0.9,
-                                        child: DesignIcon(
-                                          icon: DesignIcons.verified,
-                                          width: 11,
-                                          height: 11,
-                                        ),
-                                      ),
-                                    ),
-                                ],
+                              Text(
+                                bestMatch.name,
+                                style: DesignTextStyle.labelSmall11Bold.apply(
+                                  color: DesignColor.primary100,
+                                ),
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -151,7 +134,7 @@ class DesignBestMatchItem extends StatelessWidget {
                                   ),
                                   const DesignSpace(
                                     orientation:
-                                        DesignSpaceOrientation.horizontal,
+                                    DesignSpaceOrientation.horizontal,
                                     size: 8,
                                   ),
                                   const Padding(

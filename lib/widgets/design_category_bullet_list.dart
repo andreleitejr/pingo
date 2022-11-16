@@ -22,7 +22,7 @@ class DesignCategoryBulletList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 32,
       child: ListView.builder(
         padding: const EdgeInsets.only(
           left: DesignSize.mediumSpace,
@@ -33,11 +33,7 @@ class DesignCategoryBulletList extends StatelessWidget {
           final category = categories[index];
           final isSelected = value == category;
           return GestureDetector(
-            onTap: () {
-              print(
-                  'CATEGORY SDHUSADHSUDHSDAUUSAHDUSH ${value.title} $isSelected}');
-              onItemPressed(category);
-            },
+            onTap: () => onItemPressed(category),
             child: DesignBulletItem(
               title: category.title,
               isSelected: isSelected,

@@ -16,4 +16,5 @@ class DesignIcons {
   static const share = 'assets/icons/share.png';
   static const signOut = 'assets/icons/sign_out.png';
   static const star = 'assets/icons/star_filled.png';
+  static const verified = 'assets/icons/verified.png';
 }

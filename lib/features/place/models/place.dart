@@ -15,6 +15,7 @@ class Place extends MatchBase {
   final String? email;
   final String? open;
   final String? close;
+  final bool verified;
 
   final products = <Product>[];
   final events = <Event>[];
@@ -30,6 +31,7 @@ class Place extends MatchBase {
     required super.name,
     required super.keywords,
     required super.description,
+    this.verified = false,
     super.image,
   });
 
@@ -58,6 +60,7 @@ class Place extends MatchBase {
             .map((e) => ImageBlurHash.fromJson(
                 Map<String, dynamic>.from(e as Map<String, dynamic>)))
             .toList(),
+        verified = document['verified'] as bool,
         super.fromMap(document);
 
   @override
@@ -70,6 +73,7 @@ class Place extends MatchBase {
         'keywords': keywords,
         'open': open,
         'photos': photos?.map((e) => e.toJson()).toList(),
+        'verified': keywords,
       });
   }
 }

@@ -33,12 +33,12 @@ class DesignBulletItem extends StatelessWidget {
           height: 38,
           padding: padding ??
               const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
-          margin: const EdgeInsets.only(right: DesignSize.smallSpace),
+          margin: const EdgeInsets.only(right: 8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
             color: Colors.black,
             border: Border.all(
-              width: 2,
+              width: 1.35,
             ),
           ),
           child: Row(
@@ -61,7 +61,7 @@ class DesignBulletItem extends StatelessWidget {
         height: 38,
         padding: padding ??
             const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
-        margin: const EdgeInsets.only(right: DesignSize.smallSpace),
+        margin: const EdgeInsets.only(right: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           color: isSelected ? DesignColor.primary100 : Colors.transparent,
@@ -69,7 +69,7 @@ class DesignBulletItem extends StatelessWidget {
             color: isSelected
                 ? DesignColor.primary100
                 : (unselectedColor ?? DesignColor.primary500),
-            width: 2,
+            width: 1.35,
           ),
         ),
         child: Row(
@@ -78,11 +78,13 @@ class DesignBulletItem extends StatelessWidget {
             if (icon != null) icon!,
             Text(
               title,
-              style: DesignTextStyle.bodyMedium16Bold.apply(
-                color: isSelected
-                    ? DesignColor.primary700
-                    : (unselectedColor ?? DesignColor.primary500),
-              ),
+              style: isSelected
+                  ? DesignTextStyle.bodySmall12Bold.apply(
+                      color: DesignColor.primary700,
+                    )
+                  : DesignTextStyle.bodySmall12.apply(
+                      color: (unselectedColor ?? DesignColor.primary500),
+                    ),
             ),
           ],
         ),
