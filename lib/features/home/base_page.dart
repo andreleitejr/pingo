@@ -174,6 +174,17 @@ class _BasePageState extends State<BasePage> implements BasePageNav {
                   const DesignSpace(size: DesignSize.smallSpace)
                 ],
               ),
+              activeIcon: Column(
+                children: [
+                  DesignAvatarImage(
+                    image: controller.user.image?.image,
+                    blurHash: controller.user.image?.blurHash,
+                    isLoading: controller.loading.value,
+                    isSelected: true,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
+              ),
               label: 'Profile',
             ),
           ],

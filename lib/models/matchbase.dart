@@ -21,13 +21,14 @@ class MatchBase extends Base {
   }
 
   String get matchMessage {
-    if (matchPercentage > 90) {
+    if (match == null) return 'Outro perfil';
+    if (match! > 10) {
       return 'Alma gêmea';
-    } else if (matchPercentage > 80) {
+    } else if (match! > 7) {
       return 'Tudo a ver';
-    } else if (matchPercentage > 70) {
+    } else if (match! > 4) {
       return 'Sua cara';
-    } else if (matchPercentage > 40) {
+    } else if (match! > 2) {
       return 'Você pode gostar';
     } else {
       return 'Outro perfil';
