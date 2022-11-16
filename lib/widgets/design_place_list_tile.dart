@@ -34,7 +34,7 @@ class DesignPlaceListTile extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.only(bottom: DesignSize.mediumSpace),
-            height: 54,
+            height: 56,
             decoration: const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
@@ -78,10 +78,10 @@ class DesignPlaceListTile extends StatelessWidget {
                                 style: DesignTextStyle.bodySmall12Bold,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              if (place.verified)...[
-
+                              if (place.verified) ...[
                                 const DesignSpace(
-                                  orientation: DesignSpaceOrientation.horizontal,
+                                  orientation:
+                                      DesignSpaceOrientation.horizontal,
                                   size: DesignSize.minimumSpace,
                                 ),
                                 const Padding(
@@ -120,6 +120,7 @@ class DesignPlaceListTile extends StatelessWidget {
                           ),
                         ],
                       ),
+                      const DesignSpace(size: DesignSize.minimumSpace),
                       Row(
                         children: [
                           const SizedBox(width: 4),
@@ -160,6 +161,7 @@ class DesignPlaceListTile extends StatelessWidget {
                           ),
                         ],
                       ),
+                      const DesignSpace(size: DesignSize.minimumSpace),
                       Text(
                         '${place.description}',
                         maxLines: 1,

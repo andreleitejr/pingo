@@ -126,6 +126,7 @@ class DesignBestMatchItem extends StatelessWidget {
                                     ),
                                 ],
                               ),
+                              const DesignSpace(size: DesignSize.minimumSpace),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
@@ -151,7 +152,7 @@ class DesignBestMatchItem extends StatelessWidget {
                                   ),
                                   const DesignSpace(
                                     orientation:
-                                    DesignSpaceOrientation.horizontal,
+                                        DesignSpaceOrientation.horizontal,
                                     size: 8,
                                   ),
                                   const Padding(
