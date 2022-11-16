@@ -8,6 +8,6 @@ class DesignColor {
   static const text100 = Color(0xFFF8FAFD);
   static const text200 = Color(0xFFE7ECF3);
   static const text300 = Color(0xFFA7B0C0);
-  static const text400 = Color(0xFF5D6470);
+  static const text400 = Color(0xFF54627a);
   static const text500 = Color(0xFF1D232E);
 }

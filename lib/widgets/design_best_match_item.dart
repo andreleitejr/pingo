@@ -12,6 +12,7 @@ import 'package:pingo/models/base.dart';
 import 'package:pingo/models/matchbase.dart';
 import 'package:pingo/widgets/design_avatar_image.dart';
 import 'package:pingo/widgets/design_icon.dart';
+import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
 
@@ -94,6 +95,7 @@ class DesignBestMatchItem extends StatelessWidget {
                         children: [
                           DesignAvatarImage(
                             image: bestMatch.image!.image,
+                            blurHash: bestMatch.image!.blurHash,
                           ),
                           const DesignSpace(
                             orientation: DesignSpaceOrientation.horizontal,

@@ -53,7 +53,7 @@ class _DesignSearchInputState extends State<DesignSearchInput> {
           prefixIcon: const Padding(
             padding: EdgeInsets.all(DesignSize.mediumSpace),
             child: Opacity(
-              opacity: 0.5,
+              opacity: 0.25,
               child: DesignIcon(
                 icon: DesignIcons.search,
                 width: 12,

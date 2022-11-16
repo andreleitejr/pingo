@@ -1,8 +1,11 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_images.dart';
+import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/features/event/pages/list/event_list_page.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/home/home_page.dart';
@@ -13,6 +16,7 @@ import 'package:pingo/models/user.dart';
 import 'package:pingo/widgets/design_error_page.dart';
 import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_read_image.dart';
+import 'package:pingo/widgets/design_space.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({Key? key}) : super(key: key);
@@ -58,65 +62,117 @@ class _BasePageState extends State<BasePage> implements BasePageNav {
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           backgroundColor: Colors.white,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
+          selectedItemColor:
+              controller.loading.value ? Colors.white : DesignColor.primary500,
+          selectedLabelStyle:
+              controller.loading.value ? null : DesignTextStyle.labelSmall8,
+          unselectedItemColor:
+              controller.loading.value ? Colors.white : DesignColor.text400,
+          unselectedLabelStyle:
+              controller.loading.value ? null : DesignTextStyle.labelSmall8,
           selectedFontSize: 0,
           enableFeedback: false,
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
               backgroundColor: Colors.white,
-              icon: DesignIcon(
-                icon: DesignIcons.home,
-                isLoading: controller.loading.value,
+              icon: Column(
+                children: [
+                  DesignIcon(
+                    icon: DesignIcons.home,
+                    isLoading: controller.loading.value,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
               ),
-              activeIcon: DesignIcon(
-                icon: DesignIcons.home,
-                isSelected: true,
-                isLoading: controller.loading.value,
+              activeIcon: Column(
+                children: [
+                  DesignIcon(
+                    icon: DesignIcons.home,
+                    isSelected: true,
+                    isLoading: controller.loading.value,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
               ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: DesignIcon(
-                icon: DesignIcons.map,
-                isLoading: controller.loading.value,
+              icon: Column(
+                children: [
+                  DesignIcon(
+                    icon: DesignIcons.map,
+                    isLoading: controller.loading.value,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
               ),
-              activeIcon: DesignIcon(
-                icon: DesignIcons.map,
-                isSelected: true,
-                isLoading: controller.loading.value,
+              activeIcon: Column(
+                children: [
+                  DesignIcon(
+                    icon: DesignIcons.map,
+                    isSelected: true,
+                    isLoading: controller.loading.value,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
               ),
               label: 'Places',
             ),
             BottomNavigationBarItem(
-              icon: DesignIcon(
-                icon: DesignIcons.event,
-                isLoading: controller.loading.value,
+              icon: Column(
+                children: [
+                  DesignIcon(
+                    icon: DesignIcons.event,
+                    isLoading: controller.loading.value,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
               ),
-              activeIcon: DesignIcon(
-                icon: DesignIcons.event,
-                isSelected: true,
-                isLoading: controller.loading.value,
+              activeIcon: Column(
+                children: [
+                  DesignIcon(
+                    icon: DesignIcons.event,
+                    isSelected: true,
+                    isLoading: controller.loading.value,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
               ),
               label: 'Events',
             ),
             BottomNavigationBarItem(
-              icon: DesignIcon(
-                icon: DesignIcons.product,
-                isLoading: controller.loading.value,
+              icon: Column(
+                children: [
+                  DesignIcon(
+                    icon: DesignIcons.product,
+                    isLoading: controller.loading.value,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
               ),
-              activeIcon: DesignIcon(
-                icon: DesignIcons.product,
-                isSelected: true,
-                isLoading: controller.loading.value,
+              activeIcon: Column(
+                children: [
+                  DesignIcon(
+                    icon: DesignIcons.product,
+                    isSelected: true,
+                    isLoading: controller.loading.value,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
               ),
               label: 'Products',
             ),
             BottomNavigationBarItem(
-              icon: DesignAvatarImage(
-                image: controller.user.image?.image,
-                isLoading: controller.loading.value,
+              icon: Column(
+                children: [
+                  DesignAvatarImage(
+                    image: controller.user.image?.image,
+                    blurHash: controller.user.image?.blurHash,
+                    isLoading: controller.loading.value,
+                  ),
+                  const DesignSpace(size: DesignSize.smallSpace)
+                ],
               ),
               label: 'Profile',
             ),
