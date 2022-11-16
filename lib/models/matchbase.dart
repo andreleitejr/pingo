@@ -22,6 +22,7 @@ class MatchBase extends Base {
 
   String get matchMessage {
     if (match == null) return 'Outro perfil';
+
     if (match! > 10) {
       return 'Alma gêmea';
     } else if (match! > 7) {
@@ -36,13 +37,15 @@ class MatchBase extends Base {
   }
 
   String get matchEmoji {
-    if (matchPercentage > 90) {
+    if (match == null) return DesignEmojis.thinkingFace;
+
+    if (match! > 10) {
       return DesignEmojis.smilingWithHeartEyes;
-    } else if (matchPercentage > 80) {
+    } else if (match! > 7) {
       return DesignEmojis.smilingWithHearts;
-    } else if (matchPercentage > 70) {
+    } else if (match! > 4) {
       return DesignEmojis.smilingWithOpenHands;
-    } else if (matchPercentage > 40) {
+    } else if (match! > 2) {
       return DesignEmojis.winkingTongue;
     } else {
       return DesignEmojis.thinkingFace;
@@ -58,8 +61,6 @@ class MatchBase extends Base {
       return match!.compareTo(other.match!) * -1;
     } else {
       return distance.compareTo(other.distance);
-
-      // if (match == other.match) return distance.compareTo(other.distance);
     }
   }
 }
