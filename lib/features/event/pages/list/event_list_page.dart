@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/models/event.dart';
@@ -52,7 +53,7 @@ class _EventListPageState extends State<EventListPage> {
             SliverToBoxAdapter(
               child: DesignAppBar(
                 showLeading: widget.showLeading,
-                title: 'Events',
+                title: 'Eventos',
               ),
             ),
             SliverAppBar(
@@ -60,6 +61,9 @@ class _EventListPageState extends State<EventListPage> {
               pinned: true,
               automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
+              elevation: 0.4,
+              shadowColor: DesignColor.text300.withOpacity(0.5),
+              toolbarHeight: 48,
               title: DesignSearchInput(
                 hint: 'Busque os melhores eventos',
                 onChanged: controller.setSearch,

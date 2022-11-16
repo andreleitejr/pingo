@@ -277,9 +277,7 @@ class HomePage extends StatelessWidget {
             const DesignSpace(size: DesignSize.smallSpace),
             DesignSectionTitle(
               title: 'Eventos próximos',
-              onActionPressed: () => Get.to(() => EventListPage(
-                    events: controller.eventsBestMatch,
-                  )),
+              onActionPressed: () => controller.onItemTapped(2),
               padding: const EdgeInsets.symmetric(
                 horizontal: DesignSize.mediumSpace,
               ),
@@ -327,11 +325,7 @@ class HomePage extends StatelessWidget {
         children: [
           DesignSectionTitle(
             title: 'Melhores preços da região',
-            onActionPressed: () => Get.to(
-              ProductListPage(
-                  title: 'Best Prices Only',
-                  products: controller.productBestMatch),
-            ),
+            onActionPressed: () => controller.onItemTapped(3),
             padding:
                 const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
             isLoading: controller.loading.value,

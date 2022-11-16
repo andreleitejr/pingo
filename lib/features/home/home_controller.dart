@@ -21,6 +21,13 @@ class HomeController extends GetxController {
   }
 
   final BasePageNav pageNav;
+
+  var selectedIndex = 0.obs;
+
+  void onItemTapped(int index) {
+    selectedIndex(index);
+  }
+
   var loading = false.obs;
 
   final User user = Get.find();

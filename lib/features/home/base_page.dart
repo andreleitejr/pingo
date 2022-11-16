@@ -29,14 +29,6 @@ class _BasePageState extends State<BasePage> implements BasePageNav {
   late HomeController controller;
   final User user = Get.find();
 
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   void initState() {
     controller = Get.put(HomeController(this));
@@ -45,19 +37,31 @@ class _BasePageState extends State<BasePage> implements BasePageNav {
 
   @override
   Widget build(BuildContext context) {
-    final User user = Get.find();
     final pages = <Widget>[
-      HomePage(),
-      PlaceListPage(places: controller.places, showLeading: false),
-      EventListPage(events: controller.eventsBestMatch, showLeading: false),
-      ProductListPage(
-          products: controller.productBestMatch, showLeading: false),
-      ProfileReadPage(),
+      Obx(
+        () => HomePage(),
+      ),
+      Obx(
+        () => PlaceListPage(places: controller.places, showLeading: false),
+      ),
+      Obx(
+        () => EventListPage(
+            events: controller.eventsBestMatch, showLeading: false),
+      ),
+      Obx(
+        () => ProductListPage(
+            products: controller.productBestMatch, showLeading: false),
+      ),
+      Obx(
+        () => ProfileReadPage(),
+      ),
     ];
 
     return Scaffold(
-      body: Center(
-        child: pages.elementAt(_selectedIndex),
+      body: Obx(
+        () => Center(
+          child: pages.elementAt(controller.selectedIndex.value),
+        ),
       ),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
@@ -188,9 +192,9 @@ class _BasePageState extends State<BasePage> implements BasePageNav {
               label: 'Profile',
             ),
           ],
-          currentIndex: _selectedIndex,
+          currentIndex: controller.selectedIndex.value,
           // selectedItemColor: Colors.amber[800],
-          onTap: _onItemTapped,
+          onTap: controller.onItemTapped,
         ),
       ),
     );

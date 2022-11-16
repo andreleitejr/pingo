@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/pages/list/event_list_page.dart';
@@ -57,7 +58,7 @@ class _PlaceListPageState extends State<PlaceListPage> {
             SliverToBoxAdapter(
               child: DesignAppBar(
                 showLeading: widget.showLeading,
-                title: widget.title ?? 'Places',
+                title: widget.title ?? 'Lugares',
               ),
             ),
             SliverAppBar(
@@ -65,6 +66,9 @@ class _PlaceListPageState extends State<PlaceListPage> {
               pinned: true,
               automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
+              elevation: 0.4,
+              shadowColor: DesignColor.text300.withOpacity(0.5),
+              toolbarHeight: 48,
               title: DesignSearchInput(
                 hint: 'Busque o melhor ao redor',
                 onChanged: controller.search.setSearch,
