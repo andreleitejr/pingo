@@ -5,20 +5,21 @@ import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/models/matchbase.dart';
 import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_space.dart';
 import 'package:pingo/widgets/shimmers/shimmer_list_tile.dart';
 
-class DesignListTile extends StatelessWidget {
-  const DesignListTile({
+class DesignEventListTile extends StatelessWidget {
+  const DesignEventListTile({
     Key? key,
-    required this.item,
+    required this.event,
     this.onPressed,
     this.isLoading = false,
   }) : super(key: key);
 
-  final MatchBase item;
+  final Event event;
   final Function()? onPressed;
   final bool isLoading;
 
@@ -46,15 +47,15 @@ class DesignListTile extends StatelessWidget {
               children: [
                 const DesignSpace(
                     orientation: DesignSpaceOrientation.horizontal),
-                item.image != null
+                event.image != null
                     ? SizedBox(
                         width: 42,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(6),
                           child: BlurHash(
                             imageFit: BoxFit.cover,
-                            image: item.image!.image,
-                            hash: item.image!.blurHash,
+                            image: event.image!.image,
+                            hash: event.image!.blurHash,
                           ),
                         ),
                       )
@@ -71,7 +72,7 @@ class DesignListTile extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              item.name,
+                              event.name,
                               style: DesignTextStyle.bodySmall12Bold,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -93,16 +94,10 @@ class DesignListTile extends StatelessWidget {
                             size: DesignSize.minimumSpace,
                           ),
                           Text(
-                            item.distance.metricSystem,
+                            event.distance.metricSystem,
                             style: DesignTextStyle.labelSmall10,
                           ),
                         ],
-                      ),
-                      Text(
-                        '${item.description}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: DesignTextStyle.labelSmall10,
                       ),
                       Row(
                         children: [
@@ -123,7 +118,7 @@ class DesignListTile extends StatelessWidget {
                               orientation: DesignSpaceOrientation.horizontal,
                               size: DesignSize.minimumSpace),
                           Text(
-                            item.rating.toString(),
+                            event.rating.toString(),
                             style: DesignTextStyle.labelSmall8.apply(
                               color: DesignColor.text400,
                             ),
@@ -133,16 +128,22 @@ class DesignListTile extends StatelessWidget {
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              itemCount: item.keywords.length > 2
+                              itemCount: event.keywords.length > 2
                                   ? 2
-                                  : item.keywords.length,
+                                  : event.keywords.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return keywordBullet(
-                                    item.keywords[index].keyword);
+                                    event.keywords[index].keyword);
                               },
                             ),
                           ),
                         ],
+                      ),
+                      Text(
+                        '${event.description}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: DesignTextStyle.labelSmall10,
                       ),
                     ],
                   ),

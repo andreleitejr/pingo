@@ -6,7 +6,7 @@ import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
 import 'package:pingo/widgets/design_icon_button.dart';
-import 'package:pingo/widgets/design_list_tile.dart';
+import 'package:pingo/widgets/design_place_list_tile.dart';
 import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_space.dart';
 
@@ -68,8 +68,8 @@ class SearchPage extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     final place = controller.places[index];
 
-                    return DesignListTile(
-                     item: place,
+                    return DesignPlaceListTile(
+                     place: place,
                     );
                   },
                 ),

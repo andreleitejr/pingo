@@ -11,7 +11,8 @@ import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
 import 'package:pingo/widgets/design_event_best_match_item.dart';
 import 'package:pingo/widgets/design_event_item.dart';
-import 'package:pingo/widgets/design_list_tile.dart';
+import 'package:pingo/widgets/design_event_list_tile.dart';
+import 'package:pingo/widgets/design_place_list_tile.dart';
 import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_section_title.dart';
 import 'package:pingo/widgets/design_space.dart';
@@ -214,8 +215,8 @@ class _EventListPageState extends State<EventListPage> {
                   (BuildContext context, int index) {
                     final event = controller.bestMatch[index];
 
-                    return DesignListTile(
-                      item: event,
+                    return DesignEventListTile(
+                      event: event,
                       onPressed: () =>
                           Get.to(() => EventReadPage(event: event)),
                     );

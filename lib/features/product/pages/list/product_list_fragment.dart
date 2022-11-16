@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/pages/read/product_read_page.dart';
-import 'package:pingo/widgets/design_list_tile.dart';
+import 'package:pingo/widgets/design_place_list_tile.dart';
+import 'package:pingo/widgets/design_product_list_tile.dart';
 
 class ProductListFragment extends StatelessWidget {
   const ProductListFragment({Key? key, required this.products})
@@ -20,9 +21,9 @@ class ProductListFragment extends StatelessWidget {
 
         return GestureDetector(
           onTap: () => Get.to(() => ProductReadPage(product: product)),
-          child: DesignListTile(
+          child: DesignProductListTile(
 
-            item: product,
+            product: product,
           ),
         );
       },

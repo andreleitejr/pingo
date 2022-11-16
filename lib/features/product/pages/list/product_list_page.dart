@@ -9,8 +9,9 @@ import 'package:pingo/features/product/pages/list/product_list_controller.dart';
 import 'package:pingo/features/product/pages/list/product_list_fragment.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
-import 'package:pingo/widgets/design_list_tile.dart';
+import 'package:pingo/widgets/design_place_list_tile.dart';
 import 'package:pingo/widgets/design_product_item.dart';
+import 'package:pingo/widgets/design_product_list_tile.dart';
 import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_section_title.dart';
 import 'package:pingo/widgets/design_space.dart';
@@ -142,8 +143,8 @@ class _ProductListPageState extends State<ProductListPage> {
                   (BuildContext context, int index) {
                     final product = controller.bestProducts[index];
 
-                    return DesignListTile(
-                      item: product,
+                    return DesignProductListTile(
+                      product: product,
                       onPressed: () =>
                           Get.to(() => ProductReadPage(product: product)),
                     );

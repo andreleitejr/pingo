@@ -17,7 +17,7 @@ import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
 import 'package:pingo/widgets/design_category_item.dart';
 import 'package:pingo/widgets/design_event_item.dart';
-import 'package:pingo/widgets/design_list_tile.dart';
+import 'package:pingo/widgets/design_place_list_tile.dart';
 import 'package:pingo/widgets/design_product_item.dart';
 import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_section_title.dart';
@@ -213,8 +213,8 @@ class _PlaceListPageState extends State<PlaceListPage> {
             (BuildContext context, int index) {
               final place = places[index];
 
-              return DesignListTile(
-                item: place,
+              return DesignPlaceListTile(
+                place: place,
                 onPressed: () => Get.to(() => PlaceReadPage(place: place)),
                 isLoading: controller.loading.value,
               );
