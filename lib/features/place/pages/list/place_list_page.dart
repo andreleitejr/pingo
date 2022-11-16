@@ -160,9 +160,15 @@ class _PlaceListPageState extends State<PlaceListPage> {
               itemCount: 5,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                return const DesignBestMatchItem(
-                  bestMatch: null,
-                  isLoading: true,
+                return DesignShimmerWidget(
+                  child: Container(
+                    width: Get.width * 0.6,
+                    margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                 );
               },
             );

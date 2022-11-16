@@ -9,6 +9,7 @@ class DesignIcons {
   static const map = 'assets/icons/map.png';
   static const masonry = 'assets/icons/masonry.png';
   static const message = 'assets/icons/message.png';
+  static const pin = 'assets/icons/pin.png';
   static const place = 'assets/icons/place.png';
   static const product = 'assets/icons/product.png';
   static const search = 'assets/icons/search.png';

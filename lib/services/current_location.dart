@@ -9,9 +9,9 @@ class CurrentLocation {
   Placemark? placemark;
 
   Future<void> init() async {
-    await _getCurrentLocation();
-    // currentCoordinates =
-    //     const GeoPoint(-23.548842918924585, -46.64632573035709);
+    // await _getCurrentLocation();
+    currentCoordinates =
+        const GeoPoint(-23.548842918924585, -46.64632573035709);
     await _getStreetName();
   }
 

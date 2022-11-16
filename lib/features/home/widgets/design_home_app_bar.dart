@@ -161,7 +161,7 @@ class _DesignHomeAppBarState extends State<DesignHomeAppBar> {
           Obx(
             () => Text(
               controller.address.value,
-              style: DesignTextStyle.bodySmall12.apply(
+              style: DesignTextStyle.labelSmall10.apply(
                 color: DesignColor.text500,
               ),
             ),

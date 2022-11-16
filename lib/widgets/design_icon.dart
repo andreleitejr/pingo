@@ -11,6 +11,7 @@ class DesignIcon extends StatelessWidget {
     this.width,
     this.isSelected = false,
     this.isLoading = false,
+    this.color,
   }) : super(key: key);
 
   final String icon;
@@ -18,10 +19,9 @@ class DesignIcon extends StatelessWidget {
   final double? width;
   final bool isSelected;
   final bool isLoading;
+  final Color? color;
 
   double get _size => isSelected ? DesignSize.selectedIcon : DesignSize.icon;
-
-  Color get _color => isSelected ? DesignColor.primary500 : DesignColor.text300;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,8 @@ class DesignIcon extends StatelessWidget {
         height: height ?? _size,
         width: width ?? _size,
         child: ColorFiltered(
-          colorFilter: ColorFilter.mode(_color, BlendMode.srcATop),
+          colorFilter:
+              ColorFilter.mode(color ?? DesignColor.text400, BlendMode.srcATop),
           child: Image.asset(icon),
         ),
       ),

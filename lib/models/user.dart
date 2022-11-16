@@ -6,6 +6,7 @@ class User extends Base {
   final String email;
   final String gender;
   final String country;
+  final String state;
   final String city;
   final bool agreed;
   String? nickname;
@@ -16,6 +17,7 @@ class User extends Base {
     required this.email,
     required this.gender,
     required this.country,
+    required this.state,
     required this.city,
     this.agreed = true,
     this.nickname,
@@ -29,6 +31,7 @@ class User extends Base {
         email = document['email'] as String,
         gender = document['gender'] as String,
         country = document['country'] as String,
+        state = document['state'] as String,
         city = document['city'] as String,
         agreed = document['agreed'] as bool,
         nickname = document['nickname'] as String?,
@@ -42,6 +45,7 @@ class User extends Base {
       'email': email,
       'gender': gender,
       'country': country,
+      'state': state,
       'city': city,
       'agreed': agreed,
       'nickname': nickname,

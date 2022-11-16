@@ -83,7 +83,7 @@ extension DateTimeExtension on DateTime {
   }
 
   String startAndEnd(DateTime end) =>
-      '$hour${minute != 0 ? ':$minute' : ''}-${end.hour}${end.minute != 0 ? ':${end.minute}' : ''}';
+      '$hour${minute != 0 ? ':$minute' : ''} - ${end.hour}${end.minute != 0 ? ':${end.minute}' : ''}';
 }
 
 extension PositionExtension on Position {

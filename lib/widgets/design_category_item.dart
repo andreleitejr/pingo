@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
@@ -24,7 +25,7 @@ class DesignCategoryItem extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 60,
+        width: 46,
         margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
         child: Column(
           children: [
@@ -33,19 +34,19 @@ class DesignCategoryItem extends StatelessWidget {
                 width: double.infinity,
                 child: Text(
                   image,
-                  style: const TextStyle(fontSize: 42),
+                  style: const TextStyle(fontSize: 36),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
-            const DesignSpace(),
+            // const DesignSpace(),
             Container(
-              height: 16,
+              height: 10,
               width: double.infinity,
               alignment: Alignment.center,
               child: Text(
                 title,
-                style: DesignTextStyle.labelSmall10Bold,
+                style: DesignTextStyle.labelSmall10.apply(color: DesignColor.text400),
                 overflow: TextOverflow.ellipsis,
               ),
             ),

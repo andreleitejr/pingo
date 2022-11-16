@@ -44,6 +44,8 @@ abstract class Base extends DataBase {
   final ratings = <Rating>[];
 
   double get rating {
+    if (ratings.isEmpty) return 5;
+
     var i = 0;
     for (final r in ratings) {
       i += r.nps;

@@ -13,6 +13,7 @@ class SignUpController extends GetxController {
   final birthday = DateTime.now().obs;
   final gender = ''.obs;
   final country = ''.obs;
+  final state = ''.obs;
   final city = ''.obs;
   final acceptedTermsAndConditions = false.obs;
 
@@ -28,9 +29,18 @@ class SignUpController extends GetxController {
 
   void setGender(String v) => gender(v);
 
-  void setCountry(String v) => country(v);
+  void setCountry(String v) {
+    country(v);
 
-  void setCity(String v) => city(v);
+    print('COOOOOOOOOOOOOOOOUNTRY $country');
+  }
+
+  void setState(String? v) {
+    state(v);
+    print('STAAAAAAAAAAAAAAAAAAATE $country $state');
+  }
+
+  void setCity(String? v) => city(v);
 
   void toggleTermsAndConditions(bool? v) => acceptedTermsAndConditions(v!);
 
@@ -40,6 +50,7 @@ class SignUpController extends GetxController {
         email: email.value,
         gender: gender.value,
         country: country.value,
+        state: state.value,
         city: city.value,
         agreed: acceptedTermsAndConditions.value,
         keywords: [],
@@ -61,6 +72,8 @@ class SignUpController extends GetxController {
 
   bool get countryValid => country.isNotEmpty;
 
+  bool get stateValid => state.isNotEmpty;
+
   bool get cityValid => city.isNotEmpty;
 
   bool get isAuthFormValid =>
@@ -72,7 +85,7 @@ class SignUpController extends GetxController {
 
   bool get isInfoFormValid =>
       // isAuthFormValid &&
-      birthdayValid && genderValid && countryValid && cityValid;
+      birthdayValid && genderValid && countryValid && stateValid && cityValid;
 
   Future<AuthResult> signUpWithEmailAndPassword() async {
     var result = await repository.signUpWithEmailAndPassword(

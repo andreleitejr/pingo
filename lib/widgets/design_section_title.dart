@@ -36,14 +36,14 @@ class DesignSectionTitle extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: DesignTextStyle.bodyMedium16Bold,
+              style: DesignTextStyle.bodySmall14Bold,
             ),
           ),
           TextButton(
             onPressed: onActionPressed,
             child: Text(
               actionTitle ?? 'See all',
-              style: DesignTextStyle.bodySmall14Bold
+              style: DesignTextStyle.bodySmall12
                   .apply(color: DesignColor.primary500),
             ),
           ),

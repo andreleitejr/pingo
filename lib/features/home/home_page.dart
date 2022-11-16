@@ -43,6 +43,7 @@ class HomePage extends StatelessWidget {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
+                toolbarHeight: 48,
                 backgroundColor: Colors.white,
                 elevation: 0,
                 title: DesignHomeAppBar(),
@@ -53,6 +54,7 @@ class HomePage extends StatelessWidget {
                 pinned: true,
                 automaticallyImplyLeading: false,
                 backgroundColor: Colors.white,
+                toolbarHeight: 40,
                 title: DesignSearchInput(
                   hint: 'Busque o melhor ao redor',
                   onChanged: controller.search.setSearch,
@@ -67,20 +69,16 @@ class HomePage extends StatelessWidget {
                         title: 'Made for you', places: controller.bestMatch),
                   ),
                   padding: const EdgeInsets.symmetric(
-                    horizontal: DesignSize.mediumSpace,
-                  ),
+                      horizontal: DesignSize.mediumSpace),
                   isLoading: controller.loading.value,
-                ),
-              ),
-              const SliverToBoxAdapter(
-                child: DesignSpace(
-                  size: DesignSize.smallSpace,
                 ),
               ),
               SliverToBoxAdapter(
                 child: _bestMatchList(),
               ),
-              const SliverToBoxAdapter(child: DesignSpace()),
+              const SliverToBoxAdapter(
+                child: DesignSpace(size: DesignSize.largeSpace),
+              ),
               SliverToBoxAdapter(
                 child: _categoryList(),
               ),
@@ -146,9 +144,16 @@ class HomePage extends StatelessWidget {
               itemCount: 5,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                return const DesignBestMatchItem(
-                  bestMatch: null,
-                  isLoading: true,
+                return DesignShimmerWidget(
+                  child: Container(
+                    width: Get.width * 0.6,
+                    margin:
+                        const EdgeInsets.only(right: DesignSize.mediumSpace),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
                 );
               },
             );
@@ -178,9 +183,7 @@ class HomePage extends StatelessWidget {
       return SizedBox(
         height: 80,
         child: ListView.builder(
-          padding: const EdgeInsets.only(
-            left: DesignSize.mediumSpace,
-          ),
+          padding: const EdgeInsets.only(left: DesignSize.mediumSpace),
           scrollDirection: Axis.horizontal,
           itemCount: 6,
           itemBuilder: (BuildContext context, int index) {
@@ -217,7 +220,7 @@ class HomePage extends StatelessWidget {
       );
     }
     return SizedBox(
-      height: 80,
+      height: 64,
       child: ListView.builder(
         padding: const EdgeInsets.only(
           left: DesignSize.mediumSpace,
@@ -277,7 +280,6 @@ class HomePage extends StatelessWidget {
               ),
               isLoading: controller.loading.value,
             ),
-            const DesignSpace(size: DesignSize.smallSpace),
             SizedBox(
               height: 184,
               child: ListView.builder(
