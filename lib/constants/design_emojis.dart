@@ -2,6 +2,7 @@
 class DesignEmojis {
   static const all = '🎯';
   static const children = '🧒';
+  static const concert = '🎸';
   static const eventMan = '😋';
   static const eventWoman = '💃🏽';
   static const fastFood = '🍔';

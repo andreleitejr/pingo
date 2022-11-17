@@ -2,31 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
+import 'package:pingo/widgets/design_emoji_bullet.dart';
+import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_page_view.dart';
 import 'package:pingo/widgets/design_title_with_subtitle.dart';
 import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class ProfileKeywordsSelection extends StatelessWidget {
-  const ProfileKeywordsSelection({Key? key}) : super(key: key);
+  ProfileKeywordsSelection({Key? key}) : super(key: key);
+
+  final controller = Get.put(ProfileKeywordsController());
 
   @override
   Widget build(BuildContext context) {
     return DesignPageView(
       pages: [
         DesignKeywordSelection(
-          title: 'Hello, John... Welcome to Pingo.',
+          title: 'Hello, ${controller.user.name}... Welcome to Pingo.',
           subtitle: 'What kind of place do you like?',
           list: placesKeywords,
           masonryStyle: true,
           minimumQuantity: 1,
         ),
         DesignKeywordSelection(
+          title: 'Great, ${controller.user.name}...',
           subtitle: 'What are your favorite foods?',
           list: foods,
           showSearch: true,
@@ -34,7 +41,8 @@ class ProfileKeywordsSelection extends StatelessWidget {
           minimumQuantity: 1,
         ),
         DesignKeywordSelection(
-          subtitle: 'What kind of music do you listen to?',
+          title: 'We are almost there, ${controller.user.name}.',
+          subtitle: 'Can you tell me what kind of music do you listen to?',
           list: musics,
           showSearch: true,
           searchHint: 'Search for music genders...',
@@ -94,27 +102,30 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
-        child: Obx(
-          () => DesignAppBar(
-            onLeadingPressed: () => controller.pageView.previousPage(),
-            actionText: 'Next',
-            actionValid:
-                controller.quantityValid(widget.list, widget.minimumQuantity),
-            onActionPressed: () {
-              print(controller.pageView.pageController.page);
-              final isValid =
-                  controller.quantityValid(widget.list, widget.minimumQuantity);
+        child: SafeArea(
+          child: Obx(
+            () => DesignAppBar(
+              leadingIcon: DesignIcons.longArrowLeft,
+              onLeadingPressed: () => controller.pageView.previousPage(),
+              actionText: 'Next',
+              actionValid:
+                  controller.quantityValid(widget.list, widget.minimumQuantity),
+              onActionPressed: () {
+                print(controller.pageView.pageController.page);
+                final isValid = controller.quantityValid(
+                    widget.list, widget.minimumQuantity);
 
-              if (isValid) {
-                if (controller.pageView.pageController.page == 3) {
-                  controller
-                      .updateUser()
-                      .then((_) => Get.to(() => const BasePage()));
-                } else {
-                  controller.pageView.nextPage();
+                if (isValid) {
+                  if (controller.pageView.pageController.page == 3) {
+                    controller
+                        .updateUser()
+                        .then((_) => Get.to(() => const BasePage()));
+                  } else {
+                    controller.pageView.nextPage();
+                  }
                 }
-              }
-            },
+              },
+            ),
           ),
         ),
       ),
@@ -132,8 +143,8 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
           if (widget.showSearch) ...[
             SliverToBoxAdapter(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: DesignSize.mediumSpace),
                 child: DesignSearchInput(
                   hint: widget.searchHint,
                 ),
@@ -175,11 +186,54 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
 
               return GestureDetector(
                 onTap: () => controller.toggleKeyword(widget.list[index]),
-                child: Container(
-                  color:
-                      isSelected ? DesignColor.primary500 : DesignColor.text300,
-                  height: cardHeight,
-                  child: Text(widget.list[index].title),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: isSelected
+                              ? DesignColor.primary500
+                              : DesignColor.text300,
+                          image: DecorationImage(
+                            image: AssetImage(
+                              widget.list[index].image,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(16)),
+                      height: cardHeight,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      alignment: Alignment.bottomLeft,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(isSelected ? 0.6 : 0.2),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      height: cardHeight,
+                      child: Row(
+                        children: [
+                          DesignEmojiBullet(
+                            emoji: widget.list[index].emoji,
+                            title: widget.list[index].title,
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (isSelected)
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Container(
+                          height: 20,
+                          width: 20,
+                          margin: const EdgeInsets.only(
+                            top: DesignSize.mediumSpace,
+                            right: DesignSize.mediumSpace,
+                          ),
+                          child: Image.asset(DesignIcons.valid),
+                        ),
+                      ),
+                  ],
                 ),
               );
             },
@@ -190,30 +244,80 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
   }
 
   Widget basicGrid() {
-    return SliverGrid(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: DesignSize.mediumSpace,
-        crossAxisSpacing: DesignSize.mediumSpace,
-        childAspectRatio: childAspectRatio,
-        crossAxisCount: 3,
-      ),
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return Obx(() {
-            final isSelected = controller.keywords.contains(widget.list[index]);
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      sliver: SliverGrid(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisSpacing: DesignSize.mediumSpace,
+          crossAxisSpacing: DesignSize.mediumSpace,
+          childAspectRatio: childAspectRatio,
+          crossAxisCount: 3,
+        ),
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            return Obx(() {
+              final isSelected =
+                  controller.keywords.contains(widget.list[index]);
 
-            return GestureDetector(
-              onTap: () => controller.toggleKeyword(widget.list[index]),
-              child: Container(
-                alignment: Alignment.center,
-                color:
-                    isSelected ? DesignColor.primary500 : DesignColor.text300,
-                child: Text(widget.list[index].title),
-              ),
-            );
-          });
-        },
-        childCount: widget.list.length,
+              return GestureDetector(
+                onTap: () => controller.toggleKeyword(widget.list[index]),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: isSelected
+                              ? DesignColor.primary500
+                              : DesignColor.text300,
+                          image: DecorationImage(
+                            image: AssetImage(
+                              widget.list[index].image,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(16)),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      alignment: Alignment.bottomLeft,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(isSelected ? 0.6 : 0.2),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Row(
+                        children: [
+                          DesignEmojiBullet(
+                            emoji: widget.list[index].emoji,
+                            title: widget.list[index].title,
+                            textStyle:  DesignTextStyle.labelSmall10Bold.apply(
+                              color: DesignColor.text500,
+                            ),
+                            emojiSize: 10
+                            ,
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (isSelected)
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Container(
+                          height: 20,
+                          width: 20,
+                          margin: const EdgeInsets.only(
+                            top: DesignSize.mediumSpace,
+                            right: DesignSize.mediumSpace,
+                          ),
+                          child: Image.asset(DesignIcons.valid),
+                        ),
+                      ),
+                  ],
+                ),
+              );
+            });
+          },
+          childCount: widget.list.length,
+        ),
       ),
     );
   }

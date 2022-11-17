@@ -165,7 +165,6 @@ class CategoryController extends GetxController {
 
     final promo =
         allKeywords.firstWhere((keyword) => keyword.id == Keyword.promo);
-    list.insert(1, promo);
 
     list.addAll(
         foods.where((keyword) => user.keywords.contains(keyword.id)).toList());
@@ -187,6 +186,8 @@ class CategoryController extends GetxController {
           allKeywords.firstWhere((keyword) => keyword.id == Keyword.bike);
       list.add(bike);
     }
+
+    list.insert(1, promo);
 
     return list;
   }
@@ -219,6 +220,8 @@ class CategoryController extends GetxController {
         return DesignEmojis.children;
       case Keyword.pet:
         return DesignEmojis.pet;
+      case Keyword.concert:
+        return DesignEmojis.concert;
       default:
         return DesignEmojis.all;
     }

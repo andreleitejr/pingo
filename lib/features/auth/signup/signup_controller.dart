@@ -92,7 +92,7 @@ class SignUpController extends GetxController {
 
   bool get isInfoFormValid =>
       // isAuthFormValid &&
-      birthdayValid && genderValid && countryValid && stateValid && cityValid;
+      birthdayValid && genderValid && countryValid && cityValid;
 
   Future<AuthResult> signUpWithEmailAndPassword() async {
     var result = await repository.signUpWithEmailAndPassword(

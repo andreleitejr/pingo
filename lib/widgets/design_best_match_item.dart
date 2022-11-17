@@ -8,12 +8,9 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
-import 'package:pingo/models/base.dart';
-import 'package:pingo/models/matchbase.dart';
-import 'package:pingo/widgets/design_avatar_image.dart';
+import 'package:pingo/widgets/design_emoji_bullet.dart';
 import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_read_image.dart';
-import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class DesignBestMatchItem extends StatelessWidget {
@@ -32,9 +29,7 @@ class DesignBestMatchItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (bestMatch is Place) {
-          Get.to(() => PlaceReadPage(place: bestMatch as Place));
-        }
+        Get.to(() => PlaceReadPage(place: bestMatch));
       },
       child: Container(
         width: width ?? Get.width * 0.6,
@@ -66,29 +61,9 @@ class DesignBestMatchItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        height: 24,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.85),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              bestMatch.matchEmoji,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              bestMatch.matchMessage,
-                              style: DesignTextStyle.bodySmall12Bold.apply(
-                                color: DesignColor.text500,
-                              ),
-                            ),
-                          ],
-                        ),
+                      DesignEmojiBullet(
+                        emoji: bestMatch.matchEmoji,
+                        title: bestMatch.matchMessage,
                       ),
                       Expanded(child: Container()),
                       Row(

@@ -1,8 +1,14 @@
+import 'package:pingo/constants/design_emojis.dart';
+import 'package:pingo/constants/design_images.dart';
+import 'package:pingo/constants/keyword_image.dart';
+
 class KeywordData {
   final String title;
+  final String emoji;
+  final String image;
   final int id;
 
-  KeywordData(this.title, this.id);
+  KeywordData(this.title, this.id, this.emoji, this.image);
 }
 
 class Keyword {
@@ -121,100 +127,444 @@ class Keyword {
 final allKeywords = placesKeywords + foods + musics + miscellaneous + other;
 
 final placesKeywords = <KeywordData>[
-  KeywordData('Restaurant', Keyword.restaurant),
-  KeywordData('Pub', Keyword.pub),
-  KeywordData('Party', Keyword.party),
-  KeywordData('Concert', Keyword.concert),
-  KeywordData('Children', Keyword.children),
-  KeywordData('Pets', Keyword.pet),
-  KeywordData('Park', Keyword.park),
-  KeywordData('Museum', Keyword.museum),
-  KeywordData('Store', Keyword.store),
-  KeywordData('Square', Keyword.square),
-  KeywordData('Historical', Keyword.historical),
-  KeywordData('Theater', Keyword.theater),
-  KeywordData('Bookstore', Keyword.bookstore),
-  KeywordData('Exposition', Keyword.exposition),
+  KeywordData(
+    'Restaurant',
+    Keyword.restaurant,
+    DesignEmojis.restaurant,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Pub',
+    Keyword.pub,
+    DesignEmojis.pub,
+    KeywordImage.pub,
+  ),
+  KeywordData(
+    'Party',
+    Keyword.party,
+    DesignEmojis.eventWoman,
+    KeywordImage.party,
+  ),
+  KeywordData(
+    'Concert',
+    Keyword.concert,
+    DesignEmojis.concert,
+    KeywordImage.concert,
+  ),
+  KeywordData(
+    'Children',
+    Keyword.children,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Pets',
+    Keyword.pet,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Park',
+    Keyword.park,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Museum',
+    Keyword.museum,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Store',
+    Keyword.store,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Square',
+    Keyword.square,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Historical',
+    Keyword.historical,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Theater',
+    Keyword.theater,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Bookstore',
+    Keyword.bookstore,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Exposition',
+    Keyword.exposition,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
 ];
 
 final foods = <KeywordData>[
-  KeywordData('Brazilian', Keyword.brazilian),
-  KeywordData('Fast Food', Keyword.fastFood),
-  KeywordData('Pizza', Keyword.pizza),
-  KeywordData('Burger', Keyword.burger),
-  KeywordData('Hot Dog', Keyword.hotDog),
-  KeywordData('Candy', Keyword.candy),
-  KeywordData('Donuts', Keyword.donuts),
-  KeywordData('Japanese', Keyword.japanese),
-  KeywordData('Mexican', Keyword.mexican),
-  KeywordData('Chinese', Keyword.chinese),
-  KeywordData('Italian', Keyword.italian),
-  KeywordData('Thai', Keyword.thai),
-  KeywordData('Greek', Keyword.greek),
-  KeywordData('Arabian', Keyword.arabian),
-  KeywordData('Coxinha', Keyword.coxinha),
-  KeywordData('Marmita', Keyword.marmita),
-  KeywordData('Pastel', Keyword.pastel),
-  KeywordData('Esfiha', Keyword.esfiha),
+  KeywordData(
+    'Brazilian',
+    Keyword.brazilian,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Fast Food',
+    Keyword.fastFood,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Pizza',
+    Keyword.pizza,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Burger',
+    Keyword.burger,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Hot Dog',
+    Keyword.hotDog,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Candy',
+    Keyword.candy,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Donuts',
+    Keyword.donuts,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Japanese',
+    Keyword.japanese,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Mexican',
+    Keyword.mexican,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Chinese',
+    Keyword.chinese,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Italian',
+    Keyword.italian,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Thai', Keyword.thai, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Greek',
+    Keyword.greek,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Arabian',
+    Keyword.arabian,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Coxinha',
+    Keyword.coxinha,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Marmita',
+    Keyword.marmita,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Pastel',
+    Keyword.pastel,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Esfiha',
+    Keyword.esfiha,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
 ];
 
 final musics = <KeywordData>[
-  KeywordData('Rock', Keyword.rock),
-  KeywordData('Pop', Keyword.pop),
-  KeywordData('Country', Keyword.country),
-  KeywordData('Eletronic', Keyword.electronic),
-  KeywordData('Funk', Keyword.funk),
-  KeywordData('House', Keyword.house),
-  KeywordData('Trap', Keyword.trap),
-  KeywordData('Techno', Keyword.techno),
-  KeywordData('Rap', Keyword.rap),
-  KeywordData('Samba', Keyword.samba),
-  KeywordData('Metal', Keyword.metal),
-  KeywordData('Pagode', Keyword.pagode),
-  KeywordData('Gospel', Keyword.gospel),
-  KeywordData('Classic', Keyword.classic),
-  KeywordData('MPB', Keyword.mpb),
-  KeywordData('Blues', Keyword.blues),
-  KeywordData('Jazz', Keyword.jazz),
-  KeywordData('Trance', Keyword.trance),
-  KeywordData('Hardcore', Keyword.hardcore),
-  KeywordData('Punk', Keyword.punk),
+  KeywordData(
+      'Rock', Keyword.rock, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+      'Pop', Keyword.pop, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Country',
+    Keyword.country,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Eletronic',
+    Keyword.electronic,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Funk', Keyword.funk, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'House',
+    Keyword.house,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Trap', Keyword.trap, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Techno',
+    Keyword.techno,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Rap', Keyword.rap, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Samba',
+    Keyword.samba,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Metal',
+    Keyword.metal,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Pagode',
+    Keyword.pagode,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Gospel',
+    Keyword.gospel,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Classic',
+    Keyword.classic,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'MPB', Keyword.mpb, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Blues',
+    Keyword.blues,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Jazz', Keyword.jazz, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Trance',
+    Keyword.trance,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Hardcore',
+    Keyword.hardcore,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Punk', Keyword.punk, DesignEmojis.fastFood, DesignImages.fallbackImage),
 ];
 
 final miscellaneous = <KeywordData>[
-  KeywordData('LGBT', Keyword.lgbt),
-  KeywordData('Fashion', Keyword.fashion),
-  KeywordData('Gym', Keyword.gym),
-  KeywordData('Beer', Keyword.beer),
-  KeywordData('Sports', Keyword.sports),
-  KeywordData('Games', Keyword.games),
-  KeywordData('Dance', Keyword.dance),
-  KeywordData('Anime', Keyword.anime),
-  KeywordData('Chocolate', Keyword.chocolate),
-  KeywordData('Street Art', Keyword.streetArt),
-  KeywordData('Bike', Keyword.bike),
-  KeywordData('Skate', Keyword.skate),
-  KeywordData('Rollerblades', Keyword.rollerblades),
-  KeywordData('Art', Keyword.art),
-  KeywordData('Tattoo', Keyword.tattoo),
-  KeywordData('Meditation', Keyword.meditation),
-  KeywordData('Soccer', Keyword.soccer),
-  KeywordData('Basketball', Keyword.basketball),
-  KeywordData('Volleyball', Keyword.volleyball),
-  KeywordData('Tennis', Keyword.tennis),
-  KeywordData('UFC', Keyword.ufc),
-  KeywordData('Boxing', Keyword.boxing),
-  KeywordData('Brazilian Jiu Jitsu', Keyword.bjj),
-  KeywordData('Thai Boxing', Keyword.thaiBoxing),
-  KeywordData('Gin', Keyword.gin),
-  KeywordData('Drinks', Keyword.drinks),
+  KeywordData(
+      'LGBT', Keyword.lgbt, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Fashion',
+    Keyword.fashion,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Gym', Keyword.gym, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+      'Beer', Keyword.beer, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Sports',
+    Keyword.sports,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Games',
+    Keyword.games,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Dance',
+    Keyword.dance,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Anime',
+    Keyword.anime,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Chocolate',
+    Keyword.chocolate,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Street Art',
+    Keyword.streetArt,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Bike', Keyword.bike, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Skate',
+    Keyword.skate,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Rollerblades',
+    Keyword.rollerblades,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Art', Keyword.art, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Tattoo',
+    Keyword.tattoo,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Meditation',
+    Keyword.meditation,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Soccer',
+    Keyword.soccer,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Basketball',
+    Keyword.basketball,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Volleyball',
+    Keyword.volleyball,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Tennis',
+    Keyword.tennis,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'UFC', Keyword.ufc, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Boxing',
+    Keyword.boxing,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Brazilian Jiu Jitsu',
+    Keyword.bjj,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Thai Boxing',
+    Keyword.thaiBoxing,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Gin', Keyword.gin, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Drinks',
+    Keyword.drinks,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
 ];
 
 final other = [
-  KeywordData('Event', Keyword.event),
-  KeywordData('Product', Keyword.product),
-  KeywordData('Util', Keyword.util),
-  KeywordData('Free', Keyword.free),
-  KeywordData('Open', Keyword.open),
-  KeywordData('Promo', Keyword.promo),
+  KeywordData(
+    'Event',
+    Keyword.event,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+    'Product',
+    Keyword.product,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
+  KeywordData(
+      'Util', Keyword.util, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+      'Free', Keyword.free, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+      'Open', Keyword.open, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData(
+    'Promo',
+    Keyword.promo,
+    DesignEmojis.fastFood,
+    KeywordImage.restaurant,
+  ),
 ];

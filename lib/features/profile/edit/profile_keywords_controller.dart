@@ -6,7 +6,7 @@ import 'package:pingo/widgets/design_page_view.dart';
 
 class ProfileKeywordsController extends GetxController {
   final repository = UserRepository();
-  final PageViewController pageView = Get.find();
+  final PageViewController pageView = Get.put(PageViewController());
   @override
   void onReady() {
     super.onReady();

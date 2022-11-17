@@ -111,7 +111,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
                         await controller.signUpWithEmailAndPassword();
 
                     if (result == AuthResult.success) {
-                      Get.to(() => const ProfileKeywordsSelection());
+                      Get.to(() => ProfileKeywordsSelection());
                     } else {
                       Get.snackbar(
                         result.title,

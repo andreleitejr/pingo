@@ -27,29 +27,20 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(DesignSize.appBarHeight),
-        child: SafeArea(
-          child: DesignAppBar(
-            title: 'Sign Up',
-            showLeading: false,
-          ),
-        ),
-      ),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(DesignSize.mediumSpace),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const DesignSpace(),
-            const DesignSpace(),
+            Expanded(child: Container()),
             Expanded(
               child: SizedBox(
                 width: 48,
                 child: Image.asset(DesignImages.logo),
               ),
             ),
+            const DesignSpace(),
             const DesignSpace(),
             const DesignSpace(),
             Obx(

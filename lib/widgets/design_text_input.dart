@@ -52,7 +52,7 @@ class _DesignTextInputState extends State<DesignTextInput> {
         obscureText: widget.obscureText,
         keyboardType: widget.textInputType,
         style: DesignTextStyle.bodySmall12Bold
-            .apply(color: DesignColor.primary500),
+            .apply(color: DesignColor.text400),
         decoration: InputDecoration(
           hintStyle: DesignTextStyle.bodySmall12.apply(
             color: DesignColor.text300,

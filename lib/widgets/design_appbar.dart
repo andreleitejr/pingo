@@ -18,6 +18,7 @@ class DesignAppBar extends StatelessWidget {
     this.onLeadingPressed,
     this.onActionPressed,
     this.actionValid = false,
+    this.leadingIcon,
     this.actionIcon,
     this.textStyle,
   });
@@ -26,6 +27,7 @@ class DesignAppBar extends StatelessWidget {
   final bool showLeading;
   final bool verified;
   final String? actionText;
+  final String? leadingIcon;
   final String? actionIcon;
   final Function()? onLeadingPressed;
   final Function()? onActionPressed;
@@ -44,7 +46,7 @@ class DesignAppBar extends StatelessWidget {
             SizedBox(
               width: 54,
               child: DesignIconButton(
-                icon: DesignIcons.arrowLeft,
+                icon: leadingIcon ?? DesignIcons.arrowLeft,
                 onPressed: onLeadingPressed ?? () => Get.back(),
                 alignment: Alignment.centerLeft,
                 width: 16,
@@ -91,7 +93,7 @@ class DesignAppBar extends StatelessWidget {
               child: Text(
                 actionText!,
                 textAlign: TextAlign.center,
-                style: DesignTextStyle.bodySmall14Bold.apply(
+                style: DesignTextStyle.bodySmall12Bold.apply(
                   color: actionValid
                       ? DesignColor.primary700
                       : DesignColor.text300,

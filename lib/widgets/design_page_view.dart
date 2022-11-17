@@ -19,7 +19,7 @@ class PageViewController extends GetxController {
 
 class DesignPageView extends StatelessWidget {
   final List<Widget> pages;
-  final controller = Get.put(PageViewController());
+  final PageViewController controller = Get.find();
 
   DesignPageView({super.key, required this.pages});
 

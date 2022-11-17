@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pingo/features/auth/landing/landing_controller.dart';
-import 'package:pingo/features/auth/signup/signup_info_page.dart';
 import 'package:pingo/features/auth/signup/signup_page.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
@@ -50,10 +49,10 @@ class _LandingPageState extends State<LandingPage>
   void logged() => Get.to(() => const BasePage());
 
   @override
-  void loggedOut() => Get.to(() => const SignUpInfoPage());
+  void loggedOut() => Get.to(() => const SignUpPage());
 
   @override
-  void loggedWithoutInfo() => Get.to(() => const ProfileKeywordsSelection());
+  void loggedWithoutInfo() => Get.to(() => ProfileKeywordsSelection());
 }
 
 abstract class LandingPageNavigator {
