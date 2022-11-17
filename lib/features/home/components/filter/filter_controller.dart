@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pingo/models/base.dart';
 import 'package:pingo/models/buyable.dart';
+import 'package:pingo/models/matchbase.dart';
 
 class FilterController extends GetxController {
   var min = 0.0.obs;
@@ -12,6 +13,8 @@ class FilterController extends GetxController {
   var maxPrice = 20000.0.obs;
 
   var rating = 1.obs;
+
+  var match = 0.obs;
 
   int get divisions {
     final lessThanOneKm = distance < 1000;
@@ -44,6 +47,10 @@ class FilterController extends GetxController {
 
   void setMaxPrice(double v) => maxPrice(v);
 
+  void setMatch(MatchItem v) => match(v.value);
+
+  void cleanMatch() => match(matchItems.last.value);
+
   void cleanPrice() {
     minPrice(0);
     maxPrice(20000);
@@ -60,6 +67,11 @@ class FilterController extends GetxController {
 
   List<Base> filterPlaceByRating(List<Base> list) =>
       list.where((base) => base.rating >= rating.value).toList();
+
+  List<MatchBase> filterByMatch(List<MatchBase> list) => list
+      .where((matchBase) =>
+          matchBase.match != null && matchBase.match! >= match.value)
+      .toList();
 
   List<Buyable> filterProductByPrice(List<Buyable> list) => list
       .where((buyable) =>

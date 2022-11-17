@@ -32,6 +32,7 @@ class DesignSlider extends StatelessWidget {
         valueIndicatorColor: DesignColor.primary500,
         inactiveTrackColor: DesignColor.primary100,
         activeTrackColor: DesignColor.primary500,
+        trackHeight: 2,
         thumbColor: DesignColor.primary500,
         overlayColor: const Color(0x29EB1555),
         thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12),

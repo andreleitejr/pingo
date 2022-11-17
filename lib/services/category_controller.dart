@@ -1,11 +1,8 @@
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_emojis.dart';
 import 'package:pingo/core/keyword.dart';
-import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/base.dart';
 import 'package:pingo/models/category.dart';
-import 'package:pingo/features/place/models/place.dart';
-import 'package:pingo/models/matchbase.dart';
 import 'package:pingo/models/user.dart';
 
 final all = Category(Keyword.all, 'All', DesignEmojis.all);

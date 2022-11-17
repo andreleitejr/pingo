@@ -79,11 +79,11 @@ class DesignEventBestMatchItem extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              bestMatch.matchEmoji,
+                              bestMatch.matchItem.emoji,
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              bestMatch.matchMessage,
+                              bestMatch.matchItem.message,
                               style: DesignTextStyle.bodySmall12Bold.apply(
                                 color: DesignColor.text500,
                               ),

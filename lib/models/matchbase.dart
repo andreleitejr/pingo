@@ -20,36 +20,10 @@ class MatchBase extends Base {
     return (match! * 100 / keywords).round();
   }
 
-  String get matchMessage {
-    if (match == null) return 'Outro perfil';
+  MatchItem get matchItem {
+    if (match == null) return matchItems.last;
 
-    if (match! > 10) {
-      return 'Alma gêmea';
-    } else if (match! > 7) {
-      return 'Tudo a ver';
-    } else if (match! > 4) {
-      return 'Sua cara';
-    } else if (match! > 2) {
-      return 'Você pode gostar';
-    } else {
-      return 'Outro perfil';
-    }
-  }
-
-  String get matchEmoji {
-    if (match == null) return DesignEmojis.thinkingFace;
-
-    if (match! > 10) {
-      return DesignEmojis.smilingWithHeartEyes;
-    } else if (match! > 7) {
-      return DesignEmojis.smilingWithHearts;
-    } else if (match! > 4) {
-      return DesignEmojis.smilingWithOpenHands;
-    } else if (match! > 2) {
-      return DesignEmojis.winkingTongue;
-    } else {
-      return DesignEmojis.thinkingFace;
-    }
+    return matchItems.firstWhere((m) => match! >= m.value);
   }
 
   MatchBase.fromMap(DocumentSnapshot document) : super.fromMap(document);
@@ -64,3 +38,20 @@ class MatchBase extends Base {
     }
   }
 }
+
+class MatchItem {
+  final int value;
+  final String emoji;
+  final String message;
+
+  MatchItem(this.value, this.emoji, this.message);
+}
+
+// TODO: DAR NOME AOS VALORES
+final matchItems = [
+  MatchItem(10, DesignEmojis.smilingWithHeartEyes, 'Alma gêmea'),
+  MatchItem(7, DesignEmojis.smilingWithHearts, 'Tudo a ver'),
+  MatchItem(4, DesignEmojis.smilingWithOpenHands, 'Sua cara'),
+  MatchItem(2, DesignEmojis.winkingTongue, 'Você pode gostar'),
+  MatchItem(0, DesignEmojis.thinkingFace, 'Outro perfil'),
+];

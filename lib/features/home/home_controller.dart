@@ -1,7 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/models/category.dart';
 import 'package:pingo/services/current_location.dart';
@@ -72,6 +71,7 @@ class HomeController extends GetxController {
     list.sort((a, b) => a.compareTo(b));
 
     list = filter.filterPlaceByDistance(list) as List<Place>;
+    list = filter.filterByMatch(list) as List<Place>;
     // list = filter.filterPlaceByRating(list) as List<Place>;
     return list;
   }

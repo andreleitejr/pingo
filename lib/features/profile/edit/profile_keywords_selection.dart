@@ -291,8 +291,7 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
                             textStyle:  DesignTextStyle.labelSmall10Bold.apply(
                               color: DesignColor.text500,
                             ),
-                            emojiSize: 10
-                            ,
+                            emojiSize: 10,
                           ),
                         ],
                       ),

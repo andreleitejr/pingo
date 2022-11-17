@@ -62,8 +62,8 @@ class DesignBestMatchItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       DesignEmojiBullet(
-                        emoji: bestMatch.matchEmoji,
-                        title: bestMatch.matchMessage,
+                        emoji: bestMatch.matchItem.emoji,
+                        title: bestMatch.matchItem.message,
                       ),
                       Expanded(child: Container()),
                       Row(

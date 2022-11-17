@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/features/home/components/filter/filter_controller.dart';
+import 'package:pingo/models/matchbase.dart';
 import 'package:pingo/widgets/design_bullet_item.dart';
 import 'package:pingo/widgets/design_button.dart';
+import 'package:pingo/widgets/design_emoji_bullet.dart';
 import 'package:pingo/widgets/design_section_title.dart';
 import 'package:pingo/widgets/design_slider.dart';
-import 'package:pingo/widgets/design_space.dart';
-import 'package:pingo/widgets/design_text_input.dart';
 
 class FilterModal extends StatelessWidget {
   FilterModal({Key? key}) : super(key: key);
@@ -22,11 +23,73 @@ class FilterModal extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          Container(
+            height: 4,
+            width: 42,
+            decoration: BoxDecoration(
+                color: DesignColor.text200.withOpacity(0.35),
+                borderRadius: BorderRadius.circular(42)),
+          ),
           DesignSectionTitle(
-            title: 'Filter',
+            title: '',
             actionTitle: 'Clean All',
             onActionPressed: () => controller.cleanAll(),
           ),
+          DesignSectionTitle(
+            title: 'Match',
+            actionTitle: 'Clean',
+            onActionPressed: () => controller.cleanDistance(),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            width: double.infinity,
+            child: Wrap(
+              children: [
+                for (var i = 0; i < matchItems.length; i++) ...[
+                  Obx(
+                    () {
+                      final isSelected =
+                          matchItems[i].value >= controller.match.value;
+
+                      return GestureDetector(
+                        onTap: () => controller.setMatch(matchItems[i]),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              margin:
+                                  const EdgeInsets.only(bottom: 12, right: 8),
+                              decoration: BoxDecoration(
+                                  color: isSelected
+                                      ? DesignColor.primary500
+                                      : const Color(0xFFECECEC),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.withOpacity(0.25),
+                                        spreadRadius: 0,
+                                        blurRadius: 1,
+                                        offset: const Offset(0, 1.5))
+                                  ],
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: DesignEmojiBullet(
+                                title: matchItems[i].message,
+                                emoji: matchItems[i].emoji,
+                                textStyle:
+                                    DesignTextStyle.labelSmall11Bold.apply(
+                                  color: DesignColor.text500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ],
+            ),
+          ),
+
           DesignSectionTitle(
             title: 'Distance',
             actionTitle: 'Clean',
@@ -49,7 +112,8 @@ class FilterModal extends StatelessWidget {
             actionTitle: 'Clean',
             onActionPressed: () => controller.cleanRating(),
           ),
-          SizedBox(
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             width: double.infinity,
             child: Wrap(
               children: [
@@ -60,6 +124,7 @@ class FilterModal extends StatelessWidget {
                       final unselectedColor =
                           DesignColor.text300.withOpacity(0.75);
                       return SizedBox(
+                        height: 32,
                         width: ((Get.width - 64) * 0.2),
                         child: DesignBulletItem(
                           onPressed: () => controller.setRating(i),
@@ -88,7 +153,8 @@ class FilterModal extends StatelessWidget {
             actionTitle: 'Clean',
             onActionPressed: () => controller.cleanPrice(),
           ),
-          SizedBox(
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             width: double.infinity,
             child: Obx(
               () => DesignSlider(
