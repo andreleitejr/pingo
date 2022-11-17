@@ -67,6 +67,11 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                   title: DesignAppBar(
                     actionIcon: DesignIcons.share,
                     onActionPressed: () => controller.share(),
+                    title: controller.place.name,
+                    verified: controller.place.verified,
+                    textStyle: DesignTextStyle.bodySmall12Bold.apply(
+                      color: DesignColor.text400,
+                    ),
                   ),
                 ),
                 SliverToBoxAdapter(

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
+import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_icon_button.dart';
 import 'package:pingo/widgets/design_space.dart';
 
@@ -11,20 +13,24 @@ class DesignAppBar extends StatelessWidget {
     super.key,
     this.title,
     this.showLeading = true,
+    this.verified = false,
     this.actionText,
     this.onLeadingPressed,
     this.onActionPressed,
     this.actionValid = false,
     this.actionIcon,
+    this.textStyle,
   });
 
   final String? title;
   final bool showLeading;
+  final bool verified;
   final String? actionText;
   final String? actionIcon;
   final Function()? onLeadingPressed;
   final Function()? onActionPressed;
   final bool actionValid;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -35,23 +41,49 @@ class DesignAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           if (showLeading)
-            DesignIconButton(
-              icon: DesignIcons.arrowLeft,
-              onPressed: onLeadingPressed ?? () => Get.back(),
-              alignment: Alignment.centerLeft,
+            SizedBox(
+              width: 54,
+              child: DesignIconButton(
+                icon: DesignIcons.arrowLeft,
+                onPressed: onLeadingPressed ?? () => Get.back(),
+                alignment: Alignment.centerLeft,
+                width: 16,
+                height: 16,
+              ),
             ),
           Expanded(
-            child: title != null
-                ? Text(
-              title!,
-              textAlign: TextAlign.center,
-              style: DesignTextStyle.bodyMedium16Bold.apply(
-                color: DesignColor.text500,
-              ),
-            )
-                : Container(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (title != null)
+                  Text(
+                    title!,
+                    style: textStyle ?? DesignTextStyle.bodySmall14Bold.apply(
+                      color: DesignColor.text400,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                if (verified) ...[
+                  const DesignSpace(
+                    orientation: DesignSpaceOrientation.horizontal,
+                    size: DesignSize.minimumSpace,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 2),
+                    child: Opacity(
+                      opacity: 0.9,
+                      child: DesignIcon(
+                        icon: DesignIcons.verified,
+                        width: 11,
+                        height: 11,
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                ]
+              ],
+            ),
           ),
-          if (showLeading && actionText == null) const SizedBox(width: 24),
           if (actionText != null && actionIcon == null) ...[
             TextButton(
               onPressed: onActionPressed,
@@ -65,14 +97,16 @@ class DesignAppBar extends StatelessWidget {
                 ),
               ),
             ),
-            const DesignSpace(
-                orientation: DesignSpaceOrientation.horizontal),
+            const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
           ] else ...[
             if (actionIcon != null)
-              DesignIconButton(
-                height: 48,
-                onPressed: onActionPressed ?? () {},
-                icon: actionIcon!,
+              SizedBox(
+                width: 54,
+                child: DesignIconButton(
+                  height: 48,
+                  onPressed: onActionPressed ?? () {},
+                  icon: actionIcon!,
+                ),
               ),
           ],
           // DesignIconButton()

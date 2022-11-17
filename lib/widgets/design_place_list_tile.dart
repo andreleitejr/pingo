@@ -70,34 +70,35 @@ class DesignPlaceListTile extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                              child: Row(
-                            children: [
-                              Text(
-                                place.name,
-                                style: DesignTextStyle.bodySmall12Bold,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              if (place.verified) ...[
-                                const DesignSpace(
-                                  orientation:
-                                      DesignSpaceOrientation.horizontal,
-                                  size: DesignSize.minimumSpace,
+                            child: Row(
+                              children: [
+                                Text(
+                                  place.name,
+                                  style: DesignTextStyle.bodySmall12Bold,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.only(bottom: 2),
-                                  child: Opacity(
-                                    opacity: 0.9,
-                                    child: DesignIcon(
-                                      icon: DesignIcons.verified,
-                                      width: 11,
-                                      height: 11,
-                                      color: Colors.transparent,
+                                if (place.verified) ...[
+                                  const DesignSpace(
+                                    orientation:
+                                        DesignSpaceOrientation.horizontal,
+                                    size: DesignSize.minimumSpace,
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(bottom: 2),
+                                    child: Opacity(
+                                      opacity: 0.9,
+                                      child: DesignIcon(
+                                        icon: DesignIcons.verified,
+                                        width: 11,
+                                        height: 11,
+                                        color: Colors.transparent,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ]
-                            ],
-                          )),
+                                ]
+                              ],
+                            ),
+                          ),
                           const Padding(
                             padding: EdgeInsets.only(bottom: 2),
                             child: Opacity(
