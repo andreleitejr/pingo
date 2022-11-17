@@ -99,6 +99,7 @@ flutter:
   assets:
     - assets/animation/
     - assets/icons/
+    - assets/logo/
     - assets/weather/
     - assets/map/style.txt
   #   - images/a_dot_ham.jpeg

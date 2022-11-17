@@ -31,11 +31,19 @@ class _DesignCheckBoxState extends State<DesignCheckBox> {
       return DesignColor.primary500;
     }
 
-    return Checkbox(
-      checkColor: Colors.white,
-      fillColor: MaterialStateProperty.resolveWith(getColor),
-      value: widget.isChecked,
-      onChanged: widget.onChanged,
+    return SizedBox(
+      width: 24,
+      child: Checkbox(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(4),
+          ),
+        ),
+        checkColor: Colors.white,
+        fillColor: MaterialStateProperty.resolveWith(getColor),
+        value: widget.isChecked,
+        onChanged: widget.onChanged,
+      ),
     );
   }
 }

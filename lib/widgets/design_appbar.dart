@@ -58,9 +58,10 @@ class DesignAppBar extends StatelessWidget {
                 if (title != null)
                   Text(
                     title!,
-                    style: textStyle ?? DesignTextStyle.bodySmall14Bold.apply(
-                      color: DesignColor.text400,
-                    ),
+                    style: textStyle ??
+                        DesignTextStyle.bodySmall14Bold.apply(
+                          color: DesignColor.text400,
+                        ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 if (verified) ...[

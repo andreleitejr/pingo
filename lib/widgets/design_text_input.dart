@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/widgets/design_icon.dart';
 
 // ignore: must_be_immutable
 class DesignTextInput extends StatefulWidget {
@@ -39,42 +43,86 @@ class _DesignTextInputState extends State<DesignTextInput> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.textEditingController,
-      initialValue: widget.initialValue,
-      onChanged: widget.onChanged,
-      obscureText: widget.obscureText,
-      keyboardType: widget.textInputType,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(DesignSize.borderRadius),
-        ),
-        hintText: widget.hint,
-        suffixIcon: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.isValid)
-              Container(
-                height: 16,
-                width: 16,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(32),
+    return SizedBox(
+      height: 42,
+      child: TextFormField(
+        controller: widget.textEditingController,
+        initialValue: widget.initialValue,
+        onChanged: widget.onChanged,
+        obscureText: widget.obscureText,
+        keyboardType: widget.textInputType,
+        style: DesignTextStyle.bodySmall12Bold
+            .apply(color: DesignColor.primary500),
+        decoration: InputDecoration(
+          hintStyle: DesignTextStyle.bodySmall12.apply(
+            color: DesignColor.text300,
+          ),
+          filled: true,
+          fillColor: DesignColor.text100,
+          contentPadding: const EdgeInsets.only(
+            left: DesignSize.mediumSpace,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(
+              DesignSize.borderRadius,
+            ),
+            borderSide: const BorderSide(
+              width: 0.5,
+              color: DesignColor.text200,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(
+              DesignSize.borderRadius,
+            ),
+            borderSide: const BorderSide(
+              width: 0.5,
+              color: DesignColor.text200,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(
+              DesignSize.borderRadius,
+            ),
+            borderSide: const BorderSide(
+              width: 0.75,
+              color: DesignColor.primary500,
+            ),
+          ),
+          hintText: widget.hint,
+          suffixIcon: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (isPassword)
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.obscureText = !widget.obscureText;
+                    });
+                  },
+                  child: Text(
+                    widget.obscureText ? 'Show' : 'Hide',
+                    style: DesignTextStyle.bodySmall12
+                        .apply(color: DesignColor.primary500),
+                  ),
                 ),
-              ),
-            if (isPassword)
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    widget.obscureText = !widget.obscureText;
-                  });
-                },
-                child: Text(
-                  widget.obscureText ? 'Show' : 'Hide',
+              if (widget.isValid)
+                Container(
+                  height: 16,
+                  width: 16,
+                  margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
+                  child: Image.asset(DesignIcons.valid),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter some text';
+          }
+          return null;
+        },
       ),
     );
   }
