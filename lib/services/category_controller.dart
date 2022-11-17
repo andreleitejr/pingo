@@ -119,17 +119,17 @@ class CategoryController extends GetxController {
       list.add(concert);
     }
 
+    list.addAll(
+        musics.where((keyword) => user.keywords.contains(keyword.id)).toList());
+
     final free =
         allKeywords.firstWhere((keyword) => keyword.id == Keyword.free);
 
-    list.insert(2, free);
+    list.insert(1, free);
     final open =
         allKeywords.firstWhere((keyword) => keyword.id == Keyword.open);
 
-    list.insert(3, open);
-
-    list.addAll(
-        musics.where((keyword) => user.keywords.contains(keyword.id)).toList());
+    list.insert(2, open);
 
     return list;
   }
