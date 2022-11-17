@@ -4,7 +4,7 @@ class DesignSize {
   static const double mediumSpace = 12;
   static const double largeSpace = 20;
   static const double appBarHeight = 80;
-  static const double buttonHeight = 56;
+  static const double buttonHeight = 36;
   static const double borderRadius = 8;
   static const double selectedIcon = 20;
   static const double icon = 16;

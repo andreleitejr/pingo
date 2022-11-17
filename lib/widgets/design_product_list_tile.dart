@@ -34,8 +34,9 @@ class DesignProductListTile extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(bottom: DesignSize.mediumSpace),
-            height: 54,
+            padding:
+                const EdgeInsets.symmetric(vertical: DesignSize.mediumSpace),
+            height: 70,
             decoration: const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
@@ -50,23 +51,22 @@ class DesignProductListTile extends StatelessWidget {
                     orientation: DesignSpaceOrientation.horizontal),
                 product.image != null
                     ? SizedBox(
-                  width: 42,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: BlurHash(
-                      imageFit: BoxFit.cover,
-                      image: product.image!.image,
-                      hash: product.image!.blurHash,
-                    ),
-                  ),
-                )
+                        width: 42,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: BlurHash(
+                            imageFit: BoxFit.cover,
+                            image: product.image!.image,
+                            hash: product.image!.blurHash,
+                          ),
+                        ),
+                      )
                     : Container(),
                 const DesignSpace(
                   orientation: DesignSpaceOrientation.horizontal,
                 ),
                 Expanded(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
@@ -78,28 +78,30 @@ class DesignProductListTile extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(bottom: 2),
-                            child: Opacity(
-                              opacity: 0.7,
-                              child: DesignIcon(
-                                icon: DesignIcons.pin,
-                                width: 8,
-                                height: 8,
-                                color: DesignColor.primary300,
+                          if (product.isPromotion) ...[
+                            Text(
+                              product.promotionalPrice!.monetary,
+                              style: DesignTextStyle.labelSmall10Bold.apply(
+                                color: DesignColor.text500,
                               ),
                             ),
-                          ),
-                          const DesignSpace(
-                            orientation: DesignSpaceOrientation.horizontal,
-                            size: DesignSize.minimumSpace,
-                          ),
+                            const SizedBox(width: 4),
+                          ],
                           Text(
-                            product.distance.metricSystem,
-                            style: DesignTextStyle.labelSmall10,
+                            product.price.monetary,
+                            overflow: TextOverflow.ellipsis,
+                            style: DesignTextStyle.labelSmall10Bold.apply(
+                              color: product.isPromotion
+                                  ? DesignColor.text300
+                                  : Colors.black,
+                              decoration: product.isPromotion
+                                  ? TextDecoration.lineThrough
+                                  : null,
+                            ),
                           ),
                         ],
                       ),
+                      const DesignSpace(size: DesignSize.minimumSpace),
                       Row(
                         children: [
                           const SizedBox(width: 4),
@@ -140,6 +142,7 @@ class DesignProductListTile extends StatelessWidget {
                           ),
                         ],
                       ),
+                      const DesignSpace(size: DesignSize.smallSpace),
                       Text(
                         '${product.description}',
                         maxLines: 1,
@@ -154,7 +157,6 @@ class DesignProductListTile extends StatelessWidget {
               ],
             ),
           ),
-          const DesignSpace(),
         ],
       ),
     );

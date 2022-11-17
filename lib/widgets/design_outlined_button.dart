@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
+import 'package:pingo/constants/design_text_style.dart';
 
 class DesignOutlinedButton extends StatelessWidget {
   const DesignOutlinedButton({
@@ -8,11 +9,15 @@ class DesignOutlinedButton extends StatelessWidget {
     required this.title,
     this.onPressed,
     this.isActive = true,
+    this.backgroundColor,
+    this.textColor,
   }) : super(key: key);
 
   final String title;
   final Function()? onPressed;
   final bool isActive;
+  final Color? backgroundColor;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +26,12 @@ class DesignOutlinedButton extends StatelessWidget {
       width: double.infinity,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          primary: isActive ? DesignColor.primary500 : DesignColor.text300,
-          textStyle: const TextStyle(fontSize: 20),
+          primary: isActive
+              ? (backgroundColor ?? DesignColor.primary500)
+              : DesignColor.text300,
+          textStyle: DesignTextStyle.labelSmall11Bold,
           side: BorderSide(
-            width: 2,
+            width: 1.25,
             color: isActive ? DesignColor.primary500 : DesignColor.text300,
           ),
         ),

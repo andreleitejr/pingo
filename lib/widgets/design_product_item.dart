@@ -42,7 +42,7 @@ class DesignProductItem extends StatelessWidget {
             SizedBox(
               height: _width,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(6),
                 child: BlurHash(
                   imageFit: BoxFit.cover,
                   image: product.image!.image,
@@ -122,7 +122,7 @@ class DesignProductItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: DesignTextStyle.labelSmall10Bold.apply(
                       color: product.isPromotion
-                          ? DesignColor.text400
+                          ? DesignColor.text300
                           : Colors.black,
                       decoration: product.isPromotion
                           ? TextDecoration.lineThrough

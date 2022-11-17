@@ -9,21 +9,28 @@ class DesignButton extends StatelessWidget {
     required this.title,
     this.onPressed,
     this.isActive = false,
+    this.backgroundColor,
+    this.textColor,
   }) : super(key: key);
 
   final String title;
   final Function()? onPressed;
   final bool isActive;
+  final Color? backgroundColor;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: DesignSize.buttonHeight,
       width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: isActive ? DesignColor.primary500 : DesignColor.text300,
-          textStyle: DesignTextStyle.bodySmall14Bold,
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: isActive
+              ? (backgroundColor ?? DesignColor.primary500)
+              : DesignColor.text300,
+          primary: textColor ?? Colors.white,
+          textStyle: DesignTextStyle.labelSmall11Bold,
         ),
         onPressed: onPressed,
         child: Text(title),

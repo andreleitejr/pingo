@@ -50,7 +50,7 @@ class DesignAvatarImage extends StatelessWidget {
       ),
       padding: EdgeInsets.all(isSelected ? 2 : 0),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(width ?? 16),
         child: BlurHash(
           imageFit: BoxFit.cover,
           image: image,

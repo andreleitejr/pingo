@@ -20,6 +20,7 @@ import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_grid_view.dart';
 import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_map.dart';
+import 'package:pingo/widgets/design_outlined_button.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_space.dart';
 
@@ -48,208 +49,274 @@ class _PlaceReadPageState extends State<PlaceReadPage>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: controller.tabLength,
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                pinned: true,
-                backgroundColor: Colors.white,
-                automaticallyImplyLeading: false,
-                elevation: 0,
-                title: DesignAppBar(
-                  actionIcon: DesignIcons.share,
-                  onActionPressed: () => controller.share(),
+        body: SafeArea(
+          child: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  pinned: true,
+                  backgroundColor: Colors.white,
+                  automaticallyImplyLeading: false,
+                  titleSpacing: 0,
+                  elevation: 0,
+                  toolbarHeight: 48,
+                  title: DesignAppBar(
+                    actionIcon: DesignIcons.share,
+                    onActionPressed: () => controller.share(),
+                  ),
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const DesignSpace(),
-                    Row(
-                      children: [
-                        const DesignSpace(
-                          orientation: DesignSpaceOrientation.horizontal,
-                        ),
-                        DesignAvatarImage(image: widget.place.image?.image),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.place.name,
-                                style: DesignTextStyle.bodyLarge18Bold,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    widget.place.distance.metricSystem,
-                                    style: DesignTextStyle.bodySmall14,
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Container(
-                                    height: 12,
-                                    width: 1.25,
-                                    color: DesignColor.text300,
-                                  ),
-                                  const SizedBox(width: 4),
-                                  const DesignIcon(
-                                    icon: DesignIcons.star,
-                                    height: DesignSize.smallIcon,
-                                    width: DesignSize.smallIcon,
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    '${widget.place.rating.toString()} (${widget.place.ratings.length})',
-                                    style: DesignTextStyle.bodySmall14,
-                                  ),
-                                ],
-                              ),
-                            ],
+                SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const DesignSpace(
+                            orientation: DesignSpaceOrientation.horizontal,
                           ),
-                        ),
-                        const DesignSpace(
-                          orientation: DesignSpaceOrientation.horizontal,
-                        ),
-                      ],
-                    ),
-                    const DesignSpace(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: DesignSize.mediumSpace),
-                      child: Text(
-                        widget.place.description ??
-                            'No description found for this place',
-                        style: DesignTextStyle.bodySmall14,
-                      ),
-                    ),
-                    const DesignSpace(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: DesignSize.mediumSpace),
-                      child: Text(
-                        '${widget.place.address.line ?? 'Address not found'}, ${widget.place.address.number}',
-                        style: DesignTextStyle.bodySmall14
-                            .apply(color: DesignColor.primary700),
-                      ),
-                    ),
-                    const DesignSpace(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: DesignSize.mediumSpace),
-                      child: DesignButton(
-                        onPressed: () =>
-                            Get.to(RatingPage(ratedId: widget.place.uuid)),
-                        title: 'Rate',
-                        isActive: true,
-                      ),
-                    ),
-                    if (isAdmin) ...[
-                      const DesignSpace(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: DesignSize.mediumSpace),
-                        child: DesignButton(
-                          onPressed: () => Get.to(
-                              () => ProductEditPage(place: widget.place)),
-                          title: 'Create Product',
-                          isActive: true,
-                        ),
-                      ),
-                      const DesignSpace(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: DesignSize.mediumSpace),
-                        child: DesignButton(
-                          onPressed: () =>
-                              Get.to(() => EventEditPage(place: widget.place)),
-                          title: 'Create Event',
-                          isActive: true,
-                        ),
-                      ),
-                    ],
-                    const DesignSpace(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: DesignSize.mediumSpace),
-                      child: DesignButton(
-                        onPressed: () =>
-                            Get.to(() => PostEditPage(place: widget.place)),
-                        title: 'Create Post',
-                        isActive: true,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SliverToBoxAdapter(child: DesignSpace()),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (_, int index) {
-                    return const SizedBox(
-                      height: 50,
-                      child: TabBar(
-                        labelColor: DesignColor.primary500,
-                        unselectedLabelColor: DesignColor.text300,
-                        indicatorColor: DesignColor.primary500,
-                        indicatorWeight: 2,
-                        indicatorPadding: EdgeInsets.zero,
-                        labelPadding: EdgeInsets.zero,
-                        padding: EdgeInsets.zero,
-                        tabs: [
-                          DesignIcon(
-                            icon: DesignIcons.grid,
+                          DesignAvatarImage(
+                            image: widget.place.image?.image,
+                            blurHash: widget.place.image?.blurHash,
+                            width: 36,
+                            height: 36,
                           ),
-                          DesignIcon(
-                            icon: DesignIcons.product,
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.place.name,
+                                  style: DesignTextStyle.bodySmall12Bold,
+                                ),
+                                Row(
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(bottom: 2),
+                                      child: Opacity(
+                                        opacity: 0.7,
+                                        child: DesignIcon(
+                                          icon: DesignIcons.pin,
+                                          width: 9,
+                                          height: 9,
+                                          color: DesignColor.primary300,
+                                        ),
+                                      ),
+                                    ),
+                                    const DesignSpace(
+                                        orientation:
+                                            DesignSpaceOrientation.horizontal,
+                                        size: DesignSize.minimumSpace),
+                                    Text(
+                                      widget.place.distance.metricSystem,
+                                      style: DesignTextStyle.labelSmall10.apply(
+                                        color: DesignColor.text400,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 4),
+                                    const Padding(
+                                      padding: EdgeInsets.only(bottom: 2),
+                                      child: Opacity(
+                                        opacity: 0.7,
+                                        child: DesignIcon(
+                                          icon: DesignIcons.star,
+                                          width: 9,
+                                          height: 9,
+                                          color: DesignColor.primary300,
+                                        ),
+                                      ),
+                                    ),
+                                    const DesignSpace(
+                                        orientation:
+                                            DesignSpaceOrientation.horizontal,
+                                        size: DesignSize.minimumSpace),
+                                    Text(
+                                      widget.place.rating.toString(),
+                                      style: DesignTextStyle.labelSmall10.apply(
+                                        color: DesignColor.text400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                          DesignIcon(
-                            icon: DesignIcons.event,
-                          ),
-                          DesignIcon(
-                            icon: DesignIcons.map,
-                          ),
-                          DesignIcon(
-                            icon: DesignIcons.message,
+                          const DesignSpace(
+                            orientation: DesignSpaceOrientation.horizontal,
                           ),
                         ],
                       ),
-                    );
-                  },
-                  childCount: 1,
+                      const DesignSpace(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: DesignSize.mediumSpace),
+                        child: Text(
+                          widget.place.description ??
+                              'No description found for this place',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: DesignTextStyle.bodySmall12.apply(
+                            color: DesignColor.text400,
+                          ),
+                        ),
+                      ),
+                      const DesignSpace(size: DesignSize.smallSpace),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: DesignSize.mediumSpace),
+                          child: Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(bottom: 2),
+                                child: Opacity(
+                                  opacity: 0.7,
+                                  child: DesignIcon(
+                                    icon: DesignIcons.place,
+                                    width: 9,
+                                    height: 9,
+                                    color: DesignColor.primary700,
+                                  ),
+                                ),
+                              ),
+                              const DesignSpace(
+                                orientation: DesignSpaceOrientation.horizontal,
+                                size: DesignSize.minimumSpace,
+                              ),
+                              Text(
+                                '${widget.place.address.line ?? 'Address not found'}, ${widget.place.address.number}',
+                                style: DesignTextStyle.labelSmall10.apply(
+                                  color: DesignColor.primary700,
+                                ),
+                              ),
+                            ],
+                          )),
+                      const DesignSpace(),
+                      if (isAdmin) ...[
+                        const DesignSpace(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: DesignSize.mediumSpace),
+                          child: DesignButton(
+                            onPressed: () => Get.to(
+                                () => ProductEditPage(place: widget.place)),
+                            title: 'Create Product',
+                            isActive: true,
+                          ),
+                        ),
+                        const DesignSpace(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: DesignSize.mediumSpace),
+                          child: DesignButton(
+                            onPressed: () => Get.to(
+                                () => EventEditPage(place: widget.place)),
+                            title: 'Create Event',
+                            isActive: true,
+                          ),
+                        ),
+                      ],
+                      Container(
+                        height: 36,
+                        width: Get.width,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: DesignSize.mediumSpace),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                              child: DesignButton(
+                                onPressed: () => Get.to(
+                                    () => PostEditPage(place: widget.place)),
+                                title: 'Postar no Mural',
+                                isActive: true,
+                              ),
+                            ),
+                            const DesignSpace(
+                              orientation: DesignSpaceOrientation.horizontal,
+                              size: DesignSize.smallSpace,
+                            ),
+                            Expanded(
+                              child: DesignOutlinedButton(
+                                onPressed: () => Get.to(
+                                    RatingPage(ratedId: widget.place.uuid)),
+                                title: 'Avaliar',
+                                isActive: true,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ];
-          },
-          body: TabBarView(
-            children: <Widget>[
-              Obx(
-                () {
-                  if (controller.place.posts.isEmpty) {
-                    return const Center(
-                      child: Text('No photos found'),
-                    );
-                  }
-                  return DesignPostGridView(
+                const SliverToBoxAdapter(child: DesignSpace()),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (_, int index) {
+                      return SizedBox(
+                        height: 50,
+                        child: TabBar(
+                          labelColor: DesignColor.primary500,
+                          unselectedLabelColor: DesignColor.text300,
+                          indicatorColor: DesignColor.primary500,
+                          indicatorWeight: 2,
+                          indicatorPadding: EdgeInsets.zero,
+                          labelPadding: EdgeInsets.zero,
+                          padding: EdgeInsets.zero,
+                          tabs: [
+                            if (controller.place.posts.isNotEmpty)
+                              const DesignIcon(
+                                icon: DesignIcons.grid,
+                              ),
+                            if (controller.place.products.isNotEmpty)
+                              const DesignIcon(
+                                icon: DesignIcons.product,
+                              ),
+                            if (controller.place.events.isNotEmpty)
+                              const DesignIcon(
+                                icon: DesignIcons.event,
+                              ),
+                            const DesignIcon(
+                              icon: DesignIcons.map,
+                            ),
+                            if (controller.place.ratings.isNotEmpty)
+                              const DesignIcon(
+                                icon: DesignIcons.message,
+                              ),
+                          ],
+                        ),
+                      );
+                    },
+                    childCount: 1,
+                  ),
+                ),
+              ];
+            },
+            body: TabBarView(
+              children: <Widget>[
+                if (controller.place.posts.isNotEmpty)
+                  DesignPostGridView(
                     place: controller.place,
                     isMasonry: controller.isMasonry.value,
                     onButtonPressed: controller.toggleMasonry,
-                  );
-                },
-              ),
-              ProductListFragment(products: controller.place.products),
-              EventListFragment(events: controller.place.events),
-              DesignMap(
-                place: controller.place,
-              ),
-              RatingList(
-                ratings: controller.place.ratings,
-              ),
-            ],
+                  ),
+                if (controller.place.products.isNotEmpty)
+                  ProductListFragment(products: controller.place.products),
+                if (controller.place.events.isNotEmpty)
+                  EventListFragment(events: controller.place.events),
+                DesignMap(
+                  place: controller.place,
+                ),
+                if (controller.place.ratings.isNotEmpty)
+                  RatingList(
+                    ratings: controller.place.ratings,
+                  ),
+              ],
+            ),
           ),
         ),
       ),

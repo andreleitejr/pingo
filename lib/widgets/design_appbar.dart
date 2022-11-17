@@ -31,55 +31,51 @@ class DesignAppBar extends StatelessWidget {
     return Container(
       height: 48,
       alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              if (showLeading)
-                DesignIconButton(
-                  icon: DesignIcons.arrowLeft,
-                  onPressed: onLeadingPressed ?? () => Get.back(),
-                  alignment: Alignment.centerLeft,
-                ),
-              Expanded(
-                child: title != null
-                    ? Text(
-                  title!,
-                  textAlign: TextAlign.center,
-                  style: DesignTextStyle.bodyMedium16Bold.apply(
-                    color: DesignColor.text500,
-                  ),
-                )
-                    : Container(),
+          if (showLeading)
+            DesignIconButton(
+              icon: DesignIcons.arrowLeft,
+              onPressed: onLeadingPressed ?? () => Get.back(),
+              alignment: Alignment.centerLeft,
+            ),
+          Expanded(
+            child: title != null
+                ? Text(
+              title!,
+              textAlign: TextAlign.center,
+              style: DesignTextStyle.bodyMedium16Bold.apply(
+                color: DesignColor.text500,
               ),
-              if (showLeading && actionText == null) const SizedBox(width: 24),
-              if (actionText != null && actionIcon == null) ...[
-                TextButton(
-                  onPressed: onActionPressed,
-                  child: Text(
-                    actionText!,
-                    textAlign: TextAlign.center,
-                    style: DesignTextStyle.bodySmall14Bold.apply(
-                      color: actionValid
-                          ? DesignColor.primary700
-                          : DesignColor.text300,
-                    ),
-                  ),
-                ),
-                const DesignSpace(
-                    orientation: DesignSpaceOrientation.horizontal),
-              ] else ...[
-                if (actionIcon != null)
-                  DesignIconButton(
-                    onPressed: onActionPressed ?? () {},
-                    icon: actionIcon!,
-                  ),
-              ],
-              // DesignIconButton()
-            ],
+            )
+                : Container(),
           ),
+          if (showLeading && actionText == null) const SizedBox(width: 24),
+          if (actionText != null && actionIcon == null) ...[
+            TextButton(
+              onPressed: onActionPressed,
+              child: Text(
+                actionText!,
+                textAlign: TextAlign.center,
+                style: DesignTextStyle.bodySmall14Bold.apply(
+                  color: actionValid
+                      ? DesignColor.primary700
+                      : DesignColor.text300,
+                ),
+              ),
+            ),
+            const DesignSpace(
+                orientation: DesignSpaceOrientation.horizontal),
+          ] else ...[
+            if (actionIcon != null)
+              DesignIconButton(
+                height: 48,
+                onPressed: onActionPressed ?? () {},
+                icon: actionIcon!,
+              ),
+          ],
+          // DesignIconButton()
         ],
       ),
     );

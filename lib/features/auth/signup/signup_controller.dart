@@ -31,13 +31,10 @@ class SignUpController extends GetxController {
 
   void setCountry(String v) {
     country(v);
-
-    print('COOOOOOOOOOOOOOOOUNTRY $country');
   }
 
   void setState(String? v) {
     state(v);
-    print('STAAAAAAAAAAAAAAAAAAATE $country $state');
   }
 
   void setCity(String? v) => city(v);

@@ -22,7 +22,7 @@ class ShimmerProductItem extends StatelessWidget {
               height: _width,
               decoration: BoxDecoration(
                 color: Colors.black,
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
             const SizedBox(height: 4),

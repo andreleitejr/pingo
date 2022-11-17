@@ -34,7 +34,7 @@ class DesignEventItem extends StatelessWidget {
                 height: _width,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
               const SizedBox(height: 4),
