@@ -11,7 +11,7 @@ class DesignTextInput extends StatefulWidget {
     Key? key,
     this.initialValue,
     required this.hint,
-    required this.onChanged,
+    this.onChanged,
     this.obscureText = false,
     this.prefixIcon,
     this.isValid = false,
@@ -21,7 +21,7 @@ class DesignTextInput extends StatefulWidget {
 
   final String? initialValue;
   final String hint;
-  final Function(String) onChanged;
+  final Function(String)? onChanged;
   final Widget? prefixIcon;
   bool obscureText;
   final bool isValid;

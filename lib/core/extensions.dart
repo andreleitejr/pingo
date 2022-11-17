@@ -66,7 +66,13 @@ extension DoubleExtension on double {
 
 extension DateTimeExtension on DateTime {
   String get yMMMMd => DateFormat.yMMMMd('en_US').format(this);
+
   String get jm => DateFormat.jm('en_US').format(this);
+
+  DateTime get legalAge {
+    final newDate = DateTime(year - 18, month, day);
+    return newDate;
+  }
 
   bool get acceptedAge {
     const minAge = 18;

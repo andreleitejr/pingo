@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
@@ -23,7 +24,7 @@ class DesignDateInput extends StatefulWidget {
 }
 
 class _DesignDateInputState extends State<DesignDateInput> {
-  final minAgeAccepted = DateTime(DateTime.now().year - 18);
+  final minAgeAccepted = DateTime.now().legalAge;
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +33,13 @@ class _DesignDateInputState extends State<DesignDateInput> {
       child: Container(
         padding: const EdgeInsets.only(left: DesignSize.mediumSpace),
         alignment: Alignment.centerLeft,
-        height: DesignSize.buttonHeight,
+        height: 42,
         width: double.infinity,
         decoration: BoxDecoration(
+          color: DesignColor.text100,
           border: Border.all(
-            color: DesignColor.text300,
+            width: 0.5,
+            color: DesignColor.text200,
           ),
           borderRadius: BorderRadius.circular(DesignSize.borderRadius),
         ),
@@ -45,18 +48,17 @@ class _DesignDateInputState extends State<DesignDateInput> {
             Expanded(
               child: Text(
                 widget.value?.yMMMMd ?? widget.hint,
-                style: DesignTextStyle.bodyMedium16
-                    .apply(color: DesignColor.text400),
+                style: DesignTextStyle.bodySmall12.apply(
+                  color: DesignColor.text300,
+                ),
               ),
             ),
             if (widget.isValid)
               Container(
                 height: 16,
                 width: 16,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(32),
-                ),
+                margin: const EdgeInsets.only(right: DesignSize.mediumSpace),
+                child: Image.asset(DesignIcons.valid),
               ),
           ],
         ),

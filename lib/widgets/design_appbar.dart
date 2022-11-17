@@ -100,17 +100,17 @@ class DesignAppBar extends StatelessWidget {
             ),
             const DesignSpace(orientation: DesignSpaceOrientation.horizontal),
           ] else ...[
-            if (actionIcon != null)
-              SizedBox(
-                width: 54,
-                child: DesignIconButton(
-                  height: 48,
-                  onPressed: onActionPressed ?? () {},
-                  icon: actionIcon!,
-                ),
-              ),
+            SizedBox(
+              width: 54,
+              child: actionIcon != null
+                  ? DesignIconButton(
+                      height: 48,
+                      onPressed: onActionPressed ?? () {},
+                      icon: actionIcon!,
+                    )
+                  : Container(),
+            ),
           ],
-          // DesignIconButton()
         ],
       ),
     );

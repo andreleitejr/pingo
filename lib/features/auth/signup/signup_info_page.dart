@@ -6,11 +6,13 @@ import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/signup/signup_controller.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
+import 'package:pingo/models/gender.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_date_input.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 import 'package:pingo/widgets/design_space.dart';
+import 'package:pingo/widgets/dialogs/design_selection_dialog.dart';
 
 class SignUpInfoPage extends StatefulWidget {
   const SignUpInfoPage({Key? key}) : super(key: key);
@@ -27,7 +29,9 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(DesignSize.appBarHeight),
-        child: DesignAppBar(title: 'Personal Info'),
+        child: SafeArea(
+          child: DesignAppBar(title: 'Personal Info'),
+        ),
       ),
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -44,12 +48,24 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
             ),
             const DesignSpace(),
             Obx(
-              () => DesignTextInput(
-                hint: 'Gender',
+              () => DesignSelectionInput<Gender>(
+                items: genders,
+                value: genders.firstWhereOrNull(
+                  (gender) => gender.title == controller.gender.value,
+                ),
+                hint: 'GenderSDSDDS',
                 onChanged: controller.setGender,
                 isValid: controller.genderValid,
               ),
             ),
+            const DesignSpace(),
+            // Obx(
+            //   () => DesignTextInput(
+            //     hint: 'Sexual Orientation',
+            //     onChanged: controller.setGender,
+            //     isValid: controller.genderValid,
+            //   ),
+            // ),
             const DesignSpace(),
             // SizedBox(
             //   height: 100,
