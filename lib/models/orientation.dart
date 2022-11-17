@@ -22,7 +22,7 @@ class SexualOrientationType {
   static const other = 5;
 }
 
-final genders = [
+final sexualOrientations = [
   SexualOrientation(SexualOrientationType.hetero, 'Hetero'),
   SexualOrientation(SexualOrientationType.gay, 'Gay'),
   SexualOrientation(SexualOrientationType.lesbian, 'Lesbian'),

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/models/gender.dart';
+import 'package:pingo/models/orientation.dart';
 import 'package:pingo/models/user.dart';
 
 class SignUpController extends GetxController {
@@ -13,6 +14,7 @@ class SignUpController extends GetxController {
   final confirmPassword = ''.obs;
   final birthday = DateTime.now().legalAge.obs;
   final gender = ''.obs;
+  final sexualOrientation = ''.obs;
   final country = ''.obs;
   final state = ''.obs;
   final city = ''.obs;
@@ -29,6 +31,9 @@ class SignUpController extends GetxController {
   void setBirthday(DateTime v) => birthday(v);
 
   void setGender(Gender? v) => gender(v?.title);
+
+  void setSexualOrientation(SexualOrientation? v) =>
+      sexualOrientation(v?.title);
 
   void setCountry(String v) {
     country(v);
@@ -47,6 +52,7 @@ class SignUpController extends GetxController {
         birthday: birthday.value,
         email: email.value,
         gender: gender.value,
+        sexualOrientation: sexualOrientation.value,
         country: country.value,
         state: state.value,
         city: city.value,
@@ -68,6 +74,8 @@ class SignUpController extends GetxController {
       .isBefore(DateTime.now().add(const Duration(days: 1)).legalAge);
 
   bool get genderValid => gender.value.isNotEmpty;
+
+  bool get sexualOrientationValid => sexualOrientation.value.isNotEmpty;
 
   bool get countryValid => country.isNotEmpty;
 

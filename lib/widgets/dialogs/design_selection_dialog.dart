@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 // ignore: depend_on_referenced_packages
 import 'package:get/get.dart';
+import 'package:pingo/constants/design_color.dart';
+import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/models/selectable.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 
@@ -64,13 +66,28 @@ class DesignSelectionInput<T extends Selectable?> extends StatelessWidget {
               itemCount: filtered.length,
               shrinkWrap: true,
               itemBuilder: (context, i) {
-                return TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(filtered[i]);
-                  },
-                  child: Text(
-                    filtered[i]?.text ?? 'Nao encontrado',
-                  ),
+                return Column(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(filtered[i]);
+                      },
+                      child: Text(
+                        filtered[i]?.text ?? 'Nao encontrado',
+                        style: DesignTextStyle.bodySmall12Bold
+                            .apply(color: DesignColor.text400),
+                      ),
+                    ),
+                    if (filtered[i] != filtered.last)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          color: DesignColor.text200.withOpacity(0.2),
+                          height: 0.75,
+                          width: double.infinity,
+                        ),
+                      ),
+                  ],
                 );
               },
             ),
@@ -86,7 +103,11 @@ class DesignSelectionInput<T extends Selectable?> extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancelar'),
+              child: Text(
+                'Cancelar',
+                style: DesignTextStyle.bodySmall12Bold
+                    .apply(color: DesignColor.red),
+              ),
             ),
           ),
         ],

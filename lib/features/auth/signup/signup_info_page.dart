@@ -7,6 +7,7 @@ import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/signup/signup_controller.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
 import 'package:pingo/models/gender.dart';
+import 'package:pingo/models/orientation.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_date_input.dart';
@@ -53,19 +54,25 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
                 value: genders.firstWhereOrNull(
                   (gender) => gender.title == controller.gender.value,
                 ),
-                hint: 'GenderSDSDDS',
+                hint: 'Gender',
                 onChanged: controller.setGender,
                 isValid: controller.genderValid,
               ),
             ),
             const DesignSpace(),
-            // Obx(
-            //   () => DesignTextInput(
-            //     hint: 'Sexual Orientation',
-            //     onChanged: controller.setGender,
-            //     isValid: controller.genderValid,
-            //   ),
-            // ),
+            Obx(
+              () => DesignSelectionInput<SexualOrientation>(
+                items: sexualOrientations,
+                value: sexualOrientations.firstWhereOrNull(
+                  (sexualOrientation) =>
+                      sexualOrientation.title ==
+                      controller.sexualOrientation.value,
+                ),
+                hint: 'Sexual Orientation',
+                onChanged: controller.setSexualOrientation,
+                isValid: controller.sexualOrientationValid,
+              ),
+            ),
             const DesignSpace(),
             // SizedBox(
             //   height: 100,

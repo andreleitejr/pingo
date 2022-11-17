@@ -5,6 +5,7 @@ class User extends Base {
   final DateTime birthday;
   final String email;
   final String gender;
+  final String sexualOrientation;
   final String country;
   final String state;
   final String city;
@@ -16,6 +17,7 @@ class User extends Base {
     required this.birthday,
     required this.email,
     required this.gender,
+    required this.sexualOrientation,
     required this.country,
     required this.state,
     required this.city,
@@ -30,6 +32,7 @@ class User extends Base {
       : birthday = (document['birthday'] as Timestamp).toDate(),
         email = document['email'] as String,
         gender = document['gender'] as String,
+        sexualOrientation = document['sexualOrientation'] as String,
         country = document['country'] as String,
         state = document['state'] as String,
         city = document['city'] as String,
@@ -44,6 +47,7 @@ class User extends Base {
       'birthday': birthday,
       'email': email,
       'gender': gender,
+      'sexualOrientation': sexualOrientation,
       'country': country,
       'state': state,
       'city': city,
