@@ -74,19 +74,6 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
               ),
             ),
             const DesignSpace(),
-            // SizedBox(
-            //   height: 100,
-            //   child: Obx(
-            //         () => DesignAddressSelection(
-            //       country: controller.country.value,
-            //       onCountryChanged: controller.setCountry,
-            //       state: controller.state.value,
-            //       onStateChanged: controller.setState,
-            //       city: controller.city.value,
-            //       onCityChanged: controller.setCity,
-            //     ),
-            //   ),
-            // ),
             Obx(
               () => DesignTextInput(
                 hint: 'Country',
