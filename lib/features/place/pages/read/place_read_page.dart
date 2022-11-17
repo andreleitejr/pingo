@@ -41,7 +41,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
   @override
   void initState() {
     controller = Get.put(PlaceReadController(widget.place));
-    tabController = TabController(length: 5, vsync: this);
+    tabController = TabController(length: controller.tabLength, vsync: this);
 
     super.initState();
   }
@@ -89,35 +89,32 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  widget.place.name,
-                                  style: DesignTextStyle.bodySmall12Bold,
-                                ),
                                 Row(
                                   children: [
-                                    const Padding(
-                                      padding: EdgeInsets.only(bottom: 2),
-                                      child: Opacity(
-                                        opacity: 0.7,
-                                        child: DesignIcon(
-                                          icon: DesignIcons.pin,
-                                          width: 9,
-                                          height: 9,
-                                          color: DesignColor.primary300,
-                                        ),
+                                    Text(
+                                      widget.place.name,
+                                      style:
+                                          DesignTextStyle.bodySmall12Bold.apply(
+                                        color: DesignColor.text400,
                                       ),
                                     ),
                                     const DesignSpace(
                                         orientation:
                                             DesignSpaceOrientation.horizontal,
                                         size: DesignSize.minimumSpace),
-                                    Text(
-                                      widget.place.distance.metricSystem,
-                                      style: DesignTextStyle.labelSmall10.apply(
-                                        color: DesignColor.text400,
+                                    Container(
+                                      width: 4,
+                                      height: 4,
+                                      decoration: BoxDecoration(
+                                        color: DesignColor.text300,
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
                                     ),
-                                    const SizedBox(width: 4),
+                                    const DesignSpace(
+                                      orientation:
+                                          DesignSpaceOrientation.horizontal,
+                                      size: DesignSize.smallSpace,
+                                    ),
                                     const Padding(
                                       padding: EdgeInsets.only(bottom: 2),
                                       child: Opacity(
@@ -138,6 +135,56 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                                       widget.place.rating.toString(),
                                       style: DesignTextStyle.labelSmall10.apply(
                                         color: DesignColor.text400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(bottom: 2),
+                                      child: Opacity(
+                                        opacity: 0.7,
+                                        child: DesignIcon(
+                                          icon: DesignIcons.place,
+                                          width: 9,
+                                          height: 9,
+                                          color: DesignColor.primary700,
+                                        ),
+                                      ),
+                                    ),
+                                    const DesignSpace(
+                                      orientation:
+                                          DesignSpaceOrientation.horizontal,
+                                      size: DesignSize.minimumSpace,
+                                    ),
+                                    Text(
+                                      widget.place.distance.metricSystem,
+                                      style: DesignTextStyle.labelSmall10.apply(
+                                        color: DesignColor.primary700,
+                                      ),
+                                    ),
+                                    const DesignSpace(
+                                        orientation:
+                                            DesignSpaceOrientation.horizontal,
+                                        size: DesignSize.smallSpace),
+                                    Container(
+                                      width: 4,
+                                      height: 4,
+                                      decoration: BoxDecoration(
+                                        color: DesignColor.primary100,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    const DesignSpace(
+                                      orientation:
+                                          DesignSpaceOrientation.horizontal,
+                                      size: DesignSize.smallSpace,
+                                    ),
+                                    Text(
+                                      '${widget.place.address.line ?? 'Address not found'}, ${widget.place.address.number}',
+                                      style: DesignTextStyle.labelSmall10.apply(
+                                        color: DesignColor.primary700,
                                       ),
                                     ),
                                   ],
@@ -164,36 +211,6 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                           ),
                         ),
                       ),
-                      const DesignSpace(size: DesignSize.smallSpace),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: DesignSize.mediumSpace),
-                          child: Row(
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(bottom: 2),
-                                child: Opacity(
-                                  opacity: 0.7,
-                                  child: DesignIcon(
-                                    icon: DesignIcons.place,
-                                    width: 9,
-                                    height: 9,
-                                    color: DesignColor.primary700,
-                                  ),
-                                ),
-                              ),
-                              const DesignSpace(
-                                orientation: DesignSpaceOrientation.horizontal,
-                                size: DesignSize.minimumSpace,
-                              ),
-                              Text(
-                                '${widget.place.address.line ?? 'Address not found'}, ${widget.place.address.number}',
-                                style: DesignTextStyle.labelSmall10.apply(
-                                  color: DesignColor.primary700,
-                                ),
-                              ),
-                            ],
-                          )),
                       const DesignSpace(),
                       if (isAdmin) ...[
                         const DesignSpace(),
@@ -253,7 +270,6 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                     ],
                   ),
                 ),
-                const SliverToBoxAdapter(child: DesignSpace()),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (_, int index) {
@@ -263,7 +279,8 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                           labelColor: DesignColor.primary500,
                           unselectedLabelColor: DesignColor.text300,
                           indicatorColor: DesignColor.primary500,
-                          indicatorWeight: 2,
+                          indicatorWeight: 1.25,
+                          indicatorSize: TabBarIndicatorSize.tab,
                           indicatorPadding: EdgeInsets.zero,
                           labelPadding: EdgeInsets.zero,
                           padding: EdgeInsets.zero,
@@ -299,10 +316,12 @@ class _PlaceReadPageState extends State<PlaceReadPage>
             body: TabBarView(
               children: <Widget>[
                 if (controller.place.posts.isNotEmpty)
-                  DesignPostGridView(
-                    place: controller.place,
-                    isMasonry: controller.isMasonry.value,
-                    onButtonPressed: controller.toggleMasonry,
+                  Obx(
+                    () => DesignPostGridView(
+                      place: controller.place,
+                      isMasonry: controller.isMasonry.value,
+                      onButtonPressed: controller.toggleMasonry,
+                    ),
                   ),
                 if (controller.place.products.isNotEmpty)
                   ProductListFragment(products: controller.place.products),

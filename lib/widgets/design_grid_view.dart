@@ -31,8 +31,8 @@ class DesignPostGridView extends StatelessWidget {
         if (isMasonry) ...[
           MasonryGridView.count(
             crossAxisCount: 2,
-            mainAxisSpacing: 2,
-            crossAxisSpacing: 2,
+            mainAxisSpacing: 1,
+            crossAxisSpacing: 1,
             itemCount: place.posts.length,
             padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
@@ -66,8 +66,8 @@ class DesignPostGridView extends StatelessWidget {
           GridView.count(
             padding: EdgeInsets.zero,
             crossAxisCount: 3,
-            crossAxisSpacing: 2,
-            mainAxisSpacing: 2,
+            mainAxisSpacing: 1,
+            crossAxisSpacing: 1,
             children: List.generate(place.posts.length, (index) {
               final post = place.posts[index];
               final image = post.image!;
