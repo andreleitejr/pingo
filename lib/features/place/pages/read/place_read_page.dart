@@ -36,12 +36,10 @@ class PlaceReadPage extends StatefulWidget {
 class _PlaceReadPageState extends State<PlaceReadPage>
     with SingleTickerProviderStateMixin {
   late PlaceReadController controller;
-  late TabController tabController;
 
   @override
   void initState() {
-    controller = Get.put(PlaceReadController(widget.place));
-    tabController = TabController(length: controller.tabLength, vsync: this);
+    controller = Get.put(PlaceReadController(widget.place, vsync: this));
 
     super.initState();
   }
@@ -275,45 +273,45 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                     ],
                   ),
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (_, int index) {
-                      return SizedBox(
-                        height: 50,
-                        child: TabBar(
-                          labelColor: DesignColor.primary500,
-                          unselectedLabelColor: DesignColor.text300,
-                          indicatorColor: DesignColor.primary500,
-                          indicatorWeight: 1.25,
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          indicatorPadding: EdgeInsets.zero,
-                          labelPadding: EdgeInsets.zero,
-                          padding: EdgeInsets.zero,
-                          tabs: [
-                            if (controller.place.posts.isNotEmpty)
-                              const DesignIcon(
-                                icon: DesignIcons.grid,
-                              ),
-                            if (controller.place.products.isNotEmpty)
-                              const DesignIcon(
-                                icon: DesignIcons.product,
-                              ),
-                            if (controller.place.events.isNotEmpty)
-                              const DesignIcon(
-                                icon: DesignIcons.event,
-                              ),
-                            const DesignIcon(
-                              icon: DesignIcons.map,
-                            ),
-                            if (controller.place.ratings.isNotEmpty)
-                              const DesignIcon(
-                                icon: DesignIcons.message,
-                              ),
-                          ],
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 50,
+                    child: TabBar(
+                      labelColor: DesignColor.primary500,
+                      unselectedLabelColor: DesignColor.text300,
+                      indicatorColor: DesignColor.primary500,
+                      indicatorWeight: 1.25,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicatorPadding: EdgeInsets.zero,
+                      labelPadding: EdgeInsets.zero,
+                      padding: EdgeInsets.zero,
+                      tabs: [
+                        if (controller.place.posts.isNotEmpty)
+                          const DesignIcon(
+                            height: 54,
+                            icon: DesignIcons.grid,
+                          ),
+                        if (controller.place.products.isNotEmpty)
+                          const DesignIcon(
+                            height: 54,
+                            icon: DesignIcons.product,
+                          ),
+                        if (controller.place.events.isNotEmpty)
+                          const DesignIcon(
+                            height: 54,
+                            icon: DesignIcons.event,
+                          ),
+                        const DesignIcon(
+                          height: 54,
+                          icon: DesignIcons.map,
                         ),
-                      );
-                    },
-                    childCount: 1,
+                        if (controller.place.ratings.isNotEmpty)
+                          const DesignIcon(
+                            height: 54,
+                            icon: DesignIcons.message,
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ];

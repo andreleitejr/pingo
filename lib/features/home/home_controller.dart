@@ -65,7 +65,10 @@ class HomeController extends GetxController {
 
     for (final place in list) {
       final match =
-          place.keywords.toSet().intersection(user.keywords.toSet()).length;
+          place.keywords
+              .toSet()
+              .intersection(user.keywords.toSet())
+              .length;
       place.match = match;
     }
     list.sort((a, b) => a.compareTo(b));
@@ -85,7 +88,10 @@ class HomeController extends GetxController {
 
     for (final product in products) {
       final match =
-          product.keywords.toSet().intersection(user.keywords.toSet()).length;
+          product.keywords
+              .toSet()
+              .intersection(user.keywords.toSet())
+              .length;
       product.match = match;
     }
 
@@ -108,7 +114,10 @@ class HomeController extends GetxController {
 
     for (final event in events) {
       final match =
-          event.keywords.toSet().intersection(user.keywords.toSet()).length;
+          event.keywords
+              .toSet()
+              .intersection(user.keywords.toSet())
+              .length;
       event.match = match;
     }
 

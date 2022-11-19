@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
-class DesignDestionationMarker extends StatelessWidget {
-  const DesignDestionationMarker({Key? key, required this.image})
+class DesignDestinationMarker extends StatelessWidget {
+  const DesignDestinationMarker({Key? key, required this.image})
       : super(key: key);
 
   final String image;
+  final double _size = 36;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 54),
-      height: 54,
-      width: 54,
+      margin: EdgeInsets.only(left: _size),
+      height: _size,
+      width: _size,
       decoration: BoxDecoration(
         image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(54),
-          topRight: Radius.circular(54),
-          bottomRight: Radius.circular(54),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(_size),
+          topRight: Radius.circular(_size),
+          bottomRight: Radius.circular(_size),
         ),
       ),
     );

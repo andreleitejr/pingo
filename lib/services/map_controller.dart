@@ -53,8 +53,8 @@ class MapController extends GetxController {
 
   @override
   void onReady() {
-    markers[MarkerId(place.name)] = placeMarker;
     markers[MarkerId(user.name)] = userMarker;
+    markers[MarkerId(place.name)] = placeMarker;
     super.onReady();
   }
 }

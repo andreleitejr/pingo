@@ -1,4 +1,6 @@
 import 'package:custom_map_markers/custom_map_markers.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,14 +44,14 @@ class _DesignMapState extends State<DesignMap> {
     return CustomGoogleMapMarkerBuilder(
       customMarkers: [
         MarkerData(
-          marker: controller.placeMarker,
-          child: DesignDestionationMarker(
-            image: controller.place.image!.image,
-          ),
-        ),
-        MarkerData(
           marker: controller.userMarker,
           child: DesignUserMarker(),
+        ),
+        MarkerData(
+          marker: controller.placeMarker,
+          child: DesignDestinationMarker(
+            image: controller.place.image!.image,
+          ),
         ),
       ],
       builder: (BuildContext context, Set<Marker>? markers) {
@@ -60,7 +62,12 @@ class _DesignMapState extends State<DesignMap> {
           color: DesignColor.text200,
           alignment: Alignment.center,
           child: GoogleMap(
-            initialCameraPosition: controller.placePosition,
+            gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+              Factory<OneSequenceGestureRecognizer>(
+                    () =>  EagerGestureRecognizer(),
+              ),
+            },
+            initialCameraPosition: controller.userPosition,
             onMapCreated: (GoogleMapController mapController) {
               mapController = mapController;
               mapController.setMapStyle(_mapStyle);
