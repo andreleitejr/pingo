@@ -50,7 +50,7 @@ class CategoryController extends GetxController {
     categories.add(all);
 
     for (final keyword in list) {
-      final emoji = getEmoji(keyword.id);
+      final emoji = allKeywords.firstWhere((k) => k.id == keyword.id).emoji;
 
       final category = Category(keyword.id, keyword.title, emoji);
       categories.add(category);
@@ -232,6 +232,7 @@ class CategoryController extends GetxController {
 
   List<Base> filterByCategory(List<Base> list) {
     if (category.value == all) return list;
+
     return list
         .where((base) =>
             base.keywords.any((keyword) => keyword == category.value.id))

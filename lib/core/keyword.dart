@@ -142,7 +142,7 @@ final placesKeywords = <KeywordData>[
   KeywordData(
     'Party',
     Keyword.party,
-    DesignEmojis.eventWoman,
+    DesignEmojis.party,
     KeywordImage.party,
   ),
   KeywordData(
@@ -280,8 +280,7 @@ final foods = <KeywordData>[
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'Thai', Keyword.thai, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('Thai', Keyword.thai, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Greek',
     Keyword.greek,
@@ -322,9 +321,17 @@ final foods = <KeywordData>[
 
 final musics = <KeywordData>[
   KeywordData(
-      'Rock', Keyword.rock, DesignEmojis.fastFood, DesignImages.fallbackImage),
+    'Rock',
+    Keyword.rock,
+    DesignEmojis.fastFood,
+    KeywordImage.party,
+  ),
   KeywordData(
-      'Pop', Keyword.pop, DesignEmojis.fastFood, DesignImages.fallbackImage),
+    'Pop',
+    Keyword.pop,
+    DesignEmojis.fastFood,
+    KeywordImage.party,
+  ),
   KeywordData(
     'Country',
     Keyword.country,
@@ -337,24 +344,21 @@ final musics = <KeywordData>[
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'Funk', Keyword.funk, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('Funk', Keyword.funk, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'House',
     Keyword.house,
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'Trap', Keyword.trap, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('Trap', Keyword.trap, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Techno',
     Keyword.techno,
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'Rap', Keyword.rap, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('Rap', Keyword.rap, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Samba',
     Keyword.samba,
@@ -385,16 +389,14 @@ final musics = <KeywordData>[
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'MPB', Keyword.mpb, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('MPB', Keyword.mpb, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Blues',
     Keyword.blues,
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'Jazz', Keyword.jazz, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('Jazz', Keyword.jazz, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Trance',
     Keyword.trance,
@@ -407,23 +409,29 @@ final musics = <KeywordData>[
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'Punk', Keyword.punk, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('Punk', Keyword.punk, DesignEmojis.fastFood, KeywordImage.party),
 ];
 
 final miscellaneous = <KeywordData>[
-  KeywordData(
-      'LGBT', Keyword.lgbt, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('LGBT', Keyword.lgbt, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Fashion',
     Keyword.fashion,
-    DesignEmojis.fastFood,
+    DesignEmojis.shopping,
     KeywordImage.restaurant,
   ),
   KeywordData(
-      'Gym', Keyword.gym, DesignEmojis.fastFood, DesignImages.fallbackImage),
+    'Gym',
+    Keyword.gym,
+    DesignEmojis.fastFood,
+    KeywordImage.party,
+  ),
   KeywordData(
-      'Beer', Keyword.beer, DesignEmojis.fastFood, DesignImages.fallbackImage),
+    'Beer',
+    Keyword.beer,
+    DesignEmojis.fastFood,
+    KeywordImage.party,
+  ),
   KeywordData(
     'Sports',
     Keyword.sports,
@@ -461,7 +469,11 @@ final miscellaneous = <KeywordData>[
     KeywordImage.restaurant,
   ),
   KeywordData(
-      'Bike', Keyword.bike, DesignEmojis.fastFood, DesignImages.fallbackImage),
+    'Bike',
+    Keyword.bike,
+    DesignEmojis.fastFood,
+    KeywordImage.party,
+  ),
   KeywordData(
     'Skate',
     Keyword.skate,
@@ -474,8 +486,7 @@ final miscellaneous = <KeywordData>[
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'Art', Keyword.art, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('Art', Keyword.art, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Tattoo',
     Keyword.tattoo,
@@ -512,8 +523,7 @@ final miscellaneous = <KeywordData>[
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'UFC', Keyword.ufc, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('UFC', Keyword.ufc, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Boxing',
     Keyword.boxing,
@@ -532,8 +542,7 @@ final miscellaneous = <KeywordData>[
     DesignEmojis.fastFood,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'Gin', Keyword.gin, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('Gin', Keyword.gin, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Drinks',
     Keyword.drinks,
@@ -546,21 +555,18 @@ final other = [
   KeywordData(
     'Event',
     Keyword.event,
-    DesignEmojis.fastFood,
-    KeywordImage.restaurant,
+    DesignEmojis.eventWoman,
+    KeywordImage.party,
   ),
   KeywordData(
     'Product',
     Keyword.product,
-    DesignEmojis.fastFood,
+    DesignEmojis.product,
     KeywordImage.restaurant,
   ),
-  KeywordData(
-      'Util', Keyword.util, DesignEmojis.fastFood, DesignImages.fallbackImage),
-  KeywordData(
-      'Free', Keyword.free, DesignEmojis.fastFood, DesignImages.fallbackImage),
-  KeywordData(
-      'Open', Keyword.open, DesignEmojis.fastFood, DesignImages.fallbackImage),
+  KeywordData('Util', Keyword.util, DesignEmojis.utils, KeywordImage.party),
+  KeywordData('Free', Keyword.free, DesignEmojis.fastFood, KeywordImage.party),
+  KeywordData('Open', Keyword.open, DesignEmojis.fastFood, KeywordImage.party),
   KeywordData(
     'Promo',
     Keyword.promo,

@@ -10,6 +10,7 @@ class DesignEmojis {
   static const historical = '🏰';
   static const museum = '🎨';
   static const other = '🚀';
+  static const party = '🎉';
   static const pet = '🐾';
   static const pub = '🍻';
   static const product = '🛒';
