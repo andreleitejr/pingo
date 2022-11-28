@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:pingo/features/auth/landing/landing_page.dart';
+import 'package:pingo/features/auth/pages/landing/landing_page.dart';
 import 'package:pingo/main.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/repositories/user_repository.dart';

@@ -7,7 +7,7 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/features/profile/edit/info/profile_info_edit_page.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
-import 'package:pingo/features/auth/signin/signin_page.dart';
+import 'package:pingo/features/auth/pages/signin/signin_page.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_icon.dart';

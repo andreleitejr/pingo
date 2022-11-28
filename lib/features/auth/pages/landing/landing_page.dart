@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:pingo/features/auth/landing/landing_controller.dart';
-import 'package:pingo/features/auth/signup/signup_page.dart';
+import 'package:pingo/features/auth/pages/landing/landing_controller.dart';
+import 'package:pingo/features/auth/pages/signup/signup_page.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
 import 'package:pingo/widgets/design_loading_page.dart';
