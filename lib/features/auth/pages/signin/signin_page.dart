@@ -21,8 +21,7 @@ class SignInPage extends StatefulWidget {
   State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage>
-    implements SignInPageNavigator {
+class _SignInPageState extends State<SignInPage> implements SignInNavigator {
   late SignInController controller;
 
   @override
@@ -110,10 +109,10 @@ class _SignInPageState extends State<SignInPage>
   }
 }
 
-abstract class SignInPageNavigator {
-  void userNotFoundInDatabase();
-
+abstract class SignInNavigator {
   void success();
+
+  void userNotFoundInDatabase();
 
   void error(AuthResult result);
 }

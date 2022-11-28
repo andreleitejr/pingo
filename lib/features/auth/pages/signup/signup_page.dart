@@ -5,9 +5,11 @@ import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/pages/signin/signin_page.dart';
 import 'package:pingo/features/auth/pages/signup/signup_controller.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
+import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_check_box.dart';
 import 'package:pingo/widgets/design_text_input.dart';
@@ -20,8 +22,14 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  final controller = Get.put(SignUpController());
+class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
+  late SignUpController controller;
+
+  @override
+  void initState() {
+    controller = Get.put(SignUpController(this));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
             const DesignSpace(size: DesignSize.smallSpace),
             Obx(
               () => DesignButton(
-                onPressed: () async {
-                  if (controller.isAuthFormValid) {
-                    Get.to(const SignUpInfoPage());
-                  }
-                },
+                onPressed: () =>  controller.signUp(),
                 title: 'Sign Up',
                 isActive: controller.isAuthFormValid,
               ),
@@ -175,5 +179,20 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void error(AuthResult result) {
+    Get.snackbar(
+      result.title,
+      result.message,
+      backgroundColor: DesignColor.primary500,
+      colorText: Colors.white,
+    );
+  }
+
+  @override
+  void success() {
+    Get.to(const SignUpInfoPage());
   }
 }

@@ -7,7 +7,7 @@ class SignInController extends GetxController {
 
   final repository = AuthRepository();
 
-  final SignInPageNavigator navigator;
+  final SignInNavigator navigator;
 
   final email = ''.obs;
 
@@ -34,6 +34,8 @@ class SignInController extends GetxController {
       } else {
         navigator.error(result);
       }
+    } else {
+      navigator.error(AuthResult.required);
     }
   }
 }

@@ -122,6 +122,8 @@ extension AuthResultExtension on AuthResult {
       return 'Wrong password';
     } else if (this == AuthResult.userNotFound) {
       return 'User not registered';
+    } else if (this == AuthResult.required) {
+      return 'All fields are required';
     }
     return 'Unexpected error';
   }
@@ -139,6 +141,8 @@ extension AuthResultExtension on AuthResult {
       return 'You don\'t have an account yet. Please sign up.';
     } else if (this == AuthResult.tooManyRequests) {
       return 'Too many requests detected. Please, try again in a few minutes.';
+    } else if (this == AuthResult.required) {
+      return 'All fields are required. Please, complete all fields until they are positively checked.';
     }
     return 'An unexpected error occurred. Try again in minutes or try contact our support at ${Emails.support}';
   }

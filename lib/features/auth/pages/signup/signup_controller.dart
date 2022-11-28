@@ -1,13 +1,17 @@
 import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/models/gender.dart';
 import 'package:pingo/models/orientation.dart';
 import 'package:pingo/models/user.dart';
 
 class SignUpController extends GetxController {
+  SignUpController(this.navigator);
+
   final repository = AuthRepository();
 
+  final SignUpNavigator navigator;
   final name = ''.obs;
   final email = ''.obs;
   final password = ''.obs;
@@ -90,14 +94,30 @@ class SignUpController extends GetxController {
       // isAuthFormValid &&
       birthdayValid && genderValid && countryValid && cityValid;
 
-  Future<AuthResult> signUpWithEmailAndPassword() async {
-    var result = await repository.signUpWithEmailAndPassword(
-        name.value, email.value, password.value);
-
-    if (result == AuthResult.success) {
-      result = await repository.save(user);
+  void signUp() {
+    if (isAuthFormValid) {
+      navigator.success();
+    } else {
+      navigator.error(AuthResult.required);
     }
+  }
 
-    return result;
+  Future<void> signUpWithEmailAndPassword() async {
+    if (isInfoFormValid) {
+      var result = await repository.signUpWithEmailAndPassword(
+          name.value, email.value, password.value);
+
+      if (result == AuthResult.success) {
+        result = await repository.save(user);
+      }
+
+      if (result == AuthResult.success) {
+        navigator.success();
+      } else {
+        navigator.error(result);
+      }
+    } else {
+      navigator.error(AuthResult.required);
+    }
   }
 }

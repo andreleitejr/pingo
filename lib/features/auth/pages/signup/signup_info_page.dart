@@ -22,8 +22,15 @@ class SignUpInfoPage extends StatefulWidget {
   State<SignUpInfoPage> createState() => _SignUpInfoPageState();
 }
 
-class _SignUpInfoPageState extends State<SignUpInfoPage> {
-  final controller = Get.put(SignUpController());
+class _SignUpInfoPageState extends State<SignUpInfoPage>
+    implements SignUpNavigator {
+  late SignUpController controller;
+
+  @override
+  void initState() {
+    controller = Get.put(SignUpController(this));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,23 +117,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
             const DesignSpace(),
             Obx(
               () => DesignButton(
-                onPressed: () async {
-                  if (controller.isInfoFormValid) {
-                    final result =
-                        await controller.signUpWithEmailAndPassword();
-
-                    if (result == AuthResult.success) {
-                      Get.to(() => ProfileKeywordsSelection());
-                    } else {
-                      Get.snackbar(
-                        result.title,
-                        result.message,
-                        backgroundColor: DesignColor.primary500,
-                        colorText: Colors.white,
-                      );
-                    }
-                  }
-                },
+                onPressed: () async => controller.signUpWithEmailAndPassword(),
                 title: 'Sign In',
                 isActive: controller.isInfoFormValid,
               ),
@@ -136,4 +127,25 @@ class _SignUpInfoPageState extends State<SignUpInfoPage> {
       ),
     );
   }
+
+  @override
+  void success() {
+    Get.to(() => ProfileKeywordsSelection());
+  }
+
+  @override
+  void error(AuthResult result) {
+    Get.snackbar(
+      result.title,
+      result.message,
+      backgroundColor: DesignColor.primary500,
+      colorText: Colors.white,
+    );
+  }
+}
+
+abstract class SignUpNavigator {
+  void success();
+
+  void error(AuthResult result);
 }

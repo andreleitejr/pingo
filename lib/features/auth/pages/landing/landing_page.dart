@@ -16,7 +16,7 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage>
-    implements LandingPageNavigator {
+    implements LandingNavigator {
   late LandingController controller;
   late RiveAnimationController animationController;
 
@@ -58,7 +58,7 @@ class _LandingPageState extends State<LandingPage>
   void loggedWithoutInfo() => Get.to(() => ProfileKeywordsSelection());
 }
 
-abstract class LandingPageNavigator {
+abstract class LandingNavigator {
   void logged();
 
   void loggedOut();

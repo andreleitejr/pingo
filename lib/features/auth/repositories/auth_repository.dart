@@ -15,6 +15,7 @@ enum AuthResult {
   userNotFound,
   userNotFoundInDatabase,
   tooManyRequests,
+  required,
 }
 
 class AuthRepository extends UserRepository {

@@ -13,7 +13,7 @@ class LandingController extends GetxController {
 
   final repository = UserRepository();
 
-  final LandingPageNavigator navigator;
+  final LandingNavigator navigator;
 
   @override
   void onReady() {
