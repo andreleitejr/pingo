@@ -35,13 +35,9 @@ class SignUpController extends GetxController {
   void setSexualOrientation(SexualOrientation? v) =>
       sexualOrientation(v?.title);
 
-  void setCountry(String v) {
-    country(v);
-  }
+  void setCountry(String v) => country(v);
 
-  void setState(String? v) {
-    state(v);
-  }
+  void setState(String? v) => state(v);
 
   void setCity(String? v) => city(v);
 

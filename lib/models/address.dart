@@ -46,17 +46,3 @@ class Address {
     'zip': zip,
   };
 }
-
-List<Address> addresses = [
-  Address(
-    city: 'São Paulo',
-    complement: '',
-    country: 'Brazil',
-    line: 'Praça Franklin Roosevelt',
-    location: const GeoPoint(-23.5487885,-46.646209),
-    subLocality: 'Centro Histórico de São Paulo',
-    number: '2',
-    state: 'São Paulo',
-    zip: '01120010',
-  ),
-];

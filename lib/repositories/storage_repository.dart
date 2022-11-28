@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 
-class StorageReporitory {
-  StorageReporitory({
+class StorageRepository {
+  StorageRepository({
     required this.name,
   });
 
@@ -20,18 +21,18 @@ class StorageReporitory {
       final ref = storage.ref(name).child(fileName);
       await ref.putFile(image);
     } catch (e) {
-      print('error occured');
+      debugPrint('Storage Repository | Upload Error: $e');
     }
   }
 
   Future<String?> download(String fileName) async {
-    try {
-      final path = "$name/$fileName";
+    final path = "$name/$fileName";
 
+    try {
       final imageUrl = await reference.child(path).getDownloadURL();
       return imageUrl;
     } catch (e) {
-      print('error occured');
+      debugPrint('Storage Repository | Download Error: $e');
       return null;
     }
   }

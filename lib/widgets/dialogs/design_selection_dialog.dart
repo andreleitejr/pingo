@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// ignore: depend_on_referenced_packages
-import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/models/selectable.dart';

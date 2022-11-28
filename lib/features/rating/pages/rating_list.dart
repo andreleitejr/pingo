@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
-import 'package:intl/intl.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
@@ -8,7 +7,6 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/rating/models/rating.dart';
 import 'package:pingo/widgets/design_icon.dart';
-import 'package:pingo/widgets/design_place_list_tile.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class RatingList extends StatelessWidget {

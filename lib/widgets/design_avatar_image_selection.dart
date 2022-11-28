@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/services/camera_controller.dart';
-import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class DesignAvatarImageSelection extends StatelessWidget {

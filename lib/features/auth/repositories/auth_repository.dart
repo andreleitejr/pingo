@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:pingo/constants/firebase_error.dart';
+import 'package:pingo/core/extensions.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/repositories/user_repository.dart';
 
@@ -23,8 +24,7 @@ class AuthRepository extends UserRepository {
     try {
       return _auth.currentUser;
     } on auth.FirebaseAuthException catch (e) {
-      print('Failed with error code: ${e.code}');
-      print(e.message);
+      debugPrint('AuthRepository | Current User Error: $e');
       return null;
     }
   }
@@ -41,14 +41,7 @@ class AuthRepository extends UserRepository {
 
       return AuthResult.success;
     } on auth.FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case FirebaseError.emailAlreadyInUse:
-          return AuthResult.emailAlreadyInUse;
-        case FirebaseError.wrongPassword:
-          return AuthResult.wrongPassword;
-        default:
-          return AuthResult.failed;
-      }
+      return e.code.resultError;
     }
   }
 
@@ -60,16 +53,7 @@ class AuthRepository extends UserRepository {
 
       return _getUser(result);
     } on auth.FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case FirebaseError.userNotFound:
-          return AuthResult.userNotFound;
-        case FirebaseError.wrongPassword:
-          return AuthResult.wrongPassword;
-        case FirebaseError.tooManyRequests:
-          return AuthResult.tooManyRequests;
-        default:
-          return AuthResult.failed;
-      }
+      return e.code.resultError;
     }
   }
 
@@ -81,8 +65,8 @@ class AuthRepository extends UserRepository {
         return AuthResult.success;
       }
       return AuthResult.failed;
-    } catch (e) {
-      return AuthResult.failed;
+    } on FirebaseException catch (e) {
+      return e.code.resultError;
     }
   }
 
@@ -102,9 +86,8 @@ class AuthRepository extends UserRepository {
       }
 
       return AuthResult.failed;
-    } catch (e) {
-      debugPrint('Failed with error code: $e');
-      return AuthResult.failed;
+    } on FirebaseException catch (e) {
+      return e.code.resultError;
     }
   }
 
@@ -112,8 +95,7 @@ class AuthRepository extends UserRepository {
     try {
       _auth.signOut();
     } on auth.FirebaseAuthException catch (e) {
-      print('Failed with error code: ${e.code}');
-      print(e.message);
+      debugPrint('AuthRepository | Sign Out Error: $e');
     }
   }
 }

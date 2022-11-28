@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 import 'package:pingo/models/database.dart';
-import 'package:pingo/models/user.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 
 class Rating extends DataBase {

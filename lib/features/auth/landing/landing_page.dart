@@ -23,13 +23,16 @@ class _LandingPageState extends State<LandingPage>
   @override
   void initState() {
     controller = LandingController(this);
+
     animationController = OneShotAnimation(
       'blink',
       autoplay: true,
     );
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+
     super.initState();
   }
 

@@ -1,5 +1,4 @@
 import 'package:pingo/constants/design_emojis.dart';
-import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/keyword_image.dart';
 
 class KeywordData {

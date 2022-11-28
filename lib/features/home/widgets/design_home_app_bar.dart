@@ -13,7 +13,7 @@ import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:rive/rive.dart';
 
 class DesignHomeAppBar extends StatefulWidget {
-  DesignHomeAppBar({Key? key}) : super(key: key);
+  const DesignHomeAppBar({Key? key}) : super(key: key);
 
   @override
   State<DesignHomeAppBar> createState() => _DesignHomeAppBarState();

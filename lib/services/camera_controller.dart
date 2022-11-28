@@ -84,7 +84,7 @@ class CameraController extends GetxController {
 
         imageFileList.value = pickedFileList;
       } catch (e) {
-        debugPrint('An error ocurred getting multiple images: $e');
+        debugPrint('Camera Controller | Multi Image Error: $e');
         pickImageError = e;
       }
     } else {
@@ -98,7 +98,7 @@ class CameraController extends GetxController {
 
         _setImageFileListFromFile(pickedFile);
       } catch (e) {
-        debugPrint('An error ocurred getting image: $e');
+        debugPrint('Camera Controller | Single Image Error: $e');
         pickImageError = e;
       }
     }

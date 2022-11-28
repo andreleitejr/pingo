@@ -7,13 +7,13 @@ import 'package:pingo/models/user.dart';
 import 'package:pingo/repositories/user_repository.dart';
 
 class LandingController extends GetxController {
-  LandingController(this.landingPageNavigator) {
+  LandingController(this.navigator) {
     onReady();
   }
 
   final repository = UserRepository();
 
-  final LandingPageNavigator landingPageNavigator;
+  final LandingPageNavigator navigator;
 
   @override
   void onReady() {
@@ -26,17 +26,19 @@ class LandingController extends GetxController {
   Rx<List<User>> users = Rx<List<User>>([]);
 
   Future<void> _init() async {
+    /// ANIMATION TIME
     await Future.delayed(const Duration(milliseconds: 1500));
 
     final authUser = _auth.currentUser;
+
     if (authUser == null) {
-      landingPageNavigator.loggedOut();
+      navigator.loggedOut();
     } else if (userValid) {
       registerUser();
-      landingPageNavigator.logged();
+      navigator.logged();
     } else {
       registerUser();
-      landingPageNavigator.loggedWithoutInfo();
+      navigator.loggedWithoutInfo();
     }
   }
 

@@ -7,7 +7,6 @@ import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/models/address.dart';
-import 'package:pingo/models/base.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 
 class Place extends MatchBase {

@@ -1,16 +1,11 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pingo/constants/design_images.dart';
-import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/event/repositories/event_repository.dart';
 import 'package:pingo/features/place/models/place.dart';
-import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/models/product_category.dart';
-import 'package:pingo/features/product/repositories/product_repository.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 import 'package:pingo/services/camera_controller.dart';
 

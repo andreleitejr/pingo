@@ -34,7 +34,7 @@ class CurrentLocation {
         }
       });
     } catch (e) {
-      print(e);
+      debugPrint('Current Location | Get Location Error: $e');
     }
   }
 

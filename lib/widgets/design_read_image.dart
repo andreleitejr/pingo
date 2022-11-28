@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
-import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
-import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
 
 class DesignAvatarImage extends StatelessWidget {

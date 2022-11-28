@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/features/place/models/place.dart';
-import 'package:pingo/features/post/models/post.dart';
-import 'package:pingo/services/blurhash_controller.dart';
 import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_post_reader.dart';
 
@@ -95,7 +92,6 @@ class DesignPostGridView extends StatelessWidget {
             height: 54,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.white,
                 textStyle: const TextStyle(fontSize: 20),
                 shape: const CircleBorder(),
               ),

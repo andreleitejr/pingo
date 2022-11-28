@@ -2,31 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
-import 'package:pingo/core/extensions.dart';
-import 'package:pingo/features/event/pages/list/event_list_page.dart';
-import 'package:pingo/models/category.dart';
 import 'package:pingo/features/home/home_controller.dart';
-import 'package:pingo/features/home/components/search/search_page.dart';
-import 'package:pingo/features/home/widgets/design_home_app_bar.dart';
 import 'package:pingo/features/place/models/place.dart';
-import 'package:pingo/features/place/pages/list/place_list_page.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
-import 'package:pingo/features/product/models/product.dart';
-import 'package:pingo/features/product/pages/list/product_list_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
-import 'package:pingo/widgets/design_category_item.dart';
-import 'package:pingo/widgets/design_event_item.dart';
 import 'package:pingo/widgets/design_place_list_tile.dart';
-import 'package:pingo/widgets/design_product_item.dart';
 import 'package:pingo/widgets/design_search_input.dart';
 import 'package:pingo/widgets/design_section_title.dart';
 import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
-import 'package:pingo/widgets/shimmers/shimmer_event_item.dart';
 import 'package:pingo/widgets/shimmers/shimmer_list_tile.dart';
-import 'package:pingo/widgets/shimmers/shimmer_product_item.dart';
 
 class PlaceListPage extends StatefulWidget {
   const PlaceListPage({

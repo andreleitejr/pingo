@@ -1,10 +1,8 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:blurhash/blurhash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
-import 'package:pingo/repositories/database_repository.dart';
 import 'package:pingo/repositories/storage_repository.dart';
 
 class ImageBlurHash {
@@ -50,7 +48,7 @@ class BlurHashController {
   }
 
   Future<String?> uploadAndGetUrl(File file, String repositoryName) async {
-    final repository = StorageReporitory(name: repositoryName);
+    final repository = StorageRepository(name: repositoryName);
 
     await repository.upload(file);
     final downloadUrl = await repository.download(basename(file.path));

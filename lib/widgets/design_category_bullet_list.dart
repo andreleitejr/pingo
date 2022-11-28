@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
-import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/models/category.dart';
 import 'package:pingo/widgets/design_bullet_item.dart';
 

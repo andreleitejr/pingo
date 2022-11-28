@@ -4,7 +4,6 @@ import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
-import 'package:pingo/features/profile/edit/info/profile_info_edit_controller.dart';
 import 'package:pingo/features/profile/edit/info/profile_info_edit_page.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';

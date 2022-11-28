@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
-import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/pages/list/event_list_page.dart';
 import 'package:pingo/models/category.dart';
 import 'package:pingo/features/home/home_controller.dart';
@@ -10,7 +9,6 @@ import 'package:pingo/features/home/components/search/search_page.dart';
 import 'package:pingo/features/home/widgets/design_home_app_bar.dart';
 import 'package:pingo/features/place/pages/list/place_list_page.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
-import 'package:pingo/features/product/models/product.dart';
 import 'package:pingo/features/product/pages/list/product_list_page.dart';
 import 'package:pingo/widgets/design_best_match_item.dart';
 import 'package:pingo/widgets/design_category_bullet_list.dart';
@@ -42,7 +40,7 @@ class HomePage extends StatelessWidget {
           }
           return CustomScrollView(
             slivers: [
-              SliverAppBar(
+              const SliverAppBar(
                 automaticallyImplyLeading: false,
                 toolbarHeight: 48,
                 backgroundColor: Colors.white,

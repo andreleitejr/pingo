@@ -1,5 +1,3 @@
-import 'package:pingo/constants/design_emojis.dart';
-
 class Category {
   final int id;
   final String title;

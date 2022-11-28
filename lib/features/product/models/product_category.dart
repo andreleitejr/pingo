@@ -1,5 +1,3 @@
-import 'package:pingo/features/product/models/product.dart';
-
 class ProductCategory {
   final String title;
   final int id;

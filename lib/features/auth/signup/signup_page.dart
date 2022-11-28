@@ -8,7 +8,6 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/features/auth/signin/signin_page.dart';
 import 'package:pingo/features/auth/signup/signup_controller.dart';
 import 'package:pingo/features/auth/signup/signup_info_page.dart';
-import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_check_box.dart';
 import 'package:pingo/widgets/design_text_input.dart';

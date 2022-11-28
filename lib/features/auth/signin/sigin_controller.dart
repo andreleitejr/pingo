@@ -1,8 +1,13 @@
 import 'package:get/get.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
+import 'package:pingo/features/auth/signin/signin_page.dart';
 
 class SignInController extends GetxController {
+  SignInController(this.navigator);
+
   final repository = AuthRepository();
+
+  final SignInPageNavigator navigator;
 
   final email = ''.obs;
 
@@ -18,11 +23,17 @@ class SignInController extends GetxController {
 
   bool get isAuthFormValid => emailValid && passwordValid;
 
-  Future<AuthResult> signIn() async {
-    final result = await repository.signInWithEmailAndPassword(
-        email.value, password.value);
-
-
-    return result;
+  Future<void> signIn() async {
+    if (isAuthFormValid) {
+      final result = await repository.signInWithEmailAndPassword(
+          email.value, password.value);
+      if (result == AuthResult.success) {
+        navigator.success();
+      } else if (result == AuthResult.userNotFoundInDatabase) {
+        navigator.userNotFoundInDatabase();
+      } else {
+        navigator.error(result);
+      }
+    }
   }
 }

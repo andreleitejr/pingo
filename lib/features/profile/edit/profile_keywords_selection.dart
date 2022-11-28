@@ -10,7 +10,6 @@ import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_emoji_bullet.dart';
-import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_page_view.dart';
 import 'package:pingo/widgets/design_title_with_subtitle.dart';
 import 'package:pingo/widgets/design_search_input.dart';
@@ -111,7 +110,6 @@ class _DesignKeywordSelectionState extends State<DesignKeywordSelection> {
               actionValid:
                   controller.quantityValid(widget.list, widget.minimumQuantity),
               onActionPressed: () {
-                print(controller.pageView.pageController.page);
                 final isValid = controller.quantityValid(
                     widget.list, widget.minimumQuantity);
 

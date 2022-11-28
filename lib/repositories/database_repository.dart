@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/models/database.dart';
 import 'package:pingo/repositories/storage_repository.dart';
@@ -13,7 +14,7 @@ abstract class DataBaseRepository<T extends DataBase> {
     required this.name,
   });
 
-  StorageReporitory get storageRepository => StorageReporitory(name: name);
+  StorageRepository get storageRepository => StorageRepository(name: name);
 
   final String name;
   final T Function(DocumentSnapshot document) fromMap;
@@ -36,8 +37,7 @@ abstract class DataBaseRepository<T extends DataBase> {
     try {
       await collection.doc(documentId).set(model.toMap());
     } catch (e) {
-      // IMPLEMENTAR CRASHLYTICS
-      print(e);
+      debugPrint('Data Base Repository | Error: $e');
     }
   }
 
@@ -46,10 +46,7 @@ abstract class DataBaseRepository<T extends DataBase> {
 
   void delete(String documentId) => collection.doc(documentId).delete();
 
-  Stream<List<T>> get read => collectionGroup.snapshots().map((query) {
-        print('${query.docs.first}');
-        return query.docs.map<T>((document) => fromMap(document)).toList();
-      });
+  Stream<List<T>> get read => collectionGroup.snapshots().map((query) => query.docs.map<T>((document) => fromMap(document)).toList());
 
   Future<T?> get(String documentId) async =>
       await collection.doc(documentId).get().then((doc) => fromMap(doc));

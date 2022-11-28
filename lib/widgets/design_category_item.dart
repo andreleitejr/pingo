@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
-import 'package:pingo/widgets/design_shimmer_widget.dart';
-import 'package:pingo/widgets/design_space.dart';
 
 class DesignCategoryItem extends StatelessWidget {
   const DesignCategoryItem({

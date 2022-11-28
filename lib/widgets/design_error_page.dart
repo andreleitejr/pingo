@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pingo/constants/design_images.dart';
 
 class DesignErrorPage extends StatelessWidget {
   const DesignErrorPage({

@@ -9,10 +9,8 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/place/pages/read/place_read_page.dart';
-import 'package:pingo/features/rating/pages/rating_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
-import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_space.dart';
 
 class EventReadPage extends StatefulWidget {

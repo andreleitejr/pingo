@@ -3,6 +3,7 @@ import 'package:diacritic/diacritic.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:pingo/constants/emails.dart';
+import 'package:pingo/constants/firebase_error.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 
@@ -18,6 +19,21 @@ extension StringExtension on String {
       contains(RegExp(r'[0-9]')) &&
       contains(RegExp(r'[a-z]')) &&
       contains(RegExp(r'[^a-z]'));
+
+  AuthResult get resultError {
+    switch (this) {
+      case FirebaseError.userNotFound:
+        return AuthResult.userNotFound;
+      case FirebaseError.wrongPassword:
+        return AuthResult.wrongPassword;
+      case FirebaseError.tooManyRequests:
+        return AuthResult.tooManyRequests;
+      case FirebaseError.emailAlreadyInUse:
+        return AuthResult.emailAlreadyInUse;
+      default:
+        return AuthResult.failed;
+    }
+  }
 }
 
 extension IntExtension on int {

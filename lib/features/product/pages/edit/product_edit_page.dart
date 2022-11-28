@@ -16,7 +16,7 @@ import 'package:pingo/widgets/design_text_input.dart';
 import '../../../../widgets/design_space.dart';
 
 class ProductEditPage extends StatefulWidget {
-  ProductEditPage({Key? key, required this.place}) : super(key: key);
+  const ProductEditPage({Key? key, required this.place}) : super(key: key);
 
   final Place place;
 

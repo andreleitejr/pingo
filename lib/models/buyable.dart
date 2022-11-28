@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pingo/models/base.dart';
 import 'package:pingo/models/matchbase.dart';
 
 class Buyable extends MatchBase {

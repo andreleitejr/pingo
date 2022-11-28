@@ -7,7 +7,6 @@ import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/signin/sigin_controller.dart';
-import 'package:pingo/features/auth/signup/signup_controller.dart';
 import 'package:pingo/features/auth/signup/signup_info_page.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
@@ -22,8 +21,15 @@ class SignInPage extends StatefulWidget {
   State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
-  final controller = Get.put(SignInController());
+class _SignInPageState extends State<SignInPage>
+    implements SignInPageNavigator {
+  late SignInController controller;
+
+  @override
+  void initState() {
+    controller = Get.put(SignInController(this));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,23 +69,7 @@ class _SignInPageState extends State<SignInPage> {
             const DesignSpace(),
             Obx(
               () => DesignButton(
-                onPressed: () async {
-                  if (controller.isAuthFormValid) {
-                    final result = await controller.signIn();
-                    if (result == AuthResult.success) {
-                      Get.to(const BasePage());
-                    } else if (result == AuthResult.userNotFoundInDatabase) {
-                      Get.to(const SignUpInfoPage());
-                    } else {
-                      Get.snackbar(
-                        result.title,
-                        result.message,
-                        backgroundColor: DesignColor.primary500,
-                        colorText: Colors.white,
-                      );
-                    }
-                  }
-                },
+                onPressed: () async => await controller.signIn(),
                 title: 'Sign In',
                 isActive: controller.isAuthFormValid,
               ),
@@ -98,4 +88,32 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
   }
+
+  @override
+  void success() {
+    Get.to(const BasePage());
+  }
+
+  @override
+  void userNotFoundInDatabase() {
+    Get.to(const SignUpInfoPage());
+  }
+
+  @override
+  void error(AuthResult result) {
+    Get.snackbar(
+      result.title,
+      result.message,
+      backgroundColor: DesignColor.primary500,
+      colorText: Colors.white,
+    );
+  }
+}
+
+abstract class SignInPageNavigator {
+  void userNotFoundInDatabase();
+
+  void success();
+
+  void error(AuthResult result);
 }

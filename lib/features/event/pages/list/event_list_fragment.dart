@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/event/pages/read/event_read_page.dart';
 import 'package:pingo/widgets/design_event_list_tile.dart';
-import 'package:pingo/widgets/design_place_list_tile.dart';
 
 class EventListFragment extends StatelessWidget {
   const EventListFragment({Key? key, required this.events}) : super(key: key);

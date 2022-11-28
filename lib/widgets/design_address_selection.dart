@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -34,12 +32,12 @@ class _DesignAddressSelectionState extends State<DesignAddressSelection> {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<CSCPickerState> _cscPickerKey = GlobalKey();
+    GlobalKey<CSCPickerState> cscPickerKey = GlobalKey();
 
     return Center(
-      key: _cscPickerKey,
+      key: cscPickerKey,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         height: 600,
         child: Column(
           children: [
@@ -56,13 +54,13 @@ class _DesignAddressSelectionState extends State<DesignAddressSelection> {
 
               ///Dropdown box decoration to style your dropdown selector [OPTIONAL PARAMETER] (USE with disabledDropdownDecoration)
               dropdownDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   color: Colors.white,
                   border: Border.all(color: Colors.grey.shade300, width: 1)),
 
               ///Disabled Dropdown box decoration to style your dropdown selector [OPTIONAL PARAMETER]  (USE with disabled dropdownDecoration)
               disabledDropdownDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   color: Colors.grey.shade300,
                   border: Border.all(color: Colors.grey.shade300, width: 1)),
 
@@ -83,19 +81,19 @@ class _DesignAddressSelectionState extends State<DesignAddressSelection> {
               //disableCountry: true,
 
               ///selected item style [OPTIONAL PARAMETER]
-              selectedItemStyle: TextStyle(
+              selectedItemStyle: const TextStyle(
                 color: Colors.black,
                 fontSize: 14,
               ),
 
               ///DropdownDialog Heading style [OPTIONAL PARAMETER]
-              dropdownHeadingStyle: TextStyle(
+              dropdownHeadingStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 17,
                   fontWeight: FontWeight.bold),
 
               ///DropdownDialog Item style [OPTIONAL PARAMETER]
-              dropdownItemStyle: TextStyle(
+              dropdownItemStyle: const TextStyle(
                 color: Colors.black,
                 fontSize: 14,
               ),

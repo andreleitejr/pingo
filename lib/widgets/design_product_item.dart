@@ -10,7 +10,6 @@ import 'package:pingo/features/product/models/product.dart';
 
 import 'package:pingo/features/product/pages/read/product_read_page.dart';
 import 'package:pingo/widgets/design_icon.dart';
-import 'package:pingo/widgets/design_shimmer_widget.dart';
 import 'package:pingo/widgets/design_space.dart';
 import 'package:pingo/widgets/shimmers/shimmer_product_item.dart';
 
