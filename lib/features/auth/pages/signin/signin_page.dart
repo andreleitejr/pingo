@@ -5,6 +5,7 @@ import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/auth/pages/signup/signup_page.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/pages/signin/sigin_controller.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
@@ -33,10 +34,13 @@ class _SignInPageState extends State<SignInPage> implements SignInNavigator {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(DesignSize.appBarHeight),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
         child: SafeArea(
-          child: DesignAppBar(title: 'Sign In'),
+          child: DesignAppBar(
+            title: 'Sign In',
+            onLeadingPressed: () => Get.to(() => const SignUpPage()),
+          ),
         ),
       ),
       body: Padding(
@@ -90,12 +94,12 @@ class _SignInPageState extends State<SignInPage> implements SignInNavigator {
 
   @override
   void success() {
-    Get.to(const BasePage());
+    Get.to(()=>const BasePage());
   }
 
   @override
   void userNotFoundInDatabase() {
-    Get.to(const SignUpInfoPage());
+    Get.to(()=>const SignUpInfoPage());
   }
 
   @override

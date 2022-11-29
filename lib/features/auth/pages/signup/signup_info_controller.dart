@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
-import 'package:pingo/models/gender.dart';
-import 'package:pingo/models/orientation.dart';
+import 'package:pingo/features/profile/models/gender.dart';
+import 'package:pingo/features/profile/models/sexual_orientation.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 

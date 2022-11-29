@@ -5,10 +5,9 @@ import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_controller.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
-import 'package:pingo/features/auth/pages/signup/signup_controller.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
-import 'package:pingo/models/gender.dart';
-import 'package:pingo/models/orientation.dart';
+import 'package:pingo/features/profile/models/gender.dart';
+import 'package:pingo/features/profile/models/sexual_orientation.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_date_input.dart';
@@ -132,11 +131,11 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
 
   @override
   void error(AuthResult result) => Get.snackbar(
-    result.title,
-    result.message,
-    backgroundColor: DesignColor.primary500,
-    colorText: Colors.white,
-  );
+        result.title,
+        result.message,
+        backgroundColor: DesignColor.primary500,
+        colorText: Colors.white,
+      );
 }
 
 abstract class SignUpInfoNavigator {

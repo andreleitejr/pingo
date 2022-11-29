@@ -182,7 +182,7 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
   }
 
   @override
-  void success() => Get.to(const SignUpInfoPage());
+  void success() => Get.to(() => const SignUpInfoPage());
 
   @override
   void error(AuthResult result) => Get.snackbar(
