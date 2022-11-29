@@ -114,21 +114,31 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
             ),
             const DesignSpace(),
             Obx(
-              () => DesignTextInput(
-                textEditingController: controller.stateController.value,
-                hint: 'State',
-                onChanged: controller.setProvince,
-                isValid: controller.provinceValid,
-              ),
+              () {
+                return DesignSelectionInput<Province>(
+                  items: controller.provinces,
+                  value: controller.provinces.firstWhereOrNull(
+                    (province) => province.name == controller.province.value,
+                  ),
+                  hint: 'Province',
+                  onChanged: controller.setProvince,
+                  isValid: controller.provinceValid,
+                );
+              },
             ),
             const DesignSpace(),
             Obx(
-              () => DesignTextInput(
-                textEditingController: controller.cityController.value,
-                hint: 'City',
-                onChanged: controller.setCity,
-                isValid: controller.cityValid,
-              ),
+              () {
+                return DesignSelectionInput<City>(
+                  items: controller.cities,
+                  value: controller.cities.firstWhereOrNull(
+                    (city) => city.name == controller.city.value,
+                  ),
+                  hint: 'City',
+                  onChanged: controller.setCity,
+                  isValid: controller.countryValid,
+                );
+              },
             ),
             const DesignSpace(),
             Obx(

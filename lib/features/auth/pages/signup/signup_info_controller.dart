@@ -28,8 +28,6 @@ class SignUpInfoController extends GetxController {
     _getCountries();
   }
 
-  late List<Country> originalCountries;
-
   Future<void> _getCountries() async {
     try {
       final response = await Dio().get(APIs.countries);
@@ -37,13 +35,10 @@ class SignUpInfoController extends GetxController {
       final decodedData = json.decode(response.data) as List;
 
       final c = decodedData.map((data) => Country.fromJson(data)).toList();
-      print(countries.length);
-      countries(c);
-      originalCountries = countries;
 
-      print(countries.length);
+      countries(c);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
@@ -72,6 +67,8 @@ class SignUpInfoController extends GetxController {
   }
 
   var countries = <Country>[].obs;
+  var provinces = <Province>[].obs;
+  var cities = <City>[].obs;
 
   Future<void> _getUser() async {
     final currentUser = await repository.currentUser();
@@ -105,11 +102,25 @@ class SignUpInfoController extends GetxController {
   void setSexualOrientation(SexualOrientation? v) =>
       sexualOrientation(v?.title);
 
-  void setCountry(Country? v) => country(v?.text);
+  void setCountry(Country? v) {
+    country(v?.text);
 
-  void setProvince(String? v) => province(v);
+    setProvince(v?.states.first);
 
-  void setCity(String? v) => city(v);
+    provinces(v?.states);
+
+    setCity(v?.states.first.cities.first);
+  }
+
+  void setProvince(Province? v) {
+    province(v?.name);
+
+    city(v?.cities.first.name);
+
+    cities(v?.cities);
+  }
+
+  void setCity(City? v) => city(v?.name);
 
   bool get nameValid => name.value.length >= 6;
 
