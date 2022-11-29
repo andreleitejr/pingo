@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pingo/features/auth/pages/landing/landing_controller.dart';
+import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
 import 'package:pingo/features/auth/pages/signup/signup_page.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
@@ -15,8 +16,7 @@ class LandingPage extends StatefulWidget {
   State<LandingPage> createState() => _LandingPageState();
 }
 
-class _LandingPageState extends State<LandingPage>
-    implements LandingNavigator {
+class _LandingPageState extends State<LandingPage> implements LandingNavigator {
   late LandingController controller;
   late RiveAnimationController animationController;
 
@@ -55,7 +55,10 @@ class _LandingPageState extends State<LandingPage>
   void loggedOut() => Get.to(() => const SignUpPage());
 
   @override
-  void loggedWithoutInfo() => Get.to(() => ProfileKeywordsSelection());
+  void loggedWithoutUser() => Get.to(() => const SignUpInfoPage());
+
+  @override
+  void loggedWithoutKeyword() => Get.to(() => ProfileKeywordsSelection());
 }
 
 abstract class LandingNavigator {
@@ -63,5 +66,7 @@ abstract class LandingNavigator {
 
   void loggedOut();
 
-  void loggedWithoutInfo();
+  void loggedWithoutUser();
+
+  void loggedWithoutKeyword();
 }

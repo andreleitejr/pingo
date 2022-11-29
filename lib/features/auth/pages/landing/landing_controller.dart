@@ -33,12 +33,14 @@ class LandingController extends GetxController {
 
     if (authUser == null) {
       navigator.loggedOut();
+    } else if (userNotFound) {
+      navigator.loggedWithoutUser();
+    } else if (userWithoutKeywords) {
+      registerUser();
+      navigator.loggedWithoutKeyword();
     } else if (userValid) {
       registerUser();
       navigator.logged();
-    } else {
-      registerUser();
-      navigator.loggedWithoutInfo();
     }
   }
 
@@ -46,13 +48,19 @@ class LandingController extends GetxController {
 
   User? get user => users.value.firstWhereOrNull((user) => user.uuid == authId);
 
-  bool get userValid => user != null && user!.keywords.isNotEmpty;
+  bool get userNotFound => user == null;
+
+  bool get userWithoutKeywords => !userNotFound && user!.keywords.isEmpty;
+
+  bool get userValid => !userNotFound && user!.keywords.isNotEmpty;
 
   void registerUser() {
-    if (user != null) {
-      Get.put(user!);
-      isAdmin = user?.email == 'paulo@rockdssd.com';
-      if (isAdmin) debugPrint('System Message | Admin successful configured.');
-    }
+    Get.put(user!);
+    _verifyAdmin();
+  }
+
+  void _verifyAdmin() {
+    isAdmin = user?.email == 'paulo@rockdssd.com';
+    if (isAdmin) debugPrint('System Message | Admin successful configured.');
   }
 }

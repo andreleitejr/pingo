@@ -88,7 +88,7 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
             const DesignSpace(size: DesignSize.smallSpace),
             Obx(
               () => DesignButton(
-                onPressed: () =>  controller.signUp(),
+                onPressed: () => controller.signUpWithEmailAndPassword(),
                 title: 'Sign Up',
                 isActive: controller.isAuthFormValid,
               ),
@@ -182,17 +182,19 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
   }
 
   @override
-  void error(AuthResult result) {
-    Get.snackbar(
-      result.title,
-      result.message,
-      backgroundColor: DesignColor.primary500,
-      colorText: Colors.white,
-    );
-  }
+  void success() => Get.to(const SignUpInfoPage());
 
   @override
-  void success() {
-    Get.to(const SignUpInfoPage());
-  }
+  void error(AuthResult result) => Get.snackbar(
+        result.title,
+        result.message,
+        backgroundColor: DesignColor.primary500,
+        colorText: Colors.white,
+      );
+}
+
+abstract class SignUpNavigator {
+  void success();
+
+  void error(AuthResult result);
 }

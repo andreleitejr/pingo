@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/auth/pages/signup/signup_info_controller.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/pages/signup/signup_controller.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
@@ -23,12 +24,12 @@ class SignUpInfoPage extends StatefulWidget {
 }
 
 class _SignUpInfoPageState extends State<SignUpInfoPage>
-    implements SignUpNavigator {
-  late SignUpController controller;
+    implements SignUpInfoNavigator {
+  late SignUpInfoController controller;
 
   @override
   void initState() {
-    controller = Get.put(SignUpController(this));
+    controller = Get.put(SignUpInfoController(this));
     super.initState();
   }
 
@@ -48,7 +49,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
           children: [
             Obx(
               () => DesignTextInput(
-                initialValue: controller.name.value,
+                textEditingController: controller.nameController.value,
                 hint: 'Name',
                 onChanged: controller.setName,
                 isValid: controller.nameValid,
@@ -57,10 +58,8 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
             const DesignSpace(),
             Obx(
               () => DesignTextInput(
-                initialValue: controller.email.value,
+                textEditingController: controller.emailController.value,
                 hint: 'E-mail',
-                onChanged: controller.setEmail,
-                isValid: controller.emailValid,
               ),
             ),
             const DesignSpace(),
@@ -117,7 +116,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
             const DesignSpace(),
             Obx(
               () => DesignButton(
-                onPressed: () async => controller.signUpWithEmailAndPassword(),
+                onPressed: () async => controller.save(),
                 title: 'Sign In',
                 isActive: controller.isInfoFormValid,
               ),
@@ -129,22 +128,18 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
   }
 
   @override
-  void success() {
-    Get.to(() => ProfileKeywordsSelection());
-  }
+  void success() => Get.to(() => ProfileKeywordsSelection());
 
   @override
-  void error(AuthResult result) {
-    Get.snackbar(
-      result.title,
-      result.message,
-      backgroundColor: DesignColor.primary500,
-      colorText: Colors.white,
-    );
-  }
+  void error(AuthResult result) => Get.snackbar(
+    result.title,
+    result.message,
+    backgroundColor: DesignColor.primary500,
+    colorText: Colors.white,
+  );
 }
 
-abstract class SignUpNavigator {
+abstract class SignUpInfoNavigator {
   void success();
 
   void error(AuthResult result);

@@ -8,9 +8,9 @@ class ProfileKeywordsController extends GetxController {
   final repository = UserRepository();
   final PageViewController pageView = Get.put(PageViewController());
 
-  var keywords = <KeywordData>[].obs;
+  var keywords = <Keyword>[].obs;
 
-  void toggleKeyword(KeywordData v) {
+  void toggleKeyword(Keyword v) {
     if (!keywords.contains(v)) {
       keywords.add(v);
     } else {
@@ -23,7 +23,7 @@ class ProfileKeywordsController extends GetxController {
   final int minMusicsSelected = 1;
   final int minMiscellaneousSelected = 5;
 
-  bool quantityValid(List<KeywordData> items, int expectedQuantity) {
+  bool quantityValid(List<Keyword> items, int expectedQuantity) {
     return items.toSet().intersection(keywords.toSet()).length >=
         expectedQuantity;
   }

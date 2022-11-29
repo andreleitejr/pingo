@@ -55,7 +55,7 @@ abstract class Base extends DataBase {
     return (i / ratings.length) / 2;
   }
 
-  List<KeywordData> get keywordData => allKeywords
+  List<Keyword> get keywordData => allKeywords
       .where((keywordData) => keywords.contains(keywordData.id))
       .toList();
 }

@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
 import 'package:pingo/constants/design_emojis.dart';
+import 'package:pingo/constants/keywords.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/models/base.dart';
 import 'package:pingo/models/category.dart';
 import 'package:pingo/models/user.dart';
 
-final all = Category(Keyword.all, 'All', DesignEmojis.all);
+final all = Category(Keywords.all, 'All', DesignEmojis.all);
 
 enum CategoryType { general, places, events, products }
 
@@ -34,7 +35,7 @@ class CategoryController extends GetxController {
   List<Category> get(CategoryType type) {
     final categories = <Category>[];
 
-    var list = <KeywordData>[];
+    var list = <Keyword>[];
 
     if (type == CategoryType.places) {
       list = places;
@@ -59,37 +60,37 @@ class CategoryController extends GetxController {
     return categories;
   }
 
-  List<KeywordData> get general {
-    final list = <KeywordData>[];
+  List<Keyword> get general {
+    final list = <Keyword>[];
     list.addAll(places);
 
     final events =
-        allKeywords.firstWhere((keyword) => keyword.id == Keyword.event);
+        allKeywords.firstWhere((keyword) => keyword.id == Keywords.event);
     list.insert(2, events);
 
     final products =
-        allKeywords.firstWhere((keyword) => keyword.id == Keyword.product);
+        allKeywords.firstWhere((keyword) => keyword.id == Keywords.product);
     list.insert(3, products);
 
     return list;
   }
 
-  List<KeywordData> get places {
+  List<Keyword> get places {
     final list = placesKeywords
         .where((keyword) => user.keywords.contains(keyword.id))
         .toList();
 
-    if (user.keywords.contains(Keyword.fastFood)) {
+    if (user.keywords.contains(Keywords.fastFood)) {
       final fastFood =
-          allKeywords.firstWhere((keyword) => keyword.id == Keyword.fastFood);
+          allKeywords.firstWhere((keyword) => keyword.id == Keywords.fastFood);
       list.add(fastFood);
     }
 
     final fashion =
-        allKeywords.firstWhere((keyword) => keyword.id == Keyword.fashion);
+        allKeywords.firstWhere((keyword) => keyword.id == Keywords.fashion);
 
     final util =
-        allKeywords.firstWhere((keyword) => keyword.id == Keyword.util);
+        allKeywords.firstWhere((keyword) => keyword.id == Keywords.util);
 
     list.add(fashion);
 
@@ -98,24 +99,24 @@ class CategoryController extends GetxController {
     return list;
   }
 
-  List<KeywordData> get events {
-    var list = <KeywordData>[];
+  List<Keyword> get events {
+    var list = <Keyword>[];
 
-    if (user.keywords.contains(Keyword.children)) {
+    if (user.keywords.contains(Keywords.children)) {
       final children =
-          allKeywords.firstWhere((keyword) => keyword.id == Keyword.children);
+          allKeywords.firstWhere((keyword) => keyword.id == Keywords.children);
       list.add(children);
     }
 
-    if (user.keywords.contains(Keyword.party)) {
+    if (user.keywords.contains(Keywords.party)) {
       final party =
-          allKeywords.firstWhere((keyword) => keyword.id == Keyword.party);
+          allKeywords.firstWhere((keyword) => keyword.id == Keywords.party);
       list.add(party);
     }
 
-    if (user.keywords.contains(Keyword.concert)) {
+    if (user.keywords.contains(Keywords.concert)) {
       final concert =
-          allKeywords.firstWhere((keyword) => keyword.id == Keyword.concert);
+          allKeywords.firstWhere((keyword) => keyword.id == Keywords.concert);
       list.add(concert);
     }
 
@@ -123,64 +124,64 @@ class CategoryController extends GetxController {
         musics.where((keyword) => user.keywords.contains(keyword.id)).toList());
 
     final free =
-        allKeywords.firstWhere((keyword) => keyword.id == Keyword.free);
+        allKeywords.firstWhere((keyword) => keyword.id == Keywords.free);
 
     list.insert(1, free);
     final open =
-        allKeywords.firstWhere((keyword) => keyword.id == Keyword.open);
+        allKeywords.firstWhere((keyword) => keyword.id == Keywords.open);
 
     list.insert(2, open);
 
     return list;
   }
 
-  List<KeywordData> get products {
-    var list = <KeywordData>[];
+  List<Keyword> get products {
+    var list = <Keyword>[];
 
-    if (user.keywords.contains(Keyword.children)) {
-      final children = allKeywords.firstWhere((k) => k.id == Keyword.children);
+    if (user.keywords.contains(Keywords.children)) {
+      final children = allKeywords.firstWhere((k) => k.id == Keywords.children);
       list.add(children);
     }
-    if (user.keywords.contains(Keyword.pet)) {
+    if (user.keywords.contains(Keywords.pet)) {
       final pet =
-          allKeywords.firstWhere((keyword) => keyword.id == Keyword.pet);
+          allKeywords.firstWhere((keyword) => keyword.id == Keywords.pet);
       list.add(pet);
     }
 
-    if (user.keywords.contains(Keyword.beer)) {
+    if (user.keywords.contains(Keywords.beer)) {
       final beer =
-          allKeywords.firstWhere((keyword) => keyword.id == Keyword.beer);
+          allKeywords.firstWhere((keyword) => keyword.id == Keywords.beer);
       list.add(beer);
     }
 
-    if (user.keywords.contains(Keyword.drinks) ||
-        user.keywords.contains(Keyword.gin)) {
+    if (user.keywords.contains(Keywords.drinks) ||
+        user.keywords.contains(Keywords.gin)) {
       final drinks =
-          allKeywords.firstWhere((keyword) => keyword.id == Keyword.drinks);
+          allKeywords.firstWhere((keyword) => keyword.id == Keywords.drinks);
       list.add(drinks);
     }
 
     final promo =
-        allKeywords.firstWhere((keyword) => keyword.id == Keyword.promo);
+        allKeywords.firstWhere((keyword) => keyword.id == Keywords.promo);
 
     list.addAll(
         foods.where((keyword) => user.keywords.contains(keyword.id)).toList());
 
-    if (user.keywords.contains(Keyword.skate)) {
+    if (user.keywords.contains(Keywords.skate)) {
       final skate =
-          allKeywords.firstWhere((keyword) => keyword.id == Keyword.skate);
+          allKeywords.firstWhere((keyword) => keyword.id == Keywords.skate);
       list.add(skate);
     }
 
-    if (user.keywords.contains(Keyword.rollerblades)) {
+    if (user.keywords.contains(Keywords.rollerblades)) {
       final rollerblades = allKeywords
-          .firstWhere((keyword) => keyword.id == Keyword.rollerblades);
+          .firstWhere((keyword) => keyword.id == Keywords.rollerblades);
       list.add(rollerblades);
     }
 
-    if (user.keywords.contains(Keyword.bike)) {
+    if (user.keywords.contains(Keywords.bike)) {
       final bike =
-          allKeywords.firstWhere((keyword) => keyword.id == Keyword.bike);
+          allKeywords.firstWhere((keyword) => keyword.id == Keywords.bike);
       list.add(bike);
     }
 
@@ -191,33 +192,33 @@ class CategoryController extends GetxController {
 
   String getEmoji(int keyword) {
     switch (keyword) {
-      case Keyword.restaurant:
+      case Keywords.restaurant:
         return DesignEmojis.restaurant;
-      case Keyword.pub:
+      case Keywords.pub:
         return DesignEmojis.pub;
-      case Keyword.event:
+      case Keywords.event:
         return DesignEmojis.eventWoman;
-      case Keyword.product:
+      case Keywords.product:
         return DesignEmojis.product;
-      case Keyword.fastFood:
+      case Keywords.fastFood:
         return DesignEmojis.fastFood;
-      case Keyword.shopping:
+      case Keywords.shopping:
         return DesignEmojis.shopping;
-      case Keyword.fashion:
+      case Keywords.fashion:
         return DesignEmojis.shopping;
-      case Keyword.theater:
+      case Keywords.theater:
         return DesignEmojis.theater;
-      case Keyword.museum:
+      case Keywords.museum:
         return DesignEmojis.museum;
-      case Keyword.historical:
+      case Keywords.historical:
         return DesignEmojis.historical;
-      case Keyword.util:
+      case Keywords.util:
         return DesignEmojis.utils;
-      case Keyword.children:
+      case Keywords.children:
         return DesignEmojis.children;
-      case Keyword.pet:
+      case Keywords.pet:
         return DesignEmojis.pet;
-      case Keyword.concert:
+      case Keywords.concert:
         return DesignEmojis.concert;
       default:
         return DesignEmojis.all;

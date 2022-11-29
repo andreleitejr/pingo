@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pingo/constants/design_images.dart';
-import 'package:pingo/core/keyword.dart';
+import 'package:pingo/constants/keywords.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/models/buyable.dart';
 import 'package:pingo/services/blurhash_controller.dart';
@@ -41,8 +41,8 @@ List<Product> products = [
       blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
     ),
     keywords: [
-      Keyword.drinks,
-      Keyword.beer,
+      Keywords.drinks,
+      Keywords.beer,
     ],
     price: 4.90,
     promotionalPrice: 2.90,
@@ -56,8 +56,8 @@ List<Product> products = [
       blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
     ),
     keywords: [
-      Keyword.museum,
-      Keyword.ticket,
+      Keywords.museum,
+      Keywords.ticket,
     ],
     price: 14.90,
     promotionalPrice: 9.90,
@@ -71,7 +71,7 @@ List<Product> products = [
       blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
     ),
     keywords: [
-      Keyword.pizza,
+      Keywords.pizza,
     ],
     price: 49.90,
     promotionalPrice: 34.90,
@@ -85,7 +85,7 @@ List<Product> products = [
       blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
     ),
     keywords: [
-      Keyword.burger,
+      Keywords.burger,
     ],
     price: 39.90,
     promotionalPrice: 29.90,
@@ -99,7 +99,7 @@ List<Product> products = [
       blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
     ),
     keywords: [
-      Keyword.brazilian,
+      Keywords.brazilian,
     ],
     price: 19.90,
     promotionalPrice: 14.90,
@@ -113,7 +113,7 @@ List<Product> products = [
       blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
     ),
     keywords: [
-      Keyword.italian,
+      Keywords.italian,
     ],
     price: 59.90,
     promotionalPrice: 44.90,
@@ -127,7 +127,7 @@ List<Product> products = [
       blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
     ),
     keywords: [
-      Keyword.chinese,
+      Keywords.chinese,
     ],
     price: 29.90,
     promotionalPrice: 20.90,
@@ -141,7 +141,7 @@ List<Product> products = [
       blurHash: 'LEHLk~WB2yk8pyo0adR*.7kCMdnj',
     ),
     keywords: [
-      Keyword.skate,
+      Keywords.skate,
     ],
     price: 79.90,
     promotionalPrice: 49.90,

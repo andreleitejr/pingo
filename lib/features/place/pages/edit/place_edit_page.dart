@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/constants/keywords.dart';
 import 'package:pingo/core/keyword.dart';
 import 'package:pingo/features/place/pages/edit/place_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
@@ -188,7 +189,7 @@ class PlaceEditPage extends StatelessWidget {
             ),
             const DesignSpace(),
             Obx(() {
-              if (controller.keywords.contains(Keyword.restaurant)) {
+              if (controller.keywords.contains(Keywords.restaurant)) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

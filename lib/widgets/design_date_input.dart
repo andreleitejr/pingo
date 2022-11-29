@@ -48,7 +48,9 @@ class _DesignDateInputState extends State<DesignDateInput> {
             Expanded(
               child: Text(
                 widget.value?.yMMMMd ?? widget.hint,
-                style: DesignTextStyle.bodySmall12.apply(
+                style:  widget.value != null ? DesignTextStyle.bodySmall12Bold.apply(
+                  color: DesignColor.text400,
+                ) : DesignTextStyle.bodySmall12.apply(
                   color: DesignColor.text300,
                 ),
               ),

@@ -79,7 +79,7 @@ class DesignKeywordSelection extends StatefulWidget {
   final bool showSearch;
   final String? searchHint;
   final bool masonryStyle;
-  final List<KeywordData> list;
+  final List<Keyword> list;
   final List<int>? selectedList;
   final Function(int)? onItemTapped;
   final int minimumQuantity;
