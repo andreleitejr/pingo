@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pingo/constants/apis.dart';
+import 'package:pingo/constants/keys.dart';
 import 'package:pingo/constants/design_animations.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:weather/weather.dart';
@@ -7,7 +7,7 @@ import 'package:weather/weather.dart';
 class CurrentWeather {
   final CurrentLocation currentLocation = Get.find();
   final _weatherFactory = WeatherFactory(
-    APIs.weather,
+    APIKeys.weather,
     language: Language.PORTUGUESE_BRAZIL,
   );
 

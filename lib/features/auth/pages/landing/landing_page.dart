@@ -52,7 +52,7 @@ class _LandingPageState extends State<LandingPage> implements LandingNavigator {
   void logged() => Get.to(() => const BasePage());
 
   @override
-  void loggedOut() => Get.to(() => const SignUpPage());
+  void loggedOut() => Get.to(() => const SignUpInfoPage());
 
   @override
   void loggedWithoutUser() => Get.to(() => const SignUpInfoPage());

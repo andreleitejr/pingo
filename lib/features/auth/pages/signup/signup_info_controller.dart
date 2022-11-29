@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/apis.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/auth/models/city.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
 import 'package:pingo/features/profile/models/gender.dart';
 import 'package:pingo/features/profile/models/sexual_orientation.dart';
@@ -17,7 +22,30 @@ class SignUpInfoController extends GetxController {
   @override
   Future<void> onReady() async {
     _getUser();
+    _getCountries();
   }
+
+  Future<void> _getCountries() async {
+    try {
+      final response = await Dio().get(APIs.countries);
+
+      final decodedData = json.decode(response.data) as List;
+
+      try {
+        final c = decodedData.map((data) => Country.fromJson(data)).toList();
+        print(countries.length);
+        countries(c);
+        print(countries.length);
+
+      } catch (e) {
+        print('HUSDAHASDUHADSUDAHUHADSU $e');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  var countries = <Country>[].obs;
 
   Future<void> _getUser() async {
     final currentUser = await repository.currentUser();

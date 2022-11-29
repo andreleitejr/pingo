@@ -8,6 +8,7 @@ import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
 import 'package:pingo/features/profile/models/gender.dart';
 import 'package:pingo/features/profile/models/sexual_orientation.dart';
+import 'package:pingo/widgets/design_address_selection.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_date_input.dart';
@@ -97,6 +98,16 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
               ),
             ),
             const DesignSpace(),
+            Obx(() {
+              return DesignAddressSelection(
+                country: controller.country.value,
+                onCountryChanged: controller.setCountry,
+                state: controller.state.value,
+                onStateChanged: controller.setState,
+                city: controller.city.value,
+                onCityChanged: controller.setCity,
+              );
+            }),
             Obx(
               () => DesignTextInput(
                 hint: 'Country',
