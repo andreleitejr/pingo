@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 import 'package:pingo/constants/apis.dart';
 import 'package:pingo/core/extensions.dart';
@@ -23,6 +24,7 @@ class SignUpInfoController extends GetxController {
   Future<void> onReady() async {
     _getUser();
     _getCountries();
+    await _getBrazil();
   }
 
   Future<void> _getCountries() async {
@@ -31,17 +33,35 @@ class SignUpInfoController extends GetxController {
 
       final decodedData = json.decode(response.data) as List;
 
-      try {
-        final c = decodedData.map((data) => Country.fromJson(data)).toList();
-        print(countries.length);
-        countries(c);
-        print(countries.length);
-
-      } catch (e) {
-        print('HUSDAHASDUHADSUDAHUHADSU $e');
-      }
+      final c = decodedData.map((data) => Country.fromJson(data)).toList();
+      print(countries.length);
+      countries(c);
+      print(countries.length);
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> _getBrazil() async {
+    try {
+      final json = await rootBundle
+          .loadString(APIs.brazil)
+          .then((jsonStr) => jsonDecode(jsonStr));
+
+      final c = Country.fromJson(json);
+
+      country(c.name);
+      countryController.value.text = country.value;
+
+      final p = c.states.firstWhere((state) => state.id == Province.saoPaulo);
+      province(p.name);
+      stateController.value.text = province.value;
+
+      final ct = p.cities.firstWhere((city) => city.id == City.saoPaulo);
+      city(ct.name);
+      cityController.value.text = city.value;
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 
@@ -57,6 +77,9 @@ class SignUpInfoController extends GetxController {
 
   final nameController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
+  final countryController = TextEditingController().obs;
+  final stateController = TextEditingController().obs;
+  final cityController = TextEditingController().obs;
 
   final name = ''.obs;
   final email = ''.obs;
@@ -64,7 +87,7 @@ class SignUpInfoController extends GetxController {
   final gender = ''.obs;
   final sexualOrientation = ''.obs;
   final country = ''.obs;
-  final state = ''.obs;
+  final province = ''.obs;
   final city = ''.obs;
 
   void setName(String v) => name(v);
@@ -78,7 +101,7 @@ class SignUpInfoController extends GetxController {
 
   void setCountry(String v) => country(v);
 
-  void setState(String? v) => state(v);
+  void setProvince(String? v) => province(v);
 
   void setCity(String? v) => city(v);
 
@@ -93,7 +116,7 @@ class SignUpInfoController extends GetxController {
 
   bool get countryValid => country.isNotEmpty;
 
-  bool get stateValid => state.isNotEmpty;
+  bool get provinceValid => province.isNotEmpty;
 
   bool get cityValid => city.isNotEmpty;
 
@@ -108,7 +131,7 @@ class SignUpInfoController extends GetxController {
         gender: gender.value,
         sexualOrientation: sexualOrientation.value,
         country: country.value,
-        state: state.value,
+        province: province.value,
         city: city.value,
         agreed: true,
         keywords: [],

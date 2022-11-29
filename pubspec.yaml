@@ -62,7 +62,6 @@ dependencies:
   shimmer: ^2.0.0
   internet_connection_checker: ^0.0.1+4
   app_settings: ^4.1.8
-  country_state_city_picker: ^1.2.8
   dio: ^4.0.6
 
 dev_dependencies:
@@ -101,6 +100,7 @@ flutter:
     - assets/animations/
     - assets/icons/
     - assets/keywords/
+    - assets/country/
     - assets/logo/
     - assets/weather/
     - assets/map/style.txt

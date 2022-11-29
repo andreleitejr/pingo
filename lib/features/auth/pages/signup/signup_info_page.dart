@@ -98,18 +98,9 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
               ),
             ),
             const DesignSpace(),
-            Obx(() {
-              return DesignAddressSelection(
-                country: controller.country.value,
-                onCountryChanged: controller.setCountry,
-                state: controller.state.value,
-                onStateChanged: controller.setState,
-                city: controller.city.value,
-                onCityChanged: controller.setCity,
-              );
-            }),
             Obx(
               () => DesignTextInput(
+                textEditingController: controller.countryController.value,
                 hint: 'Country',
                 onChanged: controller.setCountry,
                 isValid: controller.countryValid,
@@ -118,6 +109,16 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
             const DesignSpace(),
             Obx(
               () => DesignTextInput(
+                textEditingController: controller.stateController.value,
+                hint: 'State',
+                onChanged: controller.setProvince,
+                isValid: controller.provinceValid,
+              ),
+            ),
+            const DesignSpace(),
+            Obx(
+              () => DesignTextInput(
+                textEditingController: controller.cityController.value,
                 hint: 'City',
                 onChanged: controller.setCity,
                 isValid: controller.cityValid,

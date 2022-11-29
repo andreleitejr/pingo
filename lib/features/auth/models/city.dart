@@ -19,7 +19,7 @@ class Country {
   final double longitude;
   final String emoji;
   final String emojiU;
-  final List<State> states;
+  final List<Province> states;
 
   Country({
     required this.id,
@@ -67,7 +67,7 @@ class Country {
         emoji: json['emoji'] as String? ?? '',
         emojiU: json['emojiU'] as String? ?? '',
         states: (json['states'] as List)
-            .map((data) => State.fromJson(data))
+            .map((data) => Province.fromJson(data))
             .toList(),
       );
 
@@ -92,9 +92,11 @@ class Country {
 //       'emoji': emoji,
 //       'emojiU': emojiU,
 //     };
+
+  static const brazil = 31;
 }
 
-class State {
+class Province {
   final int id;
   final String name;
   final String stateCode;
@@ -103,7 +105,7 @@ class State {
   final String? type;
   final List<City> cities;
 
-  State({
+  Province({
     required this.id,
     required this.name,
     required this.stateCode,
@@ -113,7 +115,7 @@ class State {
     required this.cities,
   });
 
-  factory State.fromJson(Map<String, dynamic> json) => State(
+  factory Province.fromJson(Map<String, dynamic> json) => Province(
         id: json['id'] as int,
         name: json['name'] as String? ?? '',
         stateCode: json['stateCode'] as String? ?? '',
@@ -124,6 +126,8 @@ class State {
             .map((data) => City.fromJson(data))
             .toList(),
       );
+
+  static const saoPaulo = 2021;
 }
 
 class City {
@@ -144,6 +148,8 @@ class City {
         latitude: double.tryParse(json['latitude'] as String) ?? 0,
         longitude: double.tryParse(json['longitude'] as String) ?? 0,
       );
+
+  static const saoPaulo = 15101;
 }
 
 class TimeZone {
