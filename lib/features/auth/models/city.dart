@@ -1,4 +1,6 @@
-class Country {
+import 'package:pingo/models/selectable.dart';
+
+class Country extends Selectable {
   final int id;
   final String name;
   final String iso3;
@@ -71,6 +73,13 @@ class Country {
             .toList(),
       );
 
+  @override
+  bool get enabled => true;
+
+  @override
+  String get text => name;
+
+
 // Map<String, dynamic> toJson() => {
 //       'id': id,
 //       'name': name,
@@ -96,7 +105,7 @@ class Country {
   static const brazil = 31;
 }
 
-class Province {
+class Province extends Selectable {
   final int id;
   final String name;
   final String stateCode;
@@ -128,9 +137,15 @@ class Province {
       );
 
   static const saoPaulo = 2021;
+
+  @override
+  bool get enabled => true;
+
+  @override
+  String get text => name;
 }
 
-class City {
+class City extends Selectable {
   final int id;
   final String name;
   final double latitude;
@@ -150,6 +165,12 @@ class City {
       );
 
   static const saoPaulo = 15101;
+
+  @override
+  bool get enabled => true;
+
+  @override
+  String get text => name;
 }
 
 class TimeZone {

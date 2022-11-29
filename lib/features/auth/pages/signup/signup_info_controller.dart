@@ -8,6 +8,7 @@ import 'package:pingo/constants/apis.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/models/city.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
+import 'package:pingo/features/home/components/search/search_controller.dart';
 import 'package:pingo/features/profile/models/gender.dart';
 import 'package:pingo/features/profile/models/sexual_orientation.dart';
 import 'package:pingo/models/user.dart';
@@ -23,9 +24,11 @@ class SignUpInfoController extends GetxController {
   @override
   Future<void> onReady() async {
     _getUser();
-    _getCountries();
     await _getBrazil();
+    _getCountries();
   }
+
+  late List<Country> originalCountries;
 
   Future<void> _getCountries() async {
     try {
@@ -36,6 +39,8 @@ class SignUpInfoController extends GetxController {
       final c = decodedData.map((data) => Country.fromJson(data)).toList();
       print(countries.length);
       countries(c);
+      originalCountries = countries;
+
       print(countries.length);
     } catch (e) {
       print(e);
@@ -50,6 +55,7 @@ class SignUpInfoController extends GetxController {
 
       final c = Country.fromJson(json);
 
+      countries.add(c);
       country(c.name);
       countryController.value.text = country.value;
 
@@ -94,12 +100,12 @@ class SignUpInfoController extends GetxController {
 
   void setBirthday(DateTime v) => birthday(v);
 
-  void setGender(Gender? v) => gender(v?.title);
+  void setGender(Gender? v) => gender(v?.text);
 
   void setSexualOrientation(SexualOrientation? v) =>
       sexualOrientation(v?.title);
 
-  void setCountry(String v) => country(v);
+  void setCountry(Country? v) => country(v?.text);
 
   void setProvince(String? v) => province(v);
 

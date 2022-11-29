@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
+import 'package:pingo/features/auth/models/city.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_controller.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
@@ -99,12 +100,17 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
             ),
             const DesignSpace(),
             Obx(
-              () => DesignTextInput(
-                textEditingController: controller.countryController.value,
-                hint: 'Country',
-                onChanged: controller.setCountry,
-                isValid: controller.countryValid,
-              ),
+              () {
+                return DesignSelectionInput<Country>(
+                  items: controller.countries,
+                  value: controller.countries.firstWhereOrNull(
+                    (country) => country.name == controller.country.value,
+                  ),
+                  hint: 'Country',
+                  onChanged: controller.setCountry,
+                  isValid: controller.countryValid,
+                );
+              },
             ),
             const DesignSpace(),
             Obx(
