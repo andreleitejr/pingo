@@ -65,98 +65,115 @@ class _DesignSelectionDialogState<T extends Selectable?>
       backgroundColor: Colors.transparent,
       context: context,
       isScrollControlled: true,
-      builder: (_) => Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            margin: const EdgeInsets.fromLTRB(16, 16, 16, 6),
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(16)),
-            child: Column(
-              children: [
-                if (widget.showSearch)...[
-
-                  const DesignSpace(size: DesignSize.smallSpace,),
-                  DesignSearchInput(
-                    hint: 'Search',
-                    onChanged: controller.setSearch,
-                  ),
-                ],
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxHeight: MediaQuery.of(context).size.height * 0.8),
-                  child: Obx(
-                    () {
-                      List<T> list = widget.items;
-                      if (controller.search.value.isNotEmpty) {
-                        list = list
-                            .where((t) =>
-                                t != null &&
-                                t.text.clean
-                                    .contains(controller.search.value.clean))
-                            .toList();
-                      }
-                      return ListView.builder(
-                        itemCount: list.length,
-                        shrinkWrap: true,
-                        physics: const ScrollPhysics(),
-                        itemBuilder: (context, i) {
-                          return Column(
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop(list[i]);
-                                },
-                                child: Text(
-                                  list[i]?.text ?? 'Nao encontrado',
-                                  style: DesignTextStyle.bodySmall12Bold
-                                      .apply(color: DesignColor.text400),
-                                ),
-                              ),
-                              if (list[i] != list.last)
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Container(
-                                    color: DesignColor.text200.withOpacity(0.2),
-                                    height: 0.75,
-                                    width: double.infinity,
-                                  ),
-                                ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.9,
+      ),
+      builder: (_) => Scaffold(
+        backgroundColor: Colors.black.withOpacity(0),
+        body:Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            widget.showSearch
+                ? Expanded(
+              child: itemList(),
+            )
+                : itemList(),
+            Container(
+              margin: const EdgeInsets.fromLTRB(16, 6, 16, 16),
+              width: double.infinity,
+              alignment: Alignment.center,
+              height: 42,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'Cancelar',
+                  style: DesignTextStyle.bodySmall12Bold
+                      .apply(color: DesignColor.red),
                 ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(16, 6, 16, 16),
-            width: double.infinity,
-            alignment: Alignment.center,
-            height: 42,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(16)),
-            child: TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                'Cancelar',
-                style: DesignTextStyle.bodySmall12Bold
-                    .apply(color: DesignColor.red),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
     if (result != null) widget.onChanged(result);
+  }
+
+  Widget itemList() {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.fromLTRB(16, 16, 16, 6),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
+      child: Column(
+        children: [
+          if (widget.showSearch) ...[
+            const DesignSpace(
+              size: DesignSize.smallSpace,
+            ),
+            DesignSearchInput(
+              hint: 'Search',
+              onChanged: controller.setSearch,
+            ),
+          ],
+          widget.showSearch
+              ? Expanded(
+                  child: observableList(),
+                )
+              : observableList(),
+        ],
+      ),
+    );
+  }
+
+  Widget observableList() {
+    return Obx(
+      () {
+        List<T> list = widget.items;
+
+        if (controller.search.value.isNotEmpty) {
+          list = list
+              .where((t) =>
+                  t != null &&
+                  t.text.clean.contains(controller.search.value.clean))
+              .toList();
+        }
+        return ListView.builder(
+          itemCount: list.length,
+          shrinkWrap: true,
+          physics: const ScrollPhysics(),
+          itemBuilder: (context, i) {
+            return Column(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(list[i]);
+                  },
+                  child: Text(
+                    list[i]?.text ?? 'Nao encontrado',
+                    style: DesignTextStyle.bodySmall12Bold
+                        .apply(color: DesignColor.text400),
+                  ),
+                ),
+                if (list[i] != list.last)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      color: DesignColor.text200.withOpacity(0.2),
+                      height: 0.75,
+                      width: double.infinity,
+                    ),
+                  ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 }
 

@@ -43,7 +43,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
           child: DesignAppBar(title: 'Personal Info'),
         ),
       ),
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(DesignSize.mediumSpace),
         child: ListView(
