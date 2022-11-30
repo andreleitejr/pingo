@@ -34,22 +34,18 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(DesignSize.mediumSpace),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: Container()),
-            Expanded(
-              child: SizedBox(
-                width: 48,
-                child: Image.asset(DesignImages.logo),
-              ),
+            const DesignSpace(size: DesignSize.largeSpace),
+            SizedBox(
+              width: 48,
+              child: Image.asset(DesignImages.logo),
             ),
-            const DesignSpace(),
-            const DesignSpace(),
-            const DesignSpace(),
+            const DesignSpace(size: 48),
             Obx(
               () => DesignTextInput(
                 hint: 'Name',
@@ -94,7 +90,6 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
               ),
             ),
             signIn(),
-            Expanded(child: Container()),
           ],
         ),
       ),

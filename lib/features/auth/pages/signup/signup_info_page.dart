@@ -74,7 +74,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
             ),
             const DesignSpace(),
             Obx(
-              () => DesignSelectionInput<Gender>(
+              () => DesignSelectionDialog<Gender>(
                 items: genders,
                 value: genders.firstWhereOrNull(
                   (gender) => gender.title == controller.gender.value,
@@ -86,7 +86,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
             ),
             const DesignSpace(),
             Obx(
-              () => DesignSelectionInput<SexualOrientation>(
+              () => DesignSelectionDialog<SexualOrientation>(
                 items: sexualOrientations,
                 value: sexualOrientations.firstWhereOrNull(
                   (sexualOrientation) =>
@@ -101,7 +101,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
             const DesignSpace(),
             Obx(
               () {
-                return DesignSelectionInput<Country>(
+                return DesignSelectionDialog<Country>(
                   items: controller.countries,
                   value: controller.countries.firstWhereOrNull(
                     (country) => country.name == controller.country.value,
@@ -109,13 +109,14 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
                   hint: 'Country',
                   onChanged: controller.setCountry,
                   isValid: controller.countryValid,
+                  showSearch: true,
                 );
               },
             ),
             const DesignSpace(),
             Obx(
               () {
-                return DesignSelectionInput<Province>(
+                return DesignSelectionDialog<Province>(
                   items: controller.provinces,
                   value: controller.provinces.firstWhereOrNull(
                     (province) => province.name == controller.province.value,
@@ -123,13 +124,14 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
                   hint: 'Province',
                   onChanged: controller.setProvince,
                   isValid: controller.provinceValid,
+                  showSearch: true,
                 );
               },
             ),
             const DesignSpace(),
             Obx(
               () {
-                return DesignSelectionInput<City>(
+                return DesignSelectionDialog<City>(
                   items: controller.cities,
                   value: controller.cities.firstWhereOrNull(
                     (city) => city.name == controller.city.value,
@@ -137,6 +139,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
                   hint: 'City',
                   onChanged: controller.setCity,
                   isValid: controller.countryValid,
+                  showSearch: true,
                 );
               },
             ),
