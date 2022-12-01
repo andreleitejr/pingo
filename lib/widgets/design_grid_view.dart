@@ -93,6 +93,7 @@ class DesignPostGridView extends StatelessWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 textStyle: const TextStyle(fontSize: 20),
+                backgroundColor: Colors.white,
                 shape: const CircleBorder(),
               ),
               onPressed: onButtonPressed,

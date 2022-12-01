@@ -30,7 +30,7 @@ class DesignButton extends StatelessWidget {
               ? (backgroundColor ?? DesignColor.primary500)
               : DesignColor.text200,
           foregroundColor: Colors.white,
-          textStyle: DesignTextStyle.labelSmall11Bold,
+          textStyle: DesignTextStyle.labelSmall11Bold.apply(color: Colors.white),
         ),
         onPressed: onPressed,
         child: Text(title),

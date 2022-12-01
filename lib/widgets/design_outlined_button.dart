@@ -27,8 +27,9 @@ class DesignOutlinedButton extends StatelessWidget {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           backgroundColor: isActive
-              ? (backgroundColor ?? DesignColor.primary500)
+              ? (backgroundColor ?? Colors.white)
               : DesignColor.text300,
+          foregroundColor: textColor ?? DesignColor.primary500,
           textStyle: DesignTextStyle.labelSmall11Bold,
           side: BorderSide(
             width: 1.25,

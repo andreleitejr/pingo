@@ -260,7 +260,7 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                               size: DesignSize.smallSpace,
                             ),
                             Expanded(
-                              child: DesignOutlinedButton(
+                              child: DesignButton(
                                 onPressed: () => Get.to(
                                     RatingPage(ratedId: widget.place.uuid)),
                                 title: 'Avaliar',
