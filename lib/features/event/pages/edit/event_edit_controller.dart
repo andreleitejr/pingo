@@ -91,24 +91,6 @@ class EventEditController extends GetxController {
 
   bool get isValid => nameValid && descriptionValid;
 
-  // cityValid &&
-  // countryValid &&
-  // lineValid &&
-  // numberValid &&
-  // stateValid &&
-  // zipValid
-
-  // Address(
-  //   city: city.value,
-  //   complement: complement.value,
-  //   country: country.value,
-  //   line: line.value,
-  //   state: state.value,
-  //   zip: zip.value,
-  //   number: number.value,
-  //   location: GeoPoint(latitude.value, longitude.value),
-  // );
-
   Event get event => Event(
         description: description.value,
         name: name.value,

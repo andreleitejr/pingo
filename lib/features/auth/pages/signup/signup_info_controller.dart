@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:pingo/constants/apis.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/models/city.dart';
+import 'package:pingo/features/auth/models/country.dart';
+import 'package:pingo/features/auth/models/province.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
 import 'package:pingo/features/home/components/search/search_controller.dart';
 import 'package:pingo/features/profile/models/gender.dart';
@@ -73,7 +75,9 @@ class SignUpInfoController extends GetxController {
   Future<void> _getUser() async {
     final currentUser = await repository.currentUser();
     if (currentUser != null) {
+      name(currentUser.displayName);
       nameController.value.text = currentUser.displayName!;
+      email(currentUser.email);
       emailController.value.text = currentUser.email!;
     }
   }
