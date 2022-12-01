@@ -80,7 +80,7 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage>
   }
 
   @override
-  void success() => Get.back();
+  void success() => Get.back(result: true);
 
   @override
   void userNotFoundInDatabase() => Get.to(() => const SignUpInfoPage());

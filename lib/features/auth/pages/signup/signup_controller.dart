@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:pingo/constants/apis.dart';
 import 'package:pingo/core/extensions.dart';
-import 'package:pingo/features/auth/models/city.dart';
 import 'package:pingo/features/auth/pages/signup/signup_page.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
+import 'package:pingo/i18n/strings.g.dart';
+import 'package:pingo/models/language.dart';
 
 class SignUpController extends GetxController {
   SignUpController(this.navigator);
@@ -17,6 +17,7 @@ class SignUpController extends GetxController {
   final password = ''.obs;
   final confirmPassword = ''.obs;
   final acceptedTermsAndConditions = false.obs;
+  final language = languages[0].obs;
 
   void setName(String v) => name(v);
 
@@ -27,6 +28,15 @@ class SignUpController extends GetxController {
   void setConfirmPassword(String v) => confirmPassword(v);
 
   void toggleTermsAndConditions(bool? v) => acceptedTermsAndConditions(v!);
+
+  Future<void> setLanguage(Language? v) async {
+    language(v);
+
+    LocaleSettings.setLocaleRaw(language.value.code);
+    await repository.setLanguageCode(language.value.code);
+    print(
+        '###########################3 hdaudhuda ${LocaleSettings.currentLocale.flutterLocale.languageCode}');
+  }
 
   bool get nameValid => name.value.length >= 6;
 
@@ -59,5 +69,4 @@ class SignUpController extends GetxController {
       navigator.error(AuthResult.required);
     }
   }
-
 }

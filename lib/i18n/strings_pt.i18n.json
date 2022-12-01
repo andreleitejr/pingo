@@ -1,0 +1,36 @@
+{
+  "code": "pt",
+  "languages": {
+    "portuguese": "Português",
+    "english": "Inglês",
+    "spanish": "Espanhol"
+  },
+  "common": {
+    "daysOfTheWeek": {
+      "sunday": "Domingo",
+      "monday": "Segunda-feira",
+      "tuesday": "Terça-feira",
+      "wednesday": "Quarta-feira",
+      "thursday": "Quinta-feira",
+      "friday": "Sexta-feira",
+      "saturday": "Sábado"
+    },
+    "messages": {
+      "example": "Example"
+    },
+    "fields": {
+      "example": "Example"
+    },
+    "genders": {
+      "title": "Gênero",
+      "hint": "Selecione o gênero",
+      "male": "Masculino",
+      "female": "Feminino"
+    }
+  },
+  "home": {
+    "fields": {
+      "example": "Example"
+    }
+  }
+}

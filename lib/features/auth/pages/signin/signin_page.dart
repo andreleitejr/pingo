@@ -78,17 +78,21 @@ class _SignInPageState extends State<SignInPage> implements SignInNavigator {
                 isActive: controller.isAuthFormValid,
               ),
             ),
-            TextButton(
-              child: Text(
-                ' Esqueceu sua senha?',
-                style: DesignTextStyle.labelSmall10
-                    .apply(color: DesignColor.primary500),
-              ),
-              onPressed: () => Get.to(
-                () => RecoverPasswordPage(
-                  email: controller.email.value,
-                ),
-              ),
+            Obx(
+              () => TextButton(
+                  child: Text(
+                    controller.recoveryMessage,
+                    style: DesignTextStyle.labelSmall10
+                        .apply(color: DesignColor.primary500),
+                  ),
+                  onPressed: () async {
+                    final recovered = await Get.to(
+                      () => RecoverPasswordPage(
+                        email: controller.email.value,
+                      ),
+                    );
+                    controller.showRecoveryMessage(recovered);
+                  }),
             ),
             Expanded(child: Container()),
           ],

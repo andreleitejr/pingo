@@ -10,10 +10,12 @@ import 'package:pingo/features/auth/pages/signin/signin_page.dart';
 import 'package:pingo/features/auth/pages/signup/signup_controller.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
+import 'package:pingo/models/language.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_check_box.dart';
 import 'package:pingo/widgets/design_text_input.dart';
 import 'package:pingo/widgets/design_space.dart';
+import 'package:pingo/widgets/dialogs/design_selection_dialog.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -79,6 +81,19 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
                 isValid: controller.confirmPasswordValid,
               ),
             ),
+            const DesignSpace(),
+            Obx(
+              () => DesignSelectionDialog<Language>(
+                items: languages,
+                value: languages.firstWhereOrNull(
+                  (language) => language == controller.language.value,
+                ),
+                hint: 'Language',
+                onChanged: controller.setLanguage,
+                isValid: true,
+              ),
+            ),
+            const DesignSpace(),
             const DesignSpace(size: DesignSize.smallSpace),
             termsAndConditions(),
             const DesignSpace(size: DesignSize.smallSpace),

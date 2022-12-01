@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:pingo/features/auth/pages/landing/landing_page.dart';
+import 'package:pingo/features/auth/repositories/auth_repository.dart';
+import 'package:pingo/i18n/strings.g.dart';
 import 'package:pingo/main.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/repositories/user_repository.dart';
@@ -15,21 +17,30 @@ class LandingController extends GetxController {
 
   final LandingNavigator navigator;
 
+  auth.User? authUser;
+
   @override
   void onReady() {
     users.bindStream(repository.read);
-    _init();
+    _verifyAuthStatus();
+    _configureAuthLanguage();
   }
 
-  final _auth = auth.FirebaseAuth.instance;
+  final authRepository = Get.put(AuthRepository());
 
   Rx<List<User>> users = Rx<List<User>>([]);
 
-  Future<void> _init() async {
+  Future<void> _configureAuthLanguage() async {
+    final locale = LocaleSettings.useDeviceLocale();
+    final code = locale.flutterLocale.languageCode;
+    await authRepository.setLanguageCode(code);
+  }
+
+  Future<void> _verifyAuthStatus() async {
     /// ANIMATION TIME
     await Future.delayed(const Duration(milliseconds: 1500));
 
-    final authUser = _auth.currentUser;
+    authUser = await authRepository.currentUser();
 
     if (authUser == null) {
       navigator.loggedOut();
@@ -44,7 +55,7 @@ class LandingController extends GetxController {
     }
   }
 
-  String? get authId => _auth.currentUser?.uid;
+  String? get authId => authUser?.uid;
 
   User? get user => users.value.firstWhereOrNull((user) => user.uuid == authId);
 

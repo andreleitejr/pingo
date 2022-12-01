@@ -13,6 +13,12 @@ class SignInController extends GetxController {
 
   final password = ''.obs;
 
+  final showRecoveryMessage = false.obs;
+
+  String get recoveryMessage => showRecoveryMessage.value
+      ? 'Verify your e-mail box (or spam) and try again with you new passowrd.'
+      : ' Esqueceu sua senha?';
+
   void setEmail(String v) => email(v);
 
   void setPassword(String v) => password(v);

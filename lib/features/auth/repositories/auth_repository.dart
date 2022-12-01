@@ -102,6 +102,16 @@ class AuthRepository extends UserRepository {
     }
   }
 
+  Future<AuthResult> setLanguageCode(String code) async {
+    try {
+      await _auth.setLanguageCode(code);
+      return AuthResult.success;
+    } on auth.FirebaseAuthException catch (e) {
+      debugPrint('AuthRepository | Language Code: $e');
+      return AuthResult.failed;
+    }
+  }
+
   Future<AuthResult> recoverPassword(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
