@@ -28,7 +28,6 @@ class ProfileKeywordsController extends GetxController {
         expectedQuantity;
   }
 
-  // PESQUISAR
   List<String> get keywordsStringList {
     final list = <String>[];
 

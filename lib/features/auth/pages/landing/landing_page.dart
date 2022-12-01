@@ -5,7 +5,6 @@ import 'package:pingo/features/auth/pages/landing/landing_controller.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
 import 'package:pingo/features/auth/pages/signup/signup_page.dart';
 import 'package:pingo/features/home/base_page.dart';
-import 'package:pingo/features/profile/edit/profile_keywords_selection.dart';
 import 'package:pingo/widgets/design_loading_page.dart';
 import 'package:rive/rive.dart';
 

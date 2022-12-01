@@ -5,7 +5,7 @@
 // import 'package:pingo/constants/design_size.dart';
 // import 'package:pingo/core/keyword.dart';
 // import 'package:pingo/features/keyword/pages/keyword_selection_controller.dart';
-// import 'package:pingo/features/profile/edit/profile_keywords_controller.dart';
+// import 'package:pingo/features/profile/edit/profile_keywords_edit_controller.dart';
 // import 'package:pingo/widgets/design_appbar.dart';
 // import 'package:pingo/widgets/design_page_view.dart';
 // import 'package:pingo/widgets/design_search_input.dart';

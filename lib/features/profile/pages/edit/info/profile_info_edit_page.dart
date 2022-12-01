@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pingo/constants/design_size.dart';
-import 'package:pingo/features/profile/edit/info/profile_info_edit_controller.dart';
+import 'package:pingo/features/profile/pages/edit/info/profile_info_edit_controller.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_avatar_image_selection.dart';
 import 'package:pingo/widgets/design_text_input.dart';

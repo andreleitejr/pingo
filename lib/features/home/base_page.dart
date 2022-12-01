@@ -11,7 +11,7 @@ import 'package:pingo/features/home/home_controller.dart';
 import 'package:pingo/features/home/home_page.dart';
 import 'package:pingo/features/place/pages/list/place_list_page.dart';
 import 'package:pingo/features/product/pages/list/product_list_page.dart';
-import 'package:pingo/features/profile/read/profile_read_page.dart';
+import 'package:pingo/features/profile/pages/read/profile_read_page.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/widgets/design_error_page.dart';
 import 'package:pingo/widgets/design_icon.dart';
