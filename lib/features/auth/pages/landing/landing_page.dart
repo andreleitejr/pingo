@@ -58,7 +58,7 @@ class _LandingPageState extends State<LandingPage> implements LandingNavigator {
   void loggedWithoutUser() => Get.to(() => const SignUpInfoPage());
 
   @override
-  void loggedWithoutKeyword() => Get.to(() => ProfileKeywordsSelection());
+  void loggedWithoutKeyword() => Get.to(() => SignUpInfoPage());
 }
 
 abstract class LandingNavigator {

@@ -62,6 +62,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
               () => DesignTextInput(
                 textEditingController: controller.emailController.value,
                 hint: 'E-mail',
+                isValid: controller.emailValid,
               ),
             ),
             const DesignSpace(),
@@ -71,32 +72,6 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
                 onPressed: controller.setBirthday,
                 value: controller.birthday.value,
                 isValid: controller.birthdayValid,
-              ),
-            ),
-            const DesignSpace(),
-            Obx(
-              () => DesignSelectionDialog<Gender>(
-                items: genders,
-                value: genders.firstWhereOrNull(
-                  (gender) => gender.title == controller.gender.value,
-                ),
-                hint: 'Gender',
-                onChanged: controller.setGender,
-                isValid: controller.genderValid,
-              ),
-            ),
-            const DesignSpace(),
-            Obx(
-              () => DesignSelectionDialog<SexualOrientation>(
-                items: sexualOrientations,
-                value: sexualOrientations.firstWhereOrNull(
-                  (sexualOrientation) =>
-                      sexualOrientation.title ==
-                      controller.sexualOrientation.value,
-                ),
-                hint: 'Sexual Orientation',
-                onChanged: controller.setSexualOrientation,
-                isValid: controller.sexualOrientationValid,
               ),
             ),
             const DesignSpace(),
@@ -145,6 +120,31 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
               },
             ),
             const DesignSpace(),
+            Obx(
+              () => DesignSelectionDialog<Gender>(
+                items: genders,
+                value: genders.firstWhereOrNull(
+                  (gender) => gender.title == controller.gender.value,
+                ),
+                hint: 'Gender',
+                onChanged: controller.setGender,
+                isValid: controller.genderValid,
+              ),
+            ),
+            const DesignSpace(),
+            Obx(
+              () => DesignSelectionDialog<SexualOrientation>(
+                items: sexualOrientations,
+                value: sexualOrientations.firstWhereOrNull(
+                  (sexualOrientation) =>
+                      sexualOrientation.title ==
+                      controller.sexualOrientation.value,
+                ),
+                hint: 'Sexual Orientation',
+                onChanged: controller.setSexualOrientation,
+                isValid: controller.sexualOrientationValid,
+              ),
+            ),
             Obx(
               () => DesignButton(
                 onPressed: () async => controller.save(),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,15 +55,16 @@ class SignUpInfoController extends GetxController {
 
       countries.add(c);
       country(c.name);
-      countryController.value.text = country.value;
 
-      final p = c.states.firstWhere((state) => state.id == Province.saoPaulo);
+      final p =
+          c.states.firstWhere((province) => province.id == Province.saoPaulo);
+
+      provinces.add(p);
       province(p.name);
-      stateController.value.text = province.value;
 
       final ct = p.cities.firstWhere((city) => city.id == City.saoPaulo);
+      cities.add(ct);
       city(ct.name);
-      cityController.value.text = city.value;
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -79,6 +81,7 @@ class SignUpInfoController extends GetxController {
       nameController.value.text = currentUser.displayName!;
       email(currentUser.email);
       emailController.value.text = currentUser.email!;
+      generateNickname();
     }
   }
 
@@ -89,6 +92,7 @@ class SignUpInfoController extends GetxController {
   final cityController = TextEditingController().obs;
 
   final name = ''.obs;
+  final nickname = ''.obs;
   final email = ''.obs;
   final birthday = DateTime.now().legalAge.obs;
   final gender = ''.obs;
@@ -109,11 +113,15 @@ class SignUpInfoController extends GetxController {
   void setCountry(Country? v) {
     country(v?.text);
 
-    setProvince(v?.states.first);
+    if (v != null && v.states.isNotEmpty) {
+      setProvince(v.states.first);
+    }
 
     provinces(v?.states);
 
-    setCity(v?.states.first.cities.first);
+    if (v != null && v.states.first.cities.isNotEmpty) {
+      setCity(v.states.first.cities.first);
+    }
   }
 
   void setProvince(Province? v) {
@@ -127,6 +135,8 @@ class SignUpInfoController extends GetxController {
   void setCity(City? v) => city(v?.name);
 
   bool get nameValid => name.value.length >= 6;
+
+  bool get emailValid => GetUtils.isEmail(email.value);
 
   bool get birthdayValid => birthday.value
       .isBefore(DateTime.now().add(const Duration(days: 1)).legalAge);
@@ -145,6 +155,20 @@ class SignUpInfoController extends GetxController {
       // isAuthFormValid &&
       birthdayValid && genderValid && countryValid && cityValid;
 
+  void generateNickname() {
+    final splitName = name.split(' ');
+
+    final randomNumber = Random().nextInt(100000);
+
+    final generatedNickname = (splitName.first +
+            (splitName.length > 1 ? splitName[1][0] : '') +
+            randomNumber.toString())
+        .toLowerCase();
+
+    nickname(generatedNickname);
+    print('HSDAUHADUADSHASDUASD OH MYNICKNAME! ${nickname.value}');
+  }
+
   User get user => User(
         name: name.value,
         birthday: birthday.value,
@@ -156,6 +180,7 @@ class SignUpInfoController extends GetxController {
         city: city.value,
         agreed: true,
         keywords: [],
+        nickname: nickname.value,
       );
 
   Future<void> save() async {
