@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:pingo/features/post/models/post.dart';
 import 'package:pingo/models/matchbase.dart';
+import 'package:pingo/models/pin.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/product/models/product.dart';
@@ -75,4 +76,11 @@ class Place extends MatchBase {
         'verified': keywords,
       });
   }
+
+  Pin get pin => Pin(
+        markerId: name,
+        markerDescription: address.line ?? '',
+        latitude: address.location.latitude,
+        longitude: address.location.longitude,
+      );
 }

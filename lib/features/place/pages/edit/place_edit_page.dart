@@ -107,7 +107,7 @@ class PlaceEditPage extends StatelessWidget {
             const DesignSpace(),
             Obx(
               () => DesignTextInput(
-                textEditingController: controller.subLocalityController,
+                value: controller.subLocality.value,
                 textInputType: TextInputType.text,
                 hint: 'Neighborhood',
                 onChanged: controller.setSubLocality,
@@ -117,7 +117,7 @@ class PlaceEditPage extends StatelessWidget {
             const DesignSpace(),
             Obx(
               () => DesignTextInput(
-                textEditingController: controller.zipController,
+                value: controller.zip.value,
                 textInputType: TextInputType.text,
                 hint: 'ZIP Code',
                 onChanged: controller.setZip,
@@ -138,7 +138,7 @@ class PlaceEditPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: DesignTextInput(
-                      textEditingController: controller.latitudeController,
+                      value: controller.latitude.value.toString(),
                       textInputType: TextInputType.number,
                       hint: 'Latitude',
                       onChanged: controller.setLatitude,
@@ -149,7 +149,7 @@ class PlaceEditPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: DesignTextInput(
-                      textEditingController: controller.longitudeController,
+                      value: controller.longitude.value.toString(),
                       textInputType: TextInputType.number,
                       hint: 'Longitude',
                       onChanged: controller.setLongitude,

@@ -51,7 +51,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
           children: [
             Obx(
               () => DesignTextInput(
-                textEditingController: controller.nameController.value,
+                value: controller.name.value,
                 hint: 'Name',
                 onChanged: controller.setName,
                 isValid: controller.nameValid,
@@ -60,7 +60,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
             const DesignSpace(),
             Obx(
               () => DesignTextInput(
-                textEditingController: controller.emailController.value,
+                value: controller.email.value,
                 hint: 'E-mail',
                 isValid: controller.emailValid,
               ),
@@ -145,6 +145,7 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
                 isValid: controller.sexualOrientationValid,
               ),
             ),
+            const DesignSpace(),
             Obx(
               () => DesignButton(
                 onPressed: () async => controller.save(),

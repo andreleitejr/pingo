@@ -46,9 +46,7 @@ class _DesignSelectionDialogState<T extends Selectable?>
           DesignTextInput(
             hint: widget.hint,
             isValid: widget.isValid,
-            textEditingController: TextEditingController(
-              text: widget.value?.text,
-            ),
+            value: widget.value?.text,
           ),
           Container(
             height: 42,
@@ -70,13 +68,13 @@ class _DesignSelectionDialogState<T extends Selectable?>
       ),
       builder: (_) => Scaffold(
         backgroundColor: Colors.black.withOpacity(0),
-        body:Column(
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             widget.showSearch
                 ? Expanded(
-              child: itemList(),
-            )
+                    child: itemList(),
+                  )
                 : itemList(),
             Container(
               margin: const EdgeInsets.fromLTRB(16, 6, 16, 16),

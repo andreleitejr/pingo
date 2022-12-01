@@ -2,14 +2,15 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:pingo/services/current_location.dart';
-import 'package:pingo/features/place/models/place.dart';
+import 'package:pingo/models/pin.dart';
 import 'package:pingo/models/user.dart';
+import 'package:pingo/services/current_location.dart';
 
 class MapController extends GetxController {
-  MapController(this.place);
+  MapController({required this.pin});
 
-  final Place place;
+  final Pin pin;
+
   final mapController = Completer<GoogleMapController>();
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
@@ -18,19 +19,20 @@ class MapController extends GetxController {
   final CurrentLocation currentLocation = Get.find();
 
   Marker get placeMarker => Marker(
-        markerId: MarkerId(place.name),
-        position: LatLng(
-            place.address.location.latitude, place.address.location.longitude),
+        markerId: MarkerId(pin.markerId),
+        position: LatLng(pin.latitude, pin.longitude),
         infoWindow: InfoWindow(
-          title: place.name,
-          snippet: place.address.line,
+          title: pin.markerId,
+          snippet: pin.markerDescription,
         ),
       );
 
   Marker get userMarker => Marker(
         markerId: MarkerId(user.name),
-        position: LatLng(currentLocation.currentCoordinates.latitude,
-            currentLocation.currentCoordinates.longitude),
+        position: LatLng(
+          currentLocation.currentCoordinates.latitude,
+          currentLocation.currentCoordinates.longitude,
+        ),
         infoWindow: InfoWindow(
           title: user.name,
           snippet: 'You are here!',
@@ -46,15 +48,14 @@ class MapController extends GetxController {
       );
 
   CameraPosition get placePosition => CameraPosition(
-        target: LatLng(
-            place.address.location.latitude, place.address.location.longitude),
+        target: LatLng(pin.latitude, pin.longitude),
         zoom: 15,
       );
 
   @override
   void onReady() {
     markers[MarkerId(user.name)] = userMarker;
-    markers[MarkerId(place.name)] = placeMarker;
+    markers[MarkerId(pin.markerId)] = placeMarker;
     super.onReady();
   }
 }

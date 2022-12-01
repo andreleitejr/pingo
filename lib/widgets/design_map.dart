@@ -31,7 +31,7 @@ class _DesignMapState extends State<DesignMap> {
 
   @override
   void initState() {
-    controller = Get.put(MapController(widget.place));
+    controller = Get.put(MapController(pin: widget.place.pin));
     super.initState();
 
     rootBundle.loadString('assets/map/style.txt').then((string) {
@@ -50,7 +50,7 @@ class _DesignMapState extends State<DesignMap> {
         MarkerData(
           marker: controller.placeMarker,
           child: DesignDestinationMarker(
-            image: controller.place.image!.image,
+            image: widget.place.image!.image,
           ),
         ),
       ],

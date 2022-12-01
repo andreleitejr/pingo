@@ -8,24 +8,22 @@ import 'package:pingo/constants/design_text_style.dart';
 class DesignTextInput extends StatefulWidget {
   DesignTextInput({
     Key? key,
-    this.initialValue,
+    this.value,
     required this.hint,
     this.onChanged,
     this.obscureText = false,
     this.prefixIcon,
     this.isValid = false,
     this.textInputType = TextInputType.text,
-    this.textEditingController,
   }) : super(key: key);
 
-  final String? initialValue;
+  final String? value;
   final String hint;
   final Function(String)? onChanged;
   final Widget? prefixIcon;
   bool obscureText;
   final bool isValid;
   final TextInputType textInputType;
-  final TextEditingController? textEditingController;
 
   @override
   State<DesignTextInput> createState() => _DesignTextInputState();
@@ -33,6 +31,8 @@ class DesignTextInput extends StatefulWidget {
 
 class _DesignTextInputState extends State<DesignTextInput> {
   bool isPassword = false;
+
+  final textEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -42,16 +42,20 @@ class _DesignTextInputState extends State<DesignTextInput> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.value != null) {
+      textEditingController.text = widget.value!;
+    }
+
     return SizedBox(
       height: 42,
       child: TextFormField(
-        controller: widget.textEditingController,
-        initialValue: widget.initialValue,
+        controller: textEditingController,
+        // initialValue: widget.initialValue,
         onChanged: widget.onChanged,
         obscureText: widget.obscureText,
         keyboardType: widget.textInputType,
-        style: DesignTextStyle.bodySmall12Bold
-            .apply(color: DesignColor.text400),
+        style:
+            DesignTextStyle.bodySmall12Bold.apply(color: DesignColor.text400),
         decoration: InputDecoration(
           hintStyle: DesignTextStyle.bodySmall12.apply(
             color: DesignColor.text300,

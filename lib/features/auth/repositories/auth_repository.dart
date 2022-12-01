@@ -92,11 +92,23 @@ class AuthRepository extends UserRepository {
     }
   }
 
-  Future<void> signOut() async {
+  Future<AuthResult> signOut() async {
     try {
-      _auth.signOut();
+      await _auth.signOut();
+      return AuthResult.success;
     } on auth.FirebaseAuthException catch (e) {
       debugPrint('AuthRepository | Sign Out Error: $e');
+      return AuthResult.failed;
+    }
+  }
+
+  Future<AuthResult> recoverPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return AuthResult.success;
+    } on auth.FirebaseAuthException catch (e) {
+      debugPrint('AuthRepository | Recover Error: $e');
+      return AuthResult.failed;
     }
   }
 }

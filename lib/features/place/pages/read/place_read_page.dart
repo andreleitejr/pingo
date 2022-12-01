@@ -185,7 +185,8 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                                       size: DesignSize.smallSpace,
                                     ),
                                     Text(
-                                      '${widget.place.address.line ?? 'Address not found'}, ${widget.place.address.number}',
+                                      '${widget.place.address.line ?? 'Address not found'},'
+                                      ' ${widget.place.address.number}',
                                       style: DesignTextStyle.labelSmall10.apply(
                                         color: DesignColor.primary700,
                                       ),
@@ -222,7 +223,8 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                               horizontal: DesignSize.mediumSpace),
                           child: DesignButton(
                             onPressed: () => Get.to(
-                                () => ProductEditPage(place: widget.place)),
+                              () => ProductEditPage(place: widget.place),
+                            ),
                             title: 'Create Product',
                             isActive: true,
                           ),
@@ -250,7 +252,8 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                             Expanded(
                               child: DesignButton(
                                 onPressed: () => Get.to(
-                                    () => PostEditPage(place: widget.place)),
+                                  () => PostEditPage(place: widget.place),
+                                ),
                                 title: 'Postar no Mural',
                                 isActive: true,
                               ),
@@ -262,7 +265,8 @@ class _PlaceReadPageState extends State<PlaceReadPage>
                             Expanded(
                               child: DesignButton(
                                 onPressed: () => Get.to(
-                                    RatingPage(ratedId: widget.place.uuid)),
+                                  RatingPage(ratedId: widget.place.uuid),
+                                ),
                                 title: 'Avaliar',
                                 isActive: true,
                               ),

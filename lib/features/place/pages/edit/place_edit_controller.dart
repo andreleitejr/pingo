@@ -18,11 +18,6 @@ class PlaceEditController extends GetxController {
 
   final blurHashController = Get.put(BlurHashController());
 
-  final latitudeController = TextEditingController();
-  final longitudeController = TextEditingController();
-  final subLocalityController = TextEditingController();
-  final zipController = TextEditingController();
-
   var displayImage = File('').obs;
   var displayPhotos = <File>[].obs;
 
@@ -88,16 +83,12 @@ class PlaceEditController extends GetxController {
     final address = '${line.value}, ${number.value}';
     final location = await CurrentLocation.getCoordinates(address);
     latitude(location.latitude);
-    latitudeController.text = latitude.toString();
     longitude(location.longitude);
-    longitudeController.text = longitude.toString();
 
     final placemarks = await CurrentLocation.getAddress(location);
 
     subLocality(placemarks.subLocality);
-    subLocalityController.text = subLocality.value;
     zip(placemarks.postalCode);
-    zipController.text = zip.value;
   }
 
   void setState(String v) => state(v);

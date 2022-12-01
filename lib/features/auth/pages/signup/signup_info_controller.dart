@@ -78,18 +78,10 @@ class SignUpInfoController extends GetxController {
     final currentUser = await repository.currentUser();
     if (currentUser != null) {
       name(currentUser.displayName);
-      nameController.value.text = currentUser.displayName!;
       email(currentUser.email);
-      emailController.value.text = currentUser.email!;
       generateNickname();
     }
   }
-
-  final nameController = TextEditingController().obs;
-  final emailController = TextEditingController().obs;
-  final countryController = TextEditingController().obs;
-  final stateController = TextEditingController().obs;
-  final cityController = TextEditingController().obs;
 
   final name = ''.obs;
   final nickname = ''.obs;
@@ -166,7 +158,6 @@ class SignUpInfoController extends GetxController {
         .toLowerCase();
 
     nickname(generatedNickname);
-    print('HSDAUHADUADSHASDUASD OH MYNICKNAME! ${nickname.value}');
   }
 
   User get user => User(
