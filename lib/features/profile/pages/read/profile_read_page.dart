@@ -5,6 +5,7 @@ import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/features/profile/pages/edit/info/profile_info_edit_page.dart';
+import 'package:pingo/features/profile/pages/edit/settings/profile_settings_page.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/pages/signin/signin_page.dart';
@@ -86,9 +87,11 @@ class ProfileReadPage extends StatelessWidget {
                 isActive: true,
               ),
               const DesignSpace(),
-              const DesignListButton(title: 'Account'),
-              const DesignListButton(title: 'Settings'),
-              const DesignListButton(title: 'Security'),
+              DesignListButton(
+                title: 'Settings',
+                onTap: () => Get.to(() => ProfileSettingsPage()),
+              ),
+              // const DesignListButton(title: 'Security'),
               const DesignListButton(title: 'Help'),
               const DesignListButton(title: 'About Pingo'),
               Expanded(child: Container()),
