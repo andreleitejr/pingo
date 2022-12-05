@@ -42,7 +42,8 @@ class AuthRepository extends UserRepository {
 
       return AuthResult.success;
     } on auth.FirebaseAuthException catch (e) {
-      return e.code.resultError;
+      debugPrint('AuthRepository | Sign Up With E-mail and Password: $e');
+      return e.code.authResultError;
     }
   }
 
@@ -52,13 +53,14 @@ class AuthRepository extends UserRepository {
       final result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
 
-      return _getUser(result);
+      return getDataBaseUser(result);
     } on auth.FirebaseAuthException catch (e) {
-      return e.code.resultError;
+      debugPrint('AuthRepository | Sign In With E-mail and Password Error: $e');
+      return e.code.authResultError;
     }
   }
 
-  Future<AuthResult> _getUser(auth.UserCredential credential) async {
+  Future<AuthResult> getDataBaseUser(auth.UserCredential credential) async {
     try {
       final user = await super.get(credential.user!.uid);
       if (user != null) {
@@ -67,7 +69,8 @@ class AuthRepository extends UserRepository {
       }
       return AuthResult.failed;
     } on FirebaseException catch (e) {
-      return e.code.resultError;
+      debugPrint('AuthRepository | Get User Error: $e');
+      return e.code.authResultError;
     }
   }
 
@@ -79,16 +82,19 @@ class AuthRepository extends UserRepository {
       if (user != null) {
         model.uuid = user.uid;
 
-        await super.save(model, documentId: user.uid).then((_) {
-          Get.put(model);
-        });
+        await super.save(model, documentId: user.uid).then(
+          (_) {
+            Get.put(model);
+          },
+        );
 
         return AuthResult.success;
       }
 
       return AuthResult.failed;
     } on FirebaseException catch (e) {
-      return e.code.resultError;
+      debugPrint('AuthRepository | Save Error: $e');
+      return e.code.authResultError;
     }
   }
 

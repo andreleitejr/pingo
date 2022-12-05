@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/pages/signup/signup_page.dart';
@@ -31,11 +30,8 @@ class SignUpController extends GetxController {
 
   Future<void> setLanguage(Language? v) async {
     language(v);
-
     LocaleSettings.setLocaleRaw(language.value.code);
     await repository.setLanguageCode(language.value.code);
-    print(
-        '###########################3 hdaudhuda ${LocaleSettings.currentLocale.flutterLocale.languageCode}');
   }
 
   bool get nameValid => name.value.length >= 6;

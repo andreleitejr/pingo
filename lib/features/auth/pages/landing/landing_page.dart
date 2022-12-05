@@ -5,6 +5,7 @@ import 'package:pingo/features/auth/pages/landing/landing_controller.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
 import 'package:pingo/features/auth/pages/signup/signup_page.dart';
 import 'package:pingo/features/home/base_page.dart';
+import 'package:pingo/features/profile/pages/edit/keywords/profile_keywords_edit_page.dart';
 import 'package:pingo/widgets/design_loading_page.dart';
 import 'package:rive/rive.dart';
 
@@ -57,7 +58,7 @@ class _LandingPageState extends State<LandingPage> implements LandingNavigator {
   void loggedWithoutUser() => Get.to(() => const SignUpInfoPage());
 
   @override
-  void loggedWithoutKeyword() => Get.to(() => SignUpInfoPage());
+  void loggedWithoutKeyword() => Get.to(() => ProfileKeywordsSelection());
 }
 
 abstract class LandingNavigator {

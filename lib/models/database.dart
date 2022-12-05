@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class DataBase {
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
   String uuid;
 
   DataBase({
@@ -19,8 +19,8 @@ abstract class DataBase {
   Map<String, dynamic> toMap() {
     return {
       // TODO: CHANGE
-      'createdAt': DateTime.now(), // createdAt,
-      'updatedAt': DateTime.now(), //updatedAt,
+      'createdAt': createdAt, // createdAt,
+      'updatedAt': updatedAt, //updatedAt,
     };
   }
 }

@@ -35,18 +35,32 @@ abstract class DataBaseRepository<T extends DataBase> {
 
   Future<void> save(T model, {String? documentId}) async {
     try {
+      model.createdAt = DateTime.now();
       await collection.doc(documentId).set(model.toMap());
     } catch (e) {
-      debugPrint('Data Base Repository | Error: $e');
+      debugPrint('Data Base Repository | Save Error: $e');
     }
   }
 
-  void update(String documentId, T model) =>
-      collection.doc(documentId).update(model.toMap());
+  Future<void> update(String documentId, T model) async {
+    try {
+      model.updatedAt = DateTime.now();
+      await collection.doc(documentId).update(model.toMap());
+    } catch (e) {
+      debugPrint('Data Base Repository | Update Error: $e');
+    }
+  }
 
-  void delete(String documentId) => collection.doc(documentId).delete();
+  Future<void> delete(String documentId) async {
+    try {
+      await collection.doc(documentId).delete();
+    } catch (e) {
+      debugPrint('Data Base Repository | Delete Error: $e');
+    }
+  }
 
-  Stream<List<T>> get read => collectionGroup.snapshots().map((query) => query.docs.map<T>((document) => fromMap(document)).toList());
+  Stream<List<T>> get read => collectionGroup.snapshots().map(
+      (query) => query.docs.map<T>((document) => fromMap(document)).toList());
 
   Future<T?> get(String documentId) async =>
       await collection.doc(documentId).get().then((doc) => fromMap(doc));

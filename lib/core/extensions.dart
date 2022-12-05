@@ -20,7 +20,7 @@ extension StringExtension on String {
       contains(RegExp(r'[a-z]')) &&
       contains(RegExp(r'[^a-z]'));
 
-  AuthResult get resultError {
+  AuthResult get authResultError {
     switch (this) {
       case FirebaseError.userNotFound:
         return AuthResult.userNotFound;

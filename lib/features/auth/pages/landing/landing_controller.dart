@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:pingo/constants/emails.dart';
 import 'package:pingo/features/auth/pages/landing/landing_page.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/i18n/strings.g.dart';
@@ -71,7 +72,7 @@ class LandingController extends GetxController {
   }
 
   void _verifyAdmin() {
-    isAdmin = user?.email == 'paulo@rockdssd.com';
+    isAdmin = user?.email == Emails.admin;
     if (isAdmin) debugPrint('System Message | Admin successful configured.');
   }
 }
