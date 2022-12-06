@@ -4,8 +4,10 @@ import 'package:pingo/constants/design_color.dart';
 import 'package:pingo/constants/design_icons.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
+import 'package:pingo/constants/support.dart';
 import 'package:pingo/features/profile/pages/edit/info/profile_info_edit_page.dart';
 import 'package:pingo/features/profile/pages/edit/settings/profile_settings_page.dart';
+import 'package:pingo/features/profile/pages/read/profile_read_controller.dart';
 import 'package:pingo/services/current_location.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/pages/signin/signin_page.dart';
@@ -17,12 +19,22 @@ import 'package:pingo/widgets/design_outlined_button.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_space.dart';
 
-class ProfileReadPage extends StatelessWidget {
-  ProfileReadPage({Key? key}) : super(key: key);
+class ProfileReadPage extends StatefulWidget {
+  const ProfileReadPage({Key? key}) : super(key: key);
 
-  final User user = Get.find();
-  final CurrentLocation currentLocation = Get.find();
-  final AuthRepository repository = AuthRepository();
+  @override
+  State<ProfileReadPage> createState() => _ProfileReadPageState();
+}
+
+class _ProfileReadPageState extends State<ProfileReadPage>
+    implements ProfileReadNavigator {
+  late ProfileReadController controller;
+
+  @override
+  void initState() {
+    controller = Get.put(ProfileReadController(this));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +44,18 @@ class ProfileReadPage extends StatelessWidget {
           preferredSize: const Size.fromHeight(DesignSize.appBarHeight),
           child: DesignAppBar(
             showLeading: false,
-            title: '@${user.nickname}',
+            title: '@${controller.user.nickname}',
           ),
         ),
         resizeToAvoidBottomInset: false,
         body: Padding(
           padding:
-              const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
+          const EdgeInsets.symmetric(horizontal: DesignSize.mediumSpace),
           child: Column(
             children: [
               Row(
                 children: [
-                  DesignAvatarImage(image: user.image?.image),
+                  DesignAvatarImage(image: controller.user.image?.image),
                   const DesignSpace(
                     orientation: DesignSpaceOrientation.horizontal,
                   ),
@@ -51,7 +63,7 @@ class ProfileReadPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        user.name,
+                        controller.user.name,
                         style: DesignTextStyle.bodyMedium16Bold
                             .apply(color: DesignColor.text500),
                       ),
@@ -64,7 +76,7 @@ class ProfileReadPage extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            currentLocation.currentAddress,
+                            controller.currentLocation.currentAddress,
                             style: DesignTextStyle.labelMedium12
                                 .apply(color: DesignColor.text400),
                           ),
@@ -76,13 +88,12 @@ class ProfileReadPage extends StatelessWidget {
               ),
               const DesignSpace(),
               Text(
-                user.description ?? 'My name is ${user.name} and I am awesome!',
+                controller.user.description ??
+                    'My name is ${controller.user.name} and I am awesome!',
               ),
               const DesignSpace(),
               DesignOutlinedButton(
-                onPressed: () async {
-                  Get.to(() => const ProfileInfoEditPage());
-                },
+                onPressed: () => Get.to(() => const ProfileInfoEditPage()),
                 title: 'Edit Profile',
                 isActive: true,
               ),
@@ -92,13 +103,16 @@ class ProfileReadPage extends StatelessWidget {
                 onTap: () => Get.to(() => ProfileSettingsPage()),
               ),
               // const DesignListButton(title: 'Security'),
-              const DesignListButton(title: 'Help'),
+              DesignListButton(
+                title: 'Support',
+                onTap: () => controller.openSupport(),
+              ),
               const DesignListButton(title: 'About Pingo'),
               Expanded(child: Container()),
               DesignListButton(
                 title: 'Sign Out',
                 onTap: () async {
-                  await repository.signOut();
+                  await controller.repository.signOut();
                   Get.to(() => const SignInPage());
                 },
               ),
@@ -108,4 +122,18 @@ class ProfileReadPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void supportError() {
+    Get.snackbar(
+      'Support Error',
+      'Unknow problem ocurred',
+      backgroundColor: DesignColor.primary500,
+      colorText: Colors.white,
+    );
+  }
+}
+
+abstract class ProfileReadNavigator {
+  void supportError();
 }
