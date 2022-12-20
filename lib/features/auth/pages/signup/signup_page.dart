@@ -44,9 +44,9 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
           children: [
             const DesignSpace(size: 24),
             Expanded(
-              child: SizedBox(
+              child: Image.asset(
+                DesignImages.logo,
                 width: 48,
-                child: Image.asset(DesignImages.logo),
               ),
             ),
             const DesignSpace(size: DesignSize.largeSpace),
@@ -113,7 +113,13 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
                 isActive: controller.isAuthFormValid,
               ),
             ),
-            signIn(),
+            Expanded(
+              child: Column(
+                children: [
+                  signIn(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
