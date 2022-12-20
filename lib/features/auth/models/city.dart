@@ -19,7 +19,7 @@ class City extends Selectable {
         longitude: double.tryParse(json['longitude'] as String) ?? 0,
       );
 
-  static const saoPaulo = 15101;
+  static const defaultCity = 15101;
 
   @override
   bool get enabled => true;

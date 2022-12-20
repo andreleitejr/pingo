@@ -32,7 +32,7 @@ class Province extends Selectable {
             .toList(),
       );
 
-  static const saoPaulo = 2021;
+  static const defaultProvince = 2021;
 
   @override
   bool get enabled => true;

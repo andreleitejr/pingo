@@ -57,14 +57,14 @@ class SignUpInfoController extends GetxController {
 
       provinces.addAll(c.states);
 
-      final p = c.states.firstWhere((province) => province.id == Province.saoPaulo);
+      final p = c.states
+          .firstWhere((province) => province.id == Province.defaultProvince);
       province(p.name);
 
       cities.addAll(p.cities);
 
-      final ct = p.cities.firstWhere((city) => city.id == City.saoPaulo);
+      final ct = p.cities.firstWhere((city) => city.id == City.defaultCity);
       city(ct.name);
-
     } catch (e) {
       debugPrint(e.toString());
     }
