@@ -21,9 +21,9 @@ class LandingController extends GetxController {
   auth.User? authUser;
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     users.bindStream(repository.read);
-    _verifyAuthStatus();
+    await _verifyAuthStatus();
     _configureAuthLanguage();
   }
 

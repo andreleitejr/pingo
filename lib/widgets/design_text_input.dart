@@ -15,6 +15,10 @@ class DesignTextInput extends StatefulWidget {
     this.prefixIcon,
     this.isValid = false,
     this.textInputType = TextInputType.text,
+    this.autofocus = false,
+    this.textInputAction,
+    // this.onEditingComplete,
+    this.showCursor = true,
   }) : super(key: key);
 
   final String? value;
@@ -24,6 +28,10 @@ class DesignTextInput extends StatefulWidget {
   bool obscureText;
   final bool isValid;
   final TextInputType textInputType;
+  final bool autofocus;
+  final TextInputAction? textInputAction;
+  // final Function()? onEditingComplete;
+  final bool showCursor;
 
   @override
   State<DesignTextInput> createState() => _DesignTextInputState();
@@ -50,6 +58,10 @@ class _DesignTextInputState extends State<DesignTextInput> {
       height: 42,
       child: TextFormField(
         controller: textEditingController,
+        autofocus: widget.autofocus,
+        textInputAction: widget.textInputAction,
+        // onEditingComplete: widget.onEditingComplete,
+        showCursor: widget.showCursor,
         // initialValue: widget.initialValue,
         onChanged: widget.onChanged,
         obscureText: widget.obscureText,
@@ -98,16 +110,20 @@ class _DesignTextInputState extends State<DesignTextInput> {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (isPassword)
-                TextButton(
-                  onPressed: () {
+                GestureDetector(
+                  onTap: () {
                     setState(() {
                       widget.obscureText = !widget.obscureText;
                     });
                   },
-                  child: Text(
-                    widget.obscureText ? 'Show' : 'Hide',
-                    style: DesignTextStyle.bodySmall12
-                        .apply(color: DesignColor.primary500),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    child: Text(
+                      widget.obscureText ? 'Show' : 'Hide',
+                      style: DesignTextStyle.bodySmall12
+                          .apply(color: DesignColor.primary500),
+                    ),
                   ),
                 ),
               if (widget.isValid)

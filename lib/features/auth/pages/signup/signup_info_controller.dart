@@ -11,7 +11,6 @@ import 'package:pingo/features/auth/models/city.dart';
 import 'package:pingo/features/auth/models/country.dart';
 import 'package:pingo/features/auth/models/province.dart';
 import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
-import 'package:pingo/features/home/components/search/search_controller.dart';
 import 'package:pingo/features/profile/models/gender.dart';
 import 'package:pingo/features/profile/models/sexual_orientation.dart';
 import 'package:pingo/models/user.dart';
@@ -56,15 +55,16 @@ class SignUpInfoController extends GetxController {
       countries.add(c);
       country(c.name);
 
-      final p =
-          c.states.firstWhere((province) => province.id == Province.saoPaulo);
+      provinces.addAll(c.states);
 
-      provinces.add(p);
+      final p = c.states.firstWhere((province) => province.id == Province.saoPaulo);
       province(p.name);
 
+      cities.addAll(p.cities);
+
       final ct = p.cities.firstWhere((city) => city.id == City.saoPaulo);
-      cities.add(ct);
       city(ct.name);
+
     } catch (e) {
       debugPrint(e.toString());
     }

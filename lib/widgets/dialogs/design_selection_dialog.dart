@@ -47,6 +47,7 @@ class _DesignSelectionDialogState<T extends Selectable?>
             hint: widget.hint,
             isValid: widget.isValid,
             value: widget.value?.text,
+            showCursor: false,
           ),
           Container(
             height: 42,

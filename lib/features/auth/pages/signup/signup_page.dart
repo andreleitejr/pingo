@@ -42,17 +42,22 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const DesignSpace(size: DesignSize.largeSpace),
-            SizedBox(
-              width: 48,
-              child: Image.asset(DesignImages.logo),
+            const DesignSpace(size: 24),
+            Expanded(
+              child: SizedBox(
+                width: 48,
+                child: Image.asset(DesignImages.logo),
+              ),
             ),
-            const DesignSpace(size: 48),
+            const DesignSpace(size: DesignSize.largeSpace),
             Obx(
               () => DesignTextInput(
+                autofocus: true,
                 hint: 'Name',
                 onChanged: controller.setName,
                 isValid: controller.nameValid,
+                textInputAction: TextInputAction.next,
+                textInputType: TextInputType.name,
               ),
             ),
             const DesignSpace(),
@@ -61,6 +66,8 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
                 hint: 'E-mail',
                 onChanged: controller.setEmail,
                 isValid: controller.emailValid,
+                textInputAction: TextInputAction.next,
+                textInputType: TextInputType.emailAddress,
               ),
             ),
             const DesignSpace(),
@@ -70,6 +77,7 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
                 obscureText: true,
                 onChanged: controller.setPassword,
                 isValid: controller.passwordValid,
+                textInputAction: TextInputAction.next,
               ),
             ),
             const DesignSpace(),
@@ -79,6 +87,7 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
                 obscureText: true,
                 onChanged: controller.setConfirmPassword,
                 isValid: controller.confirmPasswordValid,
+                textInputAction: TextInputAction.done,
               ),
             ),
             const DesignSpace(),
