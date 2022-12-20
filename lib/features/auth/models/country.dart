@@ -104,5 +104,5 @@ class Country extends Selectable {
 //       'emojiU': emojiU,
 //     };
 
-  static const brazil = 31;
+  static const defaultCountry = 31;
 }
