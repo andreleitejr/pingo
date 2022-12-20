@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pingo/core/extensions.dart';
-import 'package:pingo/features/auth/pages/signup/signup_page.dart';
+import 'package:pingo/features/auth/pages/signup/signup_navigator.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/i18n/strings.g.dart';
 import 'package:pingo/models/language.dart';

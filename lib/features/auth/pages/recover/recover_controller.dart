@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:pingo/features/auth/pages/recover/recover_navigator.dart';
 import 'package:pingo/features/auth/pages/recover/recover_page.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 

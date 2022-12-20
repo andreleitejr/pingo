@@ -49,38 +49,37 @@ class Country extends Selectable {
   });
 
   factory Country.fromJson(Map<String, dynamic> json) => Country(
-    id: json['id'] as int,
-    name: json['name'] as String? ?? '',
-    iso3: json['iso3'] as String? ?? '',
-    iso2: json['iso2'] as String? ?? '',
-    numericCode: json['numericCode'] as String? ?? '',
-    phoneCode: json['phoneCode'] as String? ?? '',
-    capital: json['capital'] as String? ?? '',
-    currency: json['currency'] as String? ?? '',
-    currencyName: json['currencyName'] as String? ?? '',
-    currencySymbol: json['currencySymbol'] as String? ?? '',
-    tld: json['tld'] as String? ?? '',
-    native: json['native'] as String? ?? '',
-    region: json['region'] as String? ?? '',
-    subRegion: json['subRegion'] as String? ?? '',
-    timezones: (json['timezones'] as List)
-        .map((data) => TimeZone.fromJson(data))
-        .toList(),
-    latitude: double.tryParse(json['latitude'] as String) ?? 0,
-    longitude: double.tryParse(json['longitude'] as String) ?? 0,
-    emoji: json['emoji'] as String? ?? '',
-    emojiU: json['emojiU'] as String? ?? '',
-    states: (json['states'] as List)
-        .map((data) => Province.fromJson(data))
-        .toList(),
-  );
+        id: json['id'] as int,
+        name: json['name'] as String? ?? '',
+        iso3: json['iso3'] as String? ?? '',
+        iso2: json['iso2'] as String? ?? '',
+        numericCode: json['numericCode'] as String? ?? '',
+        phoneCode: json['phoneCode'] as String? ?? '',
+        capital: json['capital'] as String? ?? '',
+        currency: json['currency'] as String? ?? '',
+        currencyName: json['currencyName'] as String? ?? '',
+        currencySymbol: json['currencySymbol'] as String? ?? '',
+        tld: json['tld'] as String? ?? '',
+        native: json['native'] as String? ?? '',
+        region: json['region'] as String? ?? '',
+        subRegion: json['subRegion'] as String? ?? '',
+        timezones: (json['timezones'] as List)
+            .map((data) => TimeZone.fromJson(data))
+            .toList(),
+        latitude: double.tryParse(json['latitude'] as String) ?? 0,
+        longitude: double.tryParse(json['longitude'] as String) ?? 0,
+        emoji: json['emoji'] as String? ?? '',
+        emojiU: json['emojiU'] as String? ?? '',
+        states: (json['states'] as List)
+            .map((data) => Province.fromJson(data))
+            .toList(),
+      );
 
   @override
   bool get enabled => true;
 
   @override
   String get text => name;
-
 
 // Map<String, dynamic> toJson() => {
 //       'id': id,

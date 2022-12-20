@@ -5,8 +5,9 @@ import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/pages/recover/recover_controller.dart';
+import 'package:pingo/features/auth/pages/recover/recover_navigator.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
-import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
+import 'package:pingo/features/auth/pages/info/info_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_text_input.dart';
@@ -89,12 +90,4 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage>
         backgroundColor: DesignColor.primary500,
         colorText: Colors.white,
       );
-}
-
-abstract class RecoverNavigator {
-  void success();
-
-  void userNotFoundInDatabase();
-
-  void error(AuthResult result);
 }

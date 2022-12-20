@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:pingo/constants/emails.dart';
-import 'package:pingo/features/auth/pages/landing/landing_page.dart';
+import 'package:pingo/features/auth/pages/landing/landing_navigator.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/i18n/strings.g.dart';
 import 'package:pingo/main.dart';

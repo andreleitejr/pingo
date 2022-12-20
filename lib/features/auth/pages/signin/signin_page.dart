@@ -6,10 +6,11 @@ import 'package:pingo/constants/design_size.dart';
 import 'package:pingo/constants/design_text_style.dart';
 import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/pages/recover/recover_page.dart';
+import 'package:pingo/features/auth/pages/signin/signin_navigator.dart';
 import 'package:pingo/features/auth/pages/signup/signup_page.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/auth/pages/signin/sigin_controller.dart';
-import 'package:pingo/features/auth/pages/signup/signup_info_page.dart';
+import 'package:pingo/features/auth/pages/info/info_page.dart';
 import 'package:pingo/features/home/base_page.dart';
 import 'package:pingo/widgets/design_appbar.dart';
 import 'package:pingo/widgets/design_button.dart';
@@ -120,12 +121,4 @@ class _SignInPageState extends State<SignInPage> implements SignInNavigator {
       colorText: Colors.white,
     );
   }
-}
-
-abstract class SignInNavigator {
-  void success();
-
-  void userNotFoundInDatabase();
-
-  void error(AuthResult result);
 }

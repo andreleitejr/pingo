@@ -6,7 +6,8 @@ import 'package:pingo/core/extensions.dart';
 import 'package:pingo/features/auth/models/city.dart';
 import 'package:pingo/features/auth/models/country.dart';
 import 'package:pingo/features/auth/models/province.dart';
-import 'package:pingo/features/auth/pages/signup/signup_info_controller.dart';
+import 'package:pingo/features/auth/pages/info/info_controller.dart';
+import 'package:pingo/features/auth/pages/info/info_navigator.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
 import 'package:pingo/features/profile/models/gender.dart';
 import 'package:pingo/features/profile/models/sexual_orientation.dart';
@@ -169,10 +170,4 @@ class _SignUpInfoPageState extends State<SignUpInfoPage>
         backgroundColor: DesignColor.primary500,
         colorText: Colors.white,
       );
-}
-
-abstract class SignUpInfoNavigator {
-  void success();
-
-  void error(AuthResult result);
 }

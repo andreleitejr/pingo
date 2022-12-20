@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+import 'package:pingo/features/auth/pages/signin/signin_navigator.dart';
 import 'package:pingo/features/auth/repositories/auth_repository.dart';
-import 'package:pingo/features/auth/pages/signin/signin_page.dart';
 
 class SignInController extends GetxController {
   SignInController(this.navigator);
