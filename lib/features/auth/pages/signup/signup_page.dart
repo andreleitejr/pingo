@@ -154,7 +154,7 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
                     .apply(color: DesignColor.primary500),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    print('Terms');
+                    debugPrint('Terms');
                   },
               ),
               TextSpan(
@@ -168,7 +168,7 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpNavigator {
                     .apply(color: DesignColor.primary500),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    print('Conditions');
+                    debugPrint('Conditions');
                   },
               ),
               TextSpan(

@@ -50,7 +50,7 @@ class _BasePageState extends State<BasePage> implements BasePageNav {
         () => ProductListPage(
             products: controller.productBestMatch, showLeading: false),
       ),
-      ProfileReadPage(),
+      const ProfileReadPage(),
     ];
 
     return Scaffold(

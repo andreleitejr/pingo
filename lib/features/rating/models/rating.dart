@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pingo/models/database.dart';
-import 'package:pingo/services/blurhash_controller.dart';
+import 'package:pingo/models/image_blurhash.dart';
 
 class Rating extends DataBase {
   String? message;

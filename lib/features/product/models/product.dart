@@ -3,7 +3,7 @@ import 'package:pingo/constants/design_images.dart';
 import 'package:pingo/constants/keywords.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/models/buyable.dart';
-import 'package:pingo/services/blurhash_controller.dart';
+import 'package:pingo/models/image_blurhash.dart';
 
 class Product extends Buyable {
   final String placeId;

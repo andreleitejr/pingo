@@ -20,7 +20,6 @@ import 'package:pingo/widgets/design_button.dart';
 import 'package:pingo/widgets/design_grid_view.dart';
 import 'package:pingo/widgets/design_icon.dart';
 import 'package:pingo/widgets/design_map.dart';
-import 'package:pingo/widgets/design_outlined_button.dart';
 import 'package:pingo/widgets/design_read_image.dart';
 import 'package:pingo/widgets/design_space.dart';
 

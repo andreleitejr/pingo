@@ -3,20 +3,8 @@ import 'package:blurhash/blurhash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
+import 'package:pingo/models/image_blurhash.dart';
 import 'package:pingo/repositories/storage_repository.dart';
-
-class ImageBlurHash {
-  final String image;
-  final String blurHash;
-
-  ImageBlurHash({required this.image, required this.blurHash});
-
-  ImageBlurHash.fromJson(Map<String, dynamic> json)
-      : image = json['image'],
-        blurHash = json['blurHash'];
-
-  Map<String, dynamic> toJson() => {'image': image, 'blurHash': blurHash};
-}
 
 class BlurHashController {
   Future<String> encode(File file) async {

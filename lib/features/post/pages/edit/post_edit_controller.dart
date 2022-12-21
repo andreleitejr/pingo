@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/post/models/post.dart';
 import 'package:pingo/features/post/repositories/post_repository.dart';
+import 'package:pingo/models/image_blurhash.dart';
 import 'package:pingo/models/user.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 import 'package:pingo/services/camera_controller.dart';

@@ -6,6 +6,7 @@ import 'package:pingo/features/event/models/event.dart';
 import 'package:pingo/features/event/repositories/event_repository.dart';
 import 'package:pingo/features/place/models/place.dart';
 import 'package:pingo/features/product/models/product_category.dart';
+import 'package:pingo/models/image_blurhash.dart';
 import 'package:pingo/services/blurhash_controller.dart';
 import 'package:pingo/services/camera_controller.dart';
 

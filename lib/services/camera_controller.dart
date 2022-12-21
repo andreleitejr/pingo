@@ -24,7 +24,7 @@ class CameraController extends GetxController {
   String? retrieveDataError;
 
   Future<void> getImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    // final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
   }
 
   Future<void> takePhoto(ImageSource source, Rx displayImage) async {
